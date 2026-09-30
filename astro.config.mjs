@@ -5,6 +5,6 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://fixoraa.tech',
+  site: 'https://www.fixoraa.tech',
   integrations: [tailwind(), sitemap()],
 });

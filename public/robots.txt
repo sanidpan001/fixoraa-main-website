@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://fixoraa.tech/sitemap-index.xml
+Sitemap: https://www.fixoraa.tech/sitemap-index.xml
