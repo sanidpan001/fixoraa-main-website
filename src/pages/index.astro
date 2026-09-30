@@ -77,7 +77,7 @@ const pageDescription =
       <h1 class="hero-anim mx-auto mt-6 max-w-4xl text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
         100+ free tools.<br />
         Zero signup.<br />
-        <span class="text-gold-gradient">Infinite possibilities.</span>
+        <span class="text-gradient">Infinite possibilities.</span>
       </h1>
 
       <p class="hero-anim mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink/60 sm:text-xl">
@@ -104,10 +104,10 @@ const pageDescription =
         <svg id="infinity-svg" viewBox="0 0 400 220" class="w-full overflow-visible" role="img" aria-label="Infinity symbol">
           <defs>
             <linearGradient id="infGlass" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0" stop-color="#8A6D1B" />
-              <stop offset="0.35" stop-color="#C9A227" />
-              <stop offset="0.68" stop-color="#D4AF37" />
-              <stop offset="1" stop-color="#F0D060" />
+              <stop offset="0" stop-color="#FF5A5F" />
+              <stop offset="0.35" stop-color="#F43F8E" />
+              <stop offset="0.68" stop-color="#9333EA" />
+              <stop offset="1" stop-color="#2E6BFF" />
             </linearGradient>
             <linearGradient id="infShine" x1="0" y1="0" x2="1" y2="0">
               <stop offset="0" stop-color="#ffffff" stop-opacity="0" />
@@ -155,7 +155,7 @@ const pageDescription =
             d="M200 110 C 162 110 136 72 102 82 C 68 92 62 124 96 138 C 130 152 162 110 200 110 C 238 110 270 152 304 138 C 338 124 332 92 298 82 C 264 72 238 110 200 110"
             transform="translate(0,-7)"
             fill="none"
-            stroke="#F9EFC3"
+            stroke="#ffffff"
             stroke-width="5"
             stroke-linecap="round"
             opacity="0"
@@ -469,8 +469,8 @@ const pageDescription =
       });
       flushBucket();
 
-      // Per-char split: preserves any wrapper classes (e.g. text-gold-gradient
-      // on line 3 → gold-foil-per-letter look). Spaces become nbsp so masks keep width.
+      // Per-char split: preserves any wrapper classes (e.g. text-gradient
+      // on line 3 → gradient-per-letter look). Spaces become nbsp so masks keep width.
       heroLines.forEach((line) => {
         const frag = document.createDocumentFragment();
         const emitChars = (text: string, cls: string) => {
