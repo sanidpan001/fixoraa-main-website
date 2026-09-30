@@ -525,7 +525,7 @@ const pageDescription =
     const introTl = gsap.timeline();
     introTl.to(veil, {
       opacity: 0,
-      duration: 0.8,
+      duration: 1.3,
       ease: 'power2.out',
       onComplete: () => veil.remove(),
     }, 0);
@@ -536,24 +536,24 @@ const pageDescription =
         y: 0,
         rotation: 0,
         opacity: 1,
-        duration: 0.85,
+        duration: 1.4,
         ease: 'power3.out',
-        stagger: 0.08,
+        stagger: 0.13,
       },
-      0.25
+      0.35
     );
 
     // 5b. gsap.com hero effect: headline chars rise through their masks,
     //     line by line — pure translate-Y, expo.out, no rotation/blur/scale
-    const LINE_DELAYS = [0.25, 0.4, 0.55];
+    const LINE_DELAYS = [0.35, 0.65, 0.95];
     heroLines.forEach((line, li) => {
       const chars = line.querySelectorAll('.ch');
       if (!chars.length) return;
       introTl.fromTo(
         chars,
         { yPercent: 110 },
-        { yPercent: 0, duration: 0.9, ease: 'expo.out', stagger: 0.025 },
-        LINE_DELAYS[li] ?? 0.55
+        { yPercent: 0, duration: 1.5, ease: 'expo.out', stagger: 0.04 },
+        LINE_DELAYS[li] ?? 0.95
       );
     });
 
@@ -570,7 +570,7 @@ const pageDescription =
       });
       if (glow) glow.style.opacity = '0';
     })();
-    introTl.add(playInfinityDraw, 2.05);
+    introTl.add(playInfinityDraw, 3.4);
 
     // ── Hero parallax scrub: headline drifts up, infinity floats away slower, blobs lag ──
     // (yPercent on headline/infinity composes with the entrance y — no conflict)
@@ -668,11 +668,11 @@ const pageDescription =
 
     const drawTl = gsap.timeline();
     drawTl
-      .to(path, { strokeDashoffset: 0, duration: 2, ease: 'power2.inOut' }, 0)
-      .to(frost, { strokeDashoffset: 0, duration: 2, ease: 'power2.inOut' }, 0)
-      .to(glow, { opacity: 0.55, duration: 1, ease: 'power2.out' }, 1)
-      .to(sheen, { strokeDashoffset: 0, opacity: 0.75, duration: 1.4, ease: 'power2.out' }, 1.1)
-      .to(shimmer, { strokeDashoffset: 0, duration: 0.7, ease: 'power2.out' }, 1.5)
+      .to(path, { strokeDashoffset: 0, duration: 3.2, ease: 'power2.inOut' }, 0)
+      .to(frost, { strokeDashoffset: 0, duration: 3.2, ease: 'power2.inOut' }, 0)
+      .to(glow, { opacity: 0.55, duration: 1.6, ease: 'power2.out' }, 1.6)
+      .to(sheen, { strokeDashoffset: 0, opacity: 0.75, duration: 2.2, ease: 'power2.out' }, 1.8)
+      .to(shimmer, { strokeDashoffset: 0, duration: 1.1, ease: 'power2.out' }, 2.4)
       .add(() => {
         if (!shimmer) return;
         // Shimmer sweep: a bright segment endlessly traveling the loop
