@@ -1,0 +1,54 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { totalTools } from '../data/tools';
+---
+<Layout title="About Us — Fixoraa" description="Fixoraa is a free online tools hub: calculators, converters, PDF tools and more. No signup, no watermarks, no tracking — tools that run right in your browser.">
+<main class="mx-auto max-w-3xl px-4 py-10 sm:py-14">
+  <!-- Header -->
+  <div class="text-center mb-12">
+    <span class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full text-white bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] mb-4">About</span>
+    <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-neutral-900">Tools that just <span class="bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] bg-clip-text text-transparent">work</span></h1>
+  </div>
+
+  <article class="space-y-6 text-neutral-700 leading-relaxed">
+    <p class="text-lg text-neutral-800">
+      <strong class="text-neutral-900">Fixoraa</strong> is a free online tools hub. We build small, fast, single-purpose tools — the kind you need for two minutes and then close — and make them as good as they can possibly be.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-4">Why Fixoraa exists</h2>
+    <p>
+      Too many "free" tools on the internet come with a catch: a signup wall before you can do anything, a watermark stamped on your output, or a slow, ad-cluttered page that takes forever to load. We got tired of that, so we built the opposite.
+    </p>
+    <p>Every Fixoraa tool follows the same promises:</p>
+    <ul class="space-y-3">
+      <li class="flex gap-3"><span class="text-xl" aria-hidden="true">🆓</span><span><strong class="text-neutral-900">Free, unlimited use.</strong> No free-trial countdowns, no premium tiers hiding the real features.</span></li>
+      <li class="flex gap-3"><span class="text-xl" aria-hidden="true">🚫</span><span><strong class="text-neutral-900">No signup, ever.</strong> Open the page and start. We don't want your email address.</span></li>
+      <li class="flex gap-3"><span class="text-xl" aria-hidden="true">🔒</span><span><strong class="text-neutral-900">Privacy-first.</strong> Our tools run entirely in your browser. We don't collect accounts, uploads or personal data — there's nowhere for it to even go.</span></li>
+      <li class="flex gap-3"><span class="text-xl" aria-hidden="true">⚡</span><span><strong class="text-neutral-900">No watermarks.</strong> What you make is yours, clean and ready to use.</span></li>
+    </ul>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-4">How the tools work</h2>
+    <p>
+      Most Fixoraa tools are pure client-side web apps: all the calculation happens on your own device, in your own browser tab. That means they're fast (nothing to upload, nothing to wait for), they work without an account, and your data never leaves your computer.
+    </p>
+    <p>
+      A few tools with AI features talk to our small backend service to generate text or analyse images. Even then, nothing is stored against your identity — there is no identity, because there's no login.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-4">What's coming</h2>
+    <p>
+      We're adding new tools all the time — currently <strong class="text-neutral-900">{totalTools} and counting</strong>. The goal is simple: cover every everyday task that shouldn't require a subscription, from finance calculators and PDF utilities to developer helpers and little games for the Fun Zone.
+    </p>
+    <p>
+      Have an idea for a tool, spotted a bug, or just want to say hi? We read every message ourselves. <a href="/contact" class="font-semibold text-[#9333EA] hover:underline">Contact us</a> — Fixoraa is a one-person project, and your feedback genuinely shapes what gets built next.
+    </p>
+  </article>
+
+  <!-- CTA -->
+  <div class="mt-12 rounded-3xl bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] p-8 sm:p-10 text-center text-white">
+    <h2 class="text-2xl sm:text-3xl font-black mb-3">Ready to get things done?</h2>
+    <p class="text-white/90 mb-6">Browse the full directory and find the tool you need in seconds.</p>
+    <a href="/tools" class="inline-block rounded-2xl bg-white text-neutral-900 font-bold px-8 py-3.5 hover:shadow-xl hover:-translate-y-0.5 transition-all">Browse all tools</a>
+  </div>
+</main>
+</Layout>

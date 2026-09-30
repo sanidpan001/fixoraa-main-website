@@ -1,0 +1,18 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { totalTools } from '../data/tools';
+---
+<Layout title="Page Not Found — Fixoraa" description="This page doesn't exist, but plenty of useful ones do. Head home or browse all free Fixoraa tools.">
+<main class="mx-auto max-w-2xl px-4 py-16 sm:py-24 text-center">
+  <!-- Gradient 404 -->
+  <div class="mb-6">
+    <span class="inline-block text-7xl sm:text-8xl font-black tracking-tight bg-gradient-to-r from-[#FF5A5F] via-[#9333EA] to-[#2E6BFF] bg-clip-text text-transparent">404</span>
+  </div>
+  <h1 class="text-3xl sm:text-4xl font-black text-neutral-900 mb-4">Lost? Let's get you back.</h1>
+  <p class="text-neutral-600 max-w-md mx-auto mb-8">The page you're looking for doesn't exist or moved. No worries — with {totalTools} free tools, there's plenty worth finding instead.</p>
+  <div class="flex flex-col sm:flex-row gap-3 justify-center">
+    <a href="/" class="rounded-2xl px-8 py-3.5 font-bold text-white bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] hover:opacity-90 hover:shadow-lg transition-all">← Back to Home</a>
+    <a href="/tools" class="rounded-2xl px-8 py-3.5 font-bold text-neutral-900 bg-white border border-neutral-200 hover:shadow-md hover:border-neutral-300 transition-all">Browse All Tools</a>
+  </div>
+</main>
+</Layout>
