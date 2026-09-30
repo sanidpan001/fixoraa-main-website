@@ -1,0 +1,147 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { niches, allTools, totalTools } from '../data/tools';
+
+const sortedTools = [...allTools].sort((a, b) => a.name.localeCompare(b.name));
+const toolsJson = JSON.stringify(sortedTools);
+const isSoon = (url: string) => url.includes('PASTE-YOUR-TOOL-URL-HERE');
+---
+<Layout title="All Free Online Tools — Fixoraa" description="Browse every free Fixoraa tool: calculators, converters, PDF tools, text tools, developer utilities and more. Search the full directory. No signup, no watermarks.">
+<main class="mx-auto max-w-6xl px-4 py-10 sm:py-14">
+  <!-- Header -->
+  <div class="text-center mb-8">
+    <span class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full text-white bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] mb-4">Free · No signup</span>
+    <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-neutral-900">Every Fixoraa <span class="bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] bg-clip-text text-transparent">tool</span></h1>
+    <p class="mt-4 text-neutral-600 max-w-2xl mx-auto">One directory for everything. Search by name or topic, filter by category, and jump straight to the tool you need.</p>
+  </div>
+
+  <!-- Search -->
+  <div class="max-w-xl mx-auto mb-6">
+    <div class="relative">
+      <svg class="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-neutral-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input id="toolSearch" type="search" placeholder="Search tools — try “tax”, “pdf”, “sleep”…" aria-label="Search tools"
+        class="w-full rounded-2xl border border-neutral-200 bg-white pl-11 pr-4 py-3.5 text-neutral-900 placeholder:text-neutral-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#9333EA]/50 focus:border-[#9333EA]" />
+    </div>
+  </div>
+
+  <!-- Niche filter chips -->
+  <div id="nicheChips" class="flex flex-wrap justify-center gap-2 mb-4">
+    <button data-niche="all" class="chip chip-active">All</button>
+    {niches.map((n) => (
+      <button data-niche={n.slug} class="chip">{n.name}</button>
+    ))}
+  </div>
+
+  <!-- Results count -->
+  <p id="resultCount" class="text-center text-sm text-neutral-500 mb-8">Showing {totalTools} of {totalTools} tools</p>
+
+  <!-- Grid -->
+  <div id="toolGrid" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {sortedTools.map((t) => (
+      <div class="tool-card" data-name={t.name.toLowerCase()} data-blurb={t.blurb.toLowerCase()} data-niche={t.niche.toLowerCase()} data-nicheslug={t.nicheSlug}>
+        {isSoon(t.url) ? (
+          <div class="relative block h-full rounded-2xl bg-white border border-neutral-200 p-5 opacity-70">
+            <span class="inline-block text-[11px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full bg-[#9333EA]/10 text-[#9333EA] mb-3">{t.niche}</span>
+            <h3 class="text-lg font-bold text-neutral-900 pr-6">{t.name}</h3>
+            <p class="text-sm text-neutral-600 mt-1">{t.blurb}</p>
+            <span class="inline-block mt-3 text-xs font-bold px-3 py-1 rounded-full bg-neutral-100 text-neutral-500">Coming soon</span>
+          </div>
+        ) : (
+          <a href={t.url} target="_blank" rel="noopener" class="group relative block h-full rounded-2xl bg-white border border-neutral-200 p-5 hover:shadow-lg hover:-translate-y-1 hover:border-neutral-300 transition-all">
+            <span class="inline-block text-[11px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full bg-[#9333EA]/10 text-[#9333EA] mb-3">{t.niche}</span>
+            <h3 class="text-lg font-bold text-neutral-900 pr-6">{t.name}</h3>
+            <p class="text-sm text-neutral-600 mt-1">{t.blurb}</p>
+            <span class="absolute top-5 right-5 text-xl text-neutral-400 group-hover:text-[#9333EA] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" aria-hidden="true">↗</span>
+          </a>
+        )}
+      </div>
+    ))}
+  </div>
+
+  <!-- Empty state -->
+  <div id="emptyState" class="hidden text-center py-16">
+    <p class="text-5xl mb-4">🔍</p>
+    <h2 class="text-xl font-bold text-neutral-900 mb-2">No tools found</h2>
+    <p class="text-neutral-600">Try a different search term or category.</p>
+  </div>
+
+  <!-- Browse by category -->
+  <div class="mt-16 rounded-3xl bg-[#FAFAF8] border border-neutral-200 p-6 sm:p-8">
+    <h2 class="text-2xl font-black text-neutral-900 mb-4">Browse by category</h2>
+    <div class="grid gap-3 sm:grid-cols-2">
+      {niches.map((n) => (
+        <button data-jump={n.slug} class="text-left rounded-2xl bg-white border border-neutral-200 p-4 hover:shadow-md hover:-translate-y-0.5 transition-all">
+          <span class="font-bold text-neutral-900">{n.name}</span>
+          <span class="block text-sm text-neutral-500 mt-1">{n.tools.length} tools · {n.tagline}</span>
+        </button>
+      ))}
+    </div>
+  </div>
+</main>
+
+<style>
+  .chip {
+    font-size: .875rem; font-weight: 600; padding: .5rem 1rem; border-radius: 9999px;
+    border: 1px solid #e5e5e5; background: #fff; color: #404040; cursor: pointer;
+    transition: all .15s ease;
+  }
+  .chip:hover { border-color: #a3a3a3; }
+  .chip-active {
+    color: #fff; border-color: transparent;
+    background: linear-gradient(to right, #FF5A5F, #F43F8E, #9333EA);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / .1);
+  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  .tool-card { animation: fadeUp .35s ease both; }
+</style>
+
+<script define:vars={{ toolsJson }}>
+  const tools = JSON.parse(toolsJson);
+  const grid = document.getElementById('toolGrid');
+  const search = document.getElementById('toolSearch');
+  const count = document.getElementById('resultCount');
+  const empty = document.getElementById('emptyState');
+  const chips = [...document.querySelectorAll('#nicheChips .chip')];
+  const total = tools.length;
+  let activeNiche = 'all';
+
+  const esc = (s) => s.replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const isPlaceholder = (u) => u.includes('PASTE-YOUR-TOOL-URL-HERE');
+  const tag = (n) => `<span class="inline-block text-[11px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full bg-[#9333EA]/10 text-[#9333EA] mb-3">${esc(n)}</span>`;
+  const body = (t) => `${tag(t.niche)}<h3 class="text-lg font-bold text-neutral-900 pr-6">${esc(t.name)}</h3><p class="text-sm text-neutral-600 mt-1">${esc(t.blurb)}</p>`;
+
+  function cardHtml(t) {
+    if (isPlaceholder(t.url)) {
+      return `<div class="tool-card"><div class="relative block h-full rounded-2xl bg-white border border-neutral-200 p-5 opacity-70">${body(t)}<span class="inline-block mt-3 text-xs font-bold px-3 py-1 rounded-full bg-neutral-100 text-neutral-500">Coming soon</span></div></div>`;
+    }
+    return `<div class="tool-card"><a href="${esc(t.url)}" target="_blank" rel="noopener" class="group relative block h-full rounded-2xl bg-white border border-neutral-200 p-5 hover:shadow-lg hover:-translate-y-1 hover:border-neutral-300 transition-all">${body(t)}<span class="absolute top-5 right-5 text-xl text-neutral-400 group-hover:text-[#9333EA] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" aria-hidden="true">↗</span></a></div>`;
+  }
+
+  function render() {
+    const q = search.value.trim().toLowerCase();
+    const filtered = tools.filter((t) =>
+      (activeNiche === 'all' || t.nicheSlug === activeNiche) &&
+      (!q || t.name.toLowerCase().includes(q) || t.blurb.toLowerCase().includes(q) || t.niche.toLowerCase().includes(q))
+    );
+    grid.innerHTML = filtered.map(cardHtml).join('');
+    empty.classList.toggle('hidden', filtered.length > 0);
+    grid.classList.toggle('hidden', filtered.length === 0);
+    count.textContent = `Showing ${filtered.length} of ${total} tools`;
+  }
+
+  search.addEventListener('input', render);
+  chips.forEach((chip) => chip.addEventListener('click', () => {
+    chips.forEach((c) => c.classList.remove('chip-active'));
+    chip.classList.add('chip-active');
+    activeNiche = chip.dataset.niche;
+    render();
+  }));
+  // Category cards below the grid jump to the matching filter
+  document.querySelectorAll('[data-jump]').forEach((btn) => btn.addEventListener('click', () => {
+    const chip = chips.find((c) => c.dataset.niche === btn.dataset.jump);
+    if (chip) chip.click();
+    grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }));
+  render();
+</script>
+</Layout>

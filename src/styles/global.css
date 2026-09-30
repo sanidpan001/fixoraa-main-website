@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: auto;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    @apply bg-white text-ink font-sans;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: #f43f8e;
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 3px solid #9333ea;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  /* Brand gradient text — coral → pink → purple → blue */
+  .text-gradient {
+    background-image: linear-gradient(92deg, #ff5a5f 0%, #f43f8e 35%, #9333ea 68%, #2e6bff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Premium gold gradient text — hero headline only (deep antique gold → classic gold → champagne) */
+  .text-gold-gradient {
+    background-image: linear-gradient(92deg, #8a6d1b 0%, #c9a227 38%, #d4af37 68%, #f0d060 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .bg-brand-gradient {
+    background-image: linear-gradient(92deg, #ff5a5f 0%, #f43f8e 35%, #9333ea 68%, #2e6bff 100%);
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-ink px-7 py-3.5 text-base font-bold text-white transition-all duration-300;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px -8px rgba(168, 85, 247, 0.55);
+    background-image: linear-gradient(92deg, #ff5a5f, #f43f8e, #9333ea, #2e6bff);
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-ink/10 bg-white px-7 py-3.5 text-base font-bold text-ink transition-all duration-300;
+  }
+  .btn-secondary:hover {
+    transform: translateY(-2px);
+    border-color: #9333ea;
+    box-shadow: 0 12px 28px -10px rgba(10, 10, 10, 0.25);
+  }
+
+  .card-lift {
+    @apply transition-all duration-300;
+  }
+  .card-lift:hover {
+    transform: translateY(-6px);
+  }
+
+  .section-kicker {
+    @apply inline-flex items-center gap-2 rounded-full border border-ink/10 bg-white px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-ink/60;
+  }
+}
+
+/* Soft dotted texture for light sections */
+.dot-grid {
+  background-image: radial-gradient(rgba(10, 10, 10, 0.08) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-blob-drift,
+  .animate-blob-drift-2,
+  .animate-float-slow {
+    animation: none !important;
+  }
+}
+
+/* gsap.com-style hero char reveal: each char sits in an overflow-hidden mask.
+   padding-bottom + negative margin protects descenders (p, y, g) from clipping. */
+.ch-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
+.ch {
+  display: inline-block;
+  will-change: transform;
+}

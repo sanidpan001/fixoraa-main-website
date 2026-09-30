@@ -1,0 +1,837 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { niches, allTools, totalTools } from '../data/tools';
+import { games } from '../data/games';
+
+// Rotating gradient accents for niche cards
+const accents = [
+  'from-brand-coral to-brand-pink',
+  'from-brand-pink to-brand-purple',
+  'from-brand-purple to-brand-blue',
+  'from-brand-blue to-brand-coral',
+];
+
+const valueProps = [
+  {
+    title: 'Genuinely free',
+    text: 'Every tool is free with no paywalls, no feature locks and no trial periods. What you see is what you get.',
+    icon: '<path d="M20 6 9 17l-5-5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>',
+    color: '#FF5A5F',
+  },
+  {
+    title: 'Privacy first',
+    text: 'No accounts, no signups, no tracking walls. Your data stays in your browser — never on our servers.',
+    icon: '<path d="M12 22s8-3.5 8-10V5l-8-3-8 3v7c0 6.5 8 10 8 10z" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>',
+    color: '#F43F8E',
+  },
+  {
+    title: 'Fast & mobile-friendly',
+    text: 'Lightweight pages that load in a snap on any phone or connection. Built for real life, not just desktops.',
+    icon: '<path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>',
+    color: '#9333EA',
+  },
+  {
+    title: 'Always growing',
+    text: 'New tools ship regularly. The library keeps expanding — from 100+ today toward an infinite collection.',
+    icon: '<path d="M18.2 8.5c2.5 0 4.8 2.6 4.8 5.5s-2.3 5.5-4.8 5.5c-3.4 0-5-5.5-6.2-5.5s-2.8 5.5-6.2 5.5c-2.5 0-4.8-2.6-4.8-5.5S3.3 8.5 5.8 8.5c3.4 0 5 5.5 6.2 5.5s2.8-5.5 6.2-5.5z" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>',
+    color: '#2E6BFF',
+  },
+];
+
+const pageTitle = 'Fixoraa — 100+ Free Online Tools. Zero Signup.';
+const pageDescription =
+  'Fixoraa is a growing library of 100+ free online tools — calculators, converters, text utilities, games and more. No signup, no paywalls, privacy first.';
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <!-- ══════════════════ HERO ══════════════════ -->
+  <section class="relative overflow-hidden bg-cream" id="hero">
+    <!-- Gradient blobs: vivid TIDY washes, transform-only drift + scroll parallax -->
+    <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+      <div class="hero-blob absolute -left-24 top-10 h-96 w-96" data-speed="0.35">
+        <div
+          class="animate-blob-drift h-full w-full rounded-full opacity-50 blur-3xl"
+          style="background: radial-gradient(circle, #FF5A5F, transparent 70%);"
+        ></div>
+      </div>
+      <div class="hero-blob absolute -right-24 top-40 h-[28rem] w-[28rem]" data-speed="0.55">
+        <div
+          class="animate-blob-drift-2 h-full w-full rounded-full opacity-50 blur-3xl"
+          style="background: radial-gradient(circle, #9333EA, transparent 70%);"
+        ></div>
+      </div>
+      <div class="hero-blob absolute bottom-0 left-1/3 h-80 w-80" data-speed="0.8">
+        <div
+          class="animate-blob-drift h-full w-full rounded-full opacity-40 blur-3xl"
+          style="background: radial-gradient(circle, #2E6BFF, transparent 70%); animation-delay: -9s;"
+        ></div>
+      </div>
+    </div>
+
+    <div class="relative mx-auto max-w-6xl px-5 pb-16 pt-16 text-center sm:pt-24">
+      <p class="hero-anim section-kicker">
+        <span class="h-2 w-2 rounded-full bg-brand-gradient" aria-hidden="true"></span>
+        Free online tools, made for everyone
+      </p>
+
+      <h1 class="hero-anim mx-auto mt-6 max-w-4xl text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+        100+ free tools.<br />
+        Zero signup.<br />
+        <span class="text-gold-gradient">Infinite possibilities.</span>
+      </h1>
+
+      <p class="hero-anim mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink/60 sm:text-xl">
+        Calculators, converters, text utilities, image tools and games — every one free,
+        instant and private. No accounts. No paywalls. Just results.
+      </p>
+
+      <div class="hero-anim mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <a href="/tools" class="btn-primary w-full sm:w-auto">Browse Tools
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M5 12h14m-6-6 6 6-6 6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="/games" class="btn-secondary w-full sm:w-auto">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M6 11h4M8 9v4M15 12h.01M18 10h.01M17.3 5H6.7a4 4 0 0 0-4 3.6L2 15a3 3 0 0 0 5.2 2.1L9 15h6l1.8 2.1A3 3 0 0 0 22 15l-.7-6.4a4 4 0 0 0-4-3.6z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Fun Zone
+        </a>
+      </div>
+
+      <!-- ═══ INFINITY SIGNATURE: glassy, draws itself, then shimmers ═══ -->
+      <div id="infinity-wrap" class="hero-anim mx-auto mt-10 max-w-[560px]" aria-hidden="true">
+        <svg id="infinity-svg" viewBox="0 0 400 220" class="w-full overflow-visible" role="img" aria-label="Infinity symbol">
+          <defs>
+            <linearGradient id="infGlass" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#8A6D1B" />
+              <stop offset="0.35" stop-color="#C9A227" />
+              <stop offset="0.68" stop-color="#D4AF37" />
+              <stop offset="1" stop-color="#F0D060" />
+            </linearGradient>
+            <linearGradient id="infShine" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#ffffff" stop-opacity="0" />
+              <stop offset="0.5" stop-color="#ffffff" stop-opacity="0.95" />
+              <stop offset="1" stop-color="#ffffff" stop-opacity="0" />
+            </linearGradient>
+            <filter id="infGlow" x="-60%" y="-60%" width="220%" height="220%">
+              <feGaussianBlur stdDeviation="22" />
+            </filter>
+          </defs>
+          <!-- gold-tinted glow beneath -->
+          <path
+            id="infinity-glow"
+            d="M200 110 C 162 110 136 72 102 82 C 68 92 62 124 96 138 C 130 152 162 110 200 110 C 238 110 270 152 304 138 C 338 124 332 92 298 82 C 264 72 238 110 200 110"
+            fill="none"
+            stroke="url(#infGlass)"
+            stroke-width="22"
+            stroke-linecap="round"
+            opacity="0"
+            filter="url(#infGlow)"
+          />
+          <!-- glass body: premium gold gradient -->
+          <path
+            id="infinity-path"
+            d="M200 110 C 162 110 136 72 102 82 C 68 92 62 124 96 138 C 130 152 162 110 200 110 C 238 110 270 152 304 138 C 338 124 332 92 298 82 C 264 72 238 110 200 110"
+            fill="none"
+            stroke="url(#infGlass)"
+            stroke-width="18"
+            stroke-linecap="round"
+            opacity="0.88"
+          />
+          <!-- frosted white wash for the glass look -->
+          <path
+            id="infinity-frost"
+            d="M200 110 C 162 110 136 72 102 82 C 68 92 62 124 96 138 C 130 152 162 110 200 110 C 238 110 270 152 304 138 C 338 124 332 92 298 82 C 264 72 238 110 200 110"
+            fill="none"
+            stroke="#ffffff"
+            stroke-width="18"
+            stroke-linecap="round"
+            opacity="0.3"
+          />
+          <!-- glossy top-edge highlight (pale champagne gold) -->
+          <path
+            id="infinity-sheen"
+            d="M200 110 C 162 110 136 72 102 82 C 68 92 62 124 96 138 C 130 152 162 110 200 110 C 238 110 270 152 304 138 C 338 124 332 92 298 82 C 264 72 238 110 200 110"
+            transform="translate(0,-7)"
+            fill="none"
+            stroke="#F9EFC3"
+            stroke-width="5"
+            stroke-linecap="round"
+            opacity="0"
+          />
+          <!-- traveling shimmer sweep (animated via JS after draw) -->
+          <path
+            id="infinity-shimmer"
+            d="M200 110 C 162 110 136 72 102 82 C 68 92 62 124 96 138 C 130 152 162 110 200 110 C 238 110 270 152 304 138 C 338 124 332 92 298 82 C 264 72 238 110 200 110"
+            fill="none"
+            stroke="url(#infShine)"
+            stroke-width="18"
+            stroke-linecap="round"
+            opacity="0"
+          />
+        </svg>
+        <p class="mt-2 text-sm font-semibold uppercase tracking-[0.25em] text-ink/40">
+          Tools, forever growing
+        </p>
+      </div>
+
+      <!-- Scroll indicator -->
+      <a
+        href="#stats"
+        class="hero-anim mt-10 inline-flex flex-col items-center gap-2 text-ink/40 transition-colors hover:text-ink"
+        aria-label="Scroll to stats"
+      >
+        <span class="text-xs font-bold uppercase tracking-[0.2em]">Scroll</span>
+        <svg class="animate-bounce" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ══════════════════ STATS STRIP ══════════════════ -->
+  <section id="stats" class="border-y border-ink/5 bg-white">
+    <div class="mx-auto grid max-w-6xl grid-cols-2 gap-4 px-5 py-12 lg:grid-cols-4">
+      <div class="stagger-card rounded-3xl border border-ink/10 bg-cream p-6 text-center">
+        <p class="text-4xl font-extrabold tracking-tight sm:text-5xl">
+          <span class="stat-count" data-count={totalTools}>0</span><span class="text-gradient">+</span>
+        </p>
+        <p class="mt-2 text-sm font-semibold text-ink/60">free tools</p>
+      </div>
+      <div class="stagger-card rounded-3xl border border-ink/10 bg-cream p-6 text-center">
+        <p class="text-4xl font-extrabold tracking-tight sm:text-5xl">
+          <span class="stat-count" data-count={niches.length}>0</span>
+        </p>
+        <p class="mt-2 text-sm font-semibold text-ink/60">categories</p>
+      </div>
+      <div class="stagger-card rounded-3xl border border-ink/10 bg-cream p-6 text-center">
+        <p class="text-4xl font-extrabold tracking-tight text-gradient sm:text-5xl">
+          <span class="stat-count" data-count={totalTools} data-infinity="true">0</span>
+        </p>
+        <p class="mt-2 text-sm font-semibold text-ink/60">tools, forever growing</p>
+      </div>
+      <div class="stagger-card rounded-3xl border border-ink/10 bg-cream p-6 text-center">
+        <p class="text-4xl font-extrabold tracking-tight sm:text-5xl">100<span class="text-gradient">%</span></p>
+        <p class="mt-2 text-sm font-semibold text-ink/60">free · no signup</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ SEARCH ══════════════════ -->
+  <section id="search" class="bg-white">
+    <div class="mx-auto max-w-3xl px-5 py-16 sm:py-20">
+      <div class="text-center" data-stagger>
+        <p class="section-kicker">Instant search</p>
+        <h2 class="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl">
+          Find your tool in <span class="text-gradient">seconds</span>
+        </h2>
+        <p class="mt-3 text-ink/60">Type a keyword — calculator, QR, password, resume…</p>
+      </div>
+
+      <div class="reveal relative mt-8">
+        <div class="pointer-events-none absolute inset-y-0 left-5 flex items-center" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2.5" class="text-ink/30"/>
+            <path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" class="text-ink/30"/>
+          </svg>
+        </div>
+        <input
+          id="tool-search"
+          type="search"
+          autocomplete="off"
+          placeholder="Search 100+ free tools…"
+          aria-label="Search tools"
+          class="w-full rounded-full border-2 border-ink/10 bg-white py-4 pr-5 text-base font-medium shadow-sm outline-none transition-all placeholder:text-ink/35 focus:border-brand-purple focus:shadow-lg"
+          style="padding-left: 3.25rem;"
+        />
+        <div
+          id="search-results"
+          class="absolute inset-x-0 top-full z-30 mt-2 hidden overflow-hidden rounded-2xl border border-ink/10 bg-white shadow-2xl"
+          role="listbox"
+          aria-label="Search results"
+        ></div>
+      </div>
+
+      <p class="reveal mt-6 text-center">
+        <a href="/tools" class="text-base font-bold text-ink underline decoration-brand-pink decoration-2 underline-offset-4 transition-colors hover:text-brand-purple">
+          View all tools →
+        </a>
+      </p>
+    </div>
+  </section>
+
+  <!-- ══════════════════ NICHE CARDS ══════════════════ -->
+  <section id="niches" class="border-t border-ink/5 bg-cream">
+    <div class="mx-auto max-w-6xl px-5 py-16 sm:py-20">
+      <div class="max-w-2xl" data-stagger>
+        <p class="section-kicker">Categories</p>
+        <h2 class="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl">
+          Browse by <span class="text-gradient">category</span>
+        </h2>
+        <p class="mt-3 text-ink/60">
+          {totalTools} tools across {niches.length} categories — pick a lane and get to work.
+        </p>
+      </div>
+
+      <div class="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {
+          niches.map((niche, i) => (
+            <a
+              href="/tools"
+              class="stagger-card card-lift group relative overflow-hidden rounded-3xl border border-ink/10 bg-white p-6 shadow-sm hover:shadow-xl"
+            >
+              <span
+                class={`absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r ${accents[i % accents.length]}`}
+                aria-hidden="true"
+              ></span>
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <h3 class="text-xl font-extrabold tracking-tight transition-colors group-hover:text-brand-purple">
+                    {niche.name}
+                  </h3>
+                  <p class="mt-2 text-sm leading-relaxed text-ink/60">{niche.tagline}</p>
+                </div>
+                <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-cream text-lg font-extrabold text-ink/70 transition-transform duration-300 group-hover:scale-110">
+                  {niche.tools.length}
+                </span>
+              </div>
+              <p class="mt-4 text-sm font-bold text-ink/50 transition-colors group-hover:text-ink">
+                {niche.tools.length} {niche.tools.length === 1 ? 'tool' : 'tools'}
+                <span class="ml-1 inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
+              </p>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ FUN ZONE / GAMES TEASER ══════════════════ -->
+  <section id="games" class="bg-white">
+    <div class="mx-auto max-w-6xl px-5 py-16 sm:py-20">
+      <div class="game-panel reveal relative overflow-hidden rounded-[2.5rem] bg-ink px-6 py-14 text-center sm:px-12 sm:py-16">
+        <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+          <div
+            class="animate-blob-drift absolute -left-20 -top-20 h-72 w-72 rounded-full opacity-40 blur-3xl"
+            style="background: radial-gradient(circle, #F43F8E, transparent 70%);"
+          ></div>
+          <div
+            class="animate-blob-drift-2 absolute -bottom-24 -right-16 h-80 w-80 rounded-full opacity-40 blur-3xl"
+            style="background: radial-gradient(circle, #2E6BFF, transparent 70%);"
+          ></div>
+        </div>
+
+        <div class="relative">
+          <p class="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-white/70">
+            <span class="h-2 w-2 rounded-full bg-brand-gradient" aria-hidden="true"></span>
+            Take a break
+          </p>
+          <h2 class="mx-auto mt-4 max-w-2xl text-3xl font-extrabold tracking-tight text-white sm:text-5xl">
+            The <span class="text-gradient">Fun Zone</span>
+          </h2>
+          <p class="mx-auto mt-4 max-w-xl text-white/60">
+            Chess, Sudoku, daily word puzzles and arcade classics — free games to sharpen your mind between tasks.
+          </p>
+
+          <div class="mx-auto mt-10 grid max-w-4xl grid-cols-1 gap-4 text-left sm:grid-cols-2 lg:grid-cols-4">
+            {
+              games.map((game) => (
+                <a
+                  href="/games"
+                  class="tilt-card card-lift group rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur transition-colors hover:border-white/25 hover:bg-white/10"
+                >
+                  <span
+                    class="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-gradient text-lg font-extrabold text-white"
+                    aria-hidden="true"
+                  >
+                    {game.name.charAt(0)}
+                  </span>
+                  <h3 class="mt-4 text-lg font-extrabold text-white">{game.name}</h3>
+                  <p class="mt-1.5 text-sm leading-relaxed text-white/55">{game.blurb}</p>
+                  <p class="mt-4 text-sm font-bold text-white/80 transition-colors group-hover:text-white">
+                    Play now <span class="inline-block transition-transform duration-300 group-hover:translate-x-1">→</span>
+                  </p>
+                </a>
+              ))
+            }
+          </div>
+
+          <a
+            href="/games"
+            class="mt-10 inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 text-base font-bold text-ink transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
+          >
+            Explore the Fun Zone →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ WHY FIXORAA ══════════════════ -->
+  <section id="why" class="border-t border-ink/5 bg-cream">
+    <div class="mx-auto max-w-6xl px-5 py-16 sm:py-20">
+      <div class="max-w-2xl" data-stagger>
+        <p class="section-kicker">Why Fixoraa</p>
+        <h2 class="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl">
+          Tools you can <span class="text-gradient">trust</span>
+        </h2>
+        <p class="mt-3 text-ink/60">Built to be the fastest way from "I need this" to "done".</p>
+      </div>
+
+      <div class="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          valueProps.map((prop) => (
+            <div class="stagger-card card-lift rounded-3xl border border-ink/10 bg-white p-6 shadow-sm hover:shadow-xl">
+              <span
+                class="flex h-12 w-12 items-center justify-center rounded-2xl"
+                style={`background: ${prop.color}1a;`}
+                aria-hidden="true"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={prop.color} set:html={prop.icon} />
+              </span>
+              <h3 class="mt-4 text-lg font-extrabold tracking-tight">{prop.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-ink/60">{prop.text}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Final CTA -->
+      <div class="reveal mx-auto mt-14 max-w-3xl rounded-[2.5rem] border border-ink/10 bg-white px-6 py-12 text-center shadow-sm">
+        <p class="text-5xl font-extrabold text-gradient" aria-hidden="true">∞</p>
+        <h2 class="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl">
+          Start with <span class="text-gradient">100+ free tools</span> today
+        </h2>
+        <p class="mx-auto mt-3 max-w-xl text-ink/60">
+          No signup. No paywalls. Pick a tool, get your result, get on with your day.
+        </p>
+        <div class="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <a href="/tools" class="btn-primary w-full sm:w-auto">Browse All Tools →</a>
+          <a href="/games" class="btn-secondary w-full sm:w-auto">Fun Zone</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Structured data: WebSite -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Fixoraa',
+    url: 'https://fixoraa.tech',
+    description: pageDescription,
+  })} />
+</Layout>
+
+<!-- ══════════ LANDING PAGE SCRIPTS ══════════ -->
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import { initThread } from '../lib/thread.js';
+
+  gsap.registerPlugin(ScrollTrigger);
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ── TIDY-style opening: dark veil ramp-up + exploded hero assembly ──
+  // (JS-only initial states: no-JS / reduced-motion users see the final page instantly)
+  if (!prefersReduced) {
+    // 1. Full-screen near-black veil — brightness ramps up as it fades (~0.8s)
+    const veil = document.createElement('div');
+    veil.id = 'intro-veil';
+    veil.setAttribute('aria-hidden', 'true');
+    veil.style.cssText =
+      'position:fixed;inset:0;background:#0B0B10;z-index:100;pointer-events:none;';
+    document.body.appendChild(veil);
+
+    // 2. Split the hero headline into per-line pieces, then gsap.com-style into
+    //    per-char spans — each char wrapped in an overflow:hidden mask so chars
+    //    rise through their masks (client-side only — SSR markup untouched)
+    const heroH1 = document.querySelector('#hero h1');
+    const heroLines: HTMLElement[] = [];
+    if (heroH1) {
+      const nodes = Array.from(heroH1.childNodes);
+      heroH1.textContent = '';
+      let bucket: ChildNode[] = [];
+      const flushBucket = () => {
+        if (!bucket.length) return;
+        const span = document.createElement('span');
+        span.className = 'hero-line';
+        span.style.display = 'block';
+        bucket.forEach((n) => span.appendChild(n));
+        heroH1.appendChild(span);
+        heroLines.push(span);
+        bucket = [];
+      };
+      nodes.forEach((node) => {
+        if (node.nodeName === 'BR') flushBucket();
+        else bucket.push(node);
+      });
+      flushBucket();
+
+      // Per-char split: preserves any wrapper classes (e.g. text-gold-gradient
+      // on line 3 → gold-foil-per-letter look). Spaces become nbsp so masks keep width.
+      heroLines.forEach((line) => {
+        const frag = document.createDocumentFragment();
+        const emitChars = (text: string, cls: string) => {
+          for (const c of text) {
+            const mask = document.createElement('span');
+            mask.className = 'ch-mask';
+            mask.setAttribute('aria-hidden', 'true');
+            const ch = document.createElement('span');
+            ch.className = cls ? `ch ${cls}` : 'ch';
+            ch.textContent = c === ' ' ? ' ' : c;
+            mask.appendChild(ch);
+            frag.appendChild(mask);
+          }
+        };
+        Array.from(line.childNodes).forEach((node) => {
+          if (node.nodeType === Node.TEXT_NODE) {
+            emitChars(node.textContent || '', '');
+          } else if (node.nodeType === Node.ELEMENT_NODE) {
+            emitChars((node as HTMLElement).textContent || '', (node as HTMLElement).className || '');
+          }
+        });
+        line.textContent = '';
+        line.appendChild(frag);
+      });
+      // Screen readers: masks are aria-hidden, so expose the headline as a label
+      heroH1.setAttribute('aria-label', '100+ free tools. Zero signup. Infinite possibilities.');
+    }
+
+    // 3. Assembly order: badge → subtext → CTAs → infinity → scroll hint →
+    //    blobs → stats cards. The HEADLINE is excluded — it animates via the
+    //    gsap.com char-rise below instead (no conflicting motion).
+    const introPieces: Element[] = [];
+    document.querySelectorAll('#hero .hero-anim').forEach((el) => {
+      if (el.tagName === 'H1') return;
+      introPieces.push(el);
+    });
+    document.querySelectorAll('.hero-blob').forEach((b) => introPieces.push(b));
+    document.querySelectorAll('#stats .stagger-card').forEach((c) => introPieces.push(c));
+
+    // 4. Exploded view: random offsets (±100–140px), rotation (±10°), invisible
+    const rand = (min: number, max: number) => min + Math.random() * (max - min);
+    introPieces.forEach((el) => {
+      gsap.set(el, {
+        x: (Math.random() < 0.5 ? -1 : 1) * rand(100, 140),
+        y: (Math.random() < 0.5 ? -1 : 1) * rand(100, 140),
+        rotation: rand(-10, 10),
+        opacity: 0,
+      });
+    });
+
+    // 5. Timeline: veil fades (brightness ramp) → pieces fly together with stagger
+    const introTl = gsap.timeline();
+    introTl.to(veil, {
+      opacity: 0,
+      duration: 0.8,
+      ease: 'power2.out',
+      onComplete: () => veil.remove(),
+    }, 0);
+    introTl.to(
+      introPieces,
+      {
+        x: 0,
+        y: 0,
+        rotation: 0,
+        opacity: 1,
+        duration: 0.85,
+        ease: 'power3.out',
+        stagger: 0.08,
+      },
+      0.25
+    );
+
+    // 5b. gsap.com hero effect: headline chars rise through their masks,
+    //     line by line — pure translate-Y, expo.out, no rotation/blur/scale
+    const LINE_DELAYS = [0.25, 0.4, 0.55];
+    heroLines.forEach((line, li) => {
+      const chars = line.querySelectorAll('.ch');
+      if (!chars.length) return;
+      introTl.fromTo(
+        chars,
+        { yPercent: 110 },
+        { yPercent: 0, duration: 0.9, ease: 'expo.out', stagger: 0.025 },
+        LINE_DELAYS[li] ?? 0.55
+      );
+    });
+
+    // 6. Infinity self-draw plays as the FINALE — after the headline finishes
+    //    rising. Strokes are pre-hidden at init so nothing pops in beforehand.
+    (() => {
+      const { path, frost, sheen, glow, shimmer } = infinityEls();
+      if (!path) return;
+      const len = path.getTotalLength();
+      [path, frost, sheen, shimmer].forEach((p) => {
+        if (!p) return;
+        p.style.strokeDasharray = String(len);
+        p.style.strokeDashoffset = String(len);
+      });
+      if (glow) glow.style.opacity = '0';
+    })();
+    introTl.add(playInfinityDraw, 2.05);
+
+    // ── Hero parallax scrub: headline drifts up, infinity floats away slower, blobs lag ──
+    // (yPercent on headline/infinity composes with the entrance y — no conflict)
+    const heroScrub = { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true };
+    gsap.to('#hero h1', { yPercent: -18, ease: 'none', scrollTrigger: heroScrub });
+    gsap.to('#infinity-wrap', { yPercent: 24, ease: 'none', scrollTrigger: heroScrub });
+    document.querySelectorAll<HTMLElement>('.hero-blob').forEach((blob) => {
+      const speed = parseFloat(blob.dataset.speed || '0.4');
+      gsap.to(blob, { y: 220 * speed, ease: 'none', scrollTrigger: heroScrub });
+    });
+
+    // ── Section headers: children slide up with stagger on scroll-enter ──
+    gsap.utils.toArray<HTMLElement>('[data-stagger]').forEach((group) => {
+      gsap.fromTo(
+        group.children,
+        { y: 44, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.9,
+          ease: 'power3.out',
+          stagger: 0.12,
+          scrollTrigger: { trigger: group, start: 'top 85%', once: true },
+        }
+      );
+    });
+
+    // ── Card grids: rise in with stagger (y + opacity + slight scale) ──
+    // (#stats cards are assembled by the intro timeline instead — excluded here)
+    const scrollCards = gsap.utils
+      .toArray<HTMLElement>('.stagger-card')
+      .filter((el) => !el.closest('#stats'));
+    gsap.set(scrollCards, { y: 56, opacity: 0, scale: 0.96 });
+    ScrollTrigger.batch(scrollCards, {
+      start: 'top 92%',
+      once: true,
+      onEnter: (batch) =>
+        gsap.to(batch, { y: 0, opacity: 1, scale: 1, duration: 0.9, ease: 'power3.out', stagger: 0.09 }),
+    });
+
+    // ── Games teaser: cards settle from a slight tilt + dark panel parallax ──
+    gsap.set('.tilt-card', { y: 64, opacity: 0, rotation: 2.5, transformOrigin: 'center bottom' });
+    ScrollTrigger.batch('.tilt-card', {
+      start: 'top 92%',
+      once: true,
+      onEnter: (batch) =>
+        gsap.to(batch, { y: 0, opacity: 1, rotation: 0, duration: 1, ease: 'power3.out', stagger: 0.1 }),
+    });
+    gsap.to('.game-panel', {
+      yPercent: -5,
+      ease: 'none',
+      scrollTrigger: { trigger: '#games', start: 'top bottom', end: 'bottom top', scrub: true },
+    });
+  }
+
+  // ── Infinity signature: glassy self-draw, then float + shimmer sweep ──
+  // The draw plays as the FINALE of the intro assembly (triggered from the
+  // intro timeline above); static fully-drawn state when reduced motion is on.
+  function infinityEls() {
+    const q = (id: string) => document.getElementById(id) as unknown as SVGPathElement | null;
+    return {
+      path: q('infinity-path'),
+      frost: q('infinity-frost'),
+      sheen: q('infinity-sheen'),
+      glow: q('infinity-glow'),
+      shimmer: q('infinity-shimmer'),
+      wrap: document.getElementById('infinity-wrap'),
+    };
+  }
+
+  function infinityStatic() {
+    // Static, fully-drawn glassy state — no motion
+    const { glow, frost, sheen } = infinityEls();
+    if (glow) glow.style.opacity = '0.55';
+    if (frost) frost.style.opacity = '0.3';
+    if (sheen) sheen.style.opacity = '0.75';
+  }
+
+  function playInfinityDraw() {
+    const { path, frost, sheen, glow, shimmer, wrap } = infinityEls();
+    if (!path || !wrap) return;
+
+    // Self-draw: every visible layer draws itself via stroke-dashoffset
+    const len = path.getTotalLength();
+    [path, frost, sheen].forEach((p) => {
+      if (!p) return;
+      p.style.strokeDasharray = String(len);
+      p.style.strokeDashoffset = String(len);
+    });
+    if (shimmer) {
+      shimmer.style.strokeDasharray = String(len);
+      shimmer.style.strokeDashoffset = String(len);
+    }
+    if (glow) glow.style.opacity = '0';
+
+    const drawTl = gsap.timeline();
+    drawTl
+      .to(path, { strokeDashoffset: 0, duration: 2, ease: 'power2.inOut' }, 0)
+      .to(frost, { strokeDashoffset: 0, duration: 2, ease: 'power2.inOut' }, 0)
+      .to(glow, { opacity: 0.55, duration: 1, ease: 'power2.out' }, 1)
+      .to(sheen, { strokeDashoffset: 0, opacity: 0.75, duration: 1.4, ease: 'power2.out' }, 1.1)
+      .to(shimmer, { strokeDashoffset: 0, duration: 0.7, ease: 'power2.out' }, 1.5)
+      .add(() => {
+        if (!shimmer) return;
+        // Shimmer sweep: a bright segment endlessly traveling the loop
+        gsap.set(shimmer, { strokeDasharray: `72 ${len}`, strokeDashoffset: 0, opacity: 0.9 });
+        gsap.to(shimmer, { strokeDashoffset: -len, duration: 3.4, repeat: -1, ease: 'none' });
+        // Gentle infinite float + glow breathing (transform/opacity only — 60fps)
+        gsap.to(wrap, { y: -14, duration: 3.2, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+        if (glow) gsap.to(glow, { opacity: 0.3, duration: 2.6, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+      });
+  }
+
+  if (prefersReduced) {
+    infinityStatic();
+  }
+
+  // ── Scroll reveals (fade-up) ───────────────────────────
+  if (!prefersReduced) {
+    gsap.utils.toArray<HTMLElement>('.reveal').forEach((el) => {
+      gsap.fromTo(
+        el,
+        { y: 36, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.85,
+          ease: 'power3.out',
+          scrollTrigger: { trigger: el, start: 'top 88%', once: true },
+        }
+      );
+    });
+  }
+
+  // ── Animated count-up stats ────────────────────────────
+  function countUp(el: HTMLElement, target: number, done?: () => void) {
+    const duration = 1400;
+    const start = performance.now();
+    function frame(now: number) {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = String(Math.round(target * eased));
+      if (p < 1) requestAnimationFrame(frame);
+      else done?.();
+    }
+    requestAnimationFrame(frame);
+  }
+
+  document.querySelectorAll<HTMLElement>('.stat-count').forEach((el) => {
+    const target = parseInt(el.dataset.count || '0', 10);
+    const becomesInfinity = el.dataset.infinity === 'true';
+    const run = () => {
+      if (prefersReduced) {
+        el.textContent = becomesInfinity ? '∞' : String(target);
+        return;
+      }
+      countUp(el, target, () => {
+        if (becomesInfinity) {
+          gsap.to(el, {
+            opacity: 0,
+            y: -8,
+            duration: 0.25,
+            onComplete: () => {
+              el.textContent = '∞';
+              gsap.fromTo(el, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' });
+            },
+          });
+        }
+      });
+    };
+    if (prefersReduced) {
+      run();
+    } else {
+      ScrollTrigger.create({ trigger: el, start: 'top 90%', once: true, onEnter: run });
+    }
+  });
+
+  // ── Sewing-needle thread drawing (fixed canvas overlay, pointer-transparent) ──
+  // JS-only + skipped entirely for prefers-reduced-motion users.
+  if (!prefersReduced) {
+    initThread();
+  }
+</script>
+
+<!-- ══════════ LIVE TOOL SEARCH ══════════ -->
+<script define:vars={{ toolData: allTools }}>
+  const searchInput = document.getElementById('tool-search');
+  const searchResults = document.getElementById('search-results');
+  const tools = toolData;
+
+  function escapeHtml(s) {
+    return String(s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function hideResults() {
+    searchResults.classList.add('hidden');
+    searchResults.innerHTML = '';
+  }
+
+  function renderResults(matches, query) {
+    if (!matches.length) {
+      searchResults.innerHTML =
+        '<p class="px-5 py-4 text-sm text-ink/60">No tools match "' +
+        escapeHtml(query) +
+        '". Try another keyword — or <a href="/tools" class="font-bold text-brand-purple underline">browse all tools</a>.</p>';
+    } else {
+      searchResults.innerHTML = matches
+        .map(
+          (t) =>
+            '<a href="' +
+            escapeHtml(t.url) +
+            '" target="_blank" rel="noopener" role="option" class="flex items-center justify-between gap-3 px-5 py-3.5 transition-colors hover:bg-cream">' +
+            '<span><span class="block text-sm font-bold text-ink">' +
+            escapeHtml(t.name) +
+            '</span><span class="mt-0.5 block text-xs text-ink/55">' +
+            escapeHtml(t.blurb) +
+            '</span></span>' +
+            '<span class="shrink-0 rounded-full bg-cream px-3 py-1 text-[11px] font-bold text-ink/60">' +
+            escapeHtml(t.niche) +
+            '</span></a>'
+        )
+        .join('');
+    }
+    searchResults.classList.remove('hidden');
+  }
+
+  searchInput.addEventListener('input', () => {
+    const q = searchInput.value.trim().toLowerCase();
+    if (q.length < 2) {
+      hideResults();
+      return;
+    }
+    const matches = tools
+      .filter(
+        (t) =>
+          t.name.toLowerCase().includes(q) ||
+          t.blurb.toLowerCase().includes(q) ||
+          t.niche.toLowerCase().includes(q)
+      )
+      .slice(0, 8);
+    renderResults(matches, searchInput.value.trim());
+  });
+
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      hideResults();
+      searchInput.blur();
+    }
+  });
+
+  // Keep results open when clicking a result link
+  searchInput.addEventListener('blur', () => {
+    setTimeout(hideResults, 180);
+  });
+  searchInput.addEventListener('focus', () => {
+    if (searchInput.value.trim().length >= 2) {
+      searchInput.dispatchEvent(new Event('input'));
+    }
+  });
+</script>
