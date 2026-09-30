@@ -19,8 +19,11 @@
 import { sfx } from './sfx.js';
 
 const THREAD_COLOR = '#FF5A5F';
-const PIN_COLOR = '#1a1a1a';
 const PIN_R = 3.5;
+// Pin dots stay visible in both modes (dark dots on light, light dots on dark)
+function pinColor() {
+  return document.documentElement.getAttribute('data-theme') === 'dark' ? '#F8FAFC' : '#1a1a1a';
+}
 const N_POINTS = 60;
 const GRAVITY = 0.5; // px per frame^2 @60fps
 const DAMPING = 0.985;
@@ -168,7 +171,7 @@ export function initThread() {
     g.lineJoin = 'round';
     g.stroke();
     // Pin dots at every anchor
-    g.fillStyle = PIN_COLOR;
+    g.fillStyle = pinColor();
     g.beginPath();
     g.arc(t.ax, t.ay, PIN_R, 0, Math.PI * 2);
     if (t.pin2) {
