@@ -1,0 +1,584 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Sudoku Daily — Free Online Sudoku Puzzle | Fixoraa" description="Play today's free daily Sudoku puzzle — the same puzzle for everyone, every day. Easy, Medium and Hard modes, notes, hints and timer. No signup needed.">
+<main class="mx-auto max-w-6xl px-4 py-8 sm:py-12">
+  <nav class="mb-6 text-sm text-neutral-500">
+    <a href="/games" class="hover:text-neutral-900 transition-colors">← Fun Zone</a>
+    <span class="mx-2">/</span><span class="text-neutral-900 font-medium">Sudoku Daily</span>
+  </nav>
+
+  <div class="text-center mb-6">
+    <span class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full text-white bg-gradient-to-r from-[#2E6BFF] via-[#9333EA] to-[#F43F8E] mb-4">Fun Zone · New puzzle every day</span>
+    <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-neutral-900">Sudoku <span class="bg-gradient-to-r from-[#2E6BFF] via-[#9333EA] to-[#F43F8E] bg-clip-text text-transparent">Daily</span></h1>
+    <p class="mt-3 text-neutral-600 max-w-xl mx-auto">One fresh puzzle every day — the same for every visitor. Tap a cell, then tap a number. Stuck? Use a hint. Three mistakes and it's game over.</p>
+  </div>
+
+  <!-- Mode + difficulty tabs -->
+  <div class="flex flex-wrap justify-center gap-3 mb-2">
+    <div class="inline-flex rounded-full bg-neutral-100 p-1" role="group" aria-label="Mode">
+      <button id="modeDaily" class="mode-btn px-5 py-2 rounded-full text-sm font-bold transition-all">📅 Daily</button>
+      <button id="modePractice" class="mode-btn px-5 py-2 rounded-full text-sm font-bold transition-all">🎲 Practice</button>
+    </div>
+    <div class="inline-flex rounded-full bg-neutral-100 p-1" role="group" aria-label="Difficulty">
+      <button data-diff="easy" class="diff-btn px-4 py-2 rounded-full text-sm font-bold transition-all">Easy</button>
+      <button data-diff="medium" class="diff-btn px-4 py-2 rounded-full text-sm font-bold transition-all">Medium</button>
+      <button data-diff="hard" class="diff-btn px-4 py-2 rounded-full text-sm font-bold transition-all">Hard</button>
+    </div>
+  </div>
+  <p id="puzzleLabel" class="text-center text-sm text-neutral-500 mb-6"></p>
+
+  <!-- Stats row -->
+  <div class="flex justify-center gap-3 sm:gap-4 mb-6 flex-wrap">
+    <div class="rounded-2xl border border-neutral-200 bg-white px-5 py-2.5 shadow-sm text-center min-w-[92px]">
+      <div class="text-[11px] font-bold uppercase tracking-widest text-neutral-400">Time</div>
+      <div id="timer" class="text-xl font-black text-neutral-900 tabular-nums">0:00</div>
+    </div>
+    <div class="rounded-2xl border border-neutral-200 bg-white px-5 py-2.5 shadow-sm text-center min-w-[92px]">
+      <div class="text-[11px] font-bold uppercase tracking-widest text-neutral-400">Mistakes</div>
+      <div id="mistakes" class="text-xl font-black text-neutral-900"><span id="mistakeCount">0</span><span class="text-neutral-300">/3</span></div>
+    </div>
+    <div class="rounded-2xl border border-neutral-200 bg-white px-5 py-2.5 shadow-sm text-center min-w-[92px]">
+      <div class="text-[11px] font-bold uppercase tracking-widest text-neutral-400">Hints</div>
+      <div id="hintsLeft" class="text-xl font-black text-neutral-900">3</div>
+    </div>
+  </div>
+
+  <div class="max-w-[420px] mx-auto">
+    <!-- Sudoku grid -->
+    <div id="grid" class="grid grid-cols-9 w-full aspect-square rounded-xl overflow-hidden bg-neutral-900 gap-[1.5px] p-[1.5px] shadow-xl select-none" style="touch-action: manipulation;" aria-label="Sudoku grid"></div>
+
+    <!-- Number pad -->
+    <div id="pad" class="grid grid-cols-9 gap-1.5 mt-4"></div>
+
+    <!-- Action buttons -->
+    <div class="grid grid-cols-4 gap-2 mt-3">
+      <button id="notesBtn" class="tool-btn" aria-pressed="false">✏️<span>Notes</span></button>
+      <button id="eraseBtn" class="tool-btn"><span class="text-lg">⌫</span><span>Erase</span></button>
+      <button id="hintBtn" class="tool-btn">💡<span>Hint</span></button>
+      <button id="newBtn" class="tool-btn">↻<span>New</span></button>
+    </div>
+    <p class="text-center text-xs text-neutral-400 mt-4">Daily progress auto-saves in this browser. Practice puzzles are just for fun.</p>
+  </div>
+
+  <!-- Win / Lose overlays -->
+  <div id="overlay" class="hidden fixed inset-0 z-50 items-center justify-center bg-black/50 p-4">
+    <div class="bg-white rounded-3xl p-8 max-w-sm w-full text-center shadow-2xl">
+      <div id="overlayEmoji" class="text-6xl mb-3">🎉</div>
+      <h2 id="overlayTitle" class="text-3xl font-black text-neutral-900 mb-2">Puzzle solved!</h2>
+      <p id="overlayText" class="text-neutral-600 mb-6"></p>
+      <div class="flex flex-col gap-2">
+        <button id="overlayPrimary" class="px-5 py-3 rounded-full text-sm font-bold text-white bg-gradient-to-r from-[#2E6BFF] to-[#9333EA] shadow-md hover:opacity-90 active:scale-95 transition-all"></button>
+        <button id="overlaySecondary" class="px-5 py-3 rounded-full text-sm font-bold bg-neutral-100 text-neutral-800 hover:bg-neutral-200 active:scale-95 transition-all"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- How to play -->
+  <section class="max-w-3xl mx-auto mt-14 rounded-3xl bg-[#FAFAF8] border border-neutral-200 p-6 sm:p-8">
+    <h2 class="text-2xl font-black text-neutral-900 mb-3">How to play</h2>
+    <ul class="space-y-2 text-neutral-600 text-[15px] leading-relaxed list-disc pl-5">
+      <li><strong class="text-neutral-900">Tap any empty cell</strong>, then tap a number from 1–9 on the pad. Each row, column and 3×3 box must contain every digit exactly once.</li>
+      <li><strong class="text-neutral-900">Notes mode</strong> (✏️) lets you pencil in candidates — tap the numbers you want as small notes in the selected cell.</li>
+      <li>Wrong entries count as <strong class="text-neutral-900">mistakes</strong>. Three mistakes ends the run — but you can keep practicing or restart the same puzzle.</li>
+      <li>You get <strong class="text-neutral-900">3 hints</strong> per puzzle. A hint fills the selected cell correctly and locks it in.</li>
+      <li><strong class="text-neutral-900">Daily mode</strong> gives everyone the same puzzle, generated from today's date — come back tomorrow for a new one. <strong class="text-neutral-900">Practice mode</strong> deals a random puzzle whenever you want one.</li>
+    </ul>
+  </section>
+</main>
+
+<style is:global>
+  .cell { position: relative; background: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: clamp(1.05rem, 4.6vw, 1.5rem); }
+  .cell.given { font-weight: 800; color: #171717; }
+  .cell.user { font-weight: 700; color: #2563eb; }
+  .cell.hinted { font-weight: 800; color: #7c3aed; }
+  .cell.selected { background: #dbeafe !important; }
+  .cell.peer { background: #eff6ff; }
+  .cell.same { background: #dbeafe; }
+  .cell.error { animation: errFlash .5s ease; }
+  @keyframes errFlash { 0%,100% { background: #fff; } 30%,70% { background: #fecaca; color: #dc2626; } }
+  /* thicker lines every 3 cells */
+  .cell.br { border-right: 2px solid #171717; }
+  .cell.bb { border-bottom: 2px solid #171717; }
+  .notes { display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; height: 100%; padding: 12%; pointer-events: none; }
+  .notes span { display: flex; align-items: center; justify-content: center; font-size: clamp(.42rem, 1.8vw, .6rem); font-weight: 700; color: #6b7280; line-height: 1; }
+  .pad-btn { position: relative; aspect-ratio: .82; border-radius: .9rem; background: #fff; border: 1.5px solid #e5e5e5; font-size: 1.35rem; font-weight: 800; color: #171717; box-shadow: 0 1px 3px rgba(0,0,0,.06); transition: transform .1s, background .15s; }
+  .pad-btn:active { transform: scale(.92); background: #eff6ff; }
+  .pad-btn .rem { position: absolute; bottom: 2px; right: 6px; font-size: .6rem; font-weight: 700; color: #a3a3a3; }
+  .pad-btn.done { opacity: .3; }
+  .tool-btn { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: .65rem 0; border-radius: 1rem; background: #f5f5f5; font-size: .72rem; font-weight: 800; color: #404040; transition: transform .1s, background .15s; }
+  .tool-btn:active { transform: scale(.94); }
+  .tool-btn.on { background: linear-gradient(135deg, #2E6BFF, #9333EA); color: #fff; }
+  .mode-btn, .diff-btn { color: #525252; }
+  .mode-btn.active, .diff-btn.active { background: #fff; color: #111; box-shadow: 0 1px 4px rgba(0,0,0,.15); }
+  @keyframes pop { 0% { transform: scale(.6); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+  #overlay:not(.hidden) > div { animation: pop .25s ease; }
+</style>
+
+<script>
+import { sfx } from '../../lib/sfx.js';
+(function () {
+  'use strict';
+
+  /* ============================================================
+     SEEDED PRNG — mulberry32. Same date => same puzzle for everyone.
+     ============================================================ */
+  function mulberry32(a) {
+    return function () {
+      a |= 0; a = (a + 0x6D2B79F5) | 0;
+      var t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+  function shuffled(arr, rand) {
+    for (var i = arr.length - 1; i > 0; i--) {
+      var j = (rand() * (i + 1)) | 0;
+      var t = arr[i]; arr[i] = arr[j]; arr[j] = t;
+    }
+    return arr;
+  }
+
+  /* ============================================================
+     GENERATOR — backtracking fill, symmetric removal with a
+     uniqueness check (solver capped at 2 solutions).
+     ============================================================ */
+  // Find the empty cell with the fewest legal candidates (MRV heuristic),
+  // returning the cell index plus its candidate list.
+  function emptyCells(grid) {
+    var best = -1, bestCount = 10, bestCands = null;
+    for (var i = 0; i < 81; i++) {
+      if (grid[i] !== 0) continue;
+      var cands = [], r = (i / 9) | 0, c = i % 9;
+      for (var n = 1; n <= 9; n++) {
+        var ok = true, k;
+        for (k = 0; k < 9; k++) {
+          if (grid[r * 9 + k] === n || grid[k * 9 + c] === n) { ok = false; break; }
+        }
+        if (ok) {
+          var br = ((r / 3) | 0) * 3, bc = ((c / 3) | 0) * 3;
+          for (var dr = 0; dr < 3 && ok; dr++) for (var dc = 0; dc < 3; dc++) {
+            if (grid[(br + dr) * 9 + bc + dc] === n) { ok = false; break; }
+          }
+        }
+        if (ok) cands.push(n);
+        if (cands.length >= bestCount) break; // can't beat the current best
+      }
+      if (cands.length === 0) return { idx: i, dead: true, cands: [] };
+      if (cands.length < bestCount) {
+        bestCount = cands.length; best = i; bestCands = cands;
+        if (cands.length === 1) break;
+      }
+    }
+    return { idx: best, dead: false, cands: bestCands };
+  }
+
+  // Count solutions up to `limit` (MRV backtracking).
+  function countSolutions(grid, limit) {
+    var count = 0;
+    (function bt() {
+      if (count >= limit) return;
+      var e = emptyCells(grid);
+      if (e.dead) return;
+      if (e.idx === -1) { count++; return; }
+      var i = e.idx, r = (i / 9) | 0, c = i % 9;
+      for (var n = 1; n <= 9 && count < limit; n++) {
+        var ok = true, k;
+        for (k = 0; k < 9; k++) if (grid[r * 9 + k] === n || grid[k * 9 + c] === n) { ok = false; break; }
+        if (ok) {
+          var br = ((r / 3) | 0) * 3, bc = ((c / 3) | 0) * 3;
+          for (var dr = 0; dr < 3 && ok; dr++) for (var dc = 0; dc < 3; dc++)
+            if (grid[(br + dr) * 9 + bc + dc] === n) { ok = false; break; }
+        }
+        if (!ok) continue;
+        grid[i] = n; bt(); grid[i] = 0;
+      }
+    })();
+    return count;
+  }
+
+  function fillGrid(grid, rand) {
+    var e = emptyCells(grid);
+    if (e.dead) return false;
+    if (e.idx === -1) return true;
+    var nums = shuffled(e.cands.slice(), rand); // only try legal candidates
+    for (var k = 0; k < nums.length; k++) {
+      grid[e.idx] = nums[k];
+      if (fillGrid(grid, rand)) return true;
+      grid[e.idx] = 0;
+    }
+    return false;
+  }
+
+  var REMOVE_TARGET = { easy: 35, medium: 45, hard: 52 };
+
+  function generatePuzzle(difficulty, seed) {
+    var rand = mulberry32(seed);
+    var solution = new Array(81).fill(0);
+    fillGrid(solution, rand); // randomized full grid
+    var puzzle = solution.slice();
+    var target = REMOVE_TARGET[difficulty] || 45;
+    var removed = 0;
+    var order = shuffled(Array.from({ length: 81 }, function (_, i) { return i; }), rand);
+    for (var o = 0; o < order.length && removed < target; o++) {
+      var i = order[o], j = 80 - i;
+      if (puzzle[i] === 0) continue;
+      var bi = puzzle[i], bj = puzzle[j];
+      puzzle[i] = 0;
+      var took = 1;
+      if (j !== i && puzzle[j] !== 0) { puzzle[j] = 0; took = 2; }
+      // uniqueness check: exactly one solution must remain
+      if (countSolutions(puzzle.slice(), 2) !== 1) {
+        puzzle[i] = bi;
+        if (j !== i) puzzle[j] = bj;
+      } else removed += took;
+    }
+    return { puzzle: puzzle, solution: solution };
+  }
+
+  /* ============================================================
+     GAME STATE + UI
+     ============================================================ */
+  var $ = function (id) { return document.getElementById(id); };
+  var gridEl = $('grid'), padEl = $('pad');
+
+  var G = null; // game state
+  var mode = 'daily';       // 'daily' | 'practice'
+  var difficulty = 'medium';
+  var timerId = null;
+
+  function todayKey() {
+    var d = new Date();
+    var m = String(d.getMonth() + 1).padStart(2, '0'), day = String(d.getDate()).padStart(2, '0');
+    return d.getFullYear() + '-' + m + '-' + day;
+  }
+  function dateSeed() {
+    var d = new Date();
+    return d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate();
+  }
+  function diffIdx() { return difficulty === 'easy' ? 1 : difficulty === 'hard' ? 3 : 2; }
+  function storageKey() { return 'fixoraa-sudoku-daily-' + todayKey() + '-' + difficulty; }
+
+  function fmtTime(s) { return ((s / 60) | 0) + ':' + String(s % 60).padStart(2, '0'); }
+
+  function newGame(fresh) {
+    stopTimer();
+    var seed, label;
+    if (mode === 'daily') {
+      seed = dateSeed() * 10 + diffIdx(); // date-seeded: same puzzle for every visitor
+      label = '📅 Daily puzzle · ' + prettyDate() + ' · ' + cap(difficulty);
+      var saved = fresh ? null : loadDaily();
+      var gen = generatePuzzle(difficulty, seed);
+      G = {
+        puzzle: gen.puzzle, solution: gen.solution,
+        user: new Array(81).fill(0),
+        notes: Array.from({ length: 81 }, function () { return new Set(); }),
+        hinted: new Array(81).fill(false),
+        mistakes: 0, hints: 3, seconds: 0,
+        selected: -1, notesMode: false, status: 'playing', forgiving: false
+      };
+      if (saved) {
+        G.user = saved.user; G.hints = saved.hints; G.mistakes = saved.mistakes;
+        G.seconds = saved.seconds; G.status = saved.status || 'playing';
+        G.forgiving = !!saved.forgiving;
+        for (var i = 0; i < 81; i++) {
+          G.notes[i] = new Set(saved.notes[i] || []);
+          if (saved.hinted[i]) { G.hinted[i] = true; G.user[i] = G.solution[i]; }
+        }
+        // Resuming a lost run: let them keep practicing instead of being stuck.
+        if (G.status === 'lost' && !G.forgiving) { G.status = 'playing'; G.forgiving = true; }
+      }
+    } else {
+      seed = (Math.random() * 1e9) | 0;
+      label = '🎲 Practice puzzle · ' + cap(difficulty) + ' · random deal';
+      var gen2 = generatePuzzle(difficulty, seed);
+      G = {
+        puzzle: gen2.puzzle, solution: gen2.solution,
+        user: new Array(81).fill(0),
+        notes: Array.from({ length: 81 }, function () { return new Set(); }),
+        hinted: new Array(81).fill(false),
+        mistakes: 0, hints: 3, seconds: 0,
+        selected: -1, notesMode: false, status: 'playing', forgiving: false
+      };
+    }
+    $('puzzleLabel').textContent = label;
+    hideOverlay();
+    buildGrid(); buildPad();
+    paintTabs();
+    renderAll();
+    startTimer();
+    saveDaily();
+    // Revisiting an already-solved daily: show the celebration again.
+    if (G.status === 'won') {
+      showOverlay(
+        '🎉', 'Already solved!',
+        cap(mode) + ' · ' + cap(difficulty) + ' · Time ' + fmtTime(G.seconds) + ' · ' + G.mistakes + (G.mistakes === 1 ? ' mistake' : ' mistakes'),
+        mode === 'daily' ? 'Practice a random one' : 'Back to today\'s daily',
+        'Replay this puzzle'
+      );
+    }
+  }
+
+  function prettyDate() {
+    return new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  }
+  function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+
+  /* ---------- persistence (daily only) ---------- */
+  function saveDaily() {
+    if (mode !== 'daily' || !G) return;
+    try {
+      localStorage.setItem(storageKey(), JSON.stringify({
+        user: G.user, notes: G.notes.map(function (s) { return Array.from(s); }),
+        hinted: G.hinted, mistakes: G.mistakes, hints: G.hints,
+        seconds: G.seconds, status: G.status, forgiving: G.forgiving
+      }));
+    } catch (e) { /* storage unavailable — game still works */ }
+  }
+  function loadDaily() {
+    try {
+      var raw = localStorage.getItem(storageKey());
+      if (!raw) return null;
+      var d = JSON.parse(raw);
+      if (!d || !Array.isArray(d.user) || d.user.length !== 81) return null;
+      return d;
+    } catch (e) { return null; }
+  }
+
+  /* ---------- timer ---------- */
+  function startTimer() {
+    stopTimer();
+    $('timer').textContent = fmtTime(G.seconds);
+    timerId = setInterval(function () {
+      if (G.status !== 'playing') return;
+      G.seconds++;
+      $('timer').textContent = fmtTime(G.seconds);
+      if (G.seconds % 5 === 0) saveDaily();
+    }, 1000);
+  }
+  function stopTimer() { if (timerId) { clearInterval(timerId); timerId = null; } }
+
+  /* ---------- rendering ---------- */
+  function buildGrid() {
+    gridEl.innerHTML = '';
+    for (var i = 0; i < 81; i++) {
+      var d = document.createElement('div');
+      d.className = 'cell' + ((i % 9 === 2 || i % 9 === 5) ? ' br' : '') + ((((i / 9) | 0) === 2 || ((i / 9) | 0) === 5) ? ' bb' : '');
+      d.setAttribute('data-i', i);
+      d.setAttribute('role', 'button');
+      d.setAttribute('aria-label', 'Cell ' + (i + 1));
+      gridEl.appendChild(d);
+    }
+  }
+
+  function buildPad() {
+    padEl.innerHTML = '';
+    for (var n = 1; n <= 9; n++) {
+      (function (num) {
+        var b = document.createElement('button');
+        b.className = 'pad-btn';
+        b.innerHTML = num + '<span class="rem"></span>';
+        b.setAttribute('aria-label', 'Enter ' + num);
+        b.addEventListener('click', function () { inputNumber(num); });
+        padEl.appendChild(b);
+      })(n);
+    }
+  }
+
+  function peers(i) {
+    var r = (i / 9) | 0, c = i % 9, set = {};
+    for (var k = 0; k < 9; k++) { set[r * 9 + k] = 1; set[k * 9 + c] = 1; }
+    var br = ((r / 3) | 0) * 3, bc = ((c / 3) | 0) * 3;
+    for (var dr = 0; dr < 3; dr++) for (var dc = 0; dc < 3; dc++) set[(br + dr) * 9 + bc + dc] = 1;
+    delete set[i];
+    return Object.keys(set).map(Number);
+  }
+
+  function cellValue(i) { return G.puzzle[i] !== 0 ? G.puzzle[i] : G.user[i]; }
+  function isGiven(i) { return G.puzzle[i] !== 0 || G.hinted[i]; }
+
+  function renderAll() {
+    var cells = gridEl.children;
+    var selVal = G.selected >= 0 ? cellValue(G.selected) : 0;
+    var peerSet = {};
+    if (G.selected >= 0) { var ps = peers(G.selected); for (var p = 0; p < ps.length; p++) peerSet[ps[p]] = 1; }
+    for (var i = 0; i < 81; i++) {
+      var el = cells[i], v = cellValue(i);
+      var cls = 'cell' + ((i % 9 === 2 || i % 9 === 5) ? ' br' : '') + ((((i / 9) | 0) === 2 || ((i / 9) | 0) === 5) ? ' bb' : '');
+      if (G.hinted[i]) cls += ' hinted';
+      else if (G.puzzle[i] !== 0) cls += ' given';
+      else if (G.user[i] !== 0) cls += ' user';
+      if (i === G.selected) cls += ' selected';
+      else if (selVal && v === selVal) cls += ' same';
+      else if (peerSet[i]) cls += ' peer';
+      el.className = cls;
+      if (v !== 0) { el.textContent = v; }
+      else if (G.notes[i].size) {
+        var nh = '<div class="notes">';
+        for (var n = 1; n <= 9; n++) nh += '<span>' + (G.notes[i].has(n) ? n : '') + '</span>';
+        el.innerHTML = nh + '</div>';
+      } else { el.textContent = ''; }
+      el.setAttribute('aria-label', 'Cell ' + (i + 1) + (v ? ', ' + v : ', empty'));
+    }
+    // pad remaining counts
+    var counts = {};
+    for (var q = 0; q < 81; q++) { var vv = cellValue(q); if (vv) counts[vv] = (counts[vv] || 0) + 1; }
+    var pads = padEl.children;
+    for (var n2 = 1; n2 <= 9; n2++) {
+      var rem = 9 - (counts[n2] || 0);
+      pads[n2 - 1].querySelector('.rem').textContent = rem > 0 ? rem : '';
+      pads[n2 - 1].classList.toggle('done', rem <= 0);
+    }
+    $('mistakeCount').textContent = G.mistakes;
+    $('hintsLeft').textContent = G.hints;
+    $('notesBtn').classList.toggle('on', G.notesMode);
+    $('notesBtn').setAttribute('aria-pressed', G.notesMode ? 'true' : 'false');
+    $('timer').textContent = fmtTime(G.seconds);
+  }
+
+  function flashError(i) {
+    var el = gridEl.children[i];
+    el.classList.remove('error'); void el.offsetWidth; el.classList.add('error');
+  }
+
+  /* ---------- input ---------- */
+  gridEl.addEventListener('click', function (e) {
+    var cell = e.target.closest('.cell');
+    if (!cell || G.status !== 'playing') return;
+    G.selected = parseInt(cell.getAttribute('data-i'), 10);
+    renderAll();
+  });
+
+  function inputNumber(n) {
+    var i = G.selected;
+    if (i < 0 || G.status !== 'playing' || isGiven(i)) return;
+    if (G.notesMode) {
+      if (G.user[i] !== 0) return;
+      if (G.notes[i].has(n)) G.notes[i].delete(n); else G.notes[i].add(n);
+      renderAll(); saveDaily(); return;
+    }
+    if (G.user[i] === n) return;
+    if (n === G.solution[i]) {
+      G.user[i] = n; G.notes[i].clear();
+      // clear this digit from peers' notes
+      var ps = peers(i);
+      for (var k = 0; k < ps.length; k++) G.notes[ps[k]].delete(n);
+      renderAll(); saveDaily();
+      checkWin();
+      sfx.place(); // correct entry lands with a soft thock
+    } else {
+      G.mistakes++;
+      flashError(i);
+      sfx.error(); // gentle low buzz on a wrong digit
+      renderAll(); saveDaily();
+      if (G.mistakes >= 3 && !G.forgiving) gameOver();
+    }
+  }
+
+  $('eraseBtn').addEventListener('click', function () {
+    var i = G.selected;
+    if (i < 0 || G.status !== 'playing' || isGiven(i)) return;
+    sfx.click();
+    G.user[i] = 0; G.notes[i].clear();
+    renderAll(); saveDaily();
+  });
+
+  $('notesBtn').addEventListener('click', function () {
+    G.notesMode = !G.notesMode;
+    renderAll();
+  });
+
+  $('hintBtn').addEventListener('click', function () {
+    if (G.status !== 'playing' || G.hints <= 0) return;
+    var i = G.selected;
+    if (i < 0 || isGiven(i) || G.user[i] !== 0) {
+      // no valid selection: hint a random empty cell
+      var empt = [];
+      for (var k = 0; k < 81; k++) if (!isGiven(k) && G.user[k] === 0) empt.push(k);
+      if (!empt.length) return;
+      i = empt[(Math.random() * empt.length) | 0];
+      G.selected = i;
+    }
+    G.hints--;
+    G.hinted[i] = true; G.user[i] = G.solution[i]; G.notes[i].clear();
+    var ps = peers(i);
+    for (var k2 = 0; k2 < ps.length; k2++) G.notes[ps[k2]].delete(G.solution[i]);
+    renderAll(); saveDaily();
+    checkWin();
+  });
+
+  $('newBtn').addEventListener('click', function () {
+    if (mode === 'practice') newGame();
+    else { mode = 'practice'; newGame(); } // "New" from daily jumps to a random practice puzzle
+  });
+
+  function checkWin() {
+    for (var i = 0; i < 81; i++) if (cellValue(i) === 0) return;
+    G.status = 'won';
+    stopTimer(); saveDaily();
+    showOverlay(
+      '🎉', 'Puzzle solved!',
+      cap(mode) + ' · ' + cap(difficulty) + ' · Time ' + fmtTime(G.seconds) + ' · ' + G.mistakes + (G.mistakes === 1 ? ' mistake' : ' mistakes'),
+      mode === 'daily' ? 'Practice a random one' : 'Back to today\'s daily',
+      'New practice puzzle'
+    );
+  }
+
+  function gameOver() {
+    G.status = 'lost';
+    stopTimer(); saveDaily();
+    showOverlay(
+      '💥', 'Three mistakes!',
+      'That\'s three wrong entries. Restart this puzzle fresh, or keep practicing without the mistake limit.',
+      'Keep practicing', 'Restart puzzle'
+    );
+  }
+
+  /* ---------- overlay ---------- */
+  function showOverlay(emoji, title, text, primary, secondary) {
+    $('overlayEmoji').textContent = emoji;
+    $('overlayTitle').textContent = title;
+    $('overlayText').textContent = text;
+    $('overlayPrimary').textContent = primary;
+    $('overlaySecondary').textContent = secondary;
+    $('overlay').classList.remove('hidden');
+    $('overlay').classList.add('flex');
+  }
+  function hideOverlay() { $('overlay').classList.add('hidden'); $('overlay').classList.remove('flex'); }
+
+  $('overlayPrimary').addEventListener('click', function () {
+    if (G.status === 'won') {
+      mode = mode === 'daily' ? 'practice' : 'daily'; // toggle to the other mode
+      newGame();
+    } else {
+      // lost -> keep practicing: lift the mistake limit, stay on this puzzle
+      G.forgiving = true; G.status = 'playing';
+      hideOverlay(); startTimer(); saveDaily(); renderAll();
+    }
+  });
+  $('overlaySecondary').addEventListener('click', function () {
+    newGame(true); // fresh deal: same daily puzzle from scratch, or a new random practice one
+  });
+
+  /* ---------- tabs ---------- */
+  function paintTabs() {
+    $('modeDaily').classList.toggle('active', mode === 'daily');
+    $('modePractice').classList.toggle('active', mode === 'practice');
+    var btns = document.querySelectorAll('.diff-btn');
+    for (var k = 0; k < btns.length; k++) btns[k].classList.toggle('active', btns[k].getAttribute('data-diff') === difficulty);
+  }
+  $('modeDaily').addEventListener('click', function () { if (mode !== 'daily') { mode = 'daily'; newGame(); } });
+  $('modePractice').addEventListener('click', function () { if (mode !== 'practice') { mode = 'practice'; newGame(); } });
+  var diffBtns = document.querySelectorAll('.diff-btn');
+  for (var d = 0; d < diffBtns.length; d++) {
+    diffBtns[d].addEventListener('click', function () {
+      var nd = this.getAttribute('data-diff');
+      if (nd !== difficulty) { difficulty = nd; newGame(); }
+    });
+  }
+
+  // boot
+  newGame();
+})();
+</script>
+</Layout>

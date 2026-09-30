@@ -1,0 +1,46 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { games } from '../../data/games';
+---
+<Layout title="Fun Zone — Free Online Games | Fixoraa" description="Take a break in Fixoraa's Fun Zone: play chess against the AI, daily Sudoku, a daily word puzzle and classic falling-block arcade. Free, no signup.">
+<main class="mx-auto max-w-6xl px-4 py-10 sm:py-14">
+  <!-- Breadcrumb -->
+  <nav class="mb-6 text-sm text-neutral-500">
+    <a href="/" class="hover:text-neutral-900 transition-colors">← Home</a>
+    <span class="mx-2">/</span><span class="text-neutral-900 font-medium">Fun Zone</span>
+  </nav>
+
+  <!-- Header -->
+  <div class="text-center mb-12">
+    <span class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full text-white bg-gradient-to-r from-[#F43F8E] via-[#9333EA] to-[#2E6BFF] mb-4">🎮 Fun Zone</span>
+    <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-neutral-900">Take a <span class="bg-gradient-to-r from-[#F43F8E] via-[#9333EA] to-[#2E6BFF] bg-clip-text text-transparent">break</span></h1>
+    <p class="mt-4 text-neutral-600 max-w-2xl mx-auto">Quick games to reset your brain between tasks. Free forever, no signup — your scores stay on your own device.</p>
+  </div>
+
+  <!-- Game cards -->
+  <div class="grid gap-6 sm:grid-cols-2">
+    {games.map((g) => (
+      <div class="group rounded-3xl bg-white border border-neutral-200 p-6 sm:p-8 hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col">
+        <div class="flex items-start justify-between mb-4">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] flex items-center justify-center text-2xl text-white font-black shadow-md">
+            {g.name.charAt(0)}
+          </div>
+          <span class="text-[11px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full bg-[#9333EA]/10 text-[#9333EA]">Free</span>
+        </div>
+        <h2 class="text-2xl font-black text-neutral-900">{g.name}</h2>
+        <p class="text-neutral-600 mt-2 flex-1">{g.blurb}</p>
+        <a href={g.url} class="mt-6 inline-flex items-center justify-center gap-2 rounded-2xl px-6 py-3 font-bold text-white bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] hover:opacity-90 hover:shadow-lg transition-all">
+          Play now
+          <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M6 4.5v11l9-5.5-9-5.5z"/></svg>
+        </a>
+      </div>
+    ))}
+  </div>
+
+  <!-- Note -->
+  <div class="mt-12 rounded-3xl bg-[#FAFAF8] border border-neutral-200 p-6 sm:p-8 text-center">
+    <h2 class="text-xl font-black text-neutral-900 mb-2">More games are on the way</h2>
+    <p class="text-neutral-600 max-w-xl mx-auto">We're adding new games regularly. Got an idea for one? <a href="/contact" class="font-semibold text-[#9333EA] hover:underline">Tell us</a> — the best suggestions get built first.</p>
+  </div>
+</main>
+</Layout>
