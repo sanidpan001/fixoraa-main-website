@@ -621,5 +621,13 @@ const VALID_GUESSES=["ABOUT","ABOVE","ACTOR","ACUTE","ADMIT","ADOPT","ADULT","AF
   .key.present { background: #c9b458; color: #fff; }
   .key.absent  { background: #8b8b93; color: #fff; }
   details summary::-webkit-details-marker { display: none; }
+
+  /* ── Dark mode (:global so it matches <html data-theme> + JS-created tiles/keys) ── */
+  :global([data-theme="dark"] .tile) { background: #131a28; border-color: #334155; color: #f8fafc; }
+  :global([data-theme="dark"] .tile.filled) { border-color: #64748b; }
+  :global([data-theme="dark"] .tile.correct),
+  :global([data-theme="dark"] .tile.present),
+  :global([data-theme="dark"] .tile.absent) { color: #fff; }
+  :global([data-theme="dark"] .key) { background: #2a3350; color: #f8fafc; }
 </style>
 </Layout>
