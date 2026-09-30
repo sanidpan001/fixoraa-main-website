@@ -400,10 +400,11 @@ import { sfx } from '../../lib/sfx.js';
   }
   function render() {
     ctx.clearRect(0, 0, BW, BH);
-    // board background + faint grid
-    ctx.fillStyle = '#FAFAF8';
+    // board background + faint grid (theme-aware)
+    var darkMode = document.documentElement.getAttribute('data-theme') === 'dark';
+    ctx.fillStyle = darkMode ? '#0B0E15' : '#FAFAF8';
     ctx.fillRect(0, 0, BW, BH);
-    ctx.strokeStyle = 'rgba(0,0,0,0.05)';
+    ctx.strokeStyle = darkMode ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.05)';
     ctx.lineWidth = 1;
     ctx.beginPath();
     for (var gx = 1; gx < COLS; gx++) { ctx.moveTo(gx * CELL + 0.5, 0); ctx.lineTo(gx * CELL + 0.5, BH); }
@@ -625,5 +626,10 @@ import { sfx } from '../../lib/sfx.js';
   .tbtn:active { background: #f4f4f5; transform: scale(0.96); }
   .tbtn-sm { font-size: 0.95rem; }
   details summary::-webkit-details-marker { display: none; }
+
+  /* ── Dark mode (:global so it matches <html data-theme>) ── */
+  :global([data-theme="dark"] .game-canvas) { background: #0b0e15; }
+  :global([data-theme="dark"] .tbtn) { background: #131a28; border-color: #2a3350; color: #f8fafc; }
+  :global([data-theme="dark"] .tbtn:active) { background: #1e293b; }
 </style>
 </Layout>

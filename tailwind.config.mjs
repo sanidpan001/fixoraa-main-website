@@ -4,8 +4,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: '#0A0A0A',
-        cream: '#FAFAF8',
+        // Theme-aware via CSS vars (see global.css :root / [data-theme="dark"]).
+        // Light values are identical to the old hexes, so light mode is pixel-identical.
+        ink: 'rgb(var(--ink) / <alpha-value>)',
+        cream: 'rgb(var(--cream) / <alpha-value>)',
         brand: {
           coral: '#FF5A5F',
           pink: '#F43F8E',

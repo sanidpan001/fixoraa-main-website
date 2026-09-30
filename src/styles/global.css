@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Theme tokens: light values are the original hexes, so light mode is pixel-identical ── */
+:root {
+  --ink: 10 10 10;
+  --cream: 250 250 248;
+}
+[data-theme="dark"] {
+  --ink: 248 250 252;
+  --cream: 11 14 21;
+  color-scheme: dark;
+}
+
 @layer base {
   html {
     scroll-behavior: auto;
@@ -95,4 +106,122 @@
 .ch {
   display: inline-block;
   will-change: transform;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   DARK MODE
+   Unlayered rules below beat Tailwind's layered utilities, so every
+   override here wins without touching markup. Light mode is untouched.
+   ══════════════════════════════════════════════════════════════ */
+
+/* Page base */
+html[data-theme="dark"] {
+  background-color: #0b0e15;
+}
+html[data-theme="dark"] body.bg-white {
+  background-color: #0b0e15;
+}
+
+/* Subtle dot-grid across the whole page (pngcraft vibe) */
+[data-theme="dark"] body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.055) 1px, transparent 1.5px);
+  background-size: 26px 26px;
+}
+
+/* Soft edge glows in OUR brand gradient colors (coral/pink left, purple/blue right, blue bottom) */
+[data-theme="dark"] body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(640px 640px at 6% 18%, rgba(255, 90, 95, 0.13), transparent 70%),
+    radial-gradient(720px 720px at 94% 32%, rgba(147, 51, 234, 0.13), transparent 70%),
+    radial-gradient(900px 520px at 50% 112%, rgba(46, 107, 255, 0.1), transparent 70%);
+}
+
+/* ── Surfaces: cards/panels become elevated dark ── */
+[data-theme="dark"] .bg-white {
+  background-color: #131a28;
+}
+[data-theme="dark"] .bg-white\/80 {
+  background-color: rgba(11, 14, 21, 0.82);
+}
+[data-theme="dark"] .bg-white\/95 {
+  background-color: rgba(11, 14, 21, 0.95);
+}
+[data-theme="dark"] .bg-cream {
+  background-color: #131a28;
+}
+/* Full-bleed sections stay transparent so the dot-grid + glows show through */
+[data-theme="dark"] section.bg-cream,
+[data-theme="dark"] footer.bg-cream {
+  background-color: transparent;
+}
+[data-theme="dark"] .bg-\[\#FAFAF8\] {
+  background-color: #131a28;
+}
+[data-theme="dark"] .hover\:bg-cream:hover {
+  background-color: rgba(255, 255, 255, 0.06);
+}
+
+/* ── Dark buttons: bg-ink becomes a light button with dark text ── */
+[data-theme="dark"] .bg-ink {
+  background-color: #f8fafc;
+  color: #0b0e15;
+}
+/* …except the intentionally-dark Fun Zone panel, which stays dark */
+[data-theme="dark"] .game-panel.bg-ink {
+  background-color: #0a0d14;
+  color: #f8fafc;
+}
+
+/* ── Neutral / zinc / gray palettes (article + game chrome) ── */
+[data-theme="dark"] .text-neutral-900 { color: #f1f5f9; }
+[data-theme="dark"] .text-neutral-800 { color: #e2e8f0; }
+[data-theme="dark"] .text-neutral-700 { color: #cbd5e1; }
+[data-theme="dark"] .text-neutral-600 { color: #94a3b8; }
+[data-theme="dark"] .text-neutral-500 { color: #94a3b8; }
+[data-theme="dark"] .text-neutral-400 { color: #64748b; }
+[data-theme="dark"] .text-neutral-300 { color: #cbd5e1; }
+[data-theme="dark"] .text-zinc-950 { color: #f8fafc; }
+[data-theme="dark"] .text-zinc-900 { color: #f1f5f9; }
+[data-theme="dark"] .text-zinc-700 { color: #cbd5e1; }
+[data-theme="dark"] .text-zinc-600 { color: #94a3b8; }
+[data-theme="dark"] .text-zinc-500 { color: #94a3b8; }
+[data-theme="dark"] .text-zinc-400 { color: #64748b; }
+[data-theme="dark"] .bg-neutral-100 { background-color: #131a28; }
+[data-theme="dark"] .bg-neutral-200 { background-color: #1b2436; }
+[data-theme="dark"] .bg-zinc-50 { background-color: #131a28; }
+[data-theme="dark"] .bg-zinc-100 { background-color: #1b2436; }
+[data-theme="dark"] .bg-zinc-400 { background-color: #475569; }
+[data-theme="dark"] .border-neutral-200 { border-color: rgba(255, 255, 255, 0.1); }
+[data-theme="dark"] .border-neutral-300 { border-color: rgba(255, 255, 255, 0.14); }
+[data-theme="dark"] .border-zinc-200 { border-color: rgba(255, 255, 255, 0.1); }
+[data-theme="dark"] .border-zinc-300 { border-color: rgba(255, 255, 255, 0.14); }
+[data-theme="dark"] .ring-neutral-900\/10 { --tw-ring-color: rgb(255 255 255 / 0.14); }
+
+/* ── Theme toggle icons ── */
+.theme-toggle .sun-icon { display: none; }
+.theme-toggle .moon-icon { display: block; }
+[data-theme="dark"] .theme-toggle .sun-icon { display: block; }
+[data-theme="dark"] .theme-toggle .moon-icon { display: none; }
+
+/* ── Smooth cross-fade on toggle (colors only; transforms/opacity untouched) ── */
+body.theme-anim,
+body.theme-anim *,
+body.theme-anim *::before,
+body.theme-anim *::after {
+  transition:
+    background-color 0.35s ease,
+    border-color 0.35s ease,
+    color 0.35s ease,
+    fill 0.35s ease,
+    stroke 0.35s ease !important;
 }

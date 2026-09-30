@@ -91,6 +91,13 @@ const isSoon = (url: string) => url.includes('PASTE-YOUR-TOOL-URL-HERE');
     background: linear-gradient(to right, #FF5A5F, #F43F8E, #9333EA);
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / .1);
   }
+  /* ── Dark mode (:global so it matches <html data-theme>) ── */
+  :global([data-theme="dark"] .chip) { background: #131a28; border-color: #2a3350; color: #cbd5e1; }
+  :global([data-theme="dark"] .chip:hover) { border-color: #475569; }
+  :global([data-theme="dark"] .chip.chip-active) {
+    background: linear-gradient(to right, #FF5A5F, #F43F8E, #9333EA);
+    border-color: transparent; color: #fff;
+  }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
   .tool-card { animation: fadeUp .35s ease both; }
 </style>
