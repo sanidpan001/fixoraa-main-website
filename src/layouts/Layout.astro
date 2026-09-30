@@ -42,10 +42,10 @@ const footerLinks = [
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <!-- Apply saved theme before first paint (no flash) -->
+    <!-- Apply saved theme before first paint (no flash). Dark is the default. -->
     <script is:inline>
       try {
-        if (localStorage.getItem('fixoraa-theme') === 'dark') {
+        if (localStorage.getItem('fixoraa-theme') !== 'light') {
           document.documentElement.setAttribute('data-theme', 'dark');
           var m = document.querySelector('meta[name="theme-color"]');
           if (m) m.setAttribute('content', '#0B0E15');
