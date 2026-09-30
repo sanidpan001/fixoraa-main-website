@@ -113,6 +113,26 @@ import Layout from '../../layouts/Layout.astro';
   .mode-btn.active, .diff-btn.active { background: #fff; color: #111; box-shadow: 0 1px 4px rgba(0,0,0,.15); }
   @keyframes pop { 0% { transform: scale(.6); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
   #overlay:not(.hidden) > div { animation: pop .25s ease; }
+
+  /* ── Dark mode ── */
+  [data-theme="dark"] .cell { background: #131a28; }
+  [data-theme="dark"] .cell.given { color: #f8fafc; }
+  [data-theme="dark"] .cell.user { color: #60a5fa; }
+  [data-theme="dark"] .cell.hinted { color: #a78bfa; }
+  [data-theme="dark"] .cell.selected { background: #1e3a8a !important; }
+  [data-theme="dark"] .cell.peer { background: #152238; }
+  [data-theme="dark"] .cell.same { background: #1e3a8a; }
+  [data-theme="dark"] .cell.br { border-right-color: #475569; }
+  [data-theme="dark"] .cell.bb { border-bottom-color: #475569; }
+  [data-theme="dark"] .notes span { color: #94a3b8; }
+  [data-theme="dark"] .pad-btn { background: #131a28; border-color: #2a3350; color: #f8fafc; }
+  [data-theme="dark"] .pad-btn:active { background: #1e3a8a; }
+  [data-theme="dark"] .pad-btn .rem { color: #64748b; }
+  [data-theme="dark"] .tool-btn { background: #1b2436; color: #cbd5e1; }
+  [data-theme="dark"] .mode-btn, [data-theme="dark"] .diff-btn { color: #a3a3a3; }
+  [data-theme="dark"] .mode-btn.active, [data-theme="dark"] .diff-btn.active { background: #1b2436; color: #f8fafc; }
+  @keyframes errFlashDark { 0%,100% { background: #131a28; } 30%,70% { background: #7f1d1d; color: #fca5a5; } }
+  [data-theme="dark"] .cell.error { animation-name: errFlashDark; }
 </style>
 
 <script>
