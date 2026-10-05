@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 ---
-<Layout title="Contact Us — Fixoraa" description="Contact Fixoraa: suggest a tool, report a bug, or just say hello. We read every message. Email hello@fixoraa.tech.">
+<Layout title="Contact Us — Fixoraa" description="Contact Fixoraa: suggest a tool, report a bug, or just say hello. We read every message. Email official@fixoraa.tech.">
 <main class="mx-auto max-w-2xl px-4 py-10 sm:py-14">
   <!-- Header -->
   <div class="text-center mb-10">
@@ -11,9 +11,9 @@ import Layout from '../layouts/Layout.astro';
   </div>
 
   <!-- Email card -->
-  <a href="mailto:hello@fixoraa.tech" class="block rounded-3xl bg-[#FAFAF8] border border-neutral-200 p-6 text-center mb-8 hover:shadow-md hover:border-neutral-300 transition-all">
+  <a href="mailto:official@fixoraa.tech" class="block rounded-3xl bg-[#FAFAF8] border border-neutral-200 p-6 text-center mb-8 hover:shadow-md hover:border-neutral-300 transition-all">
     <p class="text-sm font-semibold text-neutral-500 mb-1">Prefer email? Write to us directly</p>
-    <p class="text-xl sm:text-2xl font-black text-neutral-900">hello@fixoraa.tech</p>
+    <p class="text-xl sm:text-2xl font-black text-neutral-900">official@fixoraa.tech</p>
   </a>
 
   <!-- Form -->
@@ -60,7 +60,7 @@ import Layout from '../layouts/Layout.astro';
      below (and uncomment the fetch block).
 
   Until then, the form shows a friendly notice directing visitors to
-  email hello@fixoraa.tech instead of silently failing.
+  email official@fixoraa.tech instead of silently failing.
   ─────────────────────────────────────────────────────────────────────
 -->
 <script>
@@ -84,7 +84,7 @@ import Layout from '../layouts/Layout.astro';
 
     // Backend not configured yet — never pretend the message was sent.
     if (!FORM_ENDPOINT) {
-      showStatus('Form backend not connected yet — email us at hello@fixoraa.tech and we\u2019ll get back to you.', false);
+      showStatus('Form backend not connected yet — email us at official@fixoraa.tech and we\u2019ll get back to you.', false);
       return;
     }
 
@@ -104,7 +104,7 @@ import Layout from '../layouts/Layout.astro';
       form.reset();
       showStatus('Message sent! We\u2019ll get back to you soon.', true);
     } catch {
-      showStatus('Something went wrong sending your message — please email us at hello@fixoraa.tech instead.', false);
+      showStatus('Something went wrong sending your message — please email us at official@fixoraa.tech instead.', false);
     } finally {
       submitBtn.disabled = false;
     }
