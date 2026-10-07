@@ -1,0 +1,117 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Request a Tool — Fixoraa" description="Request a new free online tool, report a bug, or ask for a custom build. Tell us what you need — we build what people ask for.">
+<main class="mx-auto max-w-2xl px-4 py-10 sm:py-14">
+  <!-- Header -->
+  <div class="text-center mb-10">
+    <span class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full text-white bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] mb-4">Request a Tool</span>
+    <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-neutral-900">You ask, <span class="bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] bg-clip-text text-transparent">we build</span></h1>
+    <p class="mt-4 text-neutral-600">Need a tool that doesn't exist yet? Found a bug? Tell us — we build what the most people ask for.</p>
+  </div>
+
+  <!-- Form -->
+  <form id="reqForm" class="rounded-3xl bg-white border border-neutral-200 p-6 sm:p-8 shadow-sm" novalidate>
+    <div class="grid gap-5">
+      <div>
+        <label for="rq-type" class="block text-sm font-bold text-neutral-900 mb-1.5">What is this about?</label>
+        <select id="rq-type" name="request_type" required
+          class="w-full rounded-2xl border border-neutral-200 px-4 py-3 text-neutral-900 bg-white focus:outline-none focus:ring-2 focus:ring-[#9333EA]/50 focus:border-[#9333EA]">
+          <option value="new-tool">💡 New tool idea — build this tool</option>
+          <option value="bug-report">🐛 Bug report — something is broken</option>
+          <option value="custom-build">🏗️ Custom build — I need something made for me</option>
+        </select>
+      </div>
+      <div>
+        <label for="rq-tool" class="block text-sm font-bold text-neutral-900 mb-1.5">Tool name <span class="font-normal text-neutral-400">(if requesting a tool)</span></label>
+        <input id="rq-tool" name="tool_name" type="text" placeholder="e.g. EMI Calculator, QR Generator…"
+          class="w-full rounded-2xl border border-neutral-200 px-4 py-3 text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#9333EA]/50 focus:border-[#9333EA]" />
+      </div>
+      <div>
+        <label for="rq-desc" class="block text-sm font-bold text-neutral-900 mb-1.5">Describe it</label>
+        <textarea id="rq-desc" name="description" rows="5" required placeholder="What should it do? Who is it for? Any must-have features?"
+          class="w-full rounded-2xl border border-neutral-200 px-4 py-3 text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#9333EA]/50 focus:border-[#9333EA] resize-y"></textarea>
+      </div>
+      <div>
+        <label for="rq-name" class="block text-sm font-bold text-neutral-900 mb-1.5">Your name</label>
+        <input id="rq-name" name="name" type="text" required autocomplete="name" placeholder="Jane Doe"
+          class="w-full rounded-2xl border border-neutral-200 px-4 py-3 text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#9333EA]/50 focus:border-[#9333EA]" />
+      </div>
+      <div>
+        <label for="rq-email" class="block text-sm font-bold text-neutral-900 mb-1.5">Email address <span class="font-normal text-neutral-400">(optional)</span></label>
+        <input id="rq-email" name="email" type="email" autocomplete="email" placeholder="you@example.com"
+          class="w-full rounded-2xl border border-neutral-200 px-4 py-3 text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-[#9333EA]/50 focus:border-[#9333EA]" />
+        <label class="mt-2 flex items-start gap-2.5 cursor-pointer select-none">
+          <input id="rq-notify" name="notify_me" type="checkbox" value="yes" checked
+            class="mt-1 h-4 w-4 rounded accent-[#9333EA]" />
+          <span class="text-sm text-neutral-600"><strong class="text-neutral-900">Notify me</strong> when this tool is ready <span class="text-neutral-400">(needs your email above)</span></span>
+        </label>
+      </div>
+      <button type="submit" id="rq-submit"
+        class="rounded-2xl px-6 py-3.5 font-bold text-white bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] hover:opacity-90 hover:shadow-lg transition-all disabled:opacity-60">
+        Send request
+      </button>
+      <p id="rq-status" class="hidden text-sm rounded-2xl px-4 py-3" role="status" aria-live="polite"></p>
+    </div>
+  </form>
+
+  <p class="mt-6 text-center text-sm text-neutral-500">Popular requests get built first — check back soon.</p>
+</main>
+
+<script>
+  // Formspree endpoint — same form as contact.
+  const FORM_ENDPOINT = "https://formspree.io/f/mgaoewnl";
+
+  const form = document.getElementById('reqForm');
+  const status = document.getElementById('rq-status');
+  const submitBtn = document.getElementById('rq-submit');
+  const notifyBox = document.getElementById('rq-notify');
+  const emailInput = document.getElementById('rq-email');
+
+  function showStatus(message, ok) {
+    status.textContent = message;
+    status.className = 'text-sm rounded-2xl px-4 py-3 ' + (ok
+      ? 'bg-green-50 text-green-800 border border-green-200'
+      : 'bg-amber-50 text-amber-900 border border-amber-200');
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    if (notifyBox.checked && !emailInput.value.trim()) {
+      showStatus('Please add your email so we can notify you when the tool is ready — or uncheck "Notify me".', false);
+      emailInput.focus();
+      return;
+    }
+    if (!FORM_ENDPOINT) {
+      showStatus('Form backend not connected yet — email us at official@fixoraa.tech instead.', false);
+      return;
+    }
+
+    submitBtn.disabled = true;
+    try {
+      const res = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          _subject: 'New tool request: ' + document.getElementById('rq-type').value,
+          request_type: document.getElementById('rq-type').selectedOptions[0].textContent.trim(),
+          tool_name: document.getElementById('rq-tool').value.trim(),
+          description: document.getElementById('rq-desc').value.trim(),
+          name: document.getElementById('rq-name').value.trim(),
+          email: emailInput.value.trim(),
+          notify_me: notifyBox.checked ? 'yes' : 'no',
+        }),
+      });
+      if (!res.ok) throw new Error('send failed');
+      form.reset();
+      notifyBox.checked = true;
+      showStatus('Request received! Popular ideas get built first — we\u2019ll notify you if you left your email.', true);
+    } catch {
+      showStatus('Something went wrong — please email us at official@fixoraa.tech instead.', false);
+    } finally {
+      submitBtn.disabled = false;
+    }
+  });
+</script>
+</Layout>
