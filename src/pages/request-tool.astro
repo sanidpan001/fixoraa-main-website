@@ -10,6 +10,16 @@ import Layout from '../layouts/Layout.astro';
     <p class="mt-4 text-neutral-600">Need a tool that doesn't exist yet? Found a bug? Tell us — we build what the most people ask for.</p>
   </div>
 
+  <!-- Credit highlight box -->
+  <div class="rounded-3xl p-6 sm:p-8 mb-8 text-white bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] shadow-lg">
+    <p class="text-2xl mb-2">💡</p>
+    <h2 class="text-xl sm:text-2xl font-black mb-2">Your idea, your name on the site!</h2>
+    <p class="text-white/90 text-sm sm:text-base leading-relaxed">If we build your tool idea, we'll credit you in the site footer as<br class="hidden sm:block" />
+      <span class="inline-block mt-2 px-4 py-1.5 rounded-full bg-white/20 font-bold text-sm">"Idea by (your name) • Developed by Fixoraa"</span>
+    </p>
+    <p class="mt-3 text-white/80 text-sm">Tick the box in the form below to allow us to show your name publicly.</p>
+  </div>
+
   <!-- Form -->
   <form id="reqForm" class="rounded-3xl bg-white border border-neutral-200 p-6 sm:p-8 shadow-sm" novalidate>
     <div class="grid gap-5">
@@ -45,6 +55,11 @@ import Layout from '../layouts/Layout.astro';
           <input id="rq-notify" name="notify_me" type="checkbox" value="yes" checked
             class="mt-1 h-4 w-4 rounded accent-[#9333EA]" />
           <span class="text-sm text-neutral-600"><strong class="text-neutral-900">Notify me</strong> when this tool is ready <span class="text-neutral-400">(needs your email above)</span></span>
+        </label>
+        <label class="mt-2 flex items-start gap-2.5 cursor-pointer select-none">
+          <input id="rq-credit" name="show_name_publicly" type="checkbox" value="yes" checked
+            class="mt-1 h-4 w-4 rounded accent-[#9333EA]" />
+          <span class="text-sm text-neutral-600"><strong class="text-neutral-900">Show my name publicly</strong> as "Idea by (my name)" if my tool gets built <span class="text-neutral-400">(first name only)</span></span>
         </label>
       </div>
       <button type="submit" id="rq-submit"
@@ -101,6 +116,7 @@ import Layout from '../layouts/Layout.astro';
           name: document.getElementById('rq-name').value.trim(),
           email: emailInput.value.trim(),
           notify_me: notifyBox.checked ? 'yes' : 'no',
+          show_name_publicly: document.getElementById('rq-credit').checked ? 'yes' : 'no',
         }),
       });
       if (!res.ok) throw new Error('send failed');
