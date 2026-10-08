@@ -538,7 +538,11 @@ const VALID_GUESSES=["ABOUT","ABOVE","ACTOR","ACUTE","ADMIT","ADOPT","ADULT","AF
   newGame('daily');
 })();
 </script>
-<style>
+<style is:global>
+  /* is:global — tiles & keyboard keys are created by JS at runtime, so Astro's
+     scoped selectors (which need a data-astro-cid attribute) never matched them.
+     This made the board + keyboard unstyled in light mode. Dark-mode rules below
+     already used :global for the same reason. */
   .grad-text {
     background: linear-gradient(100deg, #FF5A5F, #F43F8E 40%, #9333EA 70%, #2E6BFF);
     -webkit-background-clip: text;
