@@ -1,0 +1,38 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const posts = [
+  {
+    title: "50 Free Online Tools That Actually Work (No Signup Needed)",
+    slug: "/blog/50-free-online-tools",
+    date: "October 7, 2026",
+    readTime: "9 min read",
+    excerpt:
+      "Finance calculators, image tools, PDF utilities, converters and more — 50 genuinely free tools with no signup, no paywall and no watermark. Click a card and start.",
+  },
+];
+---
+<Layout title="Blog — Fixoraa" description="The Fixoraa blog: tool roundups, how-tos and updates from the free online tools hub.">
+<main class="mx-auto max-w-3xl px-4 py-10 sm:py-14">
+  <div class="text-center mb-12">
+    <span class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full text-white bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] mb-4">Blog</span>
+    <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-neutral-900">Notes from the <span class="bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] bg-clip-text text-transparent">tool shed</span></h1>
+    <p class="mt-4 text-neutral-600">Roundups, how-tos and updates. New posts whenever there's something worth saying.</p>
+  </div>
+
+  <div class="space-y-4">
+    {posts.map((post) => (
+      <a href={post.slug} class="group block rounded-3xl border border-neutral-200 bg-white p-6 sm:p-8 transition-all hover:-translate-y-0.5 hover:shadow-xl">
+        <div class="flex items-center gap-3 text-xs font-bold uppercase tracking-widest text-neutral-400">
+          <span>{post.date}</span>
+          <span aria-hidden="true">·</span>
+          <span>{post.readTime}</span>
+        </div>
+        <h2 class="mt-3 text-2xl font-black text-neutral-900 group-hover:text-[#9333EA] transition-colors">{post.title}</h2>
+        <p class="mt-2 text-neutral-600 leading-relaxed">{post.excerpt}</p>
+        <span class="mt-4 inline-block text-sm font-bold text-[#9333EA]">Read the post →</span>
+      </a>
+    ))}
+  </div>
+</main>
+</Layout>
