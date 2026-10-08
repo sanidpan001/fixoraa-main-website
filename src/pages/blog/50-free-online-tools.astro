@@ -1,0 +1,505 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const title = "50 Free Online Tools That Actually Work (No Signup Needed) — Fixoraa Blog";
+const description = "50 genuinely free online tools: finance calculators, image tools, PDF utilities, text tools, converters and more. No signup, no paywall, no watermark.";
+const faqs = [
+  { q: "Are these tools really free?", a: "Yes. Every tool on this list is free for unlimited use. There are no free-trial countdowns, no premium tiers hiding the real features, and no watermarks on your output." },
+  { q: "Do I need to create an account?", a: "No. None of the 50 tools on this list require a signup or email address. Open the page and start using the tool immediately." },
+  { q: "Is my data safe when I use these tools?", a: "Most of these tools run entirely in your browser — the calculation happens on your own device, so your data never leaves your computer. Nothing is stored against your identity, because there is no login." },
+  { q: "Do the tools work on mobile?", a: "Yes. Every tool is built as a responsive web page and works in any modern mobile or desktop browser. Nothing to install." },
+  { q: "Can I use the output for commercial work?", a: "Yes. What you make with these tools is yours — no watermarks, no usage restrictions on the results you generate." },
+  { q: "Are new tools added over time?", a: "Yes. Fixoraa adds new tools regularly — the directory now has 190+ tools and counting, all following the same free, no-signup promise." },
+];
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+};
+---
+<Layout title={title} description={description}>
+<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+<main class="mx-auto max-w-3xl px-4 py-10 sm:py-14">
+  <div class="text-center mb-10">
+    <span class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full text-white bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] mb-4">Blog · 9 min read</span>
+    <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-neutral-900">50 free online tools that <span class="bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] bg-clip-text text-transparent">actually work</span></h1>
+    <p class="mt-4 text-neutral-500 text-sm">Published October 7, 2026 · by the Fixoraa team</p>
+  </div>
+
+  <article class="space-y-6 text-neutral-700 leading-relaxed">
+    <p class="text-lg text-neutral-800">
+      Every week, millions of people search for a quick calculator, a converter, or a small utility — and land on a page that demands a signup before showing a single result. Then comes the watermark. Then the paywall. The "free" tool was never free; it was a funnel.
+    </p>
+    <p>
+      This list is the opposite. We collected <strong class="text-neutral-900">50 tools from the Fixoraa directory</strong> — finance calculators, image tools, PDF utilities, text tools, developer helpers, converters and more — and every single one follows the same promise: <strong class="text-neutral-900">free unlimited use, no signup, no watermark.</strong> Open the link, use the tool, close the tab. That's the whole relationship.
+    </p>
+    <p>
+      Each card below links straight to the live tool. No registration walls in between — click and you're in.
+    </p>
+<h2 class="text-2xl font-black text-neutral-900 pt-8">0</h2>
+<p class="!mt-2 text-neutral-500 text-sm italic">Smart calculators for money, loans, taxes and savings</p>
+<div class="grid gap-3 sm:grid-cols-2 !mt-4">
+  <a href="https://cardzero.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">CardZero</span>
+      <span class="text-xs font-black text-neutral-400">№1</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Debt snowball vs avalanche payoff planner.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://compomint.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">CompoMint</span>
+      <span class="text-xs font-black text-neutral-400">№2</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Compound interest calculator with growth projections.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://feescale.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">FeeScale</span>
+      <span class="text-xs font-black text-neutral-400">№3</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Set freelance rates that cover costs and profit.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://leaselimit.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">LeaseLimit</span>
+      <span class="text-xs font-black text-neutral-400">№4</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Find the rent you can actually afford.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://slabwise.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">SlabWise</span>
+      <span class="text-xs font-black text-neutral-400">№5</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">GST calculator with India's latest tax slabs.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://tipslice.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">TipSlice</span>
+      <span class="text-xs font-black text-neutral-400">№6</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Split restaurant bills and calculate tips fairly.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://wageflip.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">WageFlip</span>
+      <span class="text-xs font-black text-neutral-400">№7</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Convert salary to hourly rate and back.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://shelfcheck.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">ShelfCheck</span>
+      <span class="text-xs font-black text-neutral-400">№8</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Compare unit prices and find the real deal.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+</div>
+<h2 class="text-2xl font-black text-neutral-900 pt-8">8</h2>
+<p class="!mt-2 text-neutral-500 text-sm italic">Edit, compress and enhance images right in your browser</p>
+<div class="grid gap-3 sm:grid-cols-2 !mt-4">
+  <a href="https://objectpro.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">ObjectPro</span>
+      <span class="text-xs font-black text-neutral-400">№9</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Remove unwanted objects from any photo.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://pngcraft.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">PNGCraft</span>
+      <span class="text-xs font-black text-neutral-400">№10</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Edit, convert and polish PNG images.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://pixelfix.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">PixelFix</span>
+      <span class="text-xs font-black text-neutral-400">№11</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Fix blurry and pixelated photos in one click.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://shrinkpro.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">ShrinkPro</span>
+      <span class="text-xs font-black text-neutral-400">№12</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Compress images without visible quality loss.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://pixelslim.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">PixelSlim</span>
+      <span class="text-xs font-black text-neutral-400">№13</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Shrink images for faster websites and sharing.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+</div>
+<h2 class="text-2xl font-black text-neutral-900 pt-8">13</h2>
+<p class="!mt-2 text-neutral-500 text-sm italic">Merge, split and convert PDF files for free</p>
+<div class="grid gap-3 sm:grid-cols-2 !mt-4">
+  <a href="https://docbind.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">DocBind</span>
+      <span class="text-xs font-black text-neutral-400">№14</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Merge, split and organize PDF files online.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://pdfninja.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">PDFNinja</span>
+      <span class="text-xs font-black text-neutral-400">№15</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">All-in-one PDF converter and editor toolkit.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+</div>
+<h2 class="text-2xl font-black text-neutral-900 pt-8">15</h2>
+<p class="!mt-2 text-neutral-500 text-sm italic">Write, format and analyze text like a pro</p>
+<div class="grid gap-3 sm:grid-cols-2 !mt-4">
+  <a href="https://basecraft.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">BaseCraft</span>
+      <span class="text-xs font-black text-neutral-400">№16</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Encode and decode Base64 text and files.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://diffscope.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">DiffScope</span>
+      <span class="text-xs font-black text-neutral-400">№17</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Compare two texts side by side with highlights.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://dupeless.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">Dupeless</span>
+      <span class="text-xs font-black text-neutral-400">№18</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Remove duplicate lines from any text.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://freqlens.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">FreqLens</span>
+      <span class="text-xs font-black text-neutral-400">№19</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Analyze word frequency for writing and SEO.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://ghostglyph.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">GhostGlyph</span>
+      <span class="text-xs font-black text-neutral-400">№20</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Find invisible characters hiding in your text.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+</div>
+<h2 class="text-2xl font-black text-neutral-900 pt-8">20</h2>
+<p class="!mt-2 text-neutral-500 text-sm italic">Tiny utilities that make developers' lives easier</p>
+<div class="grid gap-3 sm:grid-cols-2 !mt-4">
+  <a href="https://cronsage.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">CronSage</span>
+      <span class="text-xs font-black text-neutral-400">№21</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Cron expressions explained in plain English.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://epochly.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">Epochly</span>
+      <span class="text-xs font-black text-neutral-400">№22</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Convert Unix timestamps to dates and back.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://fakerly.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">Fakerly</span>
+      <span class="text-xs font-black text-neutral-400">№23</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Generate fake data for testing your apps.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://hexsum.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">HexSum</span>
+      <span class="text-xs font-black text-neutral-400">№24</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Generate MD5, SHA-1 and SHA-256 hashes.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://hookforge.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">HookForge</span>
+      <span class="text-xs font-black text-neutral-400">№25</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Forge test webhooks for your integrations.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+</div>
+<h2 class="text-2xl font-black text-neutral-900 pt-8">25</h2>
+<p class="!mt-2 text-neutral-500 text-sm italic">Calculators, converters and timers for dates and time</p>
+<div class="grid gap-3 sm:grid-cols-2 !mt-4">
+  <a href="https://agearc.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">AgeArc</span>
+      <span class="text-xs font-black text-neutral-400">№26</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Calculate exact age in years, months and days.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://datejump.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">DateJump</span>
+      <span class="text-xs font-black text-neutral-400">№27</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Add or subtract days from any date.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://dayspan.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">DaySpan</span>
+      <span class="text-xs font-black text-neutral-400">№28</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Find the exact duration between two dates.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://pomopace.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">PomoPace</span>
+      <span class="text-xs font-black text-neutral-400">№29</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Pomodoro focus timer with work and break cycles.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://shifttally.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">ShiftTally</span>
+      <span class="text-xs font-black text-neutral-400">№30</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Track work hours and shifts for easy payroll.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+</div>
+<h2 class="text-2xl font-black text-neutral-900 pt-8">30</h2>
+<p class="!mt-2 text-neutral-500 text-sm italic">Simple trackers for fitness, diet and sleep</p>
+<div class="grid gap-3 sm:grid-cols-2 !mt-4">
+  <a href="https://calofuel.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">CaloFuel</span>
+      <span class="text-xs font-black text-neutral-400">№31</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Calculate your TDEE and daily calorie needs.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://hydroquotient.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">HydroQuotient</span>
+      <span class="text-xs font-black text-neutral-400">№32</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Track your daily water intake goal.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://macromason.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">MacroMason</span>
+      <span class="text-xs font-black text-neutral-400">№33</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Split your calories into protein, carbs and fat.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://onereplab.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">OneRepLab</span>
+      <span class="text-xs font-black text-neutral-400">№34</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Calculate your one-rep max for any lift.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://remnest.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">REMNest</span>
+      <span class="text-xs font-black text-neutral-400">№35</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Find the best bedtime and wake-up time for you.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+</div>
+<h2 class="text-2xl font-black text-neutral-900 pt-8">35</h2>
+<p class="!mt-2 text-neutral-500 text-sm italic">Quizzes, games and generators for fun and daily life</p>
+<div class="grid gap-3 sm:grid-cols-2 !mt-4">
+  <a href="https://amoramatch.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">AmoraMatch</span>
+      <span class="text-xs font-black text-neutral-400">№36</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Love compatibility test for you and your partner.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://fateorb.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">FateOrb</span>
+      <span class="text-xs font-black text-neutral-400">№37</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Ask the magic oracle — get yes-or-no answers.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://namenova.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">NameNova</span>
+      <span class="text-xs font-black text-neutral-400">№38</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Generate cool nicknames for anyone.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://numbria.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">Numbria</span>
+      <span class="text-xs font-black text-neutral-400">№39</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Numerology reading from your name and birthdate.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://petpicks.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">PetPicks</span>
+      <span class="text-xs font-black text-neutral-400">№40</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Find the perfect name for your pet.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+</div>
+<h2 class="text-2xl font-black text-neutral-900 pt-8">40</h2>
+<p class="!mt-2 text-neutral-500 text-sm italic">Convert units, sizes and numbers in seconds</p>
+<div class="grid gap-3 sm:grid-cols-2 !mt-4">
+  <a href="https://fracify.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">Fracify</span>
+      <span class="text-xs font-black text-neutral-400">№41</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Fraction calculator — add, subtract and simplify.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://ovenmark.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">OvenMark</span>
+      <span class="text-xs font-black text-neutral-400">№42</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Convert oven temperatures between °C and °F.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://percentiq.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">PercentIQ</span>
+      <span class="text-xs font-black text-neutral-400">№43</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Percentage calculator for discounts, marks and tips.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://ringwisp.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">RingWisp</span>
+      <span class="text-xs font-black text-neutral-400">№44</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Find your ring size in any country standard.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://romanly.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">Romanly</span>
+      <span class="text-xs font-black text-neutral-400">№45</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Convert numbers to Roman numerals and back.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+</div>
+<h2 class="text-2xl font-black text-neutral-900 pt-8">45</h2>
+<p class="!mt-2 text-neutral-500 text-sm italic">Tools to study smarter and land your dream job</p>
+<div class="grid gap-3 sm:grid-cols-2 !mt-4">
+  <a href="https://citecraft.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">CiteCraft</span>
+      <span class="text-xs font-black text-neutral-400">№46</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Generate citations in APA, MLA and Chicago styles.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://deckdash.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">DeckDash</span>
+      <span class="text-xs font-black text-neutral-400">№47</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Study faster with smart flashcards.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://gradeaxis.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">GradeAxis</span>
+      <span class="text-xs font-black text-neutral-400">№48</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Calculate your GPA and CGPA easily.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://gradeneed.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">GradeNeed</span>
+      <span class="text-xs font-black text-neutral-400">№49</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Find the grade you need on your final exam.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+  <a href="https://resumecraft-ai.fixoraa.tech" target="_blank" rel="noopener" class="group rounded-2xl border border-neutral-200 bg-white p-4 transition-all hover:-translate-y-0.5 hover:shadow-lg">
+    <div class="flex items-center justify-between gap-2">
+      <span class="font-bold text-neutral-900 group-hover:text-[#9333EA]">ResumeCraft AI</span>
+      <span class="text-xs font-black text-neutral-400">№50</span>
+    </div>
+    <p class="mt-1 text-sm text-neutral-600">Build a job-winning resume with AI.</p>
+    <span class="mt-2 inline-block text-xs font-bold text-[#9333EA]">Try it free →</span>
+  </a>
+</div>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Why this list exists</h2>
+    <p>
+      Small tools have a trust problem. The internet is full of "free" utilities that are really signup funnels, and people have learned to be suspicious. We built Fixoraa on a simple bet: if a tool does one job perfectly and asks for nothing in return, people will come back — and tell their friends.
+    </p>
+    <p>
+      That bet is why every tool above runs the same playbook: it loads fast, it works on your phone, your data stays in your browser, and there's no account to create, no trial to expire, no watermark stamped on what you made. If you only bookmark one page from this list, make it the <a href="/tools" class="font-semibold text-[#9333EA] hover:underline">full tools directory</a> — new tools land there first.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Frequently asked questions</h2>
+    <div class="space-y-3 !mt-4">
+      {faqs.map((f) => (
+        <details class="rounded-2xl border border-neutral-200 bg-white p-5">
+          <summary class="cursor-pointer font-bold text-neutral-900">{f.q}</summary>
+          <p class="mt-2 text-neutral-600">{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </article>
+
+  <div class="mt-12 rounded-3xl bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] p-8 sm:p-10 text-center text-white">
+    <h2 class="text-2xl sm:text-3xl font-black mb-3">That's 50 — there are 140+ more.</h2>
+    <p class="text-white/90 mb-6">Browse the full directory and find the exact tool you need in seconds.</p>
+    <a href="/tools" class="inline-block rounded-2xl bg-white text-neutral-900 font-bold px-8 py-3.5 hover:shadow-xl hover:-translate-y-0.5 transition-all">Browse all 190+ tools</a>
+  </div>
+</main>
+</Layout>
