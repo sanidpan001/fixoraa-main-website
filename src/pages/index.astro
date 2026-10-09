@@ -32,15 +32,15 @@ const valueProps = [
   },
   {
     title: 'Always growing',
-    text: `New tools ship regularly. The library keeps expanding — from ${totalTools} today toward an infinite collection.`,
+    text: `New tools ship regularly. The library keeps expanding — from 200+ today toward an infinite collection.`,
     icon: '<path d="M18.2 8.5c2.5 0 4.8 2.6 4.8 5.5s-2.3 5.5-4.8 5.5c-3.4 0-5-5.5-6.2-5.5s-2.8 5.5-6.2 5.5c-2.5 0-4.8-2.6-4.8-5.5S3.3 8.5 5.8 8.5c3.4 0 5 5.5 6.2 5.5s2.8-5.5 6.2-5.5z" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>',
     color: '#2E6BFF',
   },
 ];
 
-const pageTitle = `Fixoraa — ${totalTools} Free Online Tools. Zero Signup.`;
+const pageTitle = `Fixoraa — 200+ Free Online Tools. Zero Signup.`;
 const pageDescription =
-  `Fixoraa is a growing library of ${totalTools} free online tools — calculators, converters, text utilities, games and more. No signup, no paywalls, privacy first.`;
+  `Fixoraa is a growing library of 200+ free online tools — calculators, converters, text utilities, games and more. No signup, no paywalls, privacy first.`;
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
@@ -75,7 +75,7 @@ const pageDescription =
       </p>
 
       <h1 class="hero-anim mx-auto mt-6 max-w-4xl text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
-        {totalTools} free tools.<br />
+        200+ free tools.<br />
         Zero signup.<br />
         <span class="text-gradient">Infinite possibilities.</span>
       </h1>
@@ -195,7 +195,7 @@ const pageDescription =
     <div class="mx-auto grid max-w-6xl grid-cols-2 gap-4 px-5 py-12 lg:grid-cols-4">
       <div class="stagger-card rounded-3xl border border-ink/10 bg-cream p-6 text-center">
         <p class="text-4xl font-extrabold tracking-tight sm:text-5xl">
-          <span class="stat-count" data-count={totalTools}>0</span><span class="text-gradient">+</span>
+          <span class="stat-count" data-count={200}>0</span><span class="text-gradient">+</span>
         </p>
         <p class="mt-2 text-sm font-semibold text-ink/60">free tools</p>
       </div>
@@ -207,7 +207,7 @@ const pageDescription =
       </div>
       <div class="stagger-card rounded-3xl border border-ink/10 bg-cream p-6 text-center">
         <p class="text-4xl font-extrabold tracking-tight text-gradient sm:text-5xl">
-          <span class="stat-count" data-count={totalTools} data-infinity="true">0</span>
+          <span class="stat-count" data-count={200} data-infinity="true">0</span>
         </p>
         <p class="mt-2 text-sm font-semibold text-ink/60">tools, forever growing</p>
       </div>
@@ -240,7 +240,7 @@ const pageDescription =
           id="tool-search"
           type="search"
           autocomplete="off"
-          placeholder={`Search ${totalTools} free tools…`}
+          placeholder={`Search 200+ free tools…`}
           aria-label="Search tools"
           class="w-full rounded-full border-2 border-ink/10 bg-white py-4 pr-5 text-base font-medium shadow-sm outline-none transition-all placeholder:text-ink/35 focus:border-brand-purple focus:shadow-lg"
           style="padding-left: 3.25rem;"
@@ -270,7 +270,7 @@ const pageDescription =
           Browse by <span class="text-gradient">category</span>
         </h2>
         <p class="mt-3 text-ink/60">
-          {totalTools} tools across {niches.length} categories — pick a lane and get to work.
+          200+ tools across {niches.length} categories — pick a lane and get to work.
         </p>
       </div>
 
@@ -401,7 +401,7 @@ const pageDescription =
       <div class="reveal mx-auto mt-14 max-w-3xl rounded-[2.5rem] border border-ink/10 bg-white px-6 py-12 text-center shadow-sm">
         <p class="text-5xl font-extrabold text-gradient" aria-hidden="true">∞</p>
         <h2 class="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl">
-          Start with <span class="text-gradient">{totalTools} free tools</span> today
+          Start with <span class="text-gradient">200+ free tools</span> today
         </h2>
         <p class="mx-auto mt-3 max-w-xl text-ink/60">
           No signup. No paywalls. Pick a tool, get your result, get on with your day.
@@ -425,7 +425,7 @@ const pageDescription =
 </Layout>
 
 <!-- ══════════ LANDING PAGE SCRIPTS ══════════ -->
-<script define:vars={{ totalTools }}>
+<script>
   import gsap from 'gsap';
   import { ScrollTrigger } from 'gsap/ScrollTrigger';
   import { initThread } from '../lib/thread.js';
@@ -496,7 +496,8 @@ const pageDescription =
         line.appendChild(frag);
       });
       // Screen readers: masks are aria-hidden, so expose the headline as a label
-      heroH1.setAttribute('aria-label', `${totalTools} free tools. Zero signup. Infinite possibilities.`);
+      const toolCount = document.querySelector('.stat-count')?.dataset.count ?? '200';
+      heroH1.setAttribute('aria-label', `${toolCount} free tools. Zero signup. Infinite possibilities.`);
     }
 
     // 3. Assembly order: badge → subtext → CTAs → infinity → scroll hint →
