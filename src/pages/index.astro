@@ -74,7 +74,7 @@ const pageDescription =
         Free online tools, made for everyone
       </p>
 
-      <h1 class="hero-anim mx-auto mt-6 max-w-4xl text-5xl font-extrabold leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+      <h1 class="hero-anim mx-auto mt-6 max-w-4xl text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl">
         200+ free tools.<br />
         Zero signup.<br />
         <span class="text-gradient">Infinite possibilities.</span>
@@ -474,6 +474,12 @@ const pageDescription =
       heroLines.forEach((line) => {
         const frag = document.createDocumentFragment();
         const emitChars = (text: string, cls: string) => {
+          // Group each word's letters in an inline-block wrapper so a line
+          // can only break at spaces — never mid-word on narrow screens.
+          let word: HTMLElement | null = null;
+          const flushWord = () => {
+            if (word) { frag.appendChild(word); word = null; }
+          };
           for (const c of text) {
             const mask = document.createElement('span');
             mask.className = 'ch-mask';
@@ -482,8 +488,18 @@ const pageDescription =
             ch.className = cls ? `ch ${cls}` : 'ch';
             ch.textContent = c === ' ' ? ' ' : c;
             mask.appendChild(ch);
-            frag.appendChild(mask);
+            if (c === ' ') {
+              flushWord();
+              frag.appendChild(mask);
+            } else {
+              if (!word) {
+                word = document.createElement('span');
+                word.style.display = 'inline-block';
+              }
+              word.appendChild(mask);
+            }
           }
+          flushWord();
         };
         Array.from(line.childNodes).forEach((node) => {
           if (node.nodeType === Node.TEXT_NODE) {
