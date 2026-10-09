@@ -587,7 +587,7 @@ const pageDescription =
       });
       if (glow) glow.style.opacity = '0';
     })();
-    introTl.add(playInfinityDraw, 3.4);
+    introTl.add(playInfinityDraw, 2.0);
 
     // ── Hero parallax scrub: headline drifts up, infinity floats away slower, blobs lag ──
     // (yPercent on headline/infinity composes with the entrance y — no conflict)
@@ -684,7 +684,6 @@ const pageDescription =
     if (glow) glow.style.opacity = '0';
 
     const drawTl = gsap.timeline();
-    drawTl.timeScale(1.4); // infinity draw ~40% faster (per Sandipan, 2026-10-09)
     drawTl
       .to(path, { strokeDashoffset: 0, duration: 3.2, ease: 'power2.inOut' }, 0)
       .to(frost, { strokeDashoffset: 0, duration: 3.2, ease: 'power2.inOut' }, 0)
@@ -695,7 +694,7 @@ const pageDescription =
         if (!shimmer) return;
         // Shimmer sweep: a bright segment endlessly traveling the loop
         gsap.set(shimmer, { strokeDasharray: `72 ${len}`, strokeDashoffset: 0, opacity: 0.9 });
-        gsap.to(shimmer, { strokeDashoffset: -len, duration: 2.6, repeat: -1, ease: 'none' });
+        gsap.to(shimmer, { strokeDashoffset: -len, duration: 3.4, repeat: -1, ease: 'none' });
         // Gentle infinite float + glow breathing (transform/opacity only — 60fps)
         gsap.to(wrap, { y: -14, duration: 3.2, yoyo: true, repeat: -1, ease: 'sine.inOut' });
         if (glow) gsap.to(glow, { opacity: 0.3, duration: 2.6, yoyo: true, repeat: -1, ease: 'sine.inOut' });
