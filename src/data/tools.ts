@@ -69,6 +69,10 @@ export const niches: Niche[] = [
     slug: "finance-calculators",
     tagline: "Smart calculators for money, loans, taxes and savings",
     tools: [
+      { name: "RentOrOwn", slug: "rentorown", url: "https://rentorown.fixoraa.tech", blurb: "Compare renting vs buying a home, year by year" },
+      { name: "FundShield", slug: "fundshield", url: "https://fundshield.fixoraa.tech", blurb: "Emergency fund calculator — months of cover & plan" },
+      { name: "HikeMath", slug: "hikemath", url: "https://hikemath.fixoraa.tech", blurb: "Salary hike calculator — new CTC & in-hand" },
+      { name: "EvenPoint", slug: "evenpoint", url: "https://evenpoint.fixoraa.tech", blurb: "Break-even point calculator for any business" },
       { name: "CardZero", slug: "cardzero", url: "https://cardzero.fixoraa.tech", blurb: "Debt snowball vs avalanche payoff planner" },
       { name: "CompoMint", slug: "compomint", url: "https://compomint.fixoraa.tech", blurb: "Compound interest calculator with growth projections" },
       { name: "DiscountWish", slug: "discountwish", url: "https://discountwish.fixoraa.tech", blurb: "Calculate sale discounts and final prices instantly" },
@@ -133,6 +137,7 @@ export const niches: Niche[] = [
     slug: "image-tools",
     tagline: "Edit, compress and enhance images right in your browser",
     tools: [
+      { name: "MockFrame", slug: "mockframe", url: "https://mockframe.fixoraa.tech", blurb: "Beautify screenshots with device frames & gradients" },
       { name: "ObjectPro", slug: "objectpro", url: "https://objectpro.fixoraa.tech", blurb: "Remove unwanted objects from any photo" },
       { name: "PNGCraft", slug: "pngcraft", url: "https://pngcraft.fixoraa.tech", blurb: "Edit, convert and polish PNG images" },
       { name: "PixelFix", slug: "pixelfix", url: "https://pixelfix.fixoraa.tech", blurb: "Fix blurry and pixelated photos in one click" },
@@ -160,6 +165,7 @@ export const niches: Niche[] = [
     slug: "pdf-tools",
     tagline: "Merge, split and convert PDF files for free",
     tools: [
+      { name: "PageToPix", slug: "pagetopix", url: "https://pagetopix.fixoraa.tech", blurb: "Convert PDF pages to PNG or JPG in your browser" },
       { name: "DocBind", slug: "docbind", url: "https://docbind.fixoraa.tech", blurb: "Merge, split and organize PDF files online" },
       { name: "PDFNinja", slug: "pdfninja", url: "https://pdfninja.fixoraa.tech", blurb: "All-in-one PDF converter and editor toolkit" },
       { name: "PageMark", slug: "pagemark", url: "https://pagemark.fixoraa.tech", blurb: "Add text or image watermarks to PDFs" },
@@ -172,6 +178,7 @@ export const niches: Niche[] = [
     slug: "text-tools",
     tagline: "Write, format and analyze text like a pro",
     tools: [
+      { name: "AcronymForge", slug: "acronymforge", url: "https://acronymforge.fixoraa.tech", blurb: "Acronym & backronym generator for any phrase" },
       { name: "BaseCraft", slug: "basecraft", url: "https://basecraft.fixoraa.tech", blurb: "Encode and decode Base64 text and files" },
       { name: "DiffScope", slug: "diffscope", url: "https://diffscope.fixoraa.tech", blurb: "Compare two texts side by side with highlights" },
       { name: "Dupeless", slug: "dupeless", url: "https://dupeless.fixoraa.tech", blurb: "Remove duplicate lines from any text" },
@@ -206,6 +213,10 @@ export const niches: Niche[] = [
     slug: "developer-tools",
     tagline: "Tiny utilities that make developers' lives easier",
     tools: [
+      { name: "BinBridge", slug: "binbridge", url: "https://binbridge.fixoraa.tech", blurb: "Text to binary, hex, octal & decimal translator" },
+      { name: "StatusAtlas", slug: "statusatlas", url: "https://statusatlas.fixoraa.tech", blurb: "HTTP status codes explained — searchable reference" },
+      { name: "ScreenScope", slug: "screenscope", url: "https://screenscope.fixoraa.tech", blurb: "What is my screen size? Live viewport checker" },
+      { name: "TableForge", slug: "tableforge", url: "https://tableforge.fixoraa.tech", blurb: "Build tables & export Markdown, HTML or CSV" },
       { name: "CronSage", slug: "cronsage", url: "https://cronsage.fixoraa.tech", blurb: "Cron expressions explained in plain English" },
       { name: "Epochly", slug: "epochly", url: "https://epochly.fixoraa.tech", blurb: "Convert Unix timestamps to dates and back" },
       { name: "Fakerly", slug: "fakerly", url: "https://fakerly.fixoraa.tech", blurb: "Generate fake data for testing your apps" },
@@ -245,6 +256,7 @@ export const niches: Niche[] = [
     slug: "date-time",
     tagline: "Calculators, converters and timers for dates and time",
     tools: [
+      { name: "DayStone", slug: "daystone", url: "https://daystone.fixoraa.tech", blurb: "Days-alive counter & life milestone dates" },
       { name: "AgeArc", slug: "agearc", url: "https://agearc.fixoraa.tech", blurb: "Calculate exact age in years, months and days" },
       { name: "DateJump", slug: "datejump", url: "https://datejump.fixoraa.tech", blurb: "Add or subtract days from any date" },
       { name: "DaySpan", slug: "dayspan", url: "https://dayspan.fixoraa.tech", blurb: "Find the exact duration between two dates" },
@@ -266,6 +278,8 @@ export const niches: Niche[] = [
     slug: "health-fitness",
     tagline: "Simple trackers for fitness, diet and sleep",
     tools: [
+      { name: "PressureMap", slug: "pressuremap", url: "https://pressuremap.fixoraa.tech", blurb: "Blood pressure checker with a private reading log" },
+      { name: "SoberScale", slug: "soberscale", url: "https://soberscale.fixoraa.tech", blurb: "BAC estimator with sober-by time & decay chart" },
       { name: "CaloFuel", slug: "calofuel", url: "https://calofuel.fixoraa.tech", blurb: "Calculate your TDEE and daily calorie needs" },
       { name: "HydroQuotient", slug: "hydroquotient", url: "https://hydroquotient.fixoraa.tech", blurb: "Track your daily water intake goal" },
       { name: "MacroMason", slug: "macromason", url: "https://macromason.fixoraa.tech", blurb: "Split your calories into protein, carbs and fat" },
@@ -296,6 +310,10 @@ export const niches: Niche[] = [
     slug: "fun-lifestyle",
     tagline: "Quizzes, games and generators for fun and daily life",
     tools: [
+      { name: "JetLagWise", slug: "jetlagwise", url: "https://jetlagwise.fixoraa.tech", blurb: "Jet lag recovery planner — light & sleep schedule" },
+      { name: "PawsYears", slug: "pawsyears", url: "https://pawsyears.fixoraa.tech", blurb: "Dog & cat age in human years, by size & stage" },
+      { name: "TileTally", slug: "tiletally", url: "https://tiletally.fixoraa.tech", blurb: "Tile calculator — tiles, boxes, wastage & cost" },
+      { name: "ReflexLab", slug: "reflexlab", url: "https://reflexlab.fixoraa.tech", blurb: "Reaction time test — 5-round average in ms" },
       { name: "AmoraMatch", slug: "amoramatch", url: "https://amoramatch.fixoraa.tech", blurb: "Love compatibility test for you and your partner" },
       { name: "FateOrb", slug: "fateorb", url: "https://fateorb.fixoraa.tech", blurb: "Ask the magic oracle — get yes-or-no answers" },
       { name: "NameNova", slug: "namenova", url: "https://namenova.fixoraa.tech", blurb: "Generate cool nicknames for anyone" },
@@ -345,6 +363,7 @@ export const niches: Niche[] = [
     slug: "converters",
     tagline: "Convert units, sizes and numbers in seconds",
     tools: [
+      { name: "CupGrams", slug: "cupgrams", url: "https://cupgrams.fixoraa.tech", blurb: "Cups to grams converter for 40+ ingredients" },
       { name: "Fracify", slug: "fracify", url: "https://fracify.fixoraa.tech", blurb: "Fraction calculator — add, subtract and simplify" },
       { name: "OvenMark", slug: "ovenmark", url: "https://ovenmark.fixoraa.tech", blurb: "Convert oven temperatures between °C and °F" },
       { name: "PercentIQ", slug: "percentiq", url: "https://percentiq.fixoraa.tech", blurb: "Percentage calculator for discounts, marks and tips" },
@@ -364,6 +383,7 @@ export const niches: Niche[] = [
     slug: "study-career",
     tagline: "Tools to study smarter and land your dream job",
     tools: [
+      { name: "SignCraft", slug: "signcraft", url: "https://signcraft.fixoraa.tech", blurb: "Email signature generator for Gmail & Outlook" },
       { name: "CiteCraft", slug: "citecraft", url: "https://citecraft.fixoraa.tech", blurb: "Generate citations in APA, MLA and Chicago styles" },
       { name: "DeckDash", slug: "deckdash", url: "https://deckdash.fixoraa.tech", blurb: "Study faster with smart flashcards" },
       { name: "GradeAxis", slug: "gradeaxis", url: "https://gradeaxis.fixoraa.tech", blurb: "Calculate your GPA and CGPA easily" },
