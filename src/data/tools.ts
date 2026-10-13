@@ -129,6 +129,13 @@ export const niches: Niche[] = [
       { name: "GlobeRate", slug: "globerate", url: "https://globerate.fixoraa.tech", blurb: "Currency converter with editable indicative rates" },
       { name: "MortgageMate", slug: "mortgagemate", url: "https://mortgagemate.fixoraa.tech", blurb: "Mortgage calculator with tax, insurance and PMI" },
       { name: "LittleNest", slug: "littlenest", url: "https://littlenest.fixoraa.tech", blurb: "Sukanya Samriddhi (SSY) calculator with deposit grid" },
+      { name: "BudgetBloom", slug: "budgetbloom", url: "https://budgetbloom.2.fixoraa.tech", blurb: "Adjustable ratios (e.g. 60/20/20 for high-rent cities) plus a leak finder that" },
+      { name: "DelayCost", slug: "delaycost", url: "https://delaycost.2.fixoraa.tech", blurb: "Month-level delay slider AND the catch-up SIP needed to still hit the same cor" },
+      { name: "ShareAvg", slug: "shareavg", url: "https://shareavg.2.fixoraa.tech", blurb: "Unlimited buy tranches with break-even and 'average needed to reach target pri" },
+      { name: "ScoreLift", slug: "scorelift", url: "https://scorelift.2.fixoraa.tech", blurb: "Anonymous, no-login simulator that ranks actions by score impact \u2014 bureaus gat" },
+      { name: "RetirePath", slug: "retirepath", url: "https://retirepath.2.fixoraa.tech", blurb: "Combines inflation, existing savings AND annual step-up saving in one year-by-" },
+      { name: "EduFund", slug: "edufund", url: "https://edufund.2.fixoraa.tech", blurb: "Starts from course + country presets with education-inflation (higher than CPI" },
+      { name: "CostPerUse", slug: "costperuse", url: "https://costperuse.2.fixoraa.tech", blurb: "Verdict meter ('worth it / borderline / luxury tax') plus cost-per-day \u2014 blogs" },
     ],
   },
   // ── Image Tools ──────────────────────────────────────────────────────
@@ -157,6 +164,9 @@ export const niches: Niche[] = [
       { name: "MetaPeel", slug: "metapeel", url: "https://metapeel.fixoraa.tech", blurb: "EXIF viewer and remover — strip photo metadata" },
       { name: "Vectra", slug: "vectra", url: "https://vectra.fixoraa.tech", blurb: "SVG to PNG converter with custom sizes" },
       { name: "BlurGuard", slug: "blurguard", url: "https://blurguard.fixoraa.tech", blurb: "Blur faces and plates in photos for privacy" },
+      { name: "BeforeAfter", slug: "beforeafter", url: "https://beforeafter.2.fixoraa.tech", blurb: "Exports static PNG, animated wipe GIF AND a copy-paste embed slider \u2014 competit" },
+      { name: "RoundCrop", slug: "roundcrop", url: "https://roundcrop.2.fixoraa.tech", blurb: "Circle, rounded-rect and blob shapes with ring/border styling in one tool \u2014 pr" },
+      { name: "AsciiPic", slug: "asciipic", url: "https://asciipic.2.fixoraa.tech", blurb: "Colour ASCII (HTML export) as well as classic mono, with brightness-mapped cha" },
     ],
   },
   // ── PDF Tools ────────────────────────────────────────────────────────
