@@ -3,6 +3,10 @@ import Layout from '../layouts/Layout.astro';
 import { niches, allTools, totalTools } from '../data/tools';
 import { games } from '../data/games';
 
+// Hero count: totalTools rounded DOWN to the nearest hundred (334 -> 300+).
+// Sandipan's rule (2026-10-13): the hero always shows the hundred mark, never the exact count.
+const heroTools = Math.floor(totalTools / 100) * 100;
+
 // Rotating gradient accents for niche cards
 const accents = [
   'from-brand-coral to-brand-pink',
@@ -75,7 +79,7 @@ const pageDescription =
       </p>
 
       <h1 class="hero-anim mx-auto mt-6 max-w-4xl text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl">
-        200+ free tools.<br />
+        {heroTools}+ free tools.<br />
         Zero signup.<br />
         <span class="text-gradient">Infinite possibilities.</span>
       </h1>
