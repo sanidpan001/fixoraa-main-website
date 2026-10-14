@@ -136,6 +136,8 @@ export const niches: Niche[] = [
       { name: "RetirePath", slug: "retirepath", url: "https://retirepath.2.fixoraa.tech", blurb: "Combines inflation, existing savings AND annual step-up saving in one year-by-" },
       { name: "EduFund", slug: "edufund", url: "https://edufund.2.fixoraa.tech", blurb: "Starts from course + country presets with education-inflation (higher than CPI" },
       { name: "CostPerUse", slug: "costperuse", url: "https://costperuse.2.fixoraa.tech", blurb: "Verdict meter ('worth it / borderline / luxury tax') plus cost-per-day \u2014 blogs" },
+      { name: "HomeReno", slug: "homereno", url: "https://homereno.2.fixoraa.tech", blurb: "Room-by-room build-up (kitchen/bath/living) splitting labour vs materials, plu" },
+      { name: "PetBudget", slug: "petbudget", url: "https://petbudget.2.fixoraa.tech", blurb: "Monthly + first-year + lifetime cost by pet type and size, with vet/food/insur" },
     ],
   },
   // ── Image Tools ──────────────────────────────────────────────────────
