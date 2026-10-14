@@ -289,6 +289,12 @@ export const niches: Niche[] = [
       { name: "BrailleBridge", slug: "braillebridge", url: "https://braillebridge.fixoraa.tech", blurb: "Braille translator — English to Grade 1 Braille" },
       { name: "Pigglish", slug: "pigglish", url: "https://pigglish.fixoraa.tech", blurb: "Pig Latin translator, both ways" },
       { name: "ScribeMic", slug: "scribemic", url: "https://scribemic.fixoraa.tech", blurb: "Speech to text dictation in your browser" },
+      { name: "FancyType", slug: "fancytype", url: "https://fancytype.2.fixoraa.tech", blurb: "40+ Unicode styles, favourites pinned on top, works for bio-length text in one" },
+      { name: "Anagramix", slug: "anagramix", url: "https://anagramix.2.fixoraa.tech", blurb: "Groups results by word length and offers a name/business anagram mode with pro" },
+      { name: "QuickNote", slug: "quicknote", url: "https://quicknote.2.fixoraa.tech", blurb: "Multiple named notes, autosaved locally, with word count and .txt/.md export \u2014" },
+      { name: "FlipText", slug: "fliptext", url: "https://fliptext.2.fixoraa.tech", blurb: "Three transform modes with per-mode copy buttons and a combined 'chaos' mode" },
+      { name: "WordCloud Studio", slug: "cloudwords", url: "https://cloudwords.2.fixoraa.tech", blurb: "Phrase detection (2-word phrases like 'true to size') + classroom-simple UI \u2014" },
+      { name: "PalinPlay", slug: "palinplay", url: "https://palinplay.2.fixoraa.tech", blurb: "Checks full sentences the way humans mean it, and finds the longest palindrome" },
     ],
   },
   // ── Developer Tools ──────────────────────────────────────────────────
@@ -338,6 +344,7 @@ export const niches: Niche[] = [
       { name: "MimeMap", slug: "mimemap", url: "https://mimemap.2.fixoraa.tech", blurb: "Drag any file in and get its real MIME type, plus the searchable two-way refer" },
       { name: "PortAtlas", slug: "portatlas", url: "https://portatlas.2.fixoraa.tech", blurb: "Search by port OR service name, with plain notes ('usually safe to close?') fo" },
       { name: "CsvJson", slug: "csvjson", url: "https://csvjson.2.fixoraa.tech", blurb: "Two-way conversion with delimiter auto-detect and nested-key flatten/unflatten" },
+      { name: "KeyPeek", slug: "keypeek", url: "https://keypeek.2.fixoraa.tech", blurb: "Live key capture with event.key/code/keyCode/ASCII and a history tape of press" },
     ],
   },
   // ── Date & Time ──────────────────────────────────────────────────────
@@ -392,6 +399,9 @@ export const niches: Niche[] = [
       { name: "CardioMap", slug: "cardiomap", url: "https://cardiomap.fixoraa.tech", blurb: "Heart rate zones calculator with Karvonen mode" },
       { name: "BreathBox", slug: "breathbox", url: "https://breathbox.fixoraa.tech", blurb: "Box breathing trainer with 4-4-4-4 guide" },
       { name: "CycleBloom", slug: "cyclebloom", url: "https://cyclebloom.fixoraa.tech", blurb: "Ovulation and fertility calendar for 3 months" },
+      { name: "VO2Peak", slug: "vo2peak", url: "https://vo2peak.2.fixoraa.tech", blurb: "Three validated methods (Cooper, Rockport, race time) with age/gender percenti" },
+      { name: "SweatRate", slug: "sweatrate", url: "https://sweatrate.2.fixoraa.tech", blurb: "Converts weigh-in/out into a per-hour fluid + sodium plan for race day" },
+      { name: "BumpGain", slug: "bumpgain", url: "https://bumpgain.2.fixoraa.tech", blurb: "IOM guideline ranges personalised by BMI category, twins toggle, week-by-week" },
     ],
   },
   // ── Fun & Lifestyle ──────────────────────────────────────────────────
