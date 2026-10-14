@@ -402,6 +402,8 @@ export const niches: Niche[] = [
       { name: "VO2Peak", slug: "vo2peak", url: "https://vo2peak.2.fixoraa.tech", blurb: "Three validated methods (Cooper, Rockport, race time) with age/gender percenti" },
       { name: "SweatRate", slug: "sweatrate", url: "https://sweatrate.2.fixoraa.tech", blurb: "Converts weigh-in/out into a per-hour fluid + sodium plan for race day" },
       { name: "BumpGain", slug: "bumpgain", url: "https://bumpgain.2.fixoraa.tech", blurb: "IOM guideline ranges personalised by BMI category, twins toggle, week-by-week" },
+      { name: "KidGrowth", slug: "kidgrowth", url: "https://kidgrowth.2.fixoraa.tech", blurb: "WHO-based percentiles plotted on a growth chart curve, not just a number" },
+      { name: "StepMiles", slug: "stepmiles", url: "https://stepmiles.2.fixoraa.tech", blurb: "Personal stride from height (or measured stride) + weekly goal planner" },
     ],
   },
   // ── Fun & Lifestyle ──────────────────────────────────────────────────
@@ -475,6 +477,9 @@ export const niches: Niche[] = [
       { name: "NumWords", slug: "numwords", url: "https://numwords.fixoraa.tech", blurb: "Number to words — Indian and international, cheque-ready" },
       { name: "SoleSize", slug: "solesize", url: "https://solesize.fixoraa.tech", blurb: "Shoe size converter for US, UK, EU and India" },
       { name: "Aspectly", slug: "aspectly", url: "https://aspectly.fixoraa.tech", blurb: "Aspect ratio calculator with common presets" },
+      { name: "PaperScale", slug: "paperscale", url: "https://paperscale.2.fixoraa.tech", blurb: "Instant scale % between any two A-sizes in both directions + poster fit planne" },
+      { name: "PPICalc", slug: "ppicalc", url: "https://ppicalc.2.fixoraa.tech", blurb: "PPI + dot pitch + physical size for ANY resolution/size, with a monitor-buying" },
+      { name: "DaysUntil", slug: "daysuntil", url: "https://daysuntil.2.fixoraa.tech", blurb: "Countdown as the hero: days + weekday + working-days toggle + a shareable coun" },
     ],
   },
   // ── Study & Career ───────────────────────────────────────────────────
@@ -505,6 +510,11 @@ export const niches: Niche[] = [
       { name: "CalcPrime", slug: "calcprime", url: "https://calcprime.fixoraa.tech", blurb: "Scientific calculator with history tape" },
       { name: "TempoTap", slug: "tempotap", url: "https://tempotap.fixoraa.tech", blurb: "Online metronome with tap tempo" },
       { name: "PingLink", slug: "pinglink", url: "https://pinglink.fixoraa.tech", blurb: "WhatsApp link generator with QR code" },
+      { name: "MarkPercent", slug: "markpercent", url: "https://markpercent.2.fixoraa.tech", blurb: "Enter each subject's marks/max, get percentage + division + how many marks sho" },
+      { name: "ClassTable", slug: "classtable", url: "https://classtable.2.fixoraa.tech", blurb: "Editable weekly grid, colour-coded subjects, breaks row, one-click print/PDF l" },
+      { name: "ElementLab", slug: "elementlab", url: "https://elementlab.2.fixoraa.tech", blurb: "Full clickable table with properties, category filters and a built-in element" },
+      { name: "CapitalQuest", slug: "capitalquest", url: "https://capitalquest.2.fixoraa.tech", blurb: "Two modes (multiple choice, type-it), region filters, streak scoring and a har" },
+      { name: "TableTrainer", slug: "tabletainer", url: "https://tabletainer.2.fixoraa.tech", blurb: "Timed table drills with a mistake-review round that repeats only the facts you" },
     ],
   },
 ];
