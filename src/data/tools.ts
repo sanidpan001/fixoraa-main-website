@@ -138,6 +138,10 @@ export const niches: Niche[] = [
       { name: "CostPerUse", slug: "costperuse", url: "https://costperuse.2.fixoraa.tech", blurb: "Verdict meter ('worth it / borderline / luxury tax') plus cost-per-day \u2014 blogs" },
       { name: "HomeReno", slug: "homereno", url: "https://homereno.2.fixoraa.tech", blurb: "Room-by-room build-up (kitchen/bath/living) splitting labour vs materials, plu" },
       { name: "PetBudget", slug: "petbudget", url: "https://petbudget.2.fixoraa.tech", blurb: "Monthly + first-year + lifetime cost by pet type and size, with vet/food/insur" },
+      { name: "SinkFund", slug: "sinkfund", url: "https://sinkfund.2.fixoraa.tech", blurb: "Multiple dated goals side by side with one combined monthly saving figure and" },
+      { name: "BondYield", slug: "bondyield", url: "https://bondyield.2.fixoraa.tech", blurb: "Current yield AND YTM plus the full year-by-year cashflow schedule in one scre" },
+      { name: "EPFCalc", slug: "epfcalc", url: "https://epfcalc.2.fixoraa.tech", blurb: "Projects with yearly salary increments and shows the employer/employee split p" },
+      { name: "SWPCalc", slug: "swpcalc", url: "https://swpcalc.2.fixoraa.tech", blurb: "Withdrawals that can rise yearly with inflation, plus the exact month the corp" },
     ],
   },
   // ── Image Tools ──────────────────────────────────────────────────────
