@@ -297,6 +297,7 @@ export const niches: Niche[] = [
       { name: "FlipText", slug: "fliptext", url: "https://fliptext.2.fixoraa.tech", blurb: "Three transform modes with per-mode copy buttons and a combined 'chaos' mode" },
       { name: "WordCloud Studio", slug: "cloudwords", url: "https://cloudwords.2.fixoraa.tech", blurb: "Phrase detection (2-word phrases like 'true to size') + classroom-simple UI \u2014" },
       { name: "PalinPlay", slug: "palinplay", url: "https://palinplay.2.fixoraa.tech", blurb: "Checks full sentences the way humans mean it, and finds the longest palindrome" },
+      { name: "SentFlip", slug: "sentflip", url: "https://sentflip.2.fixoraa.tech", blurb: "Reverses sentence order in a paragraph, or word order inside each sentence, ke" },
     ],
   },
   // ── Developer Tools ──────────────────────────────────────────────────
