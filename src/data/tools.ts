@@ -457,6 +457,14 @@ export const niches: Niche[] = [
       { name: "AislePlan", slug: "aisleplan", url: "https://aisleplan.fixoraa.tech", blurb: "Wedding budget planner with vendor tracker" },
       { name: "TinyNames", slug: "tinynames", url: "https://tinynames.fixoraa.tech", blurb: "Baby name generator with meanings and origins" },
       { name: "CalmWave", slug: "calmwave", url: "https://calmwave.fixoraa.tech", blurb: "White noise generator with pink and brown noise mixer" },
+      { name: "CurtainCalc", slug: "curtaincalc", url: "https://curtaincalc.2.fixoraa.tech", blurb: "Fullness ratio by curtain style (pencil/eyelet/wave) driving panel + fabric ma" },
+      { name: "PlankCalc", slug: "plankcalc", url: "https://plankcalc.2.fixoraa.tech", blurb: "Pack count by your pack coverage, with wastage by laying pattern (straight/her" },
+      { name: "SoilCalc", slug: "soilcalc", url: "https://soilcalc.2.fixoraa.tech", blurb: "Litres + bag counts (by 20/40/50L bags) + soil/compost mix ratios for raised b" },
+      { name: "ACCool", slug: "accool", url: "https://accool.2.fixoraa.tech", blurb: "BTU/tonnes adjusted for sun exposure, occupants, floor and ceiling height \u2014 no" },
+      { name: "WordleAid", slug: "wordleaid", url: "https://wordleaid.2.fixoraa.tech", blurb: "Candidates ranked by letter frequency with a suggested next guess that splits" },
+      { name: "StorySpark", slug: "storyspark", url: "https://storyspark.2.fixoraa.tech", blurb: "Genre + hero + twist dealt as three cards, first-line generator, favourites sa" },
+      { name: "TeamShuffle", slug: "teamshuffle", url: "https://teamshuffle.2.fixoraa.tech", blurb: "Balanced teams via snake draft using optional skill ratings, or pure random \u2014" },
+      { name: "CharadesGen", slug: "charadesgen", url: "https://charadesgen.2.fixoraa.tech", blurb: "Category decks with a big word card, countdown timer and team score keeper \u2014 t" },
     ],
   },
   // ── Converters ───────────────────────────────────────────────────────
@@ -480,6 +488,8 @@ export const niches: Niche[] = [
       { name: "PaperScale", slug: "paperscale", url: "https://paperscale.2.fixoraa.tech", blurb: "Instant scale % between any two A-sizes in both directions + poster fit planne" },
       { name: "PPICalc", slug: "ppicalc", url: "https://ppicalc.2.fixoraa.tech", blurb: "PPI + dot pitch + physical size for ANY resolution/size, with a monitor-buying" },
       { name: "DaysUntil", slug: "daysuntil", url: "https://daysuntil.2.fixoraa.tech", blurb: "Countdown as the hero: days + weekday + working-days toggle + a shareable coun" },
+      { name: "FeelsLike", slug: "feelslike", url: "https://feelslike.2.fixoraa.tech", blurb: "Wind chill, heat index AND dew point in one tool with a comfort/safety verdict" },
+      { name: "ChargeWise", slug: "chargewise", url: "https://chargewise.2.fixoraa.tech", blurb: "Battery, charger kW, tariff and petrol price all editable \u2014 works in any count" },
     ],
   },
   // ── Study & Career ───────────────────────────────────────────────────
