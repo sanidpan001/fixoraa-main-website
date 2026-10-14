@@ -167,6 +167,10 @@ export const niches: Niche[] = [
       { name: "BeforeAfter", slug: "beforeafter", url: "https://beforeafter.2.fixoraa.tech", blurb: "Exports static PNG, animated wipe GIF AND a copy-paste embed slider \u2014 competit" },
       { name: "RoundCrop", slug: "roundcrop", url: "https://roundcrop.2.fixoraa.tech", blurb: "Circle, rounded-rect and blob shapes with ring/border styling in one tool \u2014 pr" },
       { name: "AsciiPic", slug: "asciipic", url: "https://asciipic.2.fixoraa.tech", blurb: "Colour ASCII (HTML export) as well as classic mono, with brightness-mapped cha" },
+      { name: "PixelDust", slug: "pixeldust", url: "https://pixeldust.2.fixoraa.tech", blurb: "Palette reduction to classic console palettes (Game Boy, NES-style) \u2014 serves p" },
+      { name: "DuoTone Lab", slug: "duotone", url: "https://duotone.2.fixoraa.tech", blurb: "Preset pairs named by use (Poster, Blueprint, Sunset, Noir) with shadow/highli" },
+      { name: "Polaroidly", slug: "polaroidly", url: "https://polaroidly.2.fixoraa.tech", blurb: "No-watermark print-ready export with handwriting caption fonts and tilt/shadow" },
+      { name: "FlipImg", slug: "flipimg", url: "https://flipimg.2.fixoraa.tech", blurb: "Batch flip/rotate with lossless export and EXIF-orientation fix" },
     ],
   },
   // ── PDF Tools ────────────────────────────────────────────────────────
@@ -328,6 +332,12 @@ export const niches: Niche[] = [
       { name: "GlyphCode", slug: "glyphcode", url: "https://glyphcode.fixoraa.tech", blurb: "HTML entity encoder and decoder" },
       { name: "Chmodly", slug: "chmodly", url: "https://chmodly.fixoraa.tech", blurb: "Chmod calculator and permission converter" },
       { name: "Subnetly", slug: "subnetly", url: "https://subnetly.fixoraa.tech", blurb: "IP subnet calculator with CIDR splitter" },
+      { name: "WaveForge", slug: "waveforge", url: "https://waveforge.2.fixoraa.tech", blurb: "Reproducible seed + up to 5 layers + one-click SVG/CSS \u2014 design teams can shar" },
+      { name: "VerseMatch", slug: "versematch", url: "https://versematch.2.fixoraa.tech", blurb: "Explains WHY (major/minor/patch) and tests ranges (^, ~, >=) with a plain-Engl" },
+      { name: "UAParse", slug: "uaparse", url: "https://uaparse.2.fixoraa.tech", blurb: "Human verdict first, raw fields second, plus a library of real UA strings to l" },
+      { name: "MimeMap", slug: "mimemap", url: "https://mimemap.2.fixoraa.tech", blurb: "Drag any file in and get its real MIME type, plus the searchable two-way refer" },
+      { name: "PortAtlas", slug: "portatlas", url: "https://portatlas.2.fixoraa.tech", blurb: "Search by port OR service name, with plain notes ('usually safe to close?') fo" },
+      { name: "CsvJson", slug: "csvjson", url: "https://csvjson.2.fixoraa.tech", blurb: "Two-way conversion with delimiter auto-detect and nested-key flatten/unflatten" },
     ],
   },
   // ── Date & Time ──────────────────────────────────────────────────────
