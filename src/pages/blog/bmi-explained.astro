@@ -1,0 +1,105 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const title = "BMI Explained: What Your Number Means, and What It Does Not — Fixoraa Blog";
+const description = "BMI explained in plain language: how the number is calculated, the standard WHO ranges, why muscle, body shape and age can make it mislead, and what is worth tracking alongside it.";
+const faqs = [
+  { q: "How do I calculate my BMI?", a: "Divide your weight in kilograms by your height in metres squared. A person who weighs 70 kg and is 1.75 m tall has a BMI of 70 divided by 3.0625, which is about 22.9. If you would rather not do the arithmetic, any BMI calculator does it instantly — just make sure your height is in metres (or centimetres converted) and your weight in kilograms." },
+  { q: "Is BMI accurate if I lift weights or play sport?", a: "Often, no. BMI cannot tell muscle from fat, and muscle is denser, so a lean, heavily muscled athlete can land in the overweight band with low body fat. This is the most common way the number misleads. Waist measurements and body-fat estimates describe trained bodies far better, and coaches and clinicians who work with athletes generally rely on those instead." },
+  { q: "What BMI range is considered healthy?", a: "For adults, the standard published range is 18.5 to 24.9, with below 18.5 classed as underweight, 25 to 29.9 as overweight and 30 or above as obese. Treat the band as a screening guide rather than a verdict on you personally — where you sit inside it, how your weight is distributed and how you actually feel and function all matter alongside it." },
+  { q: "Does BMI work for children and teenagers?", a: "Not with the adult cut-offs. Growing bodies change proportions constantly, so for children and teens BMI is plotted on percentile charts that compare against others of the same age and sex. A result that would be unremarkable for an adult can mean something quite different at age nine. Use the child-specific charts, and discuss any concern with a doctor rather than applying adult ranges." },
+  { q: "My BMI is in the normal range but I feel unfit. Is that possible?", a: "Yes, and it is more common than people expect. BMI says nothing about fitness, strength, sleep or diet quality. Someone can sit at a BMI of 22 with low muscle, poor stamina and a largely sedentary routine. The number describes one ratio; it does not describe how your body performs. Energy levels, resting heart rate, strength and how your clothes fit are all real signals too." },
+  { q: "What should I track instead of, or alongside, BMI?", a: "Waist-to-height ratio is the simplest upgrade — your waist measurement compared with your height catches the abdominal fat BMI misses. Beyond that, trends beat snapshots: weight direction over months, waist over time, daily habits like steps, sleep and training, and periodic checks such as blood pressure and blood tests through a clinician. No single number replaces that picture, which is exactly the point." },
+];
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+};
+---
+<Layout title={title} description={description}>
+<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+<main class="mx-auto max-w-3xl px-4 py-10 sm:py-14">
+  <div class="text-center mb-10">
+    <span class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full text-white bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] mb-4">Blog · 8 min read</span>
+    <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-neutral-900">BMI explained: what your number means — <span class="bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] bg-clip-text text-transparent">and what it doesn't</span></h1>
+    <p class="mt-4 text-neutral-500 text-sm">Published October 15, 2026 · by the Fixoraa team</p>
+  </div>
+
+  <article class="space-y-6 text-neutral-700 leading-relaxed">
+    <p class="text-lg text-neutral-800">
+      Two measurements — your height and your weight — go into one of the most quoted numbers in health. Your BMI decides how forms describe you, how some insurance tables rate you, and how a lot of people quietly judge themselves. Yet the number is routinely asked to do a job it was never designed for. This guide explains what BMI actually is, where it genuinely helps, and where it misleads — so you can use it as the rough screening tool it is, instead of a verdict it is not.
+    </p>
+    <p>
+      One thing before the maths: <strong class="text-neutral-900">this article is general information, not medical advice.</strong> It can help you understand a number you have been given; it cannot diagnose anything. If you are worried about your weight or health, the right next step is a conversation with a qualified clinician who can see the whole picture.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">How BMI is calculated</h2>
+    <p>
+      BMI — body mass index — is your weight in kilograms divided by your height in metres, squared. That is the entire formula: <strong class="text-neutral-900">BMI = kg ÷ (m × m)</strong>. A person who weighs 70 kg and stands 1.75 m tall divides 70 by 3.0625 and gets about 22.9. Someone at 95 kg with the same height divides 95 by 3.0625 and lands at about 31. Notice what is not in the formula: no age, no sex, no muscle, no fat, no waistline. Two inputs, one ratio.
+    </p>
+    <p>
+      The index is nearly two centuries old. It was devised in the 19th century as a way to describe <em>populations</em> — average builds across thousands of people — and it was adopted by health bodies in the 20th century because it is cheap, quick and comparable anywhere on earth. That origin story explains both its usefulness and its limits, which we will get to. If you want your own number without the long division, <a href="https://vitascale.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">VitaScale</a> calculates your BMI in seconds from the same formula.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">The standard ranges</h2>
+    <p>
+      For adults, the World Health Organization publishes the categories almost everyone uses. Below <strong class="text-neutral-900">18.5</strong> is classed as underweight. From <strong class="text-neutral-900">18.5 to 24.9</strong> is the normal or healthy-weight range. From <strong class="text-neutral-900">25 to 29.9</strong> is overweight, and <strong class="text-neutral-900">30 or above</strong> is obese, with further classes at 35 and 40. These bands were set by looking at where health risks rise across very large populations — heart disease, type 2 diabetes and other conditions become statistically more common as BMI climbs well above the normal range, and underweight carries its own risks at the low end.
+    </p>
+    <p>
+      Read those bands the way they were built: as population statistics, not personal grades. A BMI of 24.9 and one of 25.1 are not different bodies — they are nearly the same body standing on either side of a line drawn for charts. The categories are most meaningful at the extremes and most useful when tracked as a direction over time, not as a single morning's reading.
+    </p>
+
+    <p>
+      One more reason to hold the bands loosely: your weight is not a fixed quantity. It moves by a kilogram or two across a single day with food, water and timing, and across a month with training, illness and season. A BMI measured after a large lunch in heavy clothes is a slightly different number from the same body measured in the morning, and neither is lying. This is why a single reading near a boundary deserves a shrug rather than a reaction — re-measure on another day, and look at which way several readings lean.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Where the number misleads</h2>
+    <p>
+      The deepest flaw is simple: <strong class="text-neutral-900">BMI cannot tell muscle from fat.</strong> A rugby player, a weightlifter or a manual worker with dense muscle and little fat can easily score 27 or 28 — "overweight" — while carrying less health risk than a sedentary person at 23. The scale sees mass; it cannot see what the mass is made of. The mirror-image problem exists too: someone can sit comfortably inside the normal range while carrying little muscle and a high share of body fat, a pattern sometimes called normal-weight obesity. Both people are misdescribed by the same number, in opposite directions.
+    </p>
+    <p>
+      Distribution matters as much as amount. Fat carried around the abdomen is more strongly linked to metabolic risk than fat carried on the hips and thighs, and BMI is blind to the difference. Build and height bend the number as well — the formula slightly overstates heaviness in very tall people and understates it in very short people. Age bends it too: older adults naturally lose muscle, so the same BMI at 70 usually means more fat and less strength than it did at 30. And health bodies note that for some populations, risk begins rising at lower BMI values than the standard bands suggest, which is why several countries publish adjusted guidance. None of this makes BMI useless — it makes it a first glance, not a final answer.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Two people, one number: a sense-check</h2>
+    <p>
+      Put two imaginary people side by side, both with a BMI of 27 — squarely "overweight" on the chart. The first is a rugby player who trains five days a week, with a 84 cm waist, low body fat and blood work a doctor would frame. The second is sedentary, carries most of their weight around the middle with a 104 cm waist, sleeps badly and gets breathless on stairs. Same index, opposite health pictures. Now flip it: two people at a BMI of 21. One runs, lifts and eats well. The other barely moves, has little muscle, and lives on sugar and skipped meals. The chart calls both of them normal, and it is telling the truth about exactly one thing — the ratio of their weight to their height. Everything you actually care about lives outside that ratio, which is why the next section matters more than the number itself.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">If it is so rough, why does everyone still use it?</h2>
+    <p>
+      Because the alternatives are worse at its actual job. Measuring body composition properly needs equipment, trained staff and time; asking for a height and a weight needs a tape measure and thirty seconds. For screening a school, an army intake or a whole country's health survey, that trade is unbeatable — and across populations, the averages it produces do track real risk. The mistake is not that clinics and forms use BMI as a first filter. The mistake is when any of us — patients, employers, or people alone with a calculator at midnight — treat that first filter as the final word.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">What to track alongside it</h2>
+    <p>
+      The simplest upgrade is your waist. The waist-to-height ratio — waist measurement divided by height, in the same units — catches the abdominal fat BMI cannot see, and a common rule of thumb is to keep your waist under half your height. <a href="https://waistwise.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">WaistWise</a> runs exactly that check. For body composition, tape-measure methods estimate body fat percentage from neck, waist and hip measurements — <a href="https://tapetrim.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">TapeTrim</a> works from measurements, and <a href="https://leanlens.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">LeanLens</a> uses the US Navy tape method. These are estimates, not lab scans, but for a muscular build they describe reality far better than BMI does.
+    </p>
+    <p>
+      Then track the things that actually drive health day to day. Your energy needs and how you fuel them — <a href="https://calofuel.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">CaloFuel</a> estimates your daily calorie needs — your sleep, your activity, and your habits over weeks rather than days; a streak tool like <a href="https://habitforge.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">HabitForge</a> makes those trends visible. A single weigh-in is weather. Three months of waist, habits and energy is climate. If several of those indicators point the same way, that pattern is worth more than any one index — and it is worth a clinician's time, not just a calculator's.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">The honest bottom line</h2>
+    <p>
+      BMI survives because it is nearly free to compute and because, averaged over millions of people, it genuinely correlates with risk. For an individual — you, on a Tuesday — it is a blurry photograph: useful for noticing a big change, useless for judging fitness, muscle, fat distribution or health on its own. Know your number, by all means. Then put it in its place, next to your waist measurement, your habits and how you actually feel — and let a professional interpret anything that concerns you.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Frequently asked questions</h2>
+    <div class="space-y-3 !mt-4">
+      {faqs.map((f) => (
+        <details class="rounded-2xl border border-neutral-200 bg-white p-5">
+          <summary class="cursor-pointer font-bold text-neutral-900">{f.q}</summary>
+          <p class="mt-2 text-neutral-600">{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </article>
+
+  <div class="mt-12 rounded-3xl bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] p-8 sm:p-10 text-center text-white">
+    <h2 class="text-2xl sm:text-3xl font-black mb-3">Know your numbers — all of them.</h2>
+    <p class="text-white/90 mb-6">BMI, waist-to-height, body fat, calorie needs and 440+ other tools are waiting in the directory. No signup, no watermark, ever.</p>
+    <a href="/tools" class="inline-block rounded-2xl bg-white text-neutral-900 font-bold px-8 py-3.5 hover:shadow-xl hover:-translate-y-0.5 transition-all">Browse all 443+ tools</a>
+  </div>
+</main>
+</Layout>

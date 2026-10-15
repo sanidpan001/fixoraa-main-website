@@ -1,0 +1,93 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const title = "How to Make a GST Invoice: A Simple Guide for Freelancers and Small Businesses in India — Fixoraa Blog";
+const description = "How to make a GST invoice, explained simply: who must issue one, every field it must contain, the CGST/SGST vs IGST split, common mistakes that cost clients their input tax credit, and a step-by-step using a free tool.";
+const faqs = [
+  { q: "Who needs to issue a GST invoice?", a: "Any business or freelancer who is registered under GST must issue a proper tax invoice for the taxable goods or services they supply. Your registration status decides the document: if you are not registered, you cannot charge GST or issue a tax invoice, and businesses under the composition scheme issue a bill of supply instead and do not collect tax on it." },
+  { q: "What is the difference between CGST/SGST and IGST?", a: "It depends on whether the sale stays inside one state or crosses a state border, which is decided by the supplier's location and the place of supply. For a within-state supply, the tax is split into two equal halves — CGST for the central government and SGST for the state. For an inter-state supply, a single IGST is charged at the full rate instead." },
+  { q: "Can I make a GST invoice in Word or Excel?", a: "You can, and many people start that way, but spreadsheets make the classic errors easy: duplicate invoice numbers, tax calculated on the wrong base, or the wrong tax split for an out-of-state client. A dedicated invoice tool keeps the numbering sequential, applies the split automatically and keeps your totals consistent — which is why most freelancers move to one once invoices become a weekly habit." },
+  { q: "Why does my client keep asking for my GSTIN on the invoice?", a: "Because your invoice is your client's evidence for claiming input tax credit — the credit that lets them offset the GST they paid you against the GST they charge their own customers. If your GSTIN is missing or wrong on the invoice, or the invoice does not match what is reported in returns, their credit can be blocked. A correct invoice is quite literally money to your client." },
+  { q: "Do freelancers who work for foreign clients need GST invoices?", a: "Services supplied to clients outside India are treated as exports of services, with their own documentation and registration considerations — for example, whether registration is compulsory and whether a letter of undertaking is needed to invoice without charging IGST. The position depends on your turnover and the exact nature of the supply, so freelancers earning from abroad should confirm the current rules with a chartered accountant rather than copying a domestic invoice format." },
+  { q: "What is e-invoicing, and does it apply to my small business?", a: "E-invoicing means reporting your B2B invoices to a government portal and getting a unique reference number and QR code added to them. It currently applies to businesses above turnover thresholds notified by the government, which leaves most small businesses and freelancers outside it for now. Thresholds have been lowered in phases before, so check the current position once a year — and keep your invoice format complete either way, since the same fields are required." },
+];
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+};
+---
+<Layout title={title} description={description}>
+<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+<main class="mx-auto max-w-3xl px-4 py-10 sm:py-14">
+  <div class="text-center mb-10">
+    <span class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full text-white bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] mb-4">Blog · 8 min read</span>
+    <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-neutral-900">How to make a <span class="bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] bg-clip-text text-transparent">GST invoice</span>: a simple guide for freelancers and small businesses in India</h1>
+    <p class="mt-4 text-neutral-500 text-sm">Published October 15, 2026 · by the Fixoraa team</p>
+  </div>
+
+  <article class="space-y-6 text-neutral-700 leading-relaxed">
+    <p class="text-lg text-neutral-800">
+      Your first GST invoice feels like a small exam: a dozen fields, three kinds of tax, and a client who will reject the document if any of it is off. It does not help that a wrong invoice is not just untidy — it can block your client's input tax credit, which means your paperwork mistake becomes their money problem. The good news is that a GST invoice is a fixed format with a clear logic. Once you understand what each field is for, making one takes a few minutes, and making it correctly becomes routine.
+    </p>
+    <p>
+      This guide covers <strong class="text-neutral-900">who must issue a GST invoice, every field it must contain, the one decision on every invoice — CGST/SGST or IGST — and the mistakes that most often get invoices sent back</strong>. It ends with a step-by-step for producing one with a free tool. It is written for freelancers and small businesses in India; if your situation is unusual — exports, multiple states, a composition registration — treat this as the foundation and confirm the specifics against the current rules.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Who has to issue a GST invoice</h2>
+    <p>
+      The dividing line is <strong class="text-neutral-900">registration</strong>. If your business or freelance practice is registered under GST, you must issue a proper tax invoice for taxable supplies of goods or services — it is the document your buyer uses to claim input tax credit, and the document your own returns are built from. Whether you are required to register depends on your turnover and the kind of supplies you make; some categories of suppliers must register regardless of turnover, so if you are anywhere near the boundary, check your position before you start invoicing rather than after.
+    </p>
+    <p>
+      If you are <strong class="text-neutral-900">not registered</strong>, you simply do not issue a GST invoice: you raise an ordinary invoice or bill without charging any GST, because collecting tax you are not registered to collect is not permitted. Businesses under the <strong class="text-neutral-900">composition scheme</strong> sit in between — they issue a document called a bill of supply and do not charge GST on it. So before anything else, know which of the three positions you are in; the format of every document you issue follows from that answer.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">What a GST invoice must contain</h2>
+    <p>
+      A compliant tax invoice has a standard set of fields. Working through them in the order they appear on the document: your <strong class="text-neutral-900">business name, address and GSTIN</strong> at the top; a <strong class="text-neutral-900">unique, sequential invoice number</strong> — consecutive within the financial year, with no repeats and no gaps you cannot explain; and the <strong class="text-neutral-900">date of issue</strong>. Then the buyer's side: their <strong class="text-neutral-900">name, address and GSTIN</strong> if they are registered (this is the field your client's credit depends on, so copy it from their registration details, never from memory), plus the <strong class="text-neutral-900">place of supply</strong>, which decides the tax split explained below.
+    </p>
+    <p>
+      The middle of the invoice describes what you are charging for: a clear <strong class="text-neutral-900">description</strong> of the goods or services, the <strong class="text-neutral-900">HSN code for goods or SAC code for services</strong>, quantity and unit where relevant, the <strong class="text-neutral-900">taxable value</strong> (the amount before tax, after any discount shown on the invoice itself), and then the tax lines — the <strong class="text-neutral-900">rate applied and the tax amount</strong>, split as CGST/SGST or shown as IGST. The document closes with the <strong class="text-neutral-900">total value including tax</strong>, ideally also expressed in words, and your <strong class="text-neutral-900">signature or digital signature</strong>. If the supply is one where tax is payable by the buyer under reverse charge, that fact must be stated on the invoice too. Every field earns its place: remove one and either the government's matching system or your client's accountant will find the hole.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">CGST + SGST or IGST? The one decision on every invoice</h2>
+    <p>
+      GST is a destination-based tax, and the split follows a simple rule based on two locations: <strong class="text-neutral-900">where you supply from, and the place of supply</strong> (broadly, where your buyer is located for services). If both are in the <strong class="text-neutral-900">same state</strong>, the tax is charged as two equal halves: CGST, which goes to the central government, and SGST, which goes to the state. If the supply crosses into a <strong class="text-neutral-900">different state</strong>, a single IGST is charged at the full rate instead.
+    </p>
+    <p>
+      A small example makes it concrete. You invoice a client ₹10,000 for services taxable at 18%. If you and the client are in the same state, the invoice shows CGST of ₹900 (9%) plus SGST of ₹900 (9%) — a tax total of ₹1,800 and an invoice total of ₹11,800. If that client is in another state, the same invoice shows IGST of ₹1,800 (18%) and the same total of ₹11,800. The amount the client pays is identical; what changes is how the tax is labelled and shared between governments — and getting the label wrong is one of the most common reasons invoices are rejected. When you are unsure of a rate while drafting, a quick check with the <a href="https://slabwise.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">SlabWise GST calculator</a> or the <a href="https://taxsnap.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">TaxSnap quick GST calculator</a> keeps the arithmetic honest before the invoice goes out.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Step by step: making one with a free tool</h2>
+    <p>
+      Spreadsheets can produce an invoice, but they make the classic errors — duplicate numbers, wrong splits, totals that drift — easy to commit and hard to spot. A purpose-built tool removes most of them by construction. Using <a href="https://invoicecraft.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">InvoiceCraft Pro</a> as the example, the flow is the same shape as any proper invoice generator. <strong class="text-neutral-900">Step one:</strong> enter your business details once — name, address, GSTIN — so they print identically on every invoice. <strong class="text-neutral-900">Step two:</strong> add the client's name, address and GSTIN, taken from their own GST details. <strong class="text-neutral-900">Step three:</strong> add each line item with its description, HSN or SAC code, amount and GST rate; the tool applies the CGST/SGST or IGST split and totals the invoice for you. <strong class="text-neutral-900">Step four:</strong> check the three things a tool cannot judge — that the place of supply is right, the client's GSTIN is character-perfect, and the description matches what you actually supplied. <strong class="text-neutral-900">Step five:</strong> download or print the invoice, send it to the client, and keep your own copy filed by month; your future return-filing self will be grateful. No signup, no watermark — the document looks like it came from a business several times your size.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Common mistakes that get invoices sent back</h2>
+    <p>
+      Most rejected invoices fail on a short list of repeat offenders. The first is a <strong class="text-neutral-900">wrong or missing buyer GSTIN</strong> — one transposed digit and your client's input tax credit is stuck until a revised document and matched returns fix it. The second is the <strong class="text-neutral-900">wrong tax split</strong>: charging CGST/SGST to an out-of-state client, or IGST within your own state, because the place of supply was guessed instead of checked. The third is <strong class="text-neutral-900">broken numbering</strong> — reusing a number, skipping a sequence, or restarting numbering mid-year; the series must run consecutively through the financial year. Close behind are a <strong class="text-neutral-900">missing or wrong HSN/SAC code</strong>, tax calculated on the post-discount or pre-discount value inconsistently, and totals that do not add up because a spreadsheet formula quietly covered the wrong rows. Finally, a timing mistake: issuing the invoice but reporting it in a different month's return than the client expects — your documents and your returns have to tell the same story, in the same month.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Keeping records, and one thing to check yearly</h2>
+    <p>
+      Treat every issued invoice as a record to keep, not a message to forget: store copies in order, by month, alongside the returns they fed into, and retain them for the period the law requires — your accountant can confirm the current retention period for your case. One more habit is worth forming. Larger businesses above government-notified turnover thresholds must also follow <strong class="text-neutral-900">e-invoicing</strong> — reporting B2B invoices to a government portal for a unique reference number and QR code. Most freelancers and small businesses are below those thresholds today, but the thresholds have been revised before, so a once-a-year check of where the line currently sits is cheap insurance. Get the format right, keep the sequence clean, and the GST invoice stops being an exam — it becomes thirty seconds of routine at the end of a job well done.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Frequently asked questions</h2>
+    <div class="space-y-3 !mt-4">
+      {faqs.map((f) => (
+        <details class="rounded-2xl border border-neutral-200 bg-white p-5">
+          <summary class="cursor-pointer font-bold text-neutral-900">{f.q}</summary>
+          <p class="mt-2 text-neutral-600">{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </article>
+
+  <div class="mt-12 rounded-3xl bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] p-8 sm:p-10 text-center text-white">
+    <h2 class="text-2xl sm:text-3xl font-black mb-3">Make your next invoice in minutes — free.</h2>
+    <p class="text-white/90 mb-6">InvoiceCraft Pro and 440+ other business and finance tools are waiting in the directory. No signup, no watermark, ever.</p>
+    <a href="/tools" class="inline-block rounded-2xl bg-white text-neutral-900 font-bold px-8 py-3.5 hover:shadow-xl hover:-translate-y-0.5 transition-all">Browse all 443+ tools</a>
+  </div>
+</main>
+</Layout>

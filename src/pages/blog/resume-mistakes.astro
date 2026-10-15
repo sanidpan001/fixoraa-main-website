@@ -1,0 +1,115 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const title = "Resume Mistakes That Get You Rejected (and How to Fix Each One) — Fixoraa Blog";
+const description = "The resume mistakes that quietly get applications rejected — generic templates, duties without numbers, ATS-breaking formats, typos and missing keywords — and the concrete fix for each one.";
+const faqs = [
+  { q: "How long should my resume be?", a: "For most people in the first decade of their career, one page is the right target — recruiters skim, and a tight page forces you to keep only what matters. Two pages is perfectly acceptable once you have substantial experience to show. What never helps is padding: a stretched one-pager and a bloated four-pager both signal the same thing — that you cannot judge what is important." },
+  { q: "Should I send my resume as a PDF or a Word file?", a: "Follow the job posting first — if it specifies a format, that settles it. When nothing is specified, PDF is the common default because it keeps your layout identical on every screen. Some older applicant tracking systems parse Word files more reliably, which is why some employers ask for them. Either way, avoid scanned images of a resume: software cannot read text out of a picture." },
+  { q: "Does an applicant tracking system really reject people automatically?", a: "It is less dramatic than the rumours suggest. Most systems store, search and rank applications so recruiters can filter by skills and keywords. The real risk is quieter: if your formatting cannot be parsed, or your wording never matches what the recruiter searches for, your resume simply never surfaces in their results. You are not rejected loudly — you are never seen." },
+  { q: "Should I include a photo and an objective statement?", a: "Photo norms vary by country and industry — expected in some markets, discouraged in others — so follow the local convention for the job you are applying to. The old objective statement, which described what you want, has largely been replaced by a short professional summary that states what you offer: your role, your strongest skills and one proven result. Three lines is plenty." },
+  { q: "How do I explain a gap in my work history?", a: "Briefly and honestly. Name the period and what it actually involved — study, caregiving, freelancing, a business attempt, recovery, travel. Gaps are common and rarely disqualifying by themselves. What damages trust is fudging dates to hide one, because dates are exactly what background checks verify. A one-line explanation in the resume, expanded calmly in the interview if asked, is the standard approach." },
+  { q: "Can I keep one master resume and send it everywhere?", a: "Keep a master document, yes — one long private file where every achievement and project lives. But the version you send should be a tailored cut of it for each application: reorder the bullets, mirror the job post's language for skills you genuinely have, and drop what is irrelevant to that role. Fifteen minutes of tailoring per application beats fifty identical sends." },
+];
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+};
+---
+<Layout title={title} description={description}>
+<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+<main class="mx-auto max-w-3xl px-4 py-10 sm:py-14">
+  <div class="text-center mb-10">
+    <span class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full text-white bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] mb-4">Blog · 8 min read</span>
+    <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-neutral-900">Resume mistakes that quietly get you <span class="bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] bg-clip-text text-transparent">rejected</span></h1>
+    <p class="mt-4 text-neutral-500 text-sm">Published October 15, 2026 · by the Fixoraa team</p>
+  </div>
+
+  <article class="space-y-6 text-neutral-700 leading-relaxed">
+    <p class="text-lg text-neutral-800">
+      Most rejected resumes do not belong to unqualified people. They belong to qualified people whose documents failed a test they never saw: a recruiter's first skim, which often lasts only a few seconds, or a piece of software that could not read the file at all. The good news is that almost every fatal mistake is a document problem, not a career problem — and document problems can be fixed in an afternoon.
+    </p>
+    <p>
+      Below are the six mistakes that show up again and again, why each one costs you interviews, and the concrete fix for it. Work through them in order and you will cover everything from content to formatting to the words a hiring system actually searches for.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Mistake 1: Sending the same generic resume to every job</h2>
+    <p>
+      A resume written to appeal to everyone reads as relevant to no one. Recruiters compare your document against one specific job, and a generic template forces them to hunt for the match themselves — which, at a few seconds per resume, they will not do. Generic resumes also use generic language: "hardworking team player" could sit on any application ever sent, so it earns you nothing.
+    </p>
+    <p>
+      <strong class="text-neutral-900">The fix:</strong> keep one master resume with everything in it, then cut a tailored version for each application. Reorder your experience so the most relevant work comes first, echo the job post's own wording for skills you genuinely have, and delete bullets that do not support this particular application. Tailoring is not exaggerating — it is editing. If starting from a blank page each time is what puts you off, build the tailored version inside a structured tool like <a href="https://resumecraft-ai.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">ResumeCraft AI</a>, where swapping sections in and out for a specific role takes minutes instead of an evening.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Mistake 2: Listing duties instead of numbers</h2>
+    <p>
+      "Responsible for handling customer queries" describes the job, not you. Every applicant for that role can write the same line, so it cannot separate you from any of them. Worse, duty-lists make your impact invisible: the recruiter learns what the chair does, not what the person sitting in it achieved.
+    </p>
+    <p>
+      <strong class="text-neutral-900">The fix:</strong> rewrite each bullet as an outcome with a number attached. Handled queries becomes "resolved 40+ customer queries a day, cutting average response time from a day to under two hours". Managed social media becomes "grew the account from 2,000 to 11,000 followers in eight months". Numbers do not have to be revenue — counts, percentages, time saved, error rates and team sizes all work. If you truly cannot measure something, give it scale: how many, how often, for whom. Three quantified bullets beat ten vague ones.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Mistake 3: The wrong length, in either direction</h2>
+    <p>
+      Length mistakes cut both ways. A fresher who stretches internships and coursework across four pages looks like they cannot judge what matters. A professional with twelve years of experience crushed into one dense page of tiny type looks like hard work to read — and skim-readers skip hard work. Both versions get the same few seconds; only one of them uses those seconds well.
+    </p>
+    <p>
+      <strong class="text-neutral-900">The fix:</strong> one page for roughly the first decade of a career, two pages once your experience genuinely earns it, and never more outside academia and medicine. Earn the space by cutting, not by shrinking the font: drop roles from long ago into a single line, remove the hobbies section unless it is directly relevant, and let margins and font size stay comfortable. White space is not wasted space — it is what makes a fast skim possible.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Mistake 4: Formatting that breaks applicant tracking systems</h2>
+    <p>
+      Before a human sees your resume, software usually has to read it — and many beautiful templates are unreadable to software. Two-column layouts get read across instead of down, scrambling your history. Text boxes, tables, headers and footers can be skipped entirely. Icons and skill-rating bars turn into nothing. An unusual file name or a scanned-image PDF finishes the job: your experience exists, but as far as the system is concerned, you have none.
+    </p>
+    <p>
+      <strong class="text-neutral-900">The fix:</strong> use a single-column layout with standard headings — Summary, Experience, Education, Skills — in a common font, and save the file with a plain name like yourname-resume.pdf. Put every important word in real text, never inside a graphic. A quick self-test: copy the text out of your finished PDF and paste it into a blank document. If the order reads sensibly and nothing is missing, a tracking system will read it the same way. Design still matters — it just has to be design a machine can follow.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Mistake 5: Typos and sloppy basics</h2>
+    <p>
+      One typo will rarely sink a strong application on its own, but it never travels alone: it tells the reader that the document was not checked, and invites them to wonder what else was not checked. The sloppier basics are worse than spelling. A wrong phone number or an email address you no longer use makes you unreachable. Inconsistent dates — one job ending in March, the next starting in February — raise questions you will never get the chance to answer.
+    </p>
+    <p>
+      <strong class="text-neutral-900">The fix:</strong> proofread in ways that defeat familiarity. Read the resume aloud, read it backwards paragraph by paragraph, or leave it overnight and read it fresh. Check the contact block digit by digit, and line every date up against the next. A spellchecker catches misspellings but not real-word errors — "manger" for "manager" sails straight through — so human eyes are the final pass, ideally someone else's.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Mistake 6: Missing the keywords the job post is shouting</h2>
+    <p>
+      Recruiters find candidates by searching for the words in their own job post: the tools, certifications, methods and job titles the role requires. If the post asks for "inventory management" and your resume only ever says "looked after stock", a keyword search may never surface you — even though you did the job. Synonyms feel elegant to writers; to a search box, they are invisibility.
+    </p>
+    <p>
+      <strong class="text-neutral-900">The fix:</strong> read the posting like a checklist. Highlight every required skill and tool, then make sure each one you honestly have appears in your resume using the posting's own phrasing, worked into real bullets about your work — never pasted in as a hidden list. Honesty is the boundary: claiming a keyword you cannot discuss in an interview trades a screening pass for a much worse rejection later. The simplest check is to score your draft the way a recruiter's search would — <a href="https://rezscore.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">RezScore</a> rates your resume from the recruiter's side of the screen, so missing skills and weak sections show up before a real recruiter finds them.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">One more quiet killer: design that fights the reader</h2>
+    <p>
+      None of the six mistakes above is about how the resume looks — but looks decide whether the content gets read at all. Dense walls of text, five fonts, bright colour blocks and a headshot squeezed into the corner all spend the reader's patience before your experience gets a hearing. The resumes that survive skims share a look: one readable font, clear headings, consistent spacing, bullets that start at the same point on every line. Clean is not boring. Clean is what confidence looks like on paper, because it says the content needs no decoration to carry it.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">The 20-minute repair routine</h2>
+    <p>
+      You do not need a rewrite weekend. Run this pass on your current resume: five minutes tailoring the top half to the job post in front of you, five minutes adding numbers to your three strongest bullets, five minutes on the machine-readability test and file name, and five minutes proofreading the contact block and dates aloud. Do it per application, not once — the tailored version is the whole point.
+    </p>
+    <p>
+      Then close the loop: a resume that passes screening earns you an interview, and interviews are a skill of their own. Practising against real questions with sample answers — the idea behind <a href="https://askhire.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">AskHire</a> — turns the achievement bullets you just wrote into stories you can tell out loud. Even the finishing touches matter a little: a clean <a href="https://signcraft.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">email signature</a> on your application emails quietly reinforces the professional impression the resume started. None of this requires luck. It requires one careful pass — and now you have the checklist.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Frequently asked questions</h2>
+    <div class="space-y-3 !mt-4">
+      {faqs.map((f) => (
+        <details class="rounded-2xl border border-neutral-200 bg-white p-5">
+          <summary class="cursor-pointer font-bold text-neutral-900">{f.q}</summary>
+          <p class="mt-2 text-neutral-600">{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </article>
+
+  <div class="mt-12 rounded-3xl bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] p-8 sm:p-10 text-center text-white">
+    <h2 class="text-2xl sm:text-3xl font-black mb-3">Fix the resume, then go further.</h2>
+    <p class="text-white/90 mb-6">Resume builders, resume scoring, interview prep and 440+ other tools are waiting in the directory. No signup, no watermark, ever.</p>
+    <a href="/tools" class="inline-block rounded-2xl bg-white text-neutral-900 font-bold px-8 py-3.5 hover:shadow-xl hover:-translate-y-0.5 transition-all">Browse all 443+ tools</a>
+  </div>
+</main>
+</Layout>

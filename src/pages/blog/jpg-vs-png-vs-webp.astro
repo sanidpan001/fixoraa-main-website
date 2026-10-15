@@ -1,0 +1,126 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const title = "JPG vs PNG vs WebP vs AVIF: Which Image Format Should You Use? — Fixoraa Blog";
+const description = "JPG, PNG, WebP and AVIF explained in plain language: what each format is good and bad at, how file sizes behave, and a simple decision guide for websites, WhatsApp, print, forms and screenshots.";
+const faqs = [
+  { q: "Is WebP always better than JPG?", a: "For the same visual quality, a WebP file is usually smaller than a JPG, and it also supports transparency, which JPG never will. But JPG still wins on compatibility: every device, app, printer and upload form on earth accepts it. If the image is going somewhere you do not control — a government form, an old app, a client's system — JPG is the safer choice. If it is going on a modern website, WebP is usually the better default." },
+  { q: "Why do some websites and forms reject WebP or AVIF files?", a: "Upload systems are often built conservatively: they whitelist the formats they were tested with, which usually means JPG and PNG. AVIF in particular is new enough that many form builders, exam portals and marketplace sellers' dashboards have not added it yet. The fix is simple — convert the file to JPG or PNG before uploading, which takes seconds and does not change how the image looks in any way that matters for a form." },
+  { q: "Why does a screenshot look worse as a JPG?", a: "JPG compression is designed for photographs, where neighbouring pixels are similar. Screenshots and graphics have hard edges and flat areas of colour — exactly where JPG's method creates visible smudging and fuzzy halos around text. PNG and lossless WebP store those edges exactly, so text stays crisp. That is why a screenshot can look perfect as a small PNG and noticeably worse as a JPG that is not even much smaller." },
+  { q: "If I convert a JPG to PNG, will the quality improve?", a: "No. Converting never adds back detail that was already thrown away. A JPG converted to PNG contains exactly the same picture — it just lives in a bigger, lossless container. Converting makes sense when you need a feature of the new format (transparency, compatibility, editing headroom), not as a quality upgrade. This is also why you should always keep your original file: every lossy save is one-way." },
+  { q: "Which format should I use for printing photos?", a: "Use the highest-quality file you have, which usually means the original JPG straight from your camera or phone, or a PNG if the image is a design or contains text. Avoid WebP and AVIF for print unless the print shop explicitly accepts them — many printers' software still cannot open them. And avoid repeatedly re-saving a JPG before printing, because each save quietly discards a little more detail." },
+  { q: "Does AVIF replace JPG and PNG?", a: "AVIF offers the best compression of the four and is supported by all modern browsers, so it is an excellent choice for websites that serve a lot of photos. It has not replaced the older formats, though: encoding AVIF is slower, some apps and upload forms still reject it, and PNG remains the safer tool for screenshots and graphics that must stay pixel-perfect. Expect all four formats to coexist for a long time." },
+];
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+};
+---
+<Layout title={title} description={description}>
+<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+<main class="mx-auto max-w-3xl px-4 py-10 sm:py-14">
+  <div class="text-center mb-10">
+    <span class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full text-white bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] mb-4">Blog · 8 min read</span>
+    <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-neutral-900">JPG vs PNG vs WebP vs AVIF: <span class="bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] bg-clip-text text-transparent">which format should you use?</span></h1>
+    <p class="mt-4 text-neutral-500 text-sm">Published October 15, 2026 · by the Fixoraa team</p>
+  </div>
+
+  <article class="space-y-6 text-neutral-700 leading-relaxed">
+    <p class="text-lg text-neutral-800">
+      The same photo can be a 4 MB JPG, an 11 MB PNG, a 2.8 MB WebP or a 1.9 MB AVIF — same picture, wildly different files. Pick the wrong format and your website crawls, your form upload gets rejected, or your logo comes out with an ugly white box behind it. Pick the right one and everything just works. This guide explains the four formats you will actually meet, in plain language: what each is good at, what each is bad at, and how to choose without thinking too hard.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">The only two ideas you really need</h2>
+    <p>
+      Every format makes two decisions about your image. The first is <strong class="text-neutral-900">how it squeezes the file down</strong>. <em>Lossless</em> compression keeps every pixel exactly as it was — the file can always be rebuilt perfectly. <em>Lossy</em> compression permanently deletes details your eyes are unlikely to miss, which produces dramatically smaller files at the cost of never getting the original back. Neither is "better"; they are answers to different questions.
+    </p>
+    <p>
+      The second decision is <strong class="text-neutral-900">which extra features are allowed</strong>. Can the background be transparent? Can the image be animated, like a short looping clip? Does every phone, browser and printer on the planet understand the file? JPG, PNG, WebP and AVIF each answer these questions differently, and those answers — not raw quality — are what should drive your choice.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">JPG: the universal photo format</h2>
+    <p>
+      JPG (also written JPEG) has been the default photo format for three decades, and it earned that spot. Its lossy compression is purpose-built for photographs: smooth gradients, skin tones, landscapes. At sensible quality settings, a JPG looks identical to the original while being a fraction of the size, and it opens literally everywhere — every phone, browser, printer, exam portal and marketplace on earth accepts it.
+    </p>
+    <p>
+      The weaknesses are just as clear. JPG <strong class="text-neutral-900">cannot do transparency</strong>, so a logo saved as JPG gets a solid background whether you want one or not. It is poor at graphics with sharp edges and text, where its compression leaves fuzzy smudges. And because the format is lossy, <strong class="text-neutral-900">every re-save degrades it a little more</strong> — edit and save the same JPG ten times and the damage starts to show.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">PNG: the exact-copy format</h2>
+    <p>
+      PNG is lossless: what you save is pixel-for-pixel what you get back, forever, no matter how many times the file is copied or re-saved. It fully supports transparency, which makes it the natural home of logos, icons, signatures and product cut-outs. Text and hard edges stay perfectly crisp, so screenshots saved as PNG look clean and professional.
+    </p>
+    <p>
+      The price is size. A photograph saved as PNG keeps every pixel of a scene that lossy formats would happily summarise, so photo PNGs are routinely <strong class="text-neutral-900">several times larger than the same photo as a JPG</strong> with no visible benefit. PNG is a scalpel, not a default: perfect for graphics, screenshots and anything with transparency, wasteful for camera photos.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">WebP: the modern all-rounder</h2>
+    <p>
+      WebP, created by Google, was designed to beat both older formats at once. It offers lossy compression that typically produces files <strong class="text-neutral-900">roughly a quarter to a third smaller than JPG</strong> at the same visual quality, a lossless mode that beats PNG at its own game, full transparency, and even animation — everything GIF does, in far fewer bytes. Every modern browser supports it, which is why so many websites now serve WebP by default.
+    </p>
+    <p>
+      WebP's remaining weakness is not browsers but everything else. Plenty of desktop apps, office tools, upload forms and older systems still cannot open or accept it, and downloading a WebP image only to discover your editor refuses it is a common small frustration. Inside the web it is a star; outside it, compatibility is a gamble.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">AVIF: the newest and smallest</h2>
+    <p>
+      AVIF is the youngest of the four, built on the AV1 video codec, and it pushes compression further than WebP — photos often come out <strong class="text-neutral-900">noticeably smaller again at the same quality</strong>, and it handles fine detail, gradients and even HDR colour better than its rivals. All modern browsers display it, so for photo-heavy websites it is a genuinely excellent choice.
+    </p>
+    <p>
+      The catches are practical. Creating AVIF files is slower, because the compression works harder. Support outside browsers is still patchy: some editors, phones' gallery apps, printers and upload forms do not accept it yet. AVIF is where formats are heading, but in 2026 it is still the one most likely to be refused by a form or a client.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Why the same image has four different sizes</h2>
+    <p>
+      File size is not really about the format's name — it is about how much information the scene contains and how much of it the format is allowed to forget. A photo of a forest contains millions of subtly different pixels. JPG, WebP and AVIF can summarise whole areas ("roughly this shade of green") and shrink the file dramatically, with AVIF summarising most cleverly and PNG not allowed to summarise at all. Reverse the scene — a screenshot of text on a white background — and the maths flips: there is barely any information to begin with, PNG's lossless storage is tiny and exact, and JPG's photo tricks become useless or actively harmful.
+    </p>
+    <p>
+      Two habits follow from this. First, <strong class="text-neutral-900">judge a format by the image type, not by habit</strong>: photos and graphics behave oppositely. Second, dimensions matter as much as format — a 6000-pixel-wide image saved in the smartest format still outweighs a sensibly resized one in a dumber format.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">The decision guide: pick by what you are doing</h2>
+    <p>
+      You do not need to memorise any of this. Find your situation:
+    </p>
+    <ul class="list-disc space-y-2 pl-6">
+      <li><strong class="text-neutral-900">Putting images on a website:</strong> WebP as the default, AVIF if you want the smallest possible photo files. Keep a JPG version for the rare old browser or tool that complains.</li>
+      <li><strong class="text-neutral-900">Sharing on WhatsApp or social media:</strong> JPG. The apps will recompress whatever you send anyway, and JPG is accepted everywhere with zero friction.</li>
+      <li><strong class="text-neutral-900">Printing:</strong> the original, highest-quality file — usually the camera's JPG, or PNG for designs and text. Avoid WebP and AVIF unless the print shop says it accepts them.</li>
+      <li><strong class="text-neutral-900">Uploading to an online form</strong> (exams, jobs, government, admissions): JPG or PNG, whichever the form lists, and watch the size limit — portals asking for a photo "under 200 KB" are asking for a JPG, resized and compressed.</li>
+      <li><strong class="text-neutral-900">Screenshots:</strong> PNG, every time. Text stays razor sharp and the file is usually small because screens contain little photographic detail.</li>
+      <li><strong class="text-neutral-900">Logos, icons and anything transparent:</strong> PNG for maximum compatibility, WebP if it is only for your own website. Never JPG — the transparency will be replaced by a solid box.</li>
+      <li><strong class="text-neutral-900">Product photos for a marketplace:</strong> JPG on a clean background; sellers' dashboards are conservative about formats, and JPG at a good size sails through.</li>
+    </ul>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Converting between formats</h2>
+    <p>
+      Converting is not a commitment — it is a copy. The original file stays untouched, and you produce a version in whichever format the situation demands. The tool built for exactly this is <a href="https://avifconv.2.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">AvifConv</a>, which batch-converts between JPG, PNG, WebP and AVIF entirely in your browser, so a whole folder of WebP downloads can become JPGs in one pass. For PNG-specific work, <a href="https://pngcraft.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">PNGCraft</a> edits, converts and polishes PNG images, and if your "image" starts life as a vector, <a href="https://vectra.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">Vectra</a> converts SVG to PNG at exactly the size you need.
+    </p>
+    <p>
+      One rule protects you from the most common conversion mistake: <strong class="text-neutral-900">converting up does not restore quality</strong>. JPG to PNG gives you a bigger file with the same picture inside. Convert for compatibility or features, keep the original somewhere safe, and treat every lossy file as a copy — never the master.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Format is only half the battle</h2>
+    <p>
+      Finally, remember that the format decision and the size decision are separate. A photo can be in the perfect format and still be far too heavy because it is enormous or barely compressed. Dedicated compressors such as <a href="https://shrinkpro.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">ShrinkPro</a>, which squeezes images without visible quality loss, and <a href="https://pixelslim.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">PixelSlim</a>, built for shrinking images for fast websites and sharing, handle that half — and pairing them with <a href="https://resizecraft.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">ResizeCraft</a> to fix the dimensions first usually beats either step alone. Right format, right size, right dimensions: get those three right and image files simply stop being a problem.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Frequently asked questions</h2>
+    <div class="space-y-3 !mt-4">
+      {faqs.map((f) => (
+        <details class="rounded-2xl border border-neutral-200 bg-white p-5">
+          <summary class="cursor-pointer font-bold text-neutral-900">{f.q}</summary>
+          <p class="mt-2 text-neutral-600">{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </article>
+
+  <div class="mt-12 rounded-3xl bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] p-8 sm:p-10 text-center text-white">
+    <h2 class="text-2xl sm:text-3xl font-black mb-3">Convert your images the easy way.</h2>
+    <p class="text-white/90 mb-6">AvifConv and 440+ other image tools, converters and calculators are waiting in the directory. No signup, no watermark, ever.</p>
+    <a href="/tools" class="inline-block rounded-2xl bg-white text-neutral-900 font-bold px-8 py-3.5 hover:shadow-xl hover:-translate-y-0.5 transition-all">Browse all 443+ tools</a>
+  </div>
+</main>
+</Layout>

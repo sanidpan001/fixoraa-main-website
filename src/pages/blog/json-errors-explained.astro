@@ -1,0 +1,168 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const title = "JSON Errors Explained: Why Your JSON Will Not Parse (and How to Fix It) — Fixoraa Blog";
+const description = "Why JSON refuses to parse, explained plainly: trailing commas, single quotes, unquoted keys, comments, mismatched brackets and invisible characters — with before/after examples and a one-minute fixing workflow.";
+const faqs = [
+  { q: "Why does JSON forbid trailing commas when JavaScript allows them?", a: "JSON is not JavaScript — it is a strict data format that borrowed JavaScript's look. Its grammar was deliberately kept tiny and unambiguous so that every parser in every language reads a document the same way. A trailing comma is legal in a JavaScript object literal, but in JSON it is simply not part of the grammar. Newer dialects such as JSON5 and JSONC relax rules like this, but standard JSON — what APIs send and receive — does not." },
+  { q: "My JSON looks perfect on screen. Why will it not parse?", a: "Almost always, an invisible character is the culprit. The usual suspects are a byte order mark saved at the start of the file by a Windows editor, curly 'smart quotes' pasted in from Word or a web page instead of straight quotes, or stray non-breaking spaces from copy-paste. The fix is to retype the suspicious section by hand in a plain-text editor and save the file as UTF-8 — the error usually vanishes with the invisible character." },
+  { q: "What does 'Unexpected end of JSON input' mean?", a: "It means the parser reached the end of the text while still waiting for something: a closing bracket, a closing brace, or the end of a string. In practice the document is incomplete — a bracket was never closed somewhere above, or the data itself was cut off, for example an API response or file that was truncated while being copied, downloaded or logged. Count your opening and closing brackets, and check the source is complete." },
+  { q: "Can I put comments in a JSON file?", a: "Not in standard JSON — there is no comment syntax at all, and strict parsers will fail on the very first slash. Some tools get around this by using a different dialect: VS Code's settings files are JSONC, which allows comments, and JSON5 allows them too. But if the file will be read by an API, a browser or another language's standard parser, comments will break it. Put explanations in a separate README or in a normal key instead." },
+  { q: "Are single quotes ever acceptable in JSON?", a: "No. JSON strings must use double quotes, and so must keys. Single-quoted text is valid in JavaScript, Python dictionaries and YAML, which is why the mistake is so common — data copied from those places looks like JSON but is not. Convert single quotes to double quotes, and if a string contains a double quote of its own, escape it with a backslash so the parser knows it is part of the text." },
+  { q: "How do I find the mistake when the error says 'position 128'?", a: "The position is a character count starting from the very first character of the input, counting spaces and newlines too. Rather than counting by hand, paste the JSON into an editor or validator that shows line and column or highlights the spot. One warning: the reported position is where the parser gave up, which is often a character or two after the real mistake — a trailing comma, for instance, is reported at the closing brace that follows it. Look just before the position first." },
+];
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+};
+
+const trailingBad = `{
+  "name": "Asha",
+  "age": 31,
+}`.trim();
+const trailingGood = `{
+  "name": "Asha",
+  "age": 31
+}`.trim();
+const quotesBad = `{ 'name': 'Asha', 'city': 'Pune' }`;
+const quotesGood = `{ "name": "Asha", "city": "Pune" }`;
+const keysBad = `{
+  name: "Asha",
+  age: 31
+}`.trim();
+const keysGood = `{
+  "name": "Asha",
+  "age": 31
+}`.trim();
+const commentsBad = `{
+  "name": "Asha", // the account owner
+  "age": 31
+}`.trim();
+const bracketsBad = `{
+  "items": [1, 2, 3],
+  "total": 3`.trim();
+const bomSample = `\\uFEFF{ "name": "Asha" }`;
+const smartBad = `{ “name”: “Asha” }`;
+---
+<Layout title={title} description={description}>
+<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+<main class="mx-auto max-w-3xl px-4 py-10 sm:py-14">
+  <div class="text-center mb-10">
+    <span class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full text-white bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] mb-4">Blog · 8 min read</span>
+    <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-neutral-900">JSON errors explained: why your JSON <span class="bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] bg-clip-text text-transparent">will not parse</span> (and how to fix it)</h1>
+    <p class="mt-4 text-neutral-500 text-sm">Published October 15, 2026 · by the Fixoraa team</p>
+  </div>
+
+  <article class="space-y-6 text-neutral-700 leading-relaxed">
+    <p class="text-lg text-neutral-800">
+      JSON looks forgiving. It resembles JavaScript, it reads like English, and half the time you write it by hand without thinking. Then a parser rejects the whole document over a single comma, and the error message — something like "Unexpected token in JSON at position 24" — seems designed to tell you as little as possible. In reality, almost every JSON failure comes from a short list of causes. Learn the list, learn to read the error, and these messages stop being scary.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">First, read the error like a detective</h2>
+    <p>
+      A JSON parser reads your document character by character, following a strict grammar, and it stops at the <strong class="text-neutral-900">first character it cannot make sense of</strong>. The position in the error message is a count of characters from the very start of the input — every letter, space and newline included. Position 24 is simply the 25th character of your document. Editors and validators convert that into a line and column, which is far easier to use, so your first move is always to get the JSON into a tool that shows you the spot.
+    </p>
+    <p>
+      The second thing to know is subtler: the reported position is <strong class="text-neutral-900">where the parser gave up, which is often just after the actual mistake</strong>. A comma that should not be there is perfectly legal while the parser reads it — the failure lands on the closing brace that follows, when the parser realises a new key should have come next. So when you inspect the error position, look at the highlighted character, then look immediately <em>before</em> it. That is where most of the culprits below are hiding. And if the message instead says the input ended unexpectedly, skip the detective work: something was never closed, or the document was cut off.
+    </p>
+    <p>
+      Do not be thrown by the fact that different tools phrase the same failure differently. A browser's parser says "Unexpected token", Python's json module says things like "Expecting property name enclosed in double quotes: line 1 column 2", and other parsers talk about expecting a comma or a closing brace after a value. The wording varies because each parser describes what it was hoping to see at the moment it failed — which makes the message itself a clue: whatever it says it expected is usually exactly what your document failed to provide at that spot.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Culprit 1: the trailing comma</h2>
+    <p>
+      The single most common JSON error. JavaScript lets you leave a comma after the last item in a list or object; JSON does not. This document fails:
+    </p>
+    <pre class="overflow-x-auto rounded-2xl bg-neutral-900 p-4 text-sm text-neutral-100"><code>{trailingBad}</code></pre>
+    <p>
+      The comma after <code class="rounded bg-neutral-100 px-1.5 py-0.5 text-sm text-neutral-800">31</code> promises another key, and the closing brace breaks that promise — which is why the error points at the brace, not the comma. Delete the comma and the same document parses:
+    </p>
+    <pre class="overflow-x-auto rounded-2xl bg-neutral-900 p-4 text-sm text-neutral-100"><code>{trailingGood}</code></pre>
+    <p>
+      The same rule applies inside arrays: a comma after the last element, just before the closing bracket, is equally illegal.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Culprit 2: single quotes</h2>
+    <p>
+      JSON strings — and keys, which are strings — must be wrapped in <strong class="text-neutral-900">double quotes</strong>. Single-quoted text is fine in JavaScript and Python, which is exactly where most single-quoted "JSON" comes from: it was copied out of code. This is not JSON:
+    </p>
+    <pre class="overflow-x-auto rounded-2xl bg-neutral-900 p-4 text-sm text-neutral-100"><code>{quotesBad}</code></pre>
+    <p>
+      Rewritten with double quotes, it is:
+    </p>
+    <pre class="overflow-x-auto rounded-2xl bg-neutral-900 p-4 text-sm text-neutral-100"><code>{quotesGood}</code></pre>
+    <p>
+      Watch out for the follow-on problem: if a value itself contains a double quote — a measurement, a quoted phrase — escape it with a backslash so the parser knows it belongs to the string.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Culprit 3: unquoted keys (and illegal values)</h2>
+    <p>
+      In JavaScript, object keys can be bare words. In JSON, <strong class="text-neutral-900">every key must be a double-quoted string</strong>, no exceptions:
+    </p>
+    <pre class="overflow-x-auto rounded-2xl bg-neutral-900 p-4 text-sm text-neutral-100"><code>{keysBad}</code></pre>
+    <pre class="overflow-x-auto rounded-2xl bg-neutral-900 p-4 text-sm text-neutral-100"><code>{keysGood}</code></pre>
+    <p>
+      Values have a matching trap. JSON recognises exactly these: double-quoted strings, numbers, <code class="rounded bg-neutral-100 px-1.5 py-0.5 text-sm text-neutral-800">true</code>, <code class="rounded bg-neutral-100 px-1.5 py-0.5 text-sm text-neutral-800">false</code>, <code class="rounded bg-neutral-100 px-1.5 py-0.5 text-sm text-neutral-800">null</code>, objects and arrays. There is no <code class="rounded bg-neutral-100 px-1.5 py-0.5 text-sm text-neutral-800">undefined</code> in JSON, no <code class="rounded bg-neutral-100 px-1.5 py-0.5 text-sm text-neutral-800">NaN</code>, no functions and no dates — a hand-written value like any of those fails instantly, and a date must travel as a quoted string.
+    </p>
+    <p>
+      Even numbers have fine print that trips people up: a JSON number cannot start with a leading zero (<code class="rounded bg-neutral-100 px-1.5 py-0.5 text-sm text-neutral-800">0123</code> is invalid, though <code class="rounded bg-neutral-100 px-1.5 py-0.5 text-sm text-neutral-800">0.5</code> and <code class="rounded bg-neutral-100 px-1.5 py-0.5 text-sm text-neutral-800">0</code> itself are fine), cannot start with a plus sign, and cannot be left dangling as a bare decimal point. Values copied from spreadsheets and ID fields break this rule surprisingly often — if a long ID must keep its leading zeros, it was never really a number, so send it as a quoted string.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Culprit 4: comments</h2>
+    <p>
+      JSON has <strong class="text-neutral-900">no comment syntax at all</strong> — not the double-slash kind, not the block kind. A perfectly sensible-looking note breaks the document:
+    </p>
+    <pre class="overflow-x-auto rounded-2xl bg-neutral-900 p-4 text-sm text-neutral-100"><code>{commentsBad}</code></pre>
+    <p>
+      The confusion comes from files that merely look like JSON: editor settings and some configuration formats use a dialect (JSONC or JSON5) that tolerates comments. The moment the same file is fed to a browser, an API or a standard parser, it fails. If a document needs an explanation, put it in documentation — or, as a last resort, in a key of its own that your code ignores.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Culprit 5: mismatched or missing brackets</h2>
+    <p>
+      Every opening brace needs a closing brace and every opening bracket a closing bracket, in the right nesting order. Long documents make this easy to fumble, and the parser's complaint — that the input ended unexpectedly — sounds like a file problem rather than a counting problem:
+    </p>
+    <pre class="overflow-x-auto rounded-2xl bg-neutral-900 p-4 text-sm text-neutral-100"><code>{bracketsBad}</code></pre>
+    <p>
+      The outer brace here is never closed. Its close cousin is the <em>wrong</em> closer: an object shut with a square bracket or an array shut with a brace, usually after an edit reshuffled the nesting. The parser counts types as well as totals, so a document can have perfectly balanced numbers and still fail because one pair is mismatched. The reliable way to see this whole class of error is to <strong class="text-neutral-900">pretty-print</strong>: once the document is indented, a missing or wrong closer makes the structure lean visibly wrong, and most editors will fold or highlight matching pairs. If a formatter refuses to run at all, that refusal is itself the diagnosis — work through the other culprits in this list until it formats, then check the shape.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Culprit 6: the invisible ones — BOM, encoding and smart quotes</h2>
+    <p>
+      Sometimes the JSON looks flawless and still fails at position 0 or 1. The cause is a character you cannot see. Some Windows editors save text files with a <strong class="text-neutral-900">byte order mark</strong> — a few invisible bytes at the very start of the file. Tools that print it show something like this:
+    </p>
+    <pre class="overflow-x-auto rounded-2xl bg-neutral-900 p-4 text-sm text-neutral-100"><code>{bomSample}</code></pre>
+    <p>
+      That code is not part of JSON, and strict parsers choke on it before reading a single real character. Saving the file as "UTF-8 without BOM" removes it. The other frequent ghost arrives by copy-paste: text routed through Word, Google Docs or a web page often picks up <strong class="text-neutral-900">curly smart quotes</strong> instead of straight ones:
+    </p>
+    <pre class="overflow-x-auto rounded-2xl bg-neutral-900 p-4 text-sm text-neutral-100"><code>{smartBad}</code></pre>
+    <p>
+      Those quotes look right and are completely wrong — a parser accepts only the plain ASCII double quote. The cure for both ghosts is the same: retype the affected line by hand in a plain-text editor, and be suspicious of anything pasted from a rich-text source.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">A fixing workflow that takes about a minute</h2>
+    <p>
+      When a document fails, resist the urge to hunt by eye. Work the list instead. <strong class="text-neutral-900">Step one:</strong> paste the JSON into a validator and read the first error only — parsers report one failure at a time, and later "errors" are usually just fallout from the first. A tool like <a href="https://jsonschema.2.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">JsonSchema</a> translates validation errors into plain English, which is a friendlier starting point than raw parser-speak. <strong class="text-neutral-900">Step two:</strong> go to the reported position, look just before it, and match what you see against the culprits above — trailing comma, wrong quotes, bare key, comment, missing closer, invisible character. <strong class="text-neutral-900">Step three:</strong> fix only that one thing and validate again. Repeat until it parses; most documents surrender within two or three rounds.
+    </p>
+    <p>
+      Once the JSON parses, the neighbouring tools earn their keep. If the broken JSON lives inside a JWT, <a href="https://tokenpeek.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">TokenPeek</a> decodes the token so you can inspect the payload as readable JSON instead of base64. If the data began life in a spreadsheet, <a href="https://csvjson.2.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">CsvJson</a> converts cleanly between CSV and JSON in both directions instead of you hand-mangling rows into objects. And if you are writing TypeScript, <a href="https://modelmint.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">ModelMint</a> turns your now-valid JSON into TypeScript interfaces, so the shape you just rescued becomes code you can build on. Ninety seconds of method beats an afternoon of squinting — every time.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Frequently asked questions</h2>
+    <div class="space-y-3 !mt-4">
+      {faqs.map((f) => (
+        <details class="rounded-2xl border border-neutral-200 bg-white p-5">
+          <summary class="cursor-pointer font-bold text-neutral-900">{f.q}</summary>
+          <p class="mt-2 text-neutral-600">{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </article>
+
+  <div class="mt-12 rounded-3xl bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] p-8 sm:p-10 text-center text-white">
+    <h2 class="text-2xl sm:text-3xl font-black mb-3">Fix your JSON — then keep building.</h2>
+    <p class="text-white/90 mb-6">JsonSchema and 440+ other developer tools, converters and calculators are waiting in the directory. No signup, no watermark, ever.</p>
+    <a href="/tools" class="inline-block rounded-2xl bg-white text-neutral-900 font-bold px-8 py-3.5 hover:shadow-xl hover:-translate-y-0.5 transition-all">Browse all 443+ tools</a>
+  </div>
+</main>
+</Layout>
