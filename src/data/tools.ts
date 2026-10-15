@@ -445,6 +445,10 @@ export const niches: Niche[] = [
       { name: "KidGrowth", slug: "kidgrowth", url: "https://kidgrowth.2.fixoraa.tech", blurb: "WHO-based percentiles plotted on a growth chart curve, not just a number" },
       { name: "StepMiles", slug: "stepmiles", url: "https://stepmiles.2.fixoraa.tech", blurb: "Personal stride from height (or measured stride) + weekly goal planner" },
       { name: "CaffHalf", slug: "caffhalf", url: "https://caffhalf.2.fixoraa.tech", blurb: "Log every drink (type + time) \u2192 one combined decay curve and the exact mg stil" },
+      { name: "PostureCheck", slug: "posturecheck", url: "https://posturecheck.2.fixoraa.tech", blurb: "Enter your height \u2192 chair height, desk height, monitor distance/height and key" },
+      { name: "RunWalk", slug: "runwalk", url: "https://runwalk.2.fixoraa.tech", blurb: "Pick run/walk ratios and weeks \u2192 a progressing session-by-session plan with to" },
+      { name: "BloodDonor", slug: "blooddonor", url: "https://blooddonor.2.fixoraa.tech", blurb: "Answer a short situation checklist \u2192 eligible / wait-until verdict with the ex" },
+      { name: "KidVaccine", slug: "kidvaccine", url: "https://kidvaccine.2.fixoraa.tech", blurb: "Birth date in \u2192 the full schedule with calendar dates per dose, what's due now" },
     ],
   },
   // ── Fun & Lifestyle ──────────────────────────────────────────────────
@@ -512,6 +516,7 @@ export const niches: Niche[] = [
       { name: "BingoCard", slug: "bingocard", url: "https://bingocard.2.fixoraa.tech", blurb: "Generate many unique 5\u00d75 cards (numbers or custom words) with a matching calle" },
       { name: "HangHero", slug: "hanghero", url: "https://hanghero.2.fixoraa.tech", blurb: "Category word decks, gentle gallows-free visual option for young kids, streaks" },
       { name: "MapQuiz", slug: "mapquiz", url: "https://mapquiz.2.fixoraa.tech", blurb: "Name-the-location quiz by region with streaks and a learn mode that groups cou" },
+      { name: "WardrobeCalc", slug: "wardrobecalc", url: "https://wardrobecalc.2.fixoraa.tech", blurb: "Clothes inventory in \u2192 hanging metres (short/long split), shelf stacks, drawer" },
     ],
   },
   // ── Converters ───────────────────────────────────────────────────────
@@ -574,6 +579,11 @@ export const niches: Niche[] = [
       { name: "CapitalQuest", slug: "capitalquest", url: "https://capitalquest.2.fixoraa.tech", blurb: "Two modes (multiple choice, type-it), region filters, streak scoring and a har" },
       { name: "TableTrainer", slug: "tabletainer", url: "https://tabletainer.2.fixoraa.tech", blurb: "Timed table drills with a mistake-review round that repeats only the facts you" },
       { name: "StepSolve", slug: "stepsolve", url: "https://stepsolve.2.fixoraa.tech", blurb: "Linear and quadratic equations solved with every step shown and named (factor," },
+      { name: "MapScale", slug: "mapscale", url: "https://mapscale.2.fixoraa.tech", blurb: "Both directions (map\u2192real, real\u2192map), RF/verbal/unit scales handled, working s" },
+      { name: "ReadLog", slug: "readlog", url: "https://readlog.2.fixoraa.tech", blurb: "Log books/pages daily \u2192 streaks, pages-per-day graph, finished shelf \u2014 all pri" },
+      { name: "SciFair", slug: "scifair", url: "https://scifair.2.fixoraa.tech", blurb: "Curated project bank filtered by grade, topic, days available and materials-on" },
+      { name: "MemoryPalace", slug: "memorypalace", url: "https://memorypalace.2.fixoraa.tech", blurb: "Guided peg-word and loci drills: memorise a list against a route, get quizzed" },
+      { name: "HandPractice", slug: "handpractice", url: "https://handpractice.2.fixoraa.tech", blurb: "Your words \u2192 dotted tracing lines in print/cursive/joined styles with line gui" },
     ],
   },
 ];
