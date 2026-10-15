@@ -177,6 +177,10 @@ export const niches: Niche[] = [
       { name: "DuoTone Lab", slug: "duotone", url: "https://duotone.2.fixoraa.tech", blurb: "Preset pairs named by use (Poster, Blueprint, Sunset, Noir) with shadow/highli" },
       { name: "Polaroidly", slug: "polaroidly", url: "https://polaroidly.2.fixoraa.tech", blurb: "No-watermark print-ready export with handwriting caption fonts and tilt/shadow" },
       { name: "FlipImg", slug: "flipimg", url: "https://flipimg.2.fixoraa.tech", blurb: "Batch flip/rotate with lossless export and EXIF-orientation fix" },
+      { name: "ThumbCraft", slug: "thumbcraft", url: "https://thumbcraft.2.fixoraa.tech", blurb: "1280\u00d7720 canvas with bold outlined text, background photo, face-safe zone over" },
+      { name: "MicNote", slug: "micnote", url: "https://micnote.2.fixoraa.tech", blurb: "Browser recording with live waveform, pause/resume, simple trim and MP3/WAV do" },
+      { name: "ClipWave", slug: "clipwave", url: "https://clipwave.2.fixoraa.tech", blurb: "Drag-trim any MP3/WAV in-browser with fade in/out and loop preview; the file n" },
+      { name: "NegativeLab", slug: "negativelab", url: "https://negativelab.2.fixoraa.tech", blurb: "Full invert plus per-channel levels and film-base (orange mask) correction \u2014 t" },
     ],
   },
   // ── PDF Tools ────────────────────────────────────────────────────────
@@ -472,6 +476,12 @@ export const niches: Niche[] = [
       { name: "StorySpark", slug: "storyspark", url: "https://storyspark.2.fixoraa.tech", blurb: "Genre + hero + twist dealt as three cards, first-line generator, favourites sa" },
       { name: "TeamShuffle", slug: "teamshuffle", url: "https://teamshuffle.2.fixoraa.tech", blurb: "Balanced teams via snake draft using optional skill ratings, or pure random \u2014" },
       { name: "CharadesGen", slug: "charadesgen", url: "https://charadesgen.2.fixoraa.tech", blurb: "Category decks with a big word card, countdown timer and team score keeper \u2014 t" },
+      { name: "WordSearchGen", slug: "wordsearchgen", url: "https://wordsearchgen.2.fixoraa.tech", blurb: "Your words \u2192 a filled printable grid (8 directions optional) plus a separate a" },
+      { name: "MemoryMatch", slug: "memorymatch", url: "https://memorymatch.2.fixoraa.tech", blurb: "Themed decks (animals, flags, fruits, emoji), move counter, timer and 3 diffic" },
+      { name: "FlagQuiz", slug: "flagquiz", url: "https://flagquiz.2.fixoraa.tech", blurb: "Flag-first quiz with region filters, streak scoring and a reversed hard mode (" },
+      { name: "BingoCard", slug: "bingocard", url: "https://bingocard.2.fixoraa.tech", blurb: "Generate many unique 5\u00d75 cards (numbers or custom words) with a matching calle" },
+      { name: "HangHero", slug: "hanghero", url: "https://hanghero.2.fixoraa.tech", blurb: "Category word decks, gentle gallows-free visual option for young kids, streaks" },
+      { name: "MapQuiz", slug: "mapquiz", url: "https://mapquiz.2.fixoraa.tech", blurb: "Name-the-location quiz by region with streaks and a learn mode that groups cou" },
     ],
   },
   // ── Converters ───────────────────────────────────────────────────────
@@ -533,6 +543,7 @@ export const niches: Niche[] = [
       { name: "ElementLab", slug: "elementlab", url: "https://elementlab.2.fixoraa.tech", blurb: "Full clickable table with properties, category filters and a built-in element" },
       { name: "CapitalQuest", slug: "capitalquest", url: "https://capitalquest.2.fixoraa.tech", blurb: "Two modes (multiple choice, type-it), region filters, streak scoring and a har" },
       { name: "TableTrainer", slug: "tabletainer", url: "https://tabletainer.2.fixoraa.tech", blurb: "Timed table drills with a mistake-review round that repeats only the facts you" },
+      { name: "StepSolve", slug: "stepsolve", url: "https://stepsolve.2.fixoraa.tech", blurb: "Linear and quadratic equations solved with every step shown and named (factor," },
     ],
   },
 ];
