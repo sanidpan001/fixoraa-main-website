@@ -150,6 +150,10 @@ export const niches: Niche[] = [
       { name: "TermCover", slug: "termcover", url: "https://termcover.2.fixoraa.tech", blurb: "Needs-based cover: replace income for N years, add loans and goals, subtract e" },
       { name: "GoldVsFd", slug: "goldvsfd", url: "https://goldvsfd.2.fixoraa.tech", blurb: "Same lump sum in gold (with making-charge/SGB toggle) vs FD (with tax-slab on" },
       { name: "KidsAllowance", slug: "kidsallowance", url: "https://kidsallowance.2.fixoraa.tech", blurb: "Age-guided allowance with a spend/save/share split, chore bonus table and a sa" },
+      { name: "RentHike", slug: "renthike", url: "https://renthike.2.fixoraa.tech", blurb: "Projects your rent year by year at any escalation rate and compares two rates" },
+      { name: "FDLadder", slug: "fdladder", url: "https://fdladder.2.fixoraa.tech", blurb: "Splits one lump sum into a 1\u20135 year FD ladder with a maturity schedule and yea" },
+      { name: "ForexFee", slug: "forexfee", url: "https://forexfee.2.fixoraa.tech", blurb: "Compares the mid-market rate with your bank or card rate to expose the hidden" },
+      { name: "SolarPayback", slug: "solarpayback", url: "https://solarpayback.2.fixoraa.tech", blurb: "Turns system cost, subsidy, monthly units and your current bill into a payback" },
     ],
   },
   // ── Image Tools ──────────────────────────────────────────────────────
@@ -385,6 +389,7 @@ export const niches: Niche[] = [
       { name: "SqlBuild", slug: "sqlbuild", url: "https://sqlbuild.2.fixoraa.tech", blurb: "Pick columns, stack conditions with AND/OR grouping, joins by dropdown \u2192 clean" },
       { name: "MacAddr", slug: "macaddr", url: "https://macaddr.2.fixoraa.tech", blurb: "Paste any MAC \u2192 all standard formats (colon, dash, Cisco dotted, bare), validi" },
       { name: "Base64Img", slug: "base64img", url: "https://base64img.2.fixoraa.tech", blurb: "Drop an image \u2192 base64 with the full data URI, copy-ready CSS background and <" },
+      { name: "JSONPath", slug: "jsonpath", url: "https://jsonpath.2.fixoraa.tech", blurb: "Paste JSON, type a JSONPath expression and see matched values highlighted in a" },
     ],
   },
   // ── Date & Time ──────────────────────────────────────────────────────
