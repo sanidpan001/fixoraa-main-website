@@ -189,6 +189,10 @@ export const niches: Niche[] = [
       { name: "MicNote", slug: "micnote", url: "https://micnote.2.fixoraa.tech", blurb: "Browser recording with live waveform, pause/resume, simple trim and MP3/WAV do" },
       { name: "ClipWave", slug: "clipwave", url: "https://clipwave.2.fixoraa.tech", blurb: "Drag-trim any MP3/WAV in-browser with fade in/out and loop preview; the file n" },
       { name: "NegativeLab", slug: "negativelab", url: "https://negativelab.2.fixoraa.tech", blurb: "Full invert plus per-channel levels and film-base (orange mask) correction \u2014 t" },
+      { name: "CropBulk", slug: "cropbulk", url: "https://cropbulk.2.fixoraa.tech", blurb: "Drop many images \u2192 all cropped to one ratio/size with a per-image focal drag," },
+      { name: "SvgColor", slug: "svgcolor", url: "https://svgcolor.2.fixoraa.tech", blurb: "Load SVG \u2192 its colours listed as swatches \u2192 click a swatch, pick a replacement" },
+      { name: "AvifConv", slug: "avifconv", url: "https://avifconv.2.fixoraa.tech", blurb: "Batch-convert between JPG/PNG/WebP/AVIF entirely in-browser with a per-file si" },
+      { name: "BgWhite", slug: "bgwhite", url: "https://bgwhite.2.fixoraa.tech", blurb: "Place a cut-out/any photo on pure-white (or brand colour) canvas at marketplac" },
     ],
   },
   // ── PDF Tools ────────────────────────────────────────────────────────
@@ -366,6 +370,12 @@ export const niches: Niche[] = [
       { name: "KeyPeek", slug: "keypeek", url: "https://keypeek.2.fixoraa.tech", blurb: "Live key capture with event.key/code/keyCode/ASCII and a history tape of press" },
       { name: "JsonSchema", slug: "jsonschema", url: "https://jsonschema.2.fixoraa.tech", blurb: "Validate JSON against a schema with errors translated into plain English with" },
       { name: "CssFilter", slug: "cssfilter", url: "https://cssfilter.2.fixoraa.tech", blurb: "Upload any photo, stack blur/brightness/contrast/saturate/hue filters live, co" },
+      { name: "TextShadow", slug: "textshadow", url: "https://textshadow.2.fixoraa.tech", blurb: "Multi-layer text-shadow builder with per-layer colour/blur/offset and style pr" },
+      { name: "MetaCheck", slug: "metacheck", url: "https://metacheck.2.fixoraa.tech", blurb: "Paste a page's head/HTML \u2192 title & description graded with pixel-length bars," },
+      { name: "HtPasswd", slug: "htpasswd", url: "https://htpasswd.2.fixoraa.tech", blurb: "Username + password \u2192 bcrypt/APR1/SHA1 htpasswd lines generated 100% in-browse" },
+      { name: "SqlBuild", slug: "sqlbuild", url: "https://sqlbuild.2.fixoraa.tech", blurb: "Pick columns, stack conditions with AND/OR grouping, joins by dropdown \u2192 clean" },
+      { name: "MacAddr", slug: "macaddr", url: "https://macaddr.2.fixoraa.tech", blurb: "Paste any MAC \u2192 all standard formats (colon, dash, Cisco dotted, bare), validi" },
+      { name: "Base64Img", slug: "base64img", url: "https://base64img.2.fixoraa.tech", blurb: "Drop an image \u2192 base64 with the full data URI, copy-ready CSS background and <" },
     ],
   },
   // ── Date & Time ──────────────────────────────────────────────────────
