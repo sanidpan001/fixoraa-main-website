@@ -35,15 +35,15 @@ const valueProps = [
   },
   {
     title: 'Always growing',
-    text: `New tools ship regularly. The library keeps expanding — from 200+ today toward an infinite collection.`,
+    text: `New tools ship regularly. The library keeps expanding — from ${totalTools} today toward an infinite collection.`,
     icon: '<path d="M18.2 8.5c2.5 0 4.8 2.6 4.8 5.5s-2.3 5.5-4.8 5.5c-3.4 0-5-5.5-6.2-5.5s-2.8 5.5-6.2 5.5c-2.5 0-4.8-2.6-4.8-5.5S3.3 8.5 5.8 8.5c3.4 0 5 5.5 6.2 5.5s2.8-5.5 6.2-5.5z" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>',
     color: '#2E6BFF',
   },
 ];
 
-const pageTitle = `Fixoraa — 200+ Free Online Tools. Zero Signup.`;
+const pageTitle = `Fixoraa — ${totalTools} Free Online Tools. Zero Signup.`;
 const pageDescription =
-  `Fixoraa is a growing library of 200+ free online tools — calculators, converters, text utilities, image tools and more. No signup, no paywalls, privacy first.`;
+  `Fixoraa is a growing library of ${totalTools} free online tools — calculators, converters, text utilities, image tools and more. No signup, no paywalls, privacy first.`;
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
@@ -344,7 +344,7 @@ const pageDescription =
       <div class="reveal mx-auto mt-14 max-w-3xl rounded-[2.5rem] border border-ink/10 bg-white px-6 py-12 text-center shadow-sm">
         <p class="text-5xl font-extrabold text-gradient" aria-hidden="true">∞</p>
         <h2 class="mt-4 text-3xl font-extrabold tracking-tight sm:text-4xl">
-          Start with <span class="text-gradient">200+ free tools</span> today
+          Start with <span class="text-gradient">{totalTools} free tools</span> today
         </h2>
         <p class="mx-auto mt-3 max-w-xl text-ink/60">
           No signup. No paywalls. Pick a tool, get your result, get on with your day.
