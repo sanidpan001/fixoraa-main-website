@@ -193,6 +193,9 @@ export const niches: Niche[] = [
       { name: "SvgColor", slug: "svgcolor", url: "https://svgcolor.2.fixoraa.tech", blurb: "Load SVG \u2192 its colours listed as swatches \u2192 click a swatch, pick a replacement" },
       { name: "AvifConv", slug: "avifconv", url: "https://avifconv.2.fixoraa.tech", blurb: "Batch-convert between JPG/PNG/WebP/AVIF entirely in-browser with a per-file si" },
       { name: "BgWhite", slug: "bgwhite", url: "https://bgwhite.2.fixoraa.tech", blurb: "Place a cut-out/any photo on pure-white (or brand colour) canvas at marketplac" },
+      { name: "PixelMeasure", slug: "pixelmeasure", url: "https://pixelmeasure.2.fixoraa.tech", blurb: "Set scale from a reference object, then click-measure distances/areas in the p" },
+      { name: "GifReverse", slug: "gifreverse", url: "https://gifreverse.2.fixoraa.tech", blurb: "Drop a GIF \u2192 reversed, boomerang (forward+back) or speed-shifted version, proc" },
+      { name: "VideoThumb", slug: "videothumb", url: "https://videothumb.2.fixoraa.tech", blurb: "Load a video in-browser, step frame-by-frame or by timestamp, export full-reso" },
     ],
   },
   // ── PDF Tools ────────────────────────────────────────────────────────
@@ -318,6 +321,12 @@ export const niches: Niche[] = [
       { name: "WordCloud Studio", slug: "cloudwords", url: "https://cloudwords.2.fixoraa.tech", blurb: "Phrase detection (2-word phrases like 'true to size') + classroom-simple UI \u2014" },
       { name: "PalinPlay", slug: "palinplay", url: "https://palinplay.2.fixoraa.tech", blurb: "Checks full sentences the way humans mean it, and finds the longest palindrome" },
       { name: "SentFlip", slug: "sentflip", url: "https://sentflip.2.fixoraa.tech", blurb: "Reverses sentence order in a paragraph, or word order inside each sentence, ke" },
+      { name: "EmojiText", slug: "emojitext", url: "https://emojitext.2.fixoraa.tech", blurb: "Type a sentence \u2192 words swapped for emojis where they exist, names/letters in" },
+      { name: "VocabTest", slug: "vocabtest", url: "https://vocabtest.2.fixoraa.tech", blurb: "Frequency-band sampling test with nonsense-word traps to correct guessing \u2192 es" },
+      { name: "TextColumns", slug: "textcolumns", url: "https://textcolumns.2.fixoraa.tech", blurb: "Paste text \u2192 balanced 2/3/4-column layout with gutter, font-size and rule-line" },
+      { name: "AcroFind", slug: "acrofind", url: "https://acrofind.2.fixoraa.tech", blurb: "Paste a document \u2192 every acronym extracted with occurrence counts, first-use p" },
+      { name: "QuoteMaker", slug: "quotemaker", url: "https://quotemaker.2.fixoraa.tech", blurb: "Quote + author \u2192 typography-led cards with curated background styles (gradient" },
+      { name: "PangramCheck", slug: "pangramcheck", url: "https://pangramcheck.2.fixoraa.tech", blurb: "Paste text \u2192 26-letter coverage grid lighting up live, missing letters listed," },
     ],
   },
   // ── Developer Tools ──────────────────────────────────────────────────
@@ -435,6 +444,7 @@ export const niches: Niche[] = [
       { name: "BumpGain", slug: "bumpgain", url: "https://bumpgain.2.fixoraa.tech", blurb: "IOM guideline ranges personalised by BMI category, twins toggle, week-by-week" },
       { name: "KidGrowth", slug: "kidgrowth", url: "https://kidgrowth.2.fixoraa.tech", blurb: "WHO-based percentiles plotted on a growth chart curve, not just a number" },
       { name: "StepMiles", slug: "stepmiles", url: "https://stepmiles.2.fixoraa.tech", blurb: "Personal stride from height (or measured stride) + weekly goal planner" },
+      { name: "CaffHalf", slug: "caffhalf", url: "https://caffhalf.2.fixoraa.tech", blurb: "Log every drink (type + time) \u2192 one combined decay curve and the exact mg stil" },
     ],
   },
   // ── Fun & Lifestyle ──────────────────────────────────────────────────
