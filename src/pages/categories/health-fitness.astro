@@ -1,0 +1,104 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { niches } from '../../data/tools';
+
+const niche = niches.find((n) => n.slug === 'health-fitness');
+const title = "Health & Fitness Tools — BMI, Calories, Sleep | Fixoraa";
+const description = "Free health and fitness tools: BMI and calorie calculators, sleep planners, heart-rate zones, habit trackers and more. No signup, no watermark, ever.";
+const faqs = [
+  { q: "Are these health and fitness tools really free?", a: "Yes. Every calculator and tracker in this category is free for unlimited use — no signup, no premium tier, and no trial that expires halfway through your plan. Open the tool, enter your numbers, get your answer. It is the same promise across all 443+ tools on Fixoraa." },
+  { q: "Can these tools replace medical advice?", a: "No. These calculators and trackers provide general information and estimates based on standard formulas — useful for planning workouts, meals and sleep, but they are not medical advice and cannot diagnose anything. If you have a health concern, unusual readings or symptoms, please talk to a qualified healthcare professional instead of relying on any online tool." },
+  { q: "Is my health information private?", a: "Most of these tools run entirely in your browser, so the numbers you enter are processed on your own device rather than sent to a server. There are no accounts on Fixoraa, which means your readings are never tied to a name, email or profile. What you measure stays yours." },
+  { q: "Which tool should I start with?", a: "It depends on your goal. For weight, begin with VitaScale for BMI, then CaloFuel for daily calories. For training, OneRepLab and the heart-rate zone calculators set your targets. For sleep, start with REMNest. Pick the one that matches today's question — each tool is designed to answer it in about a minute." },
+  { q: "Do these tools work on mobile?", a: "Yes. Every tool is a responsive web page that works in any modern phone or desktop browser, with nothing to install and no app store involved. Many people keep a favourite — a water tracker or sleep calculator — bookmarked on their home screen and check it in seconds." },
+];
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+};
+---
+<Layout title={title} description={description}>
+<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+<main class="mx-auto max-w-3xl px-4 py-10 sm:py-14">
+  <div class="text-center mb-10">
+    <span class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full text-white bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] mb-4">Category Guide</span>
+    <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-neutral-900">Health & Fitness <span class="bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] bg-clip-text text-transparent">Tools</span></h1>
+    <p class="mt-4 text-lg text-neutral-600">{niche.tagline}</p>
+    <p class="mt-2 text-neutral-500 text-sm">{niche.tools.length} free tools · No signup · No watermark</p>
+  </div>
+
+  <article class="space-y-6 text-neutral-700 leading-relaxed">
+    <p class="text-lg text-neutral-800">
+      Your body produces a surprising amount of useful data — how much sleep you actually got, how hard your heart worked on that run, how many calories your day really needs. The Health & Fitness category turns that data into clear numbers you can act on. Inside you will find calculators for body composition and calorie needs, planners for sleep and training, and trackers for water, habits and health milestones. Whether you are starting a first fitness routine, fine-tuning race preparation, or simply trying to sleep better, these tools give you a quick, honest read on where you stand — no app to install and nothing to sign up for.
+    </p>
+    <p>
+      Beginners use these tools to set sensible starting points: a realistic daily calorie target instead of a guess, a training heart-rate zone that keeps easy days easy. Runners plan hydration and pacing for race day, lifters work out safe progression targets, and new parents lean on the baby and pregnancy calculators — due-date timelines, growth percentiles, vaccine schedules — during months when every week brings a new question. Because each tool does one job well, you can check a number in under a minute and get on with your day, instead of maintaining yet another account and dashboard.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">When do you need a health & fitness tool?</h2>
+    <p>
+      A dedicated tool earns its bookmark when a specific question pops up:
+    </p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li><strong class="text-neutral-900">Starting a diet</strong> — you want your real daily calorie needs before cutting anything.</li>
+      <li><strong class="text-neutral-900">Training by heart rate</strong> — your watch says 'zone 4' and you would like to know what that should actually feel like.</li>
+      <li><strong class="text-neutral-900">Waking up groggy</strong> — you suspect your bedtime, not your alarm clock, is the problem.</li>
+      <li><strong class="text-neutral-900">Expecting a baby</strong> — due date, trimester timeline and a healthy weight-gain range, all in one place.</li>
+      <li><strong class="text-neutral-900">Race day approaching</strong> — you need a hydration plan based on how much you actually sweat.</li>
+    </ul>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Start with these favourites</h2>
+    <p>
+      New to the category? These six cover the questions people ask most:
+    </p>
+    <p>
+      Start with <a href="https://vitascale.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">VitaScale</a> if you want the classic first number: it calculates your BMI in seconds from your height and weight. BMI is a blunt instrument, but as a screening figure it tells you which conversation to have next — and it pairs naturally with the body-fat estimators further down this page.
+    </p>
+    <p>
+      <a href="https://calofuel.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">CaloFuel</a> goes a step deeper, working out your TDEE — the calories you burn across a full day, activity included. It is the figure every sensible meal plan is built on, and the one to revisit whenever your routine or your weight changes.
+    </p>
+    <p>
+      Once calories are set, <a href="https://macromason.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">MacroMason</a> splits them into protein, carbs and fat, so a target like '2,200 calories' becomes an actual day of eating. Lifters chasing protein goals, and anyone trying a structured diet, will find this the most practical page in the category.
+    </p>
+    <p>
+      In the gym, <a href="https://onereplab.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">OneRepLab</a> estimates your one-rep max for any lift from a set you can already do. Training percentages, progressive overload and honest strength comparisons all flow from that single number — without ever attempting a risky true maximum.
+    </p>
+    <p>
+      Sleep gets equal billing here. <a href="https://remnest.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">REMNest</a> works backwards from your wake-up time, or forwards from bedtime, in full sleep cycles, so you surface at the light end of a cycle instead of being dragged out of deep sleep. A small change, with noticeably better mornings.
+    </p>
+    <p>
+      And for the goals that take weeks rather than minutes, <a href="https://habitforge.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">HabitForge</a> keeps your streaks visible — the daily walks, water targets and workouts that quietly add up. Momentum is much easier to keep when you can actually see it.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">How to choose the right one</h2>
+    <p>
+      Choosing well starts with matching the tool to the decision in front of you. For a one-off question — a due date, a race prediction — pick the single-purpose calculator and trust its focused maths. For anything you will check weekly, like weight, sleep debt or habits, favour the trackers that keep a simple history you can review. Treat every result as a well-informed estimate: body-composition figures from tape measurements and formulas are guides, not lab readings, and they work best when compared against your own previous numbers over time. If two tools overlap, start with the one asking for the fewest inputs.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Every tool in this category</h2>
+    <div class="grid gap-3 sm:grid-cols-2 !mt-4">
+      {niche.tools.map((t) => (
+        <a href={t.url} target="_blank" rel="noopener" class="block rounded-2xl border border-neutral-200 bg-white p-4 hover:shadow-md transition-all">
+          <span class="font-bold text-neutral-900">{t.name}</span>
+          <p class="mt-1 text-sm text-neutral-600">{t.blurb}</p>
+        </a>
+      ))}
+    </div>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Frequently asked questions</h2>
+    <div class="space-y-3 !mt-4">
+      {faqs.map((f) => (
+        <details class="rounded-2xl border border-neutral-200 bg-white p-5">
+          <summary class="cursor-pointer font-bold text-neutral-900">{f.q}</summary>
+          <p class="mt-2 text-neutral-600">{f.a}</p>
+        </details>
+      ))}
+    </div>
+
+    <p>
+      That is the shape of the whole category: small, honest tools that respect your time and your privacy. You will find all of them alongside the rest of Fixoraa's 443+ free tools in the <a href="/tools" class="font-semibold text-[#9333EA] hover:underline">full tools directory</a>. And if the number you need is not here yet, tell us through <a href="/request-tool" class="font-semibold text-[#9333EA] hover:underline">Request a Tool</a> — Fixoraa is built by a solo founder who adds new tools regularly, and reader requests genuinely shape what gets built next.
+    </p>
+  </article>
+</main>
+</Layout>

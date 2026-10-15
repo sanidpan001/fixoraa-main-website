@@ -1,0 +1,103 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { niches } from '../../data/tools';
+
+const niche = niches.find((n) => n.slug === 'text-tools')!;
+const title = "Text Tools: Count, Clean, Format & Analyze Text Free — Fixoraa";
+const description = "Free text tools to count words, clean lists, convert case, compare drafts and check readability — for writers, students and SEOs. No signup, no watermark.";
+const faqs = [
+  { q: "Are these text tools really free?", a: "Yes. Every text tool on Fixoraa is free for unlimited use — paste as much text as you like, as often as you like. There are no accounts, no trials and no premium tier hiding the useful features. If a tool is listed here, the whole tool is free, not a demo of one." },
+  { q: "Is the text I paste into these tools private?", a: "The counting, cleaning and converting tools work right in your browser, so your text stays on your device and is never stored against an identity — there is no account to tie it to. The AI writing helpers use Fixoraa's AI backend to generate drafts, so as with any AI tool, avoid pasting passwords or sensitive personal data into those." },
+  { q: "Can these tools count words and reading time for my essay or speech?", a: "Yes — that is exactly what WordTally is for. It counts words and characters as you type or paste, and estimates reading time, so you can trim an essay to its limit or check whether a speech fits its slot. Teachers, students and presenters use it daily for precisely this." },
+  { q: "What is the difference between word frequency and keyword density?", a: "Word frequency, measured by FreqLens, simply counts how often each word appears in a piece of writing — useful for spotting repetition and understanding style. Keyword density, measured by Keynetic, focuses on your chosen SEO keywords as a share of the total text, so you can check a page is on-topic without overdoing it." },
+  { q: "Can a tool completely fix my writing for me?", a: "These tools will polish, tidy and draft — ProsePulse smooths style, and assistants like QuillVortex AI and Mailor AI can draft emails and articles. But they support your judgement rather than replace it. Use them for cleanup and first drafts, then read the result once with your own eyes before it goes out." },
+];
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+};
+---
+<Layout title={title} description={description}>
+<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+<main class="mx-auto max-w-3xl px-4 py-10 sm:py-14">
+  <div class="text-center mb-10">
+    <span class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full text-white bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] mb-4">Category Guide</span>
+    <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-neutral-900">Free <span class="bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] bg-clip-text text-transparent">text tools</span> for cleaner, sharper writing</h1>
+    <p class="mt-4 text-neutral-500">{niche.tagline} — {niche.tools.length} free tools · No signup · No watermark</p>
+  </div>
+
+  <article class="space-y-6 text-neutral-700 leading-relaxed">
+    <p class="text-lg text-neutral-800">
+      Text is the raw material of almost everything you do online — emails, essays, listings, captions, applications, even code. This category gathers Fixoraa's text tools: small, sharp utilities that count, clean, convert, compare and polish words, so a job that would take twenty fiddly minutes by hand takes twenty seconds instead. Every one is <strong class="text-neutral-900">free with unlimited use</strong>, works in your browser, and asks for nothing in return — no signup, no watermark, no catch. Some of them are almost embarrassingly simple. All of them exist because somebody needed them at 11 p.m. the night before a deadline.
+    </p>
+    <p>
+      Writers use these tools to hit word counts and check readability before publishing. Students use them to clean up assignments and count words before submission. Marketers and SEOs use them to test subject lines, measure keyword density and shape headlines into clean URLs. And anyone who has ever pasted a list out of a spreadsheet uses them to remove duplicates and sort chaos into order. If your workday involves a blinking cursor, at least one of these will save you time this week.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">When do you need a text tool?</h2>
+    <p>See if any of these sound familiar:</p>
+    <ul class="list-disc space-y-2 pl-6">
+      <li>An application or essay has a strict word limit, and your draft is a few hundred words over it.</li>
+      <li>A list exported from a spreadsheet contains the same names, emails or lines twice.</li>
+      <li>Two versions of a document exist, and you need to know exactly what changed between them.</li>
+      <li>A heading arrives typed in ALL CAPS, or a title needs to become a tidy, readable URL.</li>
+      <li>Pasted text behaves strangely — a form rejects it or the spacing breaks — because invisible characters are hiding inside it.</li>
+      <li>An important email will live or die by its subject line, and you have three candidates.</li>
+    </ul>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Start with these favourites</h2>
+    <p>New here? These are the tools that cover most of what people come for:</p>
+    <p>
+      <a href="https://wordtally.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">WordTally</a> is the one to bookmark first. It counts words, characters and reading time as you type, which settles everything from essay limits to how long a speech will actually take to deliver — no more guessing, and no more manual counting.
+    </p>
+    <p>
+      When formatting fights back, <a href="https://textshift.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">TextShift</a> converts text case — upper, lower, title case and more — in a single paste. It quietly ends the retype-it-by-hand era for headings, names and imported data that arrived in the wrong case.
+    </p>
+    <p>
+      Messy lists meet <a href="https://dupeless.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">Dupeless</a>, which removes duplicate lines from any text, and its partner <a href="https://lineforge.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">LineForge</a>, which sorts, filters and dedupes lines. Together they turn a chaotic export into a clean, trustworthy list in seconds.
+    </p>
+    <p>
+      For versions, <a href="https://diffscope.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">DiffScope</a> compares two texts side by side with highlights, so the one changed sentence in a long contract, email or article cannot hide from you. It is the fastest way to answer the question "what actually changed?"
+    </p>
+    <p>
+      Before you publish, <a href="https://readrank.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">ReadRank</a> scores your text's readability level, while <a href="https://freqlens.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">FreqLens</a> analyzes word frequency. Together they are a quick reality check — proof that your writing is as clear as you think it is, and not repeating the same words more than you realised.
+    </p>
+    <p>
+      And for the inbox, <a href="https://subjectlab.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">SubjectLab</a> tests email subject lines that get opened, because the best email in the world is useless if nobody clicks it. Pair it with Mailor AI when the whole message needs drafting, not just the subject.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">How to choose the right one</h2>
+    <p>
+      Start from the state of your text, not from the tool list. Too long, or simply unmeasured? Count it first. Messy or repetitive? Clean the lines before you polish the prose. Two drafts on your desk? Compare them before you edit either one. The tools chain together naturally — count, clean, compare, then polish — and each step takes seconds rather than minutes.
+    </p>
+    <p>
+      One habit is worth building: do your cleanup on a copy, and keep the original somewhere safe until you are sure the new version is the one you want. Text tools are fast, and fast is wonderful — right up until you overwrite the only copy of something. A duplicate file costs nothing; a lost draft costs plenty.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Every tool in this category</h2>
+    <div class="grid gap-3 sm:grid-cols-2 !mt-4">
+      {niche.tools.map((t) => (
+        <a href={t.url} target="_blank" rel="noopener" class="block rounded-2xl border border-neutral-200 bg-white p-4 hover:shadow-md transition-all">
+          <span class="font-bold text-neutral-900">{t.name}</span>
+          <p class="mt-1 text-sm text-neutral-600">{t.blurb}</p>
+        </a>
+      ))}
+    </div>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Frequently asked questions</h2>
+    <div class="space-y-3 !mt-4">
+      {faqs.map((f) => (
+        <details class="rounded-2xl border border-neutral-200 bg-white p-5">
+          <summary class="cursor-pointer font-bold text-neutral-900">{f.q}</summary>
+          <p class="mt-2 text-neutral-600">{f.a}</p>
+        </details>
+      ))}
+    </div>
+
+    <p>
+      That is this category — but Fixoraa now has <strong class="text-neutral-900">443+ tools</strong> in total, built by a solo founder and growing all the time. Browse the <a href="/tools" class="font-semibold text-[#9333EA] hover:underline">full tools directory</a> to see everything in one place, and if the exact text tool you need does not exist yet, tell us through <a href="/request-tool" class="font-semibold text-[#9333EA] hover:underline">Request a Tool</a> — new tools are added regularly, and reader requests jump the queue.
+    </p>
+  </article>
+</main>
+</Layout>

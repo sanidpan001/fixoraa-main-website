@@ -1,0 +1,99 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const title = "SIP vs RD: Which One Grows Your Money Better? — Fixoraa Blog";
+const description = "SIP vs RD explained in plain language: how each one works, an illustrative ₹5,000-a-month example, the risk and tax differences, and how to pick the right one for your goal.";
+const faqs = [
+  { q: "Is a SIP better than an RD?", a: "Neither is universally better — they solve different problems. An RD gives you a fixed, predictable maturity amount, which suits money you cannot afford to see fall in value. A SIP invests in market-linked mutual funds, so the final amount is not guaranteed, but over long periods it has the potential to grow faster and beat inflation by a wider margin. The right choice depends on your goal and time horizon, not on which one sounds more exciting." },
+  { q: "Is my money safe in an RD? What about a SIP?", a: "A recurring deposit is a bank or post-office product with a declared interest rate, so the maturity value is known in advance and does not depend on the stock market. A SIP puts money into mutual funds whose value moves with the market — it can be worth less than you invested at some points along the way. That short-term movement is the price of the higher long-term growth potential." },
+  { q: "What return rate should I assume when comparing SIP and RD?", a: "For an RD, use the actual rate your bank offers you, since that rate is fixed when you open the deposit. For a SIP, never treat any rate as promised — calculators let you try an assumed rate (10–12% a year is commonly used for illustration) precisely so you can see a range of outcomes. Run the same amount at a lower assumed rate too, so your plan still works if returns are modest." },
+  { q: "Can I stop or change a SIP or RD midway?", a: "A SIP can usually be paused, stopped or changed with your fund platform, though exit loads or tax may apply depending on the fund and how long you have held it. An RD is a commitment to the bank: missing deposits can attract a penalty, and closing it early usually means earning a lower interest rate than the one you signed up for. Check the exact terms before starting either one." },
+  { q: "How is the interest or gain taxed?", a: "RD interest is added to your income and taxed at your income-tax slab rate, and banks may deduct TDS once interest crosses the applicable threshold. SIP gains are taxed under mutual-fund capital-gains rules, which differ for equity and debt funds and by holding period. The rules change from time to time, so treat any calculator result as pre-tax and check the current rules for your situation." },
+  { q: "Which is better for a goal that is one year away?", a: "For money you will definitely need in about a year — a fee payment, a deposit, a planned purchase — predictability usually matters more than growth, which is what an RD is built for. A SIP's value can dip at exactly the wrong moment over such a short window. Market-linked investing generally makes more sense when the goal is several years away and a temporary dip has time to recover." },
+];
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+};
+---
+<Layout title={title} description={description}>
+<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+<main class="mx-auto max-w-3xl px-4 py-10 sm:py-14">
+  <div class="text-center mb-10">
+    <span class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full text-white bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] mb-4">Blog · 7 min read</span>
+    <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-neutral-900">SIP vs RD: which one <span class="bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] bg-clip-text text-transparent">grows your money better?</span></h1>
+    <p class="mt-4 text-neutral-500 text-sm">Published October 15, 2026 · by the Fixoraa team</p>
+  </div>
+
+  <article class="space-y-6 text-neutral-700 leading-relaxed">
+    <p class="text-lg text-neutral-800">
+      Put ₹5,000 a month aside for ten years and you will have contributed ₹6,00,000 of your own money. What that pile becomes, though, depends heavily on where the monthly amount goes. Two of the most common homes for it in India are a recurring deposit (RD) at a bank and a systematic investment plan (SIP) in a mutual fund. They look similar from the outside — a fixed amount leaves your account every month — but they are built on completely different promises.
+    </p>
+    <p>
+      This guide explains <strong class="text-neutral-900">how each one actually works</strong>, runs the same monthly amount through both in a clearly-labelled example, and then gets to the part that actually decides the winner for you: risk, time horizon, inflation and tax. At the end you will find free calculators that let you repeat the comparison with your own numbers in under a minute.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">What is a recurring deposit (RD)?</h2>
+    <p>
+      An RD is a savings product offered by banks and post offices. You commit to depositing a fixed amount every month for a fixed tenure — six months, a year, five years, ten years. In return, the bank pays you interest at a rate that is <strong class="text-neutral-900">declared up front and locked in</strong> when you open the deposit. Interest is typically compounded quarterly, and at the end of the tenure you receive your deposits plus all the interest earned.
+    </p>
+    <p>
+      The defining feature of an RD is certainty. On the day you open it, you can know almost exactly what you will receive on maturity day. The stock market does not matter, headlines do not matter, and your balance never dips below what you have put in. The trade-off for that calm is speed: the interest rate is modest, and after tax and inflation, the growth is gentler than most people expect. If you want to model a deposit with a deposit timeline and compare tenures side by side, the <a href="https://dripvault.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">DripVault RD calculator</a> lays the whole schedule out month by month.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">What is a SIP?</h2>
+    <p>
+      A SIP is not a product by itself — it is a way of investing. Each month, your fixed amount is used to buy units of a mutual fund you have chosen. When markets are down, the same ₹5,000 buys more units; when markets are up, it buys fewer. This is called rupee-cost averaging, and over time it smooths out the price you pay per unit instead of betting everything on one day's market level.
+    </p>
+    <p>
+      The defining feature of a SIP is the opposite of an RD's: <strong class="text-neutral-900">nothing is guaranteed</strong>. The fund's value rises and falls with the market, and the return figure you see in any calculator is an assumption you type in, not a promise anyone makes. In exchange for living with that uncertainty, your money is exposed to the growth of real businesses, which over long periods has historically outpaced fixed deposit rates. The <a href="https://sipscope.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">SIPScope SIP calculator</a> shows how sensitive the outcome is to the return rate and tenure you assume — try sliding the rate down a couple of points to see a more cautious picture.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">The same ₹5,000, two different journeys</h2>
+    <p>
+      Here is an <strong class="text-neutral-900">illustrative example only</strong> — not a prediction, and not any bank's or fund's actual rate. Assume ₹5,000 a month for 10 years (total deposited: ₹6,00,000). For the RD, assume a fixed interest rate of <strong class="text-neutral-900">7% per year, compounded quarterly</strong>. For the SIP, assume the fund returns <strong class="text-neutral-900">12% per year</strong> on average. These are assumptions chosen to make the mechanics visible; real RD rates are whatever your bank offers on the day, and real SIP returns vary year to year and can be lower.
+    </p>
+    <p>
+      Under those assumptions, the RD matures at roughly <strong class="text-neutral-900">₹8.7 lakh</strong> — your ₹6 lakh of deposits plus about ₹2.7 lakh of interest. The SIP, at a steady assumed 12%, grows to roughly <strong class="text-neutral-900">₹11.6 lakh</strong>. Over the shorter five-year window the gap narrows: the RD reaches about ₹3.6 lakh on ₹3 lakh deposited, and the SIP about ₹4.1 lakh. You can reproduce and adjust every one of these figures with the <a href="https://sipvsrd.2.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">SipVsRd comparison tool</a>, which runs the same monthly amount through both side by side and also shows the inflation-adjusted, "real" value of the outcome — or model each leg separately with a <a href="https://compomint.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">compound interest calculator</a>.
+    </p>
+    <p>
+      Two honest cautions about that gap. First, the SIP line in the example is smooth; the real journey is jagged, with months where your balance is below the RD's even years in. Second, if you lower the SIP assumption to, say, 9%, the ten-year result drops to roughly ₹9.7 lakh — still ahead in this example, but by a much smaller margin. The comparison is genuinely useful, but only when you test more than one assumed rate.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Risk: the difference that actually matters</h2>
+    <p>
+      Strip away the numbers and the SIP-versus-RD choice is really a question about <strong class="text-neutral-900">what this money is for</strong>. If the goal has a hard deadline and a fixed price — next year's school fees, a home down payment you have already committed to, an emergency buffer — a fall in value at the wrong moment is not an inconvenience, it is a failed goal. That is the RD's home ground, and it is also why emergency money generally belongs in deposit-like products rather than in funds.
+    </p>
+    <p>
+      If the goal is distant and flexible — retirement in twenty years, a child's higher education a decade away — the risk flips. The danger is no longer a market dip; it is that your money grows too slowly to keep up with rising prices, quietly losing purchasing power year after year while the number on the statement creeps up. For those goals, the RD's certainty can be the riskier option in real terms.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Inflation and tax quietly change the result</h2>
+    <p>
+      Two deductions never appear in the headline maturity figure. The first is <strong class="text-neutral-900">inflation</strong>: if prices rise at 5–6% a year while your deposit earns 7% before tax, your real gain is thin. This is exactly why the side-by-side tool shows an inflation-adjusted value alongside the nominal one — a maturity amount that looks large in ten years buys less than the same number today. The second is <strong class="text-neutral-900">tax</strong>: RD interest is taxed as income at your slab rate, while SIP gains fall under mutual-fund capital-gains rules that vary by fund type and holding period. A fair comparison is always after-tax and after-inflation, even if both adjustments are estimates.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">A practical answer: you do not have to choose only one</h2>
+    <p>
+      Most households quietly end up using both, and that is not indecision — it is matching. Keep near-term, must-not-fail money in deposits where the maturity value is known to the rupee. Point long-term money at a SIP where growth has time to do its work and dips have time to recover. Review the split once a year: as a goal gets closer, moving it gradually out of market-linked products and into safer ones is a common, sensible pattern. Whatever you decide, run your own figures first — the calculators linked in this post are free, need no signup, and show every intermediate step rather than just a final number.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Frequently asked questions</h2>
+    <div class="space-y-3 !mt-4">
+      {faqs.map((f) => (
+        <details class="rounded-2xl border border-neutral-200 bg-white p-5">
+          <summary class="cursor-pointer font-bold text-neutral-900">{f.q}</summary>
+          <p class="mt-2 text-neutral-600">{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </article>
+
+  <div class="mt-12 rounded-3xl bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] p-8 sm:p-10 text-center text-white">
+    <h2 class="text-2xl sm:text-3xl font-black mb-3">Run the numbers yourself — free.</h2>
+    <p class="text-white/90 mb-6">SipVsRd and 440+ other calculators and tools are waiting in the directory. No signup, no watermark, ever.</p>
+    <a href="/tools" class="inline-block rounded-2xl bg-white text-neutral-900 font-bold px-8 py-3.5 hover:shadow-xl hover:-translate-y-0.5 transition-all">Browse all 443+ tools</a>
+  </div>
+</main>
+</Layout>

@@ -1,0 +1,104 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { niches } from '../../data/tools';
+
+const niche = niches.find((n) => n.slug === 'pdf-tools');
+const title = "PDF Tools — Merge, Split, Convert & Sign for Free | Fixoraa";
+const description = "Merge, split, compress, convert, sign and repair PDFs with free tools that run in your browser. No signup, no watermark, no locked features.";
+const faqs = [
+  { q: "Are these PDF tools really free, or do features unlock later?", a: "Really free. Every tool in this category works fully without payment — no trial countdown, no premium tier holding the useful features back, and no watermark stamped on your finished file. Open the tool, do the job, download the result; that is the entire deal, for as many files as you need." },
+  { q: "Do my files get uploaded to a server?", a: "Most of these tools process your file right in your browser, so the document never leaves your device. That makes them comfortable to use for contracts, mark sheets and other private paperwork. There is also no account and no sign-in, so nothing you do here is tied to your identity." },
+  { q: "Why can't I search or copy text from my scanned PDF?", a: "A scan is a picture of a page, not real text, so there is nothing for search to find. Run the file through PDFSeer first — its OCR reads the page images and rebuilds them as a searchable document. After that, copying, searching and most conversions will work the way you expect." },
+  { q: "Can I open a password-protected PDF?", a: "Yes, if you know the password. KeyOff PDF unlocks a protected file once you enter the password you already have, so you can then merge, convert or print it freely. It is meant for your own documents — it cannot guess or crack a password you do not know." },
+  { q: "Will editing change or damage my original file?", a: "No. Every tool produces a new, processed file for you to download; the original on your device is never modified. That means you can experiment freely — compress a copy, reorder another — and if a result is not right, your untouched original is still exactly where you left it." },
+];
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+};
+---
+<Layout title={title} description={description}>
+<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+<main class="mx-auto max-w-3xl px-4 py-10 sm:py-14">
+  <div class="text-center mb-10">
+    <span class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full text-white bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] mb-4">Category Guide</span>
+    <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-neutral-900">PDF <span class="bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] bg-clip-text text-transparent">Tools</span></h1>
+    <p class="mt-4 text-lg text-neutral-600">{niche.tagline}</p>
+    <p class="mt-2 text-neutral-500 text-sm">{niche.tools.length} free tools · No signup · No watermark</p>
+  </div>
+
+  <article class="space-y-6 text-neutral-700 leading-relaxed">
+    <p class="text-lg text-neutral-800">
+      A PDF usually arrives finished — and that is precisely the problem. The contract is in the wrong order, the application is three separate files, the report is too large for the upload portal, and the scanned mark sheet reads sideways. This category is Fixoraa's workshop for those moments: tools to merge, split, convert, compress, sign and repair PDFs, each built to do one job properly. There is nothing to install and no account to create; you open the tool, hand it your file, and download the fixed version.
+    </p>
+    <p>
+      The visitors here are just as varied. Students merge assignments and compress them until a stubborn college portal finally accepts the upload. Office workers pull three pages out of a long report, add page numbers, and send a clean copy to a client. Teachers turn worksheets into fold-and-staple booklets and generate planner pages for the term. Legal and operations teams apply Bates numbering, fill forms, and permanently redact sensitive lines before documents leave the building. Designers extract the original images from a client's PDF, and job seekers build a resume, sign an offer letter, and send it back — all before lunch. What all of them share is a deadline, and very little patience for software that demands an account before it will lift a finger.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">When do you need a PDF tool?</h2>
+    <p>
+      Most PDF problems announce themselves in one of five ways:
+    </p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li><strong class="text-neutral-900">The file is too big</strong> — an email or portal rejects it, and it needs to shrink without turning into a blurry mess.</li>
+      <li><strong class="text-neutral-900">The document is in pieces</strong> — chapters, scans and attachments that must become one file, in the right order.</li>
+      <li><strong class="text-neutral-900">You need just a part of it</strong> — one chapter, the pages that mention a name, or everything except the blank pages.</li>
+      <li><strong class="text-neutral-900">It needs paperwork done</strong> — a form filled, a signature added, fields locked so nobody can alter them afterwards.</li>
+      <li><strong class="text-neutral-900">The file itself is broken or unreadable</strong> — a damaged download, a crooked scan, or pages no search can find text in.</li>
+    </ul>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Start with these favourites</h2>
+    <p>
+      Six tools handle the great majority of visits to this category:
+    </p>
+    <p>
+      <a href="https://docbind.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">DocBind</a> is the workbench for everyday jobs: merge several PDFs into one, split a long file apart, and organise the pages until the document reads the way it should. If your problem involves page order, start here.
+    </p>
+    <p>
+      When size is the problem, <a href="https://pdfslim.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">PDFSlim</a> compresses a PDF down with both quality and target-size modes, so you can aim for the exact limit a portal demands instead of hoping a generic squeeze is enough.
+    </p>
+    <p>
+      For mixed errands, <a href="https://pdfninja.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">PDFNinja</a> is the all-in-one toolkit — a converter and editor in a single place, handy when the job is "a bit of everything" and you do not want five tabs open to finish it.
+    </p>
+    <p>
+      Signing used to mean print, sign, scan, repeat. <a href="https://inkseal.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">InkSeal</a> lets you sign any PDF directly — draw your signature, type it, or upload an image of it — and return a signed document within minutes.
+    </p>
+    <p>
+      A scanned PDF is really just photographs of pages, which is why search finds nothing in it. <a href="https://pdfseer.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">PDFSeer</a> runs OCR over scanned PDFs and turns them into searchable documents that you can copy from and find text in.
+    </p>
+    <p>
+      When a PDF needs real editing rather than small fixes, <a href="https://wordbridge.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">WordBridge</a> converts it into an editable Word document, so you can change the words themselves and carry on — instead of retyping the whole thing from scratch.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">How to choose the right one</h2>
+    <p>
+      Choose from the result you need. If the content is fine and only the container is wrong — too big, the wrong format, pages out of order — a converter or an organiser is the answer. If the document itself must change, look at the editing tools: watermarks, headers and footers, redactions, form fields. And if a file is damaged or came from a scanner, fix that first with repair or OCR before converting anything, because every later step works better on a healthy, searchable file. When a job needs several steps, do the structural work first and compress last. Everything here is free, so work on a copy and experiment until the output is right.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Every tool in this category</h2>
+    <div class="grid gap-3 sm:grid-cols-2 !mt-4">
+      {niche.tools.map((t) => (
+        <a href={t.url} target="_blank" rel="noopener" class="block rounded-2xl border border-neutral-200 bg-white p-4 hover:shadow-md transition-all">
+          <span class="font-bold text-neutral-900">{t.name}</span>
+          <p class="mt-1 text-sm text-neutral-600">{t.blurb}</p>
+        </a>
+      ))}
+    </div>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Frequently asked questions</h2>
+    <div class="space-y-3 !mt-4">
+      {faqs.map((f) => (
+        <details class="rounded-2xl border border-neutral-200 bg-white p-5">
+          <summary class="cursor-pointer font-bold text-neutral-900">{f.q}</summary>
+          <p class="mt-2 text-neutral-600">{f.a}</p>
+        </details>
+      ))}
+    </div>
+
+    <p>
+      These tools are one shelf in a library of 443+ free tools that Fixoraa's solo founder keeps growing, with new additions landing regularly. Explore the rest in the <a href="/tools" class="font-semibold text-[#9333EA] hover:underline">tools directory</a> — and if your exact PDF problem has no tool yet, describe it on <a href="/request-tool" class="font-semibold text-[#9333EA] hover:underline">Request a Tool</a>. Many of the utilities above exist because somebody asked.
+    </p>
+  </article>
+</main>
+</Layout>

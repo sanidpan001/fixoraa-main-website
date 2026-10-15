@@ -1,0 +1,103 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { niches } from '../../data/tools';
+
+const niche = niches.find((n) => n.slug === 'image-tools')!;
+const title = "Image Tools: Edit, Compress & Enhance Photos Free — Fixoraa";
+const description = "Free image tools to edit, compress, resize and enhance photos in your browser — remove backgrounds, restore old photos and more. No signup, no watermark.";
+const faqs = [
+  { q: "Are these image tools really free?", a: "Yes — every image tool on Fixoraa is free for unlimited use. There is no trial that expires, no premium tier holding back the full-quality export, and no watermark added to your finished picture. Open the tool, do the job, download the result. That is the whole deal, for every tool in this category." },
+  { q: "Do my photos get uploaded to a server?", a: "Most of these tools process your image entirely in your browser, so the photo never leaves your device. A few AI-powered features — the heavier enhancement and restoration work — use Fixoraa's AI backend to do the processing. Either way there is no account, and nothing is stored against your identity." },
+  { q: "Will compressing a photo ruin its quality?", a: "Not if you use a light touch. Compressors like ShrinkPro remove invisible excess data first, so at sensible settings most people cannot see a difference — the file just gets much smaller. The trick is to compress once, at the end of your editing, rather than re-saving the same file again and again." },
+  { q: "Can I use the edited images for my business or shop?", a: "Yes. Images you create or edit with these tools are yours to use — in product listings, social posts, presentations and client work. There are no watermarks and no usage restrictions on your results. Just make sure you own the rights to the original photo you started with." },
+  { q: "Which format should I save in — JPG, PNG, WebP or AVIF?", a: "A simple rule: JPG for photographs you share, PNG when you need transparency or crisp text and logos, and WebP or AVIF when a website needs the smallest possible file. Tools in this category convert between all of them, so you can keep one master copy and export whichever format the job asks for." },
+];
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+};
+---
+<Layout title={title} description={description}>
+<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+<main class="mx-auto max-w-3xl px-4 py-10 sm:py-14">
+  <div class="text-center mb-10">
+    <span class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full text-white bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] mb-4">Category Guide</span>
+    <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-neutral-900">Free <span class="bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] bg-clip-text text-transparent">image tools</span> for every photo job</h1>
+    <p class="mt-4 text-neutral-500">{niche.tagline} — {niche.tools.length} free tools · No signup · No watermark</p>
+  </div>
+
+  <article class="space-y-6 text-neutral-700 leading-relaxed">
+    <p class="text-lg text-neutral-800">
+      Almost every photo on your phone or laptop eventually needs a small job done on it — made smaller, made sharper, cleaned up, or prepared for a form, a listing or a post. This category collects Fixoraa's image tools in one place: focused little editors that each do one job well, right in your browser, without asking you to install heavy software or create an account first. Whether the job takes ten seconds or ten minutes, the promise stays the same — <strong class="text-neutral-900">free unlimited use, no signup, and no watermark</strong> stamped on your result.
+    </p>
+    <p>
+      The people who lean on these tools most are not professional photographers. They are online sellers who need clean product photos, students and job-seekers preparing documents and ID photos, social media creators making thumbnails and collages, website owners trying to keep their pages fast, and families rescuing old printed photographs before they fade any further. If a picture matters to you but a professional editing suite feels like overkill, this category was built for you.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">When do you need an image tool?</h2>
+    <p>Most visits to this page start with one of these moments:</p>
+    <ul class="list-disc space-y-2 pl-6">
+      <li>A website, exam form or marketplace rejects your photo because the file is too big, or the dimensions are wrong.</li>
+      <li>A stranger, a messy background or a number plate is ruining an otherwise perfect shot you want to publish.</li>
+      <li>An old family photograph is faded, scratched or blurry — and it is the only copy you have.</li>
+      <li>Your product photo needs a plain white background before it can go into an online listing.</li>
+      <li>You need a correct passport-size photo today, without a trip to a studio.</li>
+      <li>A screenshot needs to look polished before it goes into a presentation, a portfolio or a post.</li>
+    </ul>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Start with these favourites</h2>
+    <p>If you are not sure where to begin, these are the tools people reach for first:</p>
+    <p>
+      Start with <a href="https://shrinkpro.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">ShrinkPro</a> when a file is simply too heavy. It compresses images without visible quality loss, which makes it the fix for slow websites, email attachments that bounce, and upload forms with strict size limits. Its sibling <a href="https://pixelslim.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">PixelSlim</a> does the same job when sharing speed matters most.
+    </p>
+    <p>
+      For backgrounds, <a href="https://erasepro.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">ErasePro</a> removes them in one click with AI, turning a cluttered snapshot into a clean cut-out you can drop onto any design. Pair it with <a href="https://bgwhite.2.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">BgWhite</a> when a marketplace listing demands a pure white backdrop behind your product.
+    </p>
+    <p>
+      When the problem is inside the photo rather than around it, <a href="https://objectpro.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">ObjectPro</a> removes unwanted objects — a passer-by, a wire, a stray sign — from any picture. It is the quiet fix behind a lot of suddenly-perfect holiday photos.
+    </p>
+    <p>
+      Old and damaged photos go to <a href="https://restorepro.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">RestorePro</a>, which uses AI to restore them, while <a href="https://pixelfix.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">PixelFix</a> tackles blurry and pixelated shots in one click — and <a href="https://claritypro.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">ClarityPro</a> goes a step further, unblurring photos to recover detail you thought was gone.
+    </p>
+    <p>
+      Deadline jobs belong to <a href="https://passportpro.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">PassportPro</a>, which creates passport photos at home — no studio queue, and no paying for a full printed sheet when you need a single photo. Keep the digital copy for online applications, or print it wherever you like.
+    </p>
+    <p>
+      And when a site asks for exact pixels, <a href="https://resizecraft.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">ResizeCraft</a> resizes images to any dimension instantly — banners, profile pictures, thumbnails and form uploads that insist on one very specific size.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">How to choose the right one</h2>
+    <p>
+      Choose by the problem, not by the tool name. File too heavy? That is compression. Right photo, wrong shape? That is resizing or cropping. Something in the frame should not be there? That is object removal or the background eraser. A photo too precious to lose but too damaged to share? That is restoration. Most jobs map to one tool in seconds.
+    </p>
+    <p>
+      Two habits help everywhere. First, keep your original file untouched and always work on a copy, so you can start again if an edit goes too far. Second, do your editing before you compress — compression should be the last step, because it is the one step that throws information away. Preparing images for a website? Finish with sensible dimensions and a modern format. Preparing for print? Keep the largest, cleanest version you have.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Every tool in this category</h2>
+    <div class="grid gap-3 sm:grid-cols-2 !mt-4">
+      {niche.tools.map((t) => (
+        <a href={t.url} target="_blank" rel="noopener" class="block rounded-2xl border border-neutral-200 bg-white p-4 hover:shadow-md transition-all">
+          <span class="font-bold text-neutral-900">{t.name}</span>
+          <p class="mt-1 text-sm text-neutral-600">{t.blurb}</p>
+        </a>
+      ))}
+    </div>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Frequently asked questions</h2>
+    <div class="space-y-3 !mt-4">
+      {faqs.map((f) => (
+        <details class="rounded-2xl border border-neutral-200 bg-white p-5">
+          <summary class="cursor-pointer font-bold text-neutral-900">{f.q}</summary>
+          <p class="mt-2 text-neutral-600">{f.a}</p>
+        </details>
+      ))}
+    </div>
+
+    <p>
+      That is this category — but Fixoraa now has <strong class="text-neutral-900">443+ tools</strong> in total, built by a solo founder and growing all the time. Browse the <a href="/tools" class="font-semibold text-[#9333EA] hover:underline">full tools directory</a> to see everything in one place, and if the exact image tool you need does not exist yet, tell us through <a href="/request-tool" class="font-semibold text-[#9333EA] hover:underline">Request a Tool</a> — new tools are added regularly, and reader requests jump the queue.
+    </p>
+  </article>
+</main>
+</Layout>

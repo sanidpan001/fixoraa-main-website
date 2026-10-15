@@ -1,0 +1,103 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { niches } from '../../data/tools';
+
+const niche = niches.find((n) => n.slug === 'developer-tools')!;
+const title = "Developer Tools: JSON, Regex, Hash & UUID Utilities — Fixoraa";
+const description = "Free developer tools for the small jobs: JSON and SQL formatting, regex testing, JWT decoding, cron translation, hashes and UUIDs. No signup, no watermark.";
+const faqs = [
+  { q: "Are these developer tools really free?", a: "Yes — every developer tool on Fixoraa is free for unlimited use, at work or at home. There is no account to create, no API key to request and no paid tier waiting behind the useful features. Open the page, do the job, close the tab. Bookmarks are the only commitment involved." },
+  { q: "Is it safe to paste tokens and passwords into these tools?", a: "These utilities run in your browser — decoding, formatting and generating happen on your own device, and tools like the htpasswd generator work 100% in-browser. That said, good habits still apply anywhere online: prefer test tokens over live production secrets, and rotate anything you suspect has been exposed, wherever it was pasted." },
+  { q: "Do I need to install or configure anything?", a: "No. Each tool is a single web page that works in any modern browser, on desktop or phone, with nothing to install, update or configure. That is the point of the category — the toolbox is identical on every machine you sit down at, including the borrowed laptop during an incident." },
+  { q: "Can I turn an API response into TypeScript types automatically?", a: "Yes — that is what ModelMint does. Paste a JSON response and it generates TypeScript interfaces you can drop straight into your project. It saves the tedious, error-prone job of writing interfaces field by field by hand, and keeps your types honest against what the API actually returns." },
+  { q: "Can I use these tools in commercial projects?", a: "Yes. The tools are free for unlimited use, including in commercial work and inside companies. What you generate with them — test data, hashes, passwords, converted files, formatted queries — is yours to use in your projects. There are no watermarks, licence keys or attribution requirements attached to the output." },
+];
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+};
+---
+<Layout title={title} description={description}>
+<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+<main class="mx-auto max-w-3xl px-4 py-10 sm:py-14">
+  <div class="text-center mb-10">
+    <span class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full text-white bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] mb-4">Category Guide</span>
+    <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-neutral-900">Free <span class="bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] bg-clip-text text-transparent">developer tools</span> for the small jobs</h1>
+    <p class="mt-4 text-neutral-500">{niche.tagline} — {niche.tools.length} free tools · No signup · No watermark</p>
+  </div>
+
+  <article class="space-y-6 text-neutral-700 leading-relaxed">
+    <p class="text-lg text-neutral-800">
+      Development is full of tiny jobs that are too small for a plugin and too annoying to do by hand — decode this token, translate that cron line, format this JSON, mint a UUID. This category is Fixoraa's shelf of tiny utilities for exactly those moments: single-purpose developer tools that load instantly in your browser, do one job correctly, and get out of your way. There are 50 of them here, from classics like hash generators to newer helpers like JSON-schema validation with plain-English errors. All of them are <strong class="text-neutral-900">free with unlimited use</strong> — no signup, no watermark, nothing to install.
+    </p>
+    <p>
+      Backend developers live here during API work, frontend developers during styling and layout debugging, and support and operations engineers whenever a log, a timestamp or a config file needs decoding at speed. QA engineers are quietly the heaviest users of all — fake data, hashes and test webhooks are their daily bread. Students, meanwhile, use the same tools to learn what a JWT actually contains or why a regex failed. The common thread: nobody wants to write a throwaway script for a thirty-second job. Bookmark this category, and that job is never more than one tab away.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">When do you need a developer tool?</h2>
+    <p>The usual triggers look like this:</p>
+    <ul class="list-disc space-y-2 pl-6">
+      <li>An API returns an error and a wall of unformatted JSON, and you need to see its shape right now.</li>
+      <li>A scheduled job ran at the wrong time — or not at all — and the cron expression is the prime suspect.</li>
+      <li>A JWT is failing validation, and you need to read its claims, including when it expires.</li>
+      <li>Your regex passes every test in your head and still fails on the real string.</li>
+      <li>You need realistic test data — names, emails, rows — not another "test123".</li>
+      <li>A SQL query has grown into one unreadable line that nobody wants to touch in review.</li>
+    </ul>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Start with these favourites</h2>
+    <p>If you only bookmark a handful, make it these:</p>
+    <p>
+      Start with <a href="https://tokenpeek.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">TokenPeek</a> when authentication misbehaves. It decodes and inspects JWT tokens instantly, so claims, issuers and expiry times stop being guesses — usually the fastest route from "401 again" to knowing why.
+    </p>
+    <p>
+      <a href="https://cronsage.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">CronSage</a> translates cron expressions into plain English. It is the quickest way to confirm that the schedule you wrote really means what you think it means, before the 3 a.m. surprise proves otherwise.
+    </p>
+    <p>
+      For pattern work, <a href="https://regexrex.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">RegexRex</a> is a regex tester with live match highlighting. You watch matches appear and disappear as you edit the pattern, instead of the old loop of run it, squint, tweak, repeat.
+    </p>
+    <p>
+      <a href="https://modelmint.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">ModelMint</a> converts JSON into TypeScript interfaces. Paste an API response, get types you can actually commit — instead of hand-writing interfaces field by field and discovering the mismatches in production.
+    </p>
+    <p>
+      Data in the wrong shape goes through <a href="https://csvjson.2.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">CsvJson</a>, a two-way converter with delimiter auto-detect that also flattens and unflattens nested keys. It is the spreadsheet-to-API bridge that every project eventually needs.
+    </p>
+    <p>
+      And <a href="https://passsmith.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">PassSmith</a> generates strong, secure passwords on the spot — for the test accounts, service users and staging logins that should never share your real password, and too often quietly do.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">How to choose the right one</h2>
+    <p>
+      Pick by the artefact in front of you: a token goes to the decoder, a schedule to the cron translator, a payload to the formatter or converter, a pattern to the regex tester. These tools deliberately do one thing each, so choosing takes seconds — and they compose. Format the JSON, generate types from it, then mint the fake data to test against it. Because everything is a web page, the same toolbox is there on any machine, with no setup and nothing to update.
+    </p>
+    <p>
+      One practical tip: keep a tab from this category open during debugging sessions and incidents. Half of these tools earn their keep in the first minute of something going wrong — a decoded timestamp, a checked hash, a readable config — long before the deeper investigation even starts.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Every tool in this category</h2>
+    <div class="grid gap-3 sm:grid-cols-2 !mt-4">
+      {niche.tools.map((t) => (
+        <a href={t.url} target="_blank" rel="noopener" class="block rounded-2xl border border-neutral-200 bg-white p-4 hover:shadow-md transition-all">
+          <span class="font-bold text-neutral-900">{t.name}</span>
+          <p class="mt-1 text-sm text-neutral-600">{t.blurb}</p>
+        </a>
+      ))}
+    </div>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Frequently asked questions</h2>
+    <div class="space-y-3 !mt-4">
+      {faqs.map((f) => (
+        <details class="rounded-2xl border border-neutral-200 bg-white p-5">
+          <summary class="cursor-pointer font-bold text-neutral-900">{f.q}</summary>
+          <p class="mt-2 text-neutral-600">{f.a}</p>
+        </details>
+      ))}
+    </div>
+
+    <p>
+      That is this category — but Fixoraa now has <strong class="text-neutral-900">443+ tools</strong> in total, built by a solo founder and growing all the time. Browse the <a href="/tools" class="font-semibold text-[#9333EA] hover:underline">full tools directory</a> to see everything in one place, and if the exact developer tool you need does not exist yet, tell us through <a href="/request-tool" class="font-semibold text-[#9333EA] hover:underline">Request a Tool</a> — new tools are added regularly, and reader requests jump the queue.
+    </p>
+  </article>
+</main>
+</Layout>

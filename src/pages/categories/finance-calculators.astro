@@ -1,0 +1,104 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { niches } from '../../data/tools';
+
+const niche = niches.find((n) => n.slug === 'finance-calculators');
+const title = "Finance Calculators — Loans, Tax, SIP & Salary Tools | Fixoraa";
+const description = "Free finance calculators for loan EMIs, SIP growth, income tax, GST, salary in-hand and retirement planning. No signup, no watermark — just clear numbers.";
+const faqs = [
+  { q: "Are these finance calculators free to use?", a: "Yes — every calculator in this category is free for unlimited use. There is no signup, no trial period and no watermark or locked result waiting at the end. Open the calculator, enter your figures and read the full projection. You can come back and rerun the numbers as often as your plans change." },
+  { q: "How accurate are the results?", a: "The calculators use the standard formulas behind EMIs, compound growth, tax slabs and amortisation, so the projections are dependable for planning and comparing options. They are still estimates: a lender's final figure can include fees and exact day counts, and tax rules change. Confirm large commitments against official documents before signing." },
+  { q: "Do these tools cover Indian taxes and salaries?", a: "Many do, specifically. Taxly compares the old and new income tax regimes, SlabWise and TaxSnap handle GST, Rently works out HRA exemption, and TakeHome shows in-hand pay after deductions. There are dedicated calculators for gratuity, EPF, PPF and the Sukanya Samriddhi scheme too — look through the full list below." },
+  { q: "Is the financial information I enter stored anywhere?", a: "Most of these calculators run entirely in your browser, so the figures you type stay on your own device. Fixoraa has no accounts and no sign-in, which means there is no profile for your salary, loans or savings to be attached to, and nothing follows you from one visit to the next." },
+  { q: "Why are there several calculators that look similar?", a: "Because similar questions are not the same question. Comparing two loan offers side by side is a different job from understanding one loan's true cost, and a quick GST check differs from a full regime comparison. Each tool is shaped around one decision; since all are free, many people cross-check with two." },
+];
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+};
+---
+<Layout title={title} description={description}>
+<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+<main class="mx-auto max-w-3xl px-4 py-10 sm:py-14">
+  <div class="text-center mb-10">
+    <span class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full text-white bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] mb-4">Category Guide</span>
+    <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-neutral-900">Finance <span class="bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] bg-clip-text text-transparent">Calculators</span></h1>
+    <p class="mt-4 text-lg text-neutral-600">{niche.tagline}</p>
+    <p class="mt-2 text-neutral-500 text-sm">{niche.tools.length} free tools · No signup · No watermark</p>
+  </div>
+
+  <article class="space-y-6 text-neutral-700 leading-relaxed">
+    <p class="text-lg text-neutral-800">
+      Money decisions get easier when you can see the numbers before you commit to them. This category gathers all of Fixoraa's finance calculators in one place — tools for loans, income tax, salaries, savings and long-term investing, each designed to answer one specific question honestly. What will this loan actually cost over its full term? Which tax regime leaves more money in your pocket? How large a corpus can a modest monthly SIP build over twenty years? Instead of a spreadsheet and a free Sunday afternoon, you enter a few figures and get a clear projection in seconds.
+    </p>
+    <p>
+      The people who use these tools are easy to picture, because they are everyone. Employees run the numbers on a new job offer to see what the salary becomes after tax and deductions, and check their gratuity before making a switch. Families weigh renting against buying a home, year by year, instead of guessing. First-time borrowers compare two loan offers side by side rather than trusting the one with the friendlier brochure. Freelancers and small business owners work out rates, margins and break-even points, and savers quietly check the long-term questions: is the emergency fund big enough, is retirement on track, and what is inflation doing to idle cash?
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">When do you need a finance calculator?</h2>
+    <p>
+      A calculator earns its keep whenever a money choice has more than one moving part. These are the moments readers most often bring here:
+    </p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li><strong class="text-neutral-900">Before signing a loan</strong> — comparing EMIs is not enough; you want the total interest and the true cost of each offer.</li>
+      <li><strong class="text-neutral-900">At appraisal or offer time</strong> — turning a headline CTC into the in-hand figure that actually reaches your bank account.</li>
+      <li><strong class="text-neutral-900">At tax time</strong> — choosing between the old and new income tax regimes, adding GST to an invoice, or claiming HRA correctly.</li>
+      <li><strong class="text-neutral-900">When investing</strong> — seeing how a monthly SIP or a lump sum could grow, and what inflation takes back from that growth.</li>
+      <li><strong class="text-neutral-900">When debt feels heavy</strong> — deciding which card or loan to attack first so the payoff plan finally finishes.</li>
+    </ul>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Start with these favourites</h2>
+    <p>
+      If you are not sure where to begin, these six cover the questions asked most often:
+    </p>
+    <p>
+      <a href="https://sipscope.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">SIPScope</a> is the natural starting point for mutual fund investors. Enter a monthly amount and a time horizon, and it projects how the investment could grow — the picture that turns "I should start investing" into an actual plan with a number attached to it.
+    </p>
+    <p>
+      Comparing two loan offers in your head is how people end up overpaying. <a href="https://emicompare.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">EMI Compare</a> puts offers side by side before you borrow, so the monthly payment, the tenure and the total outflow can be judged together instead of one shiny figure at a time.
+    </p>
+    <p>
+      Every filing season brings the same question, and <a href="https://taxly.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">Taxly</a> answers it directly: it runs your income through both the old and the new tax regime and shows which one costs you less, so the choice becomes arithmetic rather than advice passed around the family.
+    </p>
+    <p>
+      A salary figure on an offer letter is not the salary that arrives each month. <a href="https://takehome.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">TakeHome</a> strips away the deductions to reveal the real in-hand pay — the number your rent, your budget and your savings plan should actually be built on.
+    </p>
+    <p>
+      For anyone carrying card balances or several loans at once, <a href="https://cardzero.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">CardZero</a> lays out two proven payoff strategies — the snowball, which clears small debts first for momentum, and the avalanche, which attacks the costliest interest first — and lets you compare the finish line of each.
+    </p>
+    <p>
+      Retirement feels abstract until it has a figure attached. <a href="https://retirewise.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">RetireWise</a> works out the corpus you are likely to need and the monthly saving required to reach it, turning a vague worry into a target you can start chipping away at today.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">How to choose the right one</h2>
+    <p>
+      Start with the decision, not the tool name. If you are choosing between two offers — two loans, renting versus buying, one tax regime versus another — reach for a comparison tool, because a single number in isolation rarely tells the truth. If you already know your path and need one figure, the single-purpose calculators will get you there faster. Because everything here is free and runs without an account, there is no penalty for cross-checking: run the same question through a second calculator and make sure the answers agree. Treat every result as a careful planning estimate rather than a contract — a bank's final EMI or an official tax computation can still differ in the details, so confirm big commitments against the actual documents before you sign anything.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Every tool in this category</h2>
+    <div class="grid gap-3 sm:grid-cols-2 !mt-4">
+      {niche.tools.map((t) => (
+        <a href={t.url} target="_blank" rel="noopener" class="block rounded-2xl border border-neutral-200 bg-white p-4 hover:shadow-md transition-all">
+          <span class="font-bold text-neutral-900">{t.name}</span>
+          <p class="mt-1 text-sm text-neutral-600">{t.blurb}</p>
+        </a>
+      ))}
+    </div>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Frequently asked questions</h2>
+    <div class="space-y-3 !mt-4">
+      {faqs.map((f) => (
+        <details class="rounded-2xl border border-neutral-200 bg-white p-5">
+          <summary class="cursor-pointer font-bold text-neutral-900">{f.q}</summary>
+          <p class="mt-2 text-neutral-600">{f.a}</p>
+        </details>
+      ))}
+    </div>
+
+    <p>
+      That is this corner of the library. Fixoraa holds 443+ free tools in total — built by a solo founder, with new ones added regularly — and every calculator above keeps the same promise: no signup, no watermark, no locked features. Browse the full collection in the <a href="/tools" class="font-semibold text-[#9333EA] hover:underline">tools directory</a>, and if the money question you are wrestling with has no calculator yet, tell us through <a href="/request-tool" class="font-semibold text-[#9333EA] hover:underline">Request a Tool</a> — some of the most useful additions to this category started exactly that way.
+    </p>
+  </article>
+</main>
+</Layout>

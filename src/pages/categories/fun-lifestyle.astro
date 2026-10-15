@@ -1,0 +1,104 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { niches } from '../../data/tools';
+
+const niche = niches.find((n) => n.slug === 'fun-lifestyle');
+const title = "Fun & Lifestyle Tools — Quizzes, Games, Generators | Fixoraa";
+const description = "Free fun and lifestyle tools: quizzes, party games, name generators, recipe helpers, trip planners and daily-life utilities. No signup, no watermark.";
+const faqs = [
+  { q: "Are the games, quizzes and generators really free?", a: "Yes. Everything in this category is free for unlimited use — no signup, no coins, no premium unlocks and no watermarks. Whether you are running a Secret Santa draw at midnight or testing your typing speed for the tenth time today, the tools simply work when you open them." },
+  { q: "Can I use these tools with a group of friends?", a: "That is what many of them are built for. Team shufflers, charades decks, Mafia role dealers, bingo cards and party dares are all designed to be opened on one phone and shared around a room. Several tools also create shareable links — like the Secret Santa reveal links — for groups that are not together in person." },
+  { q: "Do I need to download or install anything?", a: "No. Every tool runs in your web browser on phone, tablet or computer. There is no app, no plugin and no account — which also means the same link works for everyone you send it to, whatever device they are on. Just open, play or calculate, and close the tab when you are done." },
+  { q: "Are the home and kitchen calculators accurate enough to buy with?", a: "They use standard estimating practice — including wastage allowances for things like tiles — and are designed for planning purchases sensibly. For big or expensive jobs, treat the result as a strong estimate: measure twice, and add a small buffer rather than ordering the exact figure down to the last tile." },
+  { q: "Will there be more games and lifestyle tools?", a: "Yes. Fixoraa grows steadily — the site already holds 443+ free tools and new ones are added regularly across every category. If there is a game, generator or everyday helper you wish existed, the Request a Tool page is the place to ask; many tools in this category began as reader requests." },
+];
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+};
+---
+<Layout title={title} description={description}>
+<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+<main class="mx-auto max-w-3xl px-4 py-10 sm:py-14">
+  <div class="text-center mb-10">
+    <span class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full text-white bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] mb-4">Category Guide</span>
+    <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-neutral-900">Fun & Lifestyle <span class="bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] bg-clip-text text-transparent">Tools</span></h1>
+    <p class="mt-4 text-lg text-neutral-600">{niche.tagline}</p>
+    <p class="mt-2 text-neutral-500 text-sm">{niche.tools.length} free tools · No signup · No watermark</p>
+  </div>
+
+  <article class="space-y-6 text-neutral-700 leading-relaxed">
+    <p class="text-lg text-neutral-800">
+      Not every tool needs to make you more productive. The Fun & Lifestyle category is Fixoraa's playful side: quizzes that settle friendly arguments, generators that name everything from babies to wedding hashtags, and a generous shelf of everyday helpers for the kitchen, the home and your next trip. Some of these pages will make a party louder; others quietly answer questions like how many tiles a bathroom needs or when the light turns golden. What they share is the Fixoraa promise — free, instant, no signup — and a belief that small, well-made tools can be genuinely delightful.
+    </p>
+    <p>
+      Party hosts use the games and shufflers to get a room playing in minutes. Home improvers reach for the calculators before a DIY weekend, so the paint, tiles and soil are right first time. Cooks lean on the ratio and timing guides — coffee, sourdough, sous vide, tea — while travellers plan budgets, packing lists and jet-lag recovery before they fly. And on an ordinary Tuesday, the decision makers and random pickers end the 'what should we eat?' debate without a coin flip. It is a category built for the moments between the serious ones.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">When do you need a fun & lifestyle tool?</h2>
+    <p>
+      You will know this category has what you need when:
+    </p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li><strong class="text-neutral-900">It is game night</strong> — and you need teams, secret roles or a deck of charades prompts, fast.</li>
+      <li><strong class="text-neutral-900">A Secret Santa list</strong> has twelve names, three exclusions and one group chat waiting for the draw.</li>
+      <li><strong class="text-neutral-900">You are repainting a room</strong> — and do not want a second trip to the hardware store.</li>
+      <li><strong class="text-neutral-900">Your sourdough starter is ready</strong> — and the baking schedule needs to fit around work.</li>
+      <li><strong class="text-neutral-900">A long-haul flight is booked</strong> — and you want a plan that lands you human, not jet-lagged.</li>
+    </ul>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Start with these favourites</h2>
+    <p>
+      Sixty tools is a lot to browse, so here is where most people start:
+    </p>
+    <p>
+      Think you type fast? <a href="https://typebolt.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">TypeBolt</a> measures your typing speed and accuracy honestly — most people are surprised in one direction or the other. It is a party trick, a personal benchmark and a quiet motivator if your job lives on a keyboard.
+    </p>
+    <p>
+      When a group cannot decide, <a href="https://randora.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">Randora</a> ends it fairly: a random name, number and decision picker that nobody can argue with. Teachers picking students, teams picking lunch spots and friends picking who pays all end up here eventually.
+    </p>
+    <p>
+      For the holidays, <a href="https://santashuffle.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">SantaShuffle</a> runs your Secret Santa draw and gives everyone a private reveal link, so nobody — not even the organiser — sees the full list. The draw that used to take an evening of folded paper now takes a minute.
+    </p>
+    <p>
+      Photographers, amateur or otherwise, plan around <a href="https://glowhour.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">GlowHour</a>: it gives you the golden hour times for perfect photos, so portraits, product shots and travel pictures get that warm, low light on purpose rather than by luck.
+    </p>
+    <p>
+      In the kitchen, <a href="https://brewmetric.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">BrewMetric</a> dials in perfect coffee ratios for every brew, turning 'a bit more, a bit less' into a repeatable cup. Once you have tasted your ratio done right, eyeballing it feels like guesswork.
+    </p>
+    <p>
+      And before a long flight, <a href="https://jetlagwise.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">JetLagWise</a> builds a jet lag recovery plan around light exposure and sleep timing — the two levers that actually shift your body clock. Arrive, follow the schedule, and keep the first day of the trip for the trip.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">How to choose the right one</h2>
+    <p>
+      With sixty tools in this category, the trick is to think in moments rather than names. Planning an event? Start with the games, shufflers and planners in the grid below. Fixing something at home? The calculators will ask for measurements and give you quantities, so have a tape measure handy. Cooking tonight? Go straight to the ratios and timers. Most tools here take under a minute from open to answer, so if one is not quite the fit, the neighbouring one in the grid probably is — wandering this category is half the fun.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Every tool in this category</h2>
+    <div class="grid gap-3 sm:grid-cols-2 !mt-4">
+      {niche.tools.map((t) => (
+        <a href={t.url} target="_blank" rel="noopener" class="block rounded-2xl border border-neutral-200 bg-white p-4 hover:shadow-md transition-all">
+          <span class="font-bold text-neutral-900">{t.name}</span>
+          <p class="mt-1 text-sm text-neutral-600">{t.blurb}</p>
+        </a>
+      ))}
+    </div>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Frequently asked questions</h2>
+    <div class="space-y-3 !mt-4">
+      {faqs.map((f) => (
+        <details class="rounded-2xl border border-neutral-200 bg-white p-5">
+          <summary class="cursor-pointer font-bold text-neutral-900">{f.q}</summary>
+          <p class="mt-2 text-neutral-600">{f.a}</p>
+        </details>
+      ))}
+    </div>
+
+    <p>
+      Every tool above is free for unlimited use, with no signup and no watermark — the same promise as the rest of Fixoraa's 443+ tools in the <a href="/tools" class="font-semibold text-[#9333EA] hover:underline">full tools directory</a>. Missing something that would make your party, kitchen or trip easier? Send it through <a href="/request-tool" class="font-semibold text-[#9333EA] hover:underline">Request a Tool</a>: the site is built by a solo founder, and many of these pages exist because someone asked.
+    </p>
+  </article>
+</main>
+</Layout>

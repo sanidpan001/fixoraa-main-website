@@ -5,6 +5,19 @@ import { niches, allTools, totalTools } from '../data/tools';
 const sortedTools = [...allTools].sort((a, b) => a.name.localeCompare(b.name));
 const toolsJson = JSON.stringify(sortedTools);
 const isSoon = (url: string) => url.includes('PASTE-YOUR-TOOL-URL-HERE');
+
+const guideIntros: Record<string, string> = {
+  'finance-calculators': "Money questions rarely need a spreadsheet — they need one honest number, fast. This category covers the full arc of personal finance: loan EMIs and payoff timelines, SIP and RD growth, income tax and GST, retirement corpus planning, and the small daily maths of budgets, discounts and salary breakup. Every calculator shows its working, so you can change an assumption — a rate, a tenure, a monthly amount — and see the effect instantly. Start with the EMI and SIP tools if you are planning something big, and keep the everyday converters handy for everything else.",
+  'image-tools': "Images are where file size, quality and format collide. Here you will find compressors that shrink photos for forms and WhatsApp without visible quality loss, converters between JPG, PNG, WebP and AVIF, resizers and croppers for exact dimensions, and small creative editors for backgrounds, filters and collages. Everything runs in your browser, so your photos never get uploaded to a server — the edit happens on your own device. Whether you are preparing a passport photo, a product shot for your shop, or a profile picture, start here.",
+  'pdf-tools': "The PDF is the world's default document — and the hardest to change. This category gives you the everyday operations: merge several files into one, split a long document apart, compress a heavy scan down to email size, convert to and from Word and images, rotate, reorder and protect pages. Files are processed without accounts or watermarks, and outputs come out clean and shareable. If a form, an application or an office task has ever bounced back with 'please upload a single PDF', these are the tools that fix it.",
+  'text-tools': "Writers, students and social-media managers live in text. This category handles the mechanical half of writing: word and character counters for limits that matter, case converters, duplicate line removers, text sorters and reversers, fancy-text and hashtag helpers, and small analysers that check readability and frequency. Paste, clean, copy — most jobs take under ten seconds. The tools are deliberately simple: one input, one obvious action, and output you can trust, so the words stay yours and only the busywork disappears.",
+  'developer-tools': "Small utilities that remove small frictions, fifty times a day. Formatters and validators for JSON, a regex tester that explains matches, encoders for Base64 and URLs, UUID and password generators, CSS helpers for gradients, shadows and clamp values, and viewers that make raw data readable. Everything runs locally in your browser — tokens, payloads and snippets never leave your machine, which is exactly how a debugging helper should behave. Bookmark the ones your stack needs; they will quietly save you hours every month.",
+  'date-time': "Dates look simple until time zones, working days and deadlines get involved. This category calculates ages to the day, counts down to events, adds or subtracts days across holidays, converts between time zones, and turns timestamps into human-readable moments. Useful for HR letters, project plans, exam timetables, visa paperwork and anyone who has ever asked 'how many days until…?' and needed the answer to be exactly right — not approximately right.",
+  'health-fitness': "You cannot improve what you do not measure. These trackers and calculators cover BMI and healthy weight ranges, daily calorie and protein needs, pace and step conversions for runners and walkers, sleep-cycle timing, and simple logs that turn intentions into streaks. They are general-information tools — quick, private and judgment-free — meant to help you notice patterns and set sensible targets. For anything medical, they point you to a professional; for everything everyday, they give you a clear number to start from.",
+  'fun-lifestyle': "Not everything has to be productive. This is the playful shelf: quizzes that test flags, vocab and memory, generators for names, stories and party games, wheels and dice for fair decisions, and tiny daily challenges that make a phone break feel like a game again. Teachers use them in classrooms, friends use them in group chats, and creators use them when an idea refuses to arrive. Everything is instant, free and safe to share — pick one and give your brain a different kind of exercise.",
+  'converters': "Units are a translation problem, and this category is the translator. Length, weight, temperature, area, speed, data size, cooking measures, shoe and clothing sizes, number systems and more — each converter is built for one job, with both directions one tap apart and results shown as you type. No sign-up walls between you and a number: the kind of tool you open from a search result, use in five seconds, and leave satisfied. Keep it in mind for shopping, travel, study and DIY.",
+  'study-career': "Exams and job hunts reward preparation that is organised, not just long. Here you will find study planners and flashcard-style helpers, percentage and grade calculators, resume and cover-letter builders, typing and vocabulary practice, and interview-prep tools that turn anxiety into rehearsal. Students use them to plan revision against real dates; job seekers use them to leave with a sharper resume than they arrived with. Small tools, serious outcomes — that is the point of this shelf.",
+};
 ---
 <Layout title="All Free Online Tools — Fixoraa" description="Browse every free Fixoraa tool: calculators, converters, PDF tools, text tools, developer utilities and more. Search the full directory. No signup, no watermarks.">
 <main class="mx-auto max-w-6xl px-4 py-10 sm:py-14">
@@ -74,6 +87,22 @@ const isSoon = (url: string) => url.includes('PASTE-YOUR-TOOL-URL-HERE');
           <span class="font-bold text-neutral-900">{n.name}</span>
           <span class="block text-sm text-neutral-500 mt-1">{n.tools.length} tools · {n.tagline}</span>
         </button>
+      ))}
+    </div>
+  </div>
+
+  <!-- Category guides (added 2026-10-15) -->
+  <div class="mt-16">
+    <h2 class="text-2xl font-black text-neutral-900 mb-2">Category guides</h2>
+    <p class="text-neutral-600 mb-6 max-w-3xl">New here, or not sure which tool fits your task? Each guide explains a category in plain language — what the tools do, when to use which one, and the favourites to start with.</p>
+    <div class="grid gap-4 sm:grid-cols-2">
+      {niches.map((n) => (
+        <a href={`/categories/${n.slug}`} class="block rounded-3xl border border-neutral-200 bg-white p-6 hover:shadow-lg hover:-translate-y-0.5 transition-all">
+          <span class="font-black text-lg text-neutral-900">{n.name}</span>
+          <span class="block text-xs font-bold uppercase tracking-widest text-neutral-400 mt-1">{n.tools.length} tools</span>
+          <span class="block text-sm text-neutral-600 leading-relaxed mt-3">{guideIntros[n.slug]}</span>
+          <span class="mt-4 inline-block text-sm font-bold text-[#9333EA]">Read the guide →</span>
+        </a>
       ))}
     </div>
   </div>

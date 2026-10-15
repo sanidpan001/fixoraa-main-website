@@ -1,0 +1,104 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { niches } from '../../data/tools';
+
+const niche = niches.find((n) => n.slug === 'date-time');
+const title = "Date & Time Tools — Age, Deadlines, Zones, Timers | Fixoraa";
+const description = "Free date and time tools: exact age calculator, business-day counters, countdown timers, time-zone converter and focus timers. No signup, no watermark.";
+const faqs = [
+  { q: "Are these date and time tools free to use?", a: "Yes. Every calculator, converter and timer in this category is free for unlimited use — no signup, no watermark, and no feature quietly held back for a premium tier. Count business days, convert a time zone or run a focus timer as often as you need, on any device." },
+  { q: "Do the business-day calculators account for public holidays?", a: "Business-day tools count working days — Monday to Friday — between or from your dates. Public holidays differ by country, state and even company, so no single calendar fits everyone. For payroll, contracts or legal deadlines, use the working-day count as your base and cross-check your local holiday calendar before committing." },
+  { q: "How does the time-zone converter help remote teams?", a: "ZoneSync shows one moment across multiple world time zones at once, so you can see what 3 p.m. your time means for colleagues in theirs — including when it lands on a different day entirely. It is the quickest way to stop proposing meetings at someone's 2 a.m. by accident." },
+  { q: "Should I use calendar days or business days for a deadline?", a: "Read the wording. 'Within 30 days' almost always means calendar days; 'within 15 working days' means business days only. Contracts, courts and delivery promises each have their conventions — when money or penalties ride on the answer, count both ways with the tools here and confirm which definition your document uses." },
+  { q: "How exact is the age calculator?", a: "AgeArc calculates age exactly — in years, months and days — for any birth date and any 'as on' date you choose. That precision matters for official forms, school admissions, eligibility cut-offs and records, where 'about 25' is not accepted. It handles leap years and month lengths properly, so the day count is exact." },
+];
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+};
+---
+<Layout title={title} description={description}>
+<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+<main class="mx-auto max-w-3xl px-4 py-10 sm:py-14">
+  <div class="text-center mb-10">
+    <span class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full text-white bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] mb-4">Category Guide</span>
+    <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-neutral-900">Date & Time <span class="bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] bg-clip-text text-transparent">Tools</span></h1>
+    <p class="mt-4 text-lg text-neutral-600">{niche.tagline}</p>
+    <p class="mt-2 text-neutral-500 text-sm">{niche.tools.length} free tools · No signup · No watermark</p>
+  </div>
+
+  <article class="space-y-6 text-neutral-700 leading-relaxed">
+    <p class="text-lg text-neutral-800">
+      Time is the one resource every other tool assumes you have. The Date & Time category handles the arithmetic of days, weeks and hours that humans are oddly bad at: exactly how old someone is in years, months and days; how many working days sit between now and a deadline; what 3 p.m. your time is on the other side of the world. Alongside the calculators you will find the timers — focus sessions, countdowns, a stopwatch with laps, interval training — for the moments when the job is not counting time but spending it well.
+    </p>
+    <p>
+      Office workers and freelancers live here during payroll week, totalling shifts and hours without spreadsheet gymnastics, and project planners count business days before promising a delivery date. HR teams check ages and milestone dates for forms and records. Students and remote workers convert time zones before booking calls across continents, while coaches and home athletes run interval and Tabata sessions off the timer. And everyone, eventually, needs a countdown — to a wedding, a launch, a holiday — or a focus timer that makes a distracted afternoon behave.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">When do you need a date & time tool?</h2>
+    <p>
+      This category answers questions like:
+    </p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li><strong class="text-neutral-900">A form asks for your age 'as on' a specific date</strong> — not roughly, exactly.</li>
+      <li><strong class="text-neutral-900">A client wants delivery in 15 business days</strong> — which calendar date is that, really?</li>
+      <li><strong class="text-neutral-900">Your team spans four time zones</strong> — and someone has to find the one hour that works for all of them.</li>
+      <li><strong class="text-neutral-900">It is payroll week</strong> — and a month of shift times needs to become one clean total.</li>
+      <li><strong class="text-neutral-900">Your training plan says 30 seconds on, 10 off, eight rounds</strong> — and your hands are too busy to watch a clock.</li>
+    </ul>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Start with these favourites</h2>
+    <p>
+      Fourteen tools, two families — here are the ones people reach for first:
+    </p>
+    <p>
+      <a href="https://agearc.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">AgeArc</a> is the category's flagship for a reason: it calculates exact age in years, months and days — the format official forms actually want. It is also quietly wonderful for birthdays, anniversaries and figuring out how many days you have been alive.
+    </p>
+    <p>
+      When the question sits between two dates rather than from one, <a href="https://dayspan.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">DaySpan</a> gives the exact duration — for contracts, notice periods, project timelines, and the satisfying business of counting down to something good.
+    </p>
+    <p>
+      For work planning, <a href="https://bizdays.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">BizDays</a> counts and adds working days, skipping the weekend trap that ruins so many deadline promises. Pair it with its sibling <a href="https://workcount.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">WorkCount</a> when you need the count between two dates you already have.
+    </p>
+    <p>
+      Distributed teams swear by <a href="https://zonesync.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">ZoneSync</a>, which converts a time across world time zones in one view — no more mental maths across midnight boundaries before suggesting a meeting slot.
+    </p>
+    <p>
+      For spending time well rather than counting it, <a href="https://pomopace.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">PomoPace</a> runs classic Pomodoro focus cycles — focused work blocks separated by real breaks. It is the simplest productivity system ever devised, and it works because the timer, not your willpower, keeps the boundary.
+    </p>
+    <p>
+      And when every second is the point, <a href="https://chronolap.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">ChronoLap</a> is a stopwatch with laps, splits and a fastest-lap marker — for track sessions, cooking experiments, classroom races and anything else you want timed honestly.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">How to choose the right one</h2>
+    <p>
+      Date questions split into two families, and picking the right family is most of the battle. Questions about the calendar — ages, durations, deadlines, week numbers — belong to the calculators: give them dates and take away exact answers. Questions about the clock — focusing, training, counting down, timing — belong to the timers and converters. If your problem involves other people in other places, start with the zone converter before the calendar tools, because a date agreed in the wrong zone is wrong twice. Everything here is instant, so when in doubt, run both the business-day and the calendar-day counts and see which one your situation really means.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Every tool in this category</h2>
+    <div class="grid gap-3 sm:grid-cols-2 !mt-4">
+      {niche.tools.map((t) => (
+        <a href={t.url} target="_blank" rel="noopener" class="block rounded-2xl border border-neutral-200 bg-white p-4 hover:shadow-md transition-all">
+          <span class="font-bold text-neutral-900">{t.name}</span>
+          <p class="mt-1 text-sm text-neutral-600">{t.blurb}</p>
+        </a>
+      ))}
+    </div>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Frequently asked questions</h2>
+    <div class="space-y-3 !mt-4">
+      {faqs.map((f) => (
+        <details class="rounded-2xl border border-neutral-200 bg-white p-5">
+          <summary class="cursor-pointer font-bold text-neutral-900">{f.q}</summary>
+          <p class="mt-2 text-neutral-600">{f.a}</p>
+        </details>
+      ))}
+    </div>
+
+    <p>
+      Every tool in this category is free for unlimited use, with no signup — like the rest of Fixoraa's 443+ tools waiting in the <a href="/tools" class="font-semibold text-[#9333EA] hover:underline">full tools directory</a>. Need a date calculation we have not built yet? Send it through <a href="/request-tool" class="font-semibold text-[#9333EA] hover:underline">Request a Tool</a> — new tools are added regularly, and reader requests are where many of them begin.
+    </p>
+  </article>
+</main>
+</Layout>

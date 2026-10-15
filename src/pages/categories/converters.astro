@@ -1,0 +1,104 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { niches } from '../../data/tools';
+
+const niche = niches.find((n) => n.slug === 'converters');
+const title = "Converters — Units, Shoe Sizes, Oven Temps & More | Fixoraa";
+const description = "Free online converters for units, shoe and ring sizes, oven temperatures, fractions, percentages and numbers in words. Instant results, no signup.";
+const faqs = [
+  { q: "Are all of these converters free?", a: "Yes — every converter here is free for unlimited use, with no signup, no watermark and nothing to install. Convert units, sizes or numbers as many times as you like, on phone or desktop. It is the same promise behind all 443+ tools in the Fixoraa directory." },
+  { q: "Why can't I just use one cups-to-grams number for everything?", a: "Because ingredients weigh differently. A cup of flour weighs far less than a cup of sugar or butter, so a single conversion number guarantees wrong results for most recipes. CupGrams converts per ingredient — more than forty of them — which is why its answers actually bake the way the original recipe intended." },
+  { q: "Which shoe-size systems are covered?", a: "SoleSize converts between US, UK, EU and Indian shoe sizes, while StrideScale covers US, UK and EU. Sizing still varies slightly between brands, so if you are between sizes or buying for sport, check the retailer's own chart too — but converting first puts you in the right neighbourhood immediately." },
+  { q: "How does the number-to-words converter handle Indian amounts?", a: "NumWords supports both the international system — millions and billions — and the Indian system of lakhs and crores, and formats the result ready for cheques and documents. That makes it reliable for invoices, agreements and bank paperwork, where a wrongly written amount can delay a payment or get a cheque returned." },
+  { q: "Are the conversions accurate enough for professional use?", a: "The maths uses standard conversion factors and per-context data — ingredient densities, official size charts, temperature formulas — so results are dependable for everyday and most professional tasks. For engineering tolerances, legal measurements or anything safety-critical, verify against the governing standard for your field before acting on any online converter." },
+];
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+};
+---
+<Layout title={title} description={description}>
+<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+<main class="mx-auto max-w-3xl px-4 py-10 sm:py-14">
+  <div class="text-center mb-10">
+    <span class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full text-white bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] mb-4">Category Guide</span>
+    <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-neutral-900">Everyday <span class="bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] bg-clip-text text-transparent">Converters</span></h1>
+    <p class="mt-4 text-lg text-neutral-600">{niche.tagline}</p>
+    <p class="mt-2 text-neutral-500 text-sm">{niche.tools.length} free tools · No signup · No watermark</p>
+  </div>
+
+  <article class="space-y-6 text-neutral-700 leading-relaxed">
+    <p class="text-lg text-neutral-800">
+      Conversion questions are small, urgent and everywhere: a recipe in cups when your scale reads grams, shoes sized for another continent, an oven that speaks Fahrenheit to a cook who thinks in Celsius. The Converters category answers them in seconds. These are the tools you open with flour on your hands or a checkout page waiting — unit conversions for length, weight and temperature, size charts for shoes and rings, and number tools that turn fractions, percentages and raw digits into words. No formulas to remember, no tables to hunt down: type, convert, carry on.
+    </p>
+    <p>
+      Home bakers are the power users here, moving between American recipes and metric kitchens daily — often mid-recipe. Online shoppers convert shoe and ring sizes before ordering from overseas stores, because returns are a hassle nobody budgets for. Students lean on the fraction and percentage calculators for homework that needs the working shown, not just the answer. Designers and developers check aspect ratios and pixel densities, and anyone writing a cheque or a legal amount in words uses the number-to-words converter to get it exactly right the first time.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">When do you need a converter?</h2>
+    <p>
+      You will want a converter open when:
+    </p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li><strong class="text-neutral-900">The recipe says two cups of flour</strong> — your scale says grams, and the cake is already half mixed.</li>
+      <li><strong class="text-neutral-900">The perfect shoes exist</strong> — in a US size, on a European site, and your feet are neither.</li>
+      <li><strong class="text-neutral-900">A ring is being bought as a surprise</strong> — in another country's sizing system, with no returns.</li>
+      <li><strong class="text-neutral-900">An invoice total needs writing in words</strong> — in the Indian numbering system, without a single slip.</li>
+      <li><strong class="text-neutral-900">A screen or print job needs the right aspect ratio</strong> — and resolution, settled before you commit to it.</li>
+    </ul>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Start with these favourites</h2>
+    <p>
+      Start with the tool that matches tonight's problem:
+    </p>
+    <p>
+      The workhorse is <a href="https://unitshift.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">UnitShift</a>, which converts length, weight, temperature and more in one place — the tool to bookmark for the hundred small questions a month that do not deserve their own app.
+    </p>
+    <p>
+      Bakers should go straight to <a href="https://cupgrams.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">CupGrams</a>: it converts cups to grams for more than forty ingredients, which matters because a cup of flour and a cup of sugar are very different weights. It is the difference between a recipe working in your kitchen and merely having worked in someone else's.
+    </p>
+    <p>
+      Its oven-side partner is <a href="https://ovenmark.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">OvenMark</a>, translating temperatures between Celsius and Fahrenheit, so a 350-degree recipe and a 180-degree oven stop being a source of burnt edges and raw middles.
+    </p>
+    <p>
+      For shopping across borders, <a href="https://solesize.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">SoleSize</a> converts shoe sizes across US, UK, EU and Indian standards — ten seconds here beats a month of return shipping.
+    </p>
+    <p>
+      <a href="https://ringwisp.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">RingWisp</a> does the same service for jewellery, finding your ring size in any country's standard — especially handy when the purchase is a gift and quietly trying it on is not an option.
+    </p>
+    <p>
+      Finally, <a href="https://numwords.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">NumWords</a> turns numbers into words in both Indian and international systems, formatted ready for cheques and documents — lakhs and crores handled correctly, which is exactly where hand-written conversions tend to go wrong.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">How to choose the right one</h2>
+    <p>
+      The right converter is the one that knows your context. Generic unit tools are perfect for one-off questions, but wherever a conversion depends on what you are converting — an ingredient's density, a country's sizing standard, a numbering system — choose the specialist tool built for it. The general tool will give you a number; the specialist will give you the right number. When the stakes are a purchase, convert twice with two tools and compare. And for baking, weigh ingredients where you can: the converters here handle the maths, but a kitchen scale removes the last of the guesswork.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Every tool in this category</h2>
+    <div class="grid gap-3 sm:grid-cols-2 !mt-4">
+      {niche.tools.map((t) => (
+        <a href={t.url} target="_blank" rel="noopener" class="block rounded-2xl border border-neutral-200 bg-white p-4 hover:shadow-md transition-all">
+          <span class="font-bold text-neutral-900">{t.name}</span>
+          <p class="mt-1 text-sm text-neutral-600">{t.blurb}</p>
+        </a>
+      ))}
+    </div>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Frequently asked questions</h2>
+    <div class="space-y-3 !mt-4">
+      {faqs.map((f) => (
+        <details class="rounded-2xl border border-neutral-200 bg-white p-5">
+          <summary class="cursor-pointer font-bold text-neutral-900">{f.q}</summary>
+          <p class="mt-2 text-neutral-600">{f.a}</p>
+        </details>
+      ))}
+    </div>
+
+    <p>
+      Every converter on this page is free for unlimited use, with no signup and no watermark — the same promise as all 443+ tools in the <a href="/tools" class="font-semibold text-[#9333EA] hover:underline">full Fixoraa directory</a>. Converting something we do not cover yet? Ask via <a href="/request-tool" class="font-semibold text-[#9333EA] hover:underline">Request a Tool</a> — Fixoraa is built by a solo founder, new tools land regularly, and odd little conversions are exactly the requests that get built.
+    </p>
+  </article>
+</main>
+</Layout>

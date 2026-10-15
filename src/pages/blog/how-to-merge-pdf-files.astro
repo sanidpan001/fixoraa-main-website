@@ -1,0 +1,93 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const title = "How to Merge, Split and Compress PDF Files for Free — Fixoraa Blog";
+const description = "A complete practical guide to PDF files: merge several PDFs into one, split out the pages you need, reorder pages, and compress a PDF small enough to email — free, with no signup.";
+const faqs = [
+  { q: "Is it really free to merge and compress PDFs here?", a: "Yes. The tools linked in this guide — DocBind for merging and splitting, PDFSlim for compressing, and the rest of the Fixoraa PDF collection — are free for unlimited use. There is no per-file charge, no trial period and no watermark stamped on the document you download." },
+  { q: "Do I need to sign up or install anything?", a: "No. These are web tools that run in your browser, on a phone or a computer. Open the page, add your files, and download the result. There is no account to create and no software to install, which also makes them handy on a borrowed or office computer where you cannot install programs." },
+  { q: "Are my documents private?", a: "The Fixoraa PDF tools work right in your browser, so your files are processed on your own device rather than being sent off to some server and kept there. That matters for the documents people usually merge and split — ID proofs, bank statements, contracts and certificates. As with any file, once you download the result, keeping it safe is up to you." },
+  { q: "My merged PDF is too big to email. What do I do?", a: "Run it through a compressor such as PDFSlim. If it is still too large, check whether the bulk comes from scanned pages — scans are images, so they compress less than text pages. You can also split the document into two parts with a split-by-size tool and send two smaller attachments instead of one big one." },
+  { q: "Can I change the order of pages after merging?", a: "Yes. If the merged file's pages are in the wrong sequence, open it in a page organiser like ArrangePDF, drag the pages into the order you want, and save. You can also fix the order before merging by arranging the files and pages in DocBind first — prevention is faster than repair, but both work." },
+  { q: "Can I turn photos of documents into a single PDF?", a: "Yes. If your 'PDF' currently exists as phone photos — one JPG or PNG per page — use FramePDF to combine the images into one tidy PDF in the right page order. The same approach works for screenshots and scanned pages saved as images." },
+];
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+};
+---
+<Layout title={title} description={description}>
+<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+<main class="mx-auto max-w-3xl px-4 py-10 sm:py-14">
+  <div class="text-center mb-10">
+    <span class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full text-white bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] mb-4">Blog · 8 min read</span>
+    <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-neutral-900">How to merge, split and compress <span class="bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] bg-clip-text text-transparent">PDF files for free</span></h1>
+    <p class="mt-4 text-neutral-500 text-sm">Published October 15, 2026 · by the Fixoraa team</p>
+  </div>
+
+  <article class="space-y-6 text-neutral-700 leading-relaxed">
+    <p class="text-lg text-neutral-800">
+      It always happens at the worst moment. The application form demands "one PDF file", and you have five. Or the portal rejects your upload because the file is 8 MB and the limit is 2 MB. Or someone emails you a 90-page report when all you need is page 14. Merging, splitting and compressing PDFs are the three skills that get you out of almost every document jam — and none of them needs paid software.
+    </p>
+    <p>
+      This guide walks through all three, step by step, using free tools that run in your browser: <strong class="text-neutral-900">no installation, no signup, no watermark</strong> on the file you download. Keep it bookmarked; document emergencies have a habit of repeating themselves.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Before you start: nothing to install, nothing to upload-and-pray</h2>
+    <p>
+      Older PDF workflows meant hunting for a desktop program, or using a website that made you create an account before it would release your own file back to you. The tools used below work differently: you open the page, the tool loads, and your files are handled right there in the browser. That is worth caring about, because the files people merge are rarely casual — they are ID documents, marksheets, salary slips and signed agreements. For everything in this guide, the main tool is <a href="https://docbind.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">DocBind</a>, which merges, splits and organises PDFs in one place, backed up by a few specialists for compression and page arranging.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">How to merge several PDFs into one</h2>
+    <p>
+      <strong class="text-neutral-900">Step 1 — open the merge tool.</strong> Go to <a href="https://docbind.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">DocBind</a> and choose the merge option. <strong class="text-neutral-900">Step 2 — add your files.</strong> Select all the PDFs that belong together — for a job application, that might be your resume, degree certificate, experience letter and ID proof. Add them in roughly the order you want, though you can fix the order next. <strong class="text-neutral-900">Step 3 — arrange.</strong> Drag the files (and, where needed, individual pages) until the sequence reads the way a person would read the packet: application first, supporting documents after, never the other way round. <strong class="text-neutral-900">Step 4 — merge and download.</strong> One click combines everything into a single PDF. Give the download a clear name — <em>YourName_Application.pdf</em> beats <em>merged-final-v2.pdf</em> every time — and open it once to scroll through the pages before you send it anywhere.
+    </p>
+    <p>
+      One habit separates smooth merges from messy ones: <strong class="text-neutral-900">check every source file before you combine them</strong>. A blank page hiding in a scan, or a certificate saved sideways, gets baked into the merged file. Tools exist for exactly these clean-ups — <a href="https://blankgone.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">BlankGone</a> detects and removes blank pages, and pages can be rotated upright before or after merging.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Getting page order right with an organiser</h2>
+    <p>
+      If you have already merged a file and only then notice the pages are scrambled, you do not need to start over. Open the merged PDF in <a href="https://organizepdf.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">ArrangePDF</a>, which shows your pages as a grid you can reorder into any sequence you like. Drag page 7 up to position 2, push the appendix to the end, then save. The same tool is handy for single documents too — scanned books and multi-part forms often arrive with pages in scanner order rather than reading order.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">How to split a PDF into parts</h2>
+    <p>
+      Splitting is merging in reverse, and <a href="https://docbind.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">DocBind</a> handles it with the same flow: open the tool, add the PDF, and choose what you want out of it. Typically you will either <strong class="text-neutral-900">extract specific pages</strong> — pages 14–16 of that long report — or <strong class="text-neutral-900">split into sections</strong>, such as turning one combined statement file into a separate PDF per month. Select the ranges, confirm, and download the pieces.
+    </p>
+    <p>
+      Two specialist splitters solve the awkward cases. If a portal or email system imposes a size limit, <a href="https://splitbysize.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">SplitSize PDF</a> cuts a large PDF into parts that each sit under the size you specify — no guessing which page range will fit. And if a long document has bookmarks or chapters, <a href="https://splitmarks.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">ChapterSplit PDF</a> splits neatly at those bookmarks instead of at arbitrary page numbers, so every part starts exactly where a chapter does.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">How to compress a PDF so it actually sends</h2>
+    <p>
+      When the problem is size rather than structure, open <a href="https://pdfslim.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">PDFSlim</a>, add your file, and pick how you want to shrink it. It offers two approaches: a <strong class="text-neutral-900">quality mode</strong>, where you choose how much image quality to trade for size, and a <strong class="text-neutral-900">target-size mode</strong>, where you state the limit — say, the 2 MB a portal demands — and the tool works towards it. Download the result and check both numbers: the new file size, and a quick visual pass over any page with photos or fine print to confirm it still reads clearly.
+    </p>
+    <p>
+      Why are some PDFs so stubbornly large? Almost always because of <strong class="text-neutral-900">images</strong>. A page of typed text is tiny; a single scanned page is a photograph, and photographs are heavy. That is also why compressing a text-based PDF barely changes it while a scanned one can shrink dramatically. If your document is a set of phone photos rather than a PDF at all, first combine them with <a href="https://framepdf.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">FramePDF</a>, which turns JPG and PNG images into one tidy PDF — then compress that file if it still needs to slim down. The all-in-one <a href="https://pdfninja.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">PDFNinja</a> toolkit is worth knowing about as well: it bundles conversion and editing jobs for the days when the task is not merge, split or compress but something in between.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Small habits that prevent big PDF headaches</h2>
+    <p>
+      Finish every job with three checks. <strong class="text-neutral-900">Open the result</strong> and scroll it — page order, orientation and completeness are only visible to your eyes. <strong class="text-neutral-900">Keep your originals</strong> untouched in a separate folder; merging and compressing should always produce a new file, never destroy the only copy of a certificate. And <strong class="text-neutral-900">name files like a stranger will read them</strong>, because one usually will: the person reviewing your application sees the filename before they see a single page. Add page numbers with <a href="https://numpage.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">NumPage</a> if the packet is long — it takes seconds and makes a multi-document file feel deliberately assembled rather than hastily stapled together.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Frequently asked questions</h2>
+    <div class="space-y-3 !mt-4">
+      {faqs.map((f) => (
+        <details class="rounded-2xl border border-neutral-200 bg-white p-5">
+          <summary class="cursor-pointer font-bold text-neutral-900">{f.q}</summary>
+          <p class="mt-2 text-neutral-600">{f.a}</p>
+        </details>
+      ))}
+    </div>
+  </article>
+
+  <div class="mt-12 rounded-3xl bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] p-8 sm:p-10 text-center text-white">
+    <h2 class="text-2xl sm:text-3xl font-black mb-3">Your next document jam is already solved.</h2>
+    <p class="text-white/90 mb-6">DocBind, PDFSlim and 440+ other tools live in the directory — free, with no signup and no watermark.</p>
+    <a href="/tools" class="inline-block rounded-2xl bg-white text-neutral-900 font-bold px-8 py-3.5 hover:shadow-xl hover:-translate-y-0.5 transition-all">Browse all 443+ tools</a>
+  </div>
+</main>
+</Layout>

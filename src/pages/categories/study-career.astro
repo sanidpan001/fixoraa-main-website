@@ -1,0 +1,104 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { niches } from '../../data/tools';
+
+const niche = niches.find((n) => n.slug === 'study-career');
+const title = "Study & Career Tools — GPA, Resumes, Exam Prep | Fixoraa";
+const description = "Free study and career tools: GPA calculators, flashcards, spaced repetition, resume builders and interview prep. Study smarter with no signup needed.";
+const faqs = [
+  { q: "Are these study and career tools free?", a: "Yes — free for unlimited use, with no signup and no watermark on anything you create. Calculate grades, build flashcards, plan an exam routine or draft a resume without an account. It is the same promise across the whole Fixoraa directory of 443+ tools." },
+  { q: "How accurate are the GPA and percentage calculators?", a: "They do the arithmetic exactly as entered — weighted by the marks or credits you provide — so the result is only as accurate as your inputs. Enter each subject's marks and maximums carefully, and if your institution uses a specific conversion formula or grading scale, follow that scale for official purposes." },
+  { q: "What is spaced repetition, and which tool uses it?", a: "Spaced repetition is a study method where you review material at growing intervals — a day later, then three, then a week — which is far more effective for long-term memory than re-reading. Revisit is built around it: it schedules your reviews automatically, so you return to each topic just before you would naturally forget it." },
+  { q: "Can these tools help me get a job, not just study?", a: "Yes — the career half of this category covers the whole application path. Build a resume with ResumeCraft AI, score it with RezScore before sending, prepare with AskHire's interview questions and sample answers, and finish with a professional email signature from SignCraft. Each step is free and needs no account." },
+  { q: "I'm a teacher. Is there anything here for me?", a: "Plenty. QuizLink creates and shares quizzes in minutes, ClassTable builds an editable, colour-coded weekly timetable you can print, and tools like the flashcards and drills work well as classroom material. Everything runs in a browser, so it works on school computers without installations or IT department tickets." },
+];
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+};
+---
+<Layout title={title} description={description}>
+<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+<main class="mx-auto max-w-3xl px-4 py-10 sm:py-14">
+  <div class="text-center mb-10">
+    <span class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full text-white bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] mb-4">Category Guide</span>
+    <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-neutral-900">Study & Career <span class="bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] bg-clip-text text-transparent">Tools</span></h1>
+    <p class="mt-4 text-lg text-neutral-600">{niche.tagline}</p>
+    <p class="mt-2 text-neutral-500 text-sm">{niche.tools.length} free tools · No signup · No watermark</p>
+  </div>
+
+  <article class="space-y-6 text-neutral-700 leading-relaxed">
+    <p class="text-lg text-neutral-800">
+      Studying and job-hunting reward the organised — but organisation itself can eat the hours you meant to spend learning or applying. The Study & Career category removes the paperwork around both. You will find calculators that turn raw marks into GPAs and target grades, study systems built on flashcards and spaced repetition, and career tools that carry you from a first resume draft to walking into the interview. Students, teachers and job-seekers share the same shelf here, because the underlying problem is identical: knowing exactly where you stand, and what to do next.
+    </p>
+    <p>
+      School and college students use these tools to plan a term: what the final exam needs to look like, how today's marks translate to a percentage, whether the reading list fits the calendar. Teachers build quizzes and timetables without wrestling with spreadsheets. Job-seekers use the resume builder and scorer to see their application the way a recruiter's first skim sees it, then rehearse with real interview questions. Even music students — there is a metronome — and young businesses, with SWOT and business-model canvas builders, are covered. It is the practical end of education, nothing abstract.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">When do you need a study or career tool?</h2>
+    <p>
+      Reach for this category when:
+    </p>
+    <ul class="list-disc pl-6 space-y-2">
+      <li><strong class="text-neutral-900">Results are out</strong> — and you need your GPA, CGPA or percentage converted correctly, first time.</li>
+      <li><strong class="text-neutral-900">The final exam is six weeks away</strong> — and you want the exact grade that keeps your target alive.</li>
+      <li><strong class="text-neutral-900">Revision is not sticking</strong> — re-reading notes is failing, and you need a system that makes memory do the work.</li>
+      <li><strong class="text-neutral-900">A job post closes Friday</strong> — and your resume has not been touched in two years.</li>
+      <li><strong class="text-neutral-900">You are teaching tomorrow</strong> — and the class timetable or quiz still does not exist.</li>
+    </ul>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Start with these favourites</h2>
+    <p>
+      These six cover the most common journeys through the category:
+    </p>
+    <p>
+      <a href="https://gradeaxis.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">GradeAxis</a> is the semester's reality check: it calculates your GPA and CGPA cleanly, so there are no surprises when transcripts arrive. Students use it after every result to see exactly how much each subject moved the average.
+    </p>
+    <p>
+      Its natural partner is <a href="https://gradeneed.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">GradeNeed</a>, which works the problem backwards — enter your current standing and your target, and it tells you the grade your final exam must deliver. Knowing the number turns vague anxiety into a concrete study target.
+    </p>
+    <p>
+      For the studying itself, <a href="https://revisit.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">Revisit</a> schedules your reviews using spaced repetition — the best-evidenced technique in learning science. Material returns just before you would forget it, so an hour of revision does the work of three hours of re-reading.
+    </p>
+    <p>
+      When the exam covers a whole syllabus, <a href="https://preppilot.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">PrepPilot</a> builds the study routine for you — an AI planner that turns subjects and deadlines into a day-by-day exam plan you can actually follow, instead of a hopeful list made the night before.
+    </p>
+    <p>
+      On the career side, <a href="https://resumecraft-ai.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">ResumeCraft AI</a> helps you build a job-winning resume with AI guidance — structure, wording and focus handled step by step, which matters most when you are staring at a blank page or changing fields entirely.
+    </p>
+    <p>
+      Before you send it anywhere, run it through <a href="https://rezscore.fixoraa.tech" class="font-semibold text-[#9333EA] hover:underline">RezScore</a>, which scores your resume the way recruiters see it. A cold, quick, honest read — the fixes it suggests are usually small, and they are exactly the ones a six-second skim would punish.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">How to choose the right one</h2>
+    <p>
+      Start from your deadline and work backwards. If a date is fixed — results day, an exam, an application closing — the calculators and planners come first, because they define how much work the days in between must hold. If the goal is skill rather than a date, choose the practice tools: flashcards, drills and vocabulary builders reward daily minutes far more than weekend marathons. And use the tools in sequence where they naturally chain — plan with PrepPilot, learn with Revisit, check with GradeNeed. Each tool here is free and instant, so the only real cost of trying one is a minute.
+    </p>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Every tool in this category</h2>
+    <div class="grid gap-3 sm:grid-cols-2 !mt-4">
+      {niche.tools.map((t) => (
+        <a href={t.url} target="_blank" rel="noopener" class="block rounded-2xl border border-neutral-200 bg-white p-4 hover:shadow-md transition-all">
+          <span class="font-bold text-neutral-900">{t.name}</span>
+          <p class="mt-1 text-sm text-neutral-600">{t.blurb}</p>
+        </a>
+      ))}
+    </div>
+
+    <h2 class="text-2xl font-black text-neutral-900 pt-8">Frequently asked questions</h2>
+    <div class="space-y-3 !mt-4">
+      {faqs.map((f) => (
+        <details class="rounded-2xl border border-neutral-200 bg-white p-5">
+          <summary class="cursor-pointer font-bold text-neutral-900">{f.q}</summary>
+          <p class="mt-2 text-neutral-600">{f.a}</p>
+        </details>
+      ))}
+    </div>
+
+    <p>
+      Everything in this category is free for unlimited use — no signup, no watermark, like all 443+ tools in the <a href="/tools" class="font-semibold text-[#9333EA] hover:underline">full Fixoraa directory</a>. Studying for something unusual, or teaching a subject we have not covered? Ask through <a href="/request-tool" class="font-semibold text-[#9333EA] hover:underline">Request a Tool</a> — Fixoraa is built by a solo founder, and new tools are added regularly, often from exactly these requests.
+    </p>
+  </article>
+</main>
+</Layout>
