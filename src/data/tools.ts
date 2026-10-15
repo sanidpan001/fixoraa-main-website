@@ -142,6 +142,14 @@ export const niches: Niche[] = [
       { name: "BondYield", slug: "bondyield", url: "https://bondyield.2.fixoraa.tech", blurb: "Current yield AND YTM plus the full year-by-year cashflow schedule in one scre" },
       { name: "EPFCalc", slug: "epfcalc", url: "https://epfcalc.2.fixoraa.tech", blurb: "Projects with yearly salary increments and shows the employer/employee split p" },
       { name: "SWPCalc", slug: "swpcalc", url: "https://swpcalc.2.fixoraa.tech", blurb: "Withdrawals that can rise yearly with inflation, plus the exact month the corp" },
+      { name: "SipVsRd", slug: "sipvsrd", url: "https://sipvsrd.2.fixoraa.tech", blurb: "Same monthly amount through SIP and RD together, inflation-adjusted real value" },
+      { name: "StampDuty", slug: "stampduty", url: "https://stampduty.2.fixoraa.tech", blurb: "State-wise duty + registration with male, female and joint totals compared on" },
+      { name: "CarInsure", slug: "carinsure", url: "https://carinsure.2.fixoraa.tech", blurb: "Premium estimate built transparently from IDV, car age, NCB slab and add-on pi" },
+      { name: "RentDeposit", slug: "rentdeposit", url: "https://rentdeposit.2.fixoraa.tech", blurb: "Full move-in cash total: deposit (city-wise month presets), first month, broke" },
+      { name: "NpsVsEpf", slug: "npsvsepf", url: "https://npsvsepf.2.fixoraa.tech", blurb: "Same contribution through NPS (with equity/debt split + annuity portion at exi" },
+      { name: "TermCover", slug: "termcover", url: "https://termcover.2.fixoraa.tech", blurb: "Needs-based cover: replace income for N years, add loans and goals, subtract e" },
+      { name: "GoldVsFd", slug: "goldvsfd", url: "https://goldvsfd.2.fixoraa.tech", blurb: "Same lump sum in gold (with making-charge/SGB toggle) vs FD (with tax-slab on" },
+      { name: "KidsAllowance", slug: "kidsallowance", url: "https://kidsallowance.2.fixoraa.tech", blurb: "Age-guided allowance with a spend/save/share split, chore bonus table and a sa" },
     ],
   },
   // ── Image Tools ──────────────────────────────────────────────────────
@@ -356,6 +364,8 @@ export const niches: Niche[] = [
       { name: "PortAtlas", slug: "portatlas", url: "https://portatlas.2.fixoraa.tech", blurb: "Search by port OR service name, with plain notes ('usually safe to close?') fo" },
       { name: "CsvJson", slug: "csvjson", url: "https://csvjson.2.fixoraa.tech", blurb: "Two-way conversion with delimiter auto-detect and nested-key flatten/unflatten" },
       { name: "KeyPeek", slug: "keypeek", url: "https://keypeek.2.fixoraa.tech", blurb: "Live key capture with event.key/code/keyCode/ASCII and a history tape of press" },
+      { name: "JsonSchema", slug: "jsonschema", url: "https://jsonschema.2.fixoraa.tech", blurb: "Validate JSON against a schema with errors translated into plain English with" },
+      { name: "CssFilter", slug: "cssfilter", url: "https://cssfilter.2.fixoraa.tech", blurb: "Upload any photo, stack blur/brightness/contrast/saturate/hue filters live, co" },
     ],
   },
   // ── Date & Time ──────────────────────────────────────────────────────
