@@ -295,7 +295,7 @@ export const niches: Niche[] = [
       { name: "GhostGlyph", slug: "ghostglyph", url: "https://ghostglyph.fixoraa.tech", blurb: "Find invisible characters hiding in your text" },
       { name: "JSONLens", slug: "jsonlens", url: "https://jsonlens.fixoraa.tech", blurb: "Format, validate and explore JSON data" },
       { name: "Keynetic", slug: "keynetic", url: "https://keynetic.fixoraa.tech", blurb: "Check keyword density and SEO keywords" },
-      { name: "Mailor AI", slug: "mailor", url: "https://mailora-ai.fixoraa.tech", blurb: "AI email writer — drafts, replies and subject lines" },
+      { name: "Mailora AI", slug: "mailor", url: "https://mailora-ai.fixoraa.tech", blurb: "AI email writer — drafts, replies and subject lines" },
       { name: "MatchMint", slug: "matchmint", url: "https://matchmint.fixoraa.tech", blurb: "Test and debug regular expressions live" },
       { name: "QuillVortex AI", slug: "quillvortex", url: "https://quillvortex.fixoraa.tech", blurb: "AI writing assistant for articles and stories" },
       { name: "SlugWise", slug: "slugwise", url: "https://slugwise.fixoraa.tech", blurb: "Turn headlines into clean URL slugs" },
