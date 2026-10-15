@@ -497,6 +497,7 @@ export const niches: Niche[] = [
       { name: "DaysUntil", slug: "daysuntil", url: "https://daysuntil.2.fixoraa.tech", blurb: "Countdown as the hero: days + weekday + working-days toggle + a shareable coun" },
       { name: "FeelsLike", slug: "feelslike", url: "https://feelslike.2.fixoraa.tech", blurb: "Wind chill, heat index AND dew point in one tool with a comfort/safety verdict" },
       { name: "ChargeWise", slug: "chargewise", url: "https://chargewise.2.fixoraa.tech", blurb: "Battery, charger kW, tariff and petrol price all editable \u2014 works in any count" },
+      { name: "CarbonWise", slug: "carbonwise", url: "https://carbonwise.2.fixoraa.tech", blurb: "Travel + home energy + food in one quick pass, yearly CO2e total, and reductio" },
     ],
   },
   // ── Study & Career ───────────────────────────────────────────────────
