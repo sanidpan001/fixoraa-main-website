@@ -155,6 +155,9 @@ export const niches: Niche[] = [
       { name: "ForexFee", slug: "forexfee", url: "https://forexfee.2.fixoraa.tech", blurb: "Compares the mid-market rate with your bank or card rate to expose the hidden" },
       { name: "SolarPayback", slug: "solarpayback", url: "https://solarpayback.2.fixoraa.tech", blurb: "Turns system cost, subsidy, monthly units and your current bill into a payback" },
       { name: "InflationHit", slug: "inflationhit", url: "https://inflationhit.2.fixoraa.tech", blurb: "Shows what a sum of money will be worth in future prices, and what today's goa" },
+      { name: "ChitMath", slug: "chitmath", url: "https://chitmath.2.fixoraa.tech", blurb: "Effective interest for both sides of the same chit \u2014 what a borrower actually" },
+      { name: "NSCCalc", slug: "nsccalc", url: "https://nsccalc.2.fixoraa.tech", blurb: "Year-by-year accrued-interest table (NSC interest compounds but is paid only a" },
+      { name: "GainTax", slug: "gaintax", url: "https://gaintax.2.fixoraa.tech", blurb: "Two clean paths \u2014 listed equity/MF (LTCG exemption limit + STCG rate) and prop" },
     ],
   },
   // ── Image Tools ──────────────────────────────────────────────────────
