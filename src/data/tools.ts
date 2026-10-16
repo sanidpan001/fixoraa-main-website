@@ -454,6 +454,7 @@ export const niches: Niche[] = [
       { name: "RunWalk", slug: "runwalk", url: "https://runwalk.2.fixoraa.tech", blurb: "Pick run/walk ratios and weeks \u2192 a progressing session-by-session plan with to" },
       { name: "BloodDonor", slug: "blooddonor", url: "https://blooddonor.2.fixoraa.tech", blurb: "Answer a short situation checklist \u2192 eligible / wait-until verdict with the ex" },
       { name: "KidVaccine", slug: "kidvaccine", url: "https://kidvaccine.2.fixoraa.tech", blurb: "Birth date in \u2192 the full schedule with calendar dates per dose, what's due now" },
+      { name: "RowErg", slug: "rowerg", url: "https://rowerg.2.fixoraa.tech", blurb: "Converts a 500m split into total times for every standard erg distance, and pl" },
     ],
   },
   // ── Fun & Lifestyle ──────────────────────────────────────────────────
