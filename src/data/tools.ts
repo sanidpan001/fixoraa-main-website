@@ -154,6 +154,7 @@ export const niches: Niche[] = [
       { name: "FDLadder", slug: "fdladder", url: "https://fdladder.2.fixoraa.tech", blurb: "Splits one lump sum into a 1\u20135 year FD ladder with a maturity schedule and yea" },
       { name: "ForexFee", slug: "forexfee", url: "https://forexfee.2.fixoraa.tech", blurb: "Compares the mid-market rate with your bank or card rate to expose the hidden" },
       { name: "SolarPayback", slug: "solarpayback", url: "https://solarpayback.2.fixoraa.tech", blurb: "Turns system cost, subsidy, monthly units and your current bill into a payback" },
+      { name: "InflationHit", slug: "inflationhit", url: "https://inflationhit.2.fixoraa.tech", blurb: "Shows what a sum of money will be worth in future prices, and what today's goa" },
     ],
   },
   // ── Image Tools ──────────────────────────────────────────────────────
