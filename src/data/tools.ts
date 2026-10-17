@@ -177,6 +177,8 @@ export const niches: Niche[] = [
       { name: "FiftySplit", slug: "fiftysplit", url: "https://fiftysplit.fixoraa.workers.dev", blurb: "Splits take-home pay into needs, wants and savings targets and grades your act" },
       { name: "EPFInterest", slug: "epfinterest", url: "https://epfinterest.fixoraa.workers.dev", blurb: "Works out EPF interest the way EPFO does: on running monthly balances with dep" },
       { name: "GratuityCalc", slug: "gratuitycalc", url: "https://gratuitycalc.fixoraa.workers.dev", blurb: "Checks the 5-year eligibility rule, applies the 15/26 formula and shows gratui" },
+      { name: "DebtRatio", slug: "debtratio", url: "https://debtratio.2.fixoraa.tech", blurb: "Front-end and back-end DTI side by side with lender-band verdicts and the mont" },
+      { name: "DutyCost", slug: "dutycost", url: "https://dutycost.2.fixoraa.tech", blurb: "The full cost stack in order \u2014 price, freight and insurance to CIF, duty on CI" },
     ],
   },
   // ── Image Tools ──────────────────────────────────────────────────────
@@ -228,6 +230,7 @@ export const niches: Niche[] = [
       { name: "ShotMark", slug: "shotmark", url: "https://shotmark.fixoraa.workers.dev", blurb: "Arrows, numbered steps, boxes, text and privacy blur on screenshots, export PN" },
       { name: "PicText", slug: "pictext", url: "https://pictext.fixoraa.workers.dev", blurb: "Free-position text layers with fonts, outline/shadow and sticker shapes \u2014 post" },
       { name: "GrayPic", slug: "graypic", url: "https://graypic.fixoraa.workers.dev", blurb: "Grayscale conversion with contrast/brightness and channel-mix (red/green/blue" },
+      { name: "HeicDrop", slug: "heicdrop", url: "https://heicdrop.2.fixoraa.tech", blurb: "Conversion happens entirely on your device \u2014 photos never leave the browser \u2014" },
     ],
   },
   // ── PDF Tools ────────────────────────────────────────────────────────
@@ -450,6 +453,7 @@ export const niches: Niche[] = [
       { name: "HtpasswdGen", slug: "htpasswdgen", url: "https://htpasswdgen.fixoraa.workers.dev", blurb: "Creates .htpasswd entries with modern bcrypt and legacy hashes, plus the match" },
       { name: "SlugifyPro", slug: "slugifypro", url: "https://slugifypro.fixoraa.workers.dev", blurb: "Turns titles into clean URL slugs with transliteration, stop-word control and" },
       { name: "ViewportTest", slug: "viewporttest", url: "https://viewporttest.fixoraa.workers.dev", blurb: "Previews any URL-sized layout across phone, tablet, laptop and desktop frames" },
+      { name: "UniInspect", slug: "uniinspect", url: "https://uniinspect.2.fixoraa.tech", blurb: "Every character gets a row with codepoint, UTF-8 and UTF-16 bytes, HTML entity" },
     ],
   },
   // ── Date & Time ──────────────────────────────────────────────────────
@@ -841,6 +845,10 @@ export const newTools: Record<string, string> = {
   aquavol: "2026-10-17",
   gravelcalc: "2026-10-17",
   bookshelfit: "2026-10-17",
+  debtratio: "2026-10-18",
+  uniinspect: "2026-10-18",
+  heicdrop: "2026-10-18",
+  dutycost: "2026-10-18",
 };
 
 
