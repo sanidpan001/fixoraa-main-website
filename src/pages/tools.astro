@@ -64,7 +64,7 @@ const guideIntros: Record<string, string> = {
           </div>
         ) : (
           <a href={t.url} target="_blank" rel="noopener" class="group relative block h-full rounded-2xl bg-white border border-neutral-200 p-5 hover:shadow-lg hover:-translate-y-1 hover:border-neutral-300 transition-all">
-            <span class="inline-block text-[11px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full bg-[#9333EA]/10 text-[#9333EA] mb-3">{t.niche}</span>{isNewTool(t) && <span class="new-badge">New</span>}
+            <span class="inline-block text-[11px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full bg-[#9333EA]/10 text-[#9333EA] mb-3">{t.niche}</span>{isNewTool(t) && <span class="new-badge">✨ New</span>}
             <h3 class="text-lg font-bold text-neutral-900 pr-6">{t.name}</h3>
             <p class="text-sm text-neutral-600 mt-1">{t.blurb}</p>
             <span class="absolute top-5 right-5 text-xl text-neutral-400 group-hover:text-[#9333EA] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" aria-hidden="true">↗</span>
@@ -125,10 +125,15 @@ const guideIntros: Record<string, string> = {
   }
   .new-badge {
     display: inline-block; margin-left: .5rem; vertical-align: middle;
-    font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
-    padding: .25rem .6rem; border-radius: 9999px; color: #fff;
+    font-size: 11px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase;
+    padding: .35rem .75rem; border-radius: 9999px; color: #fff;
     background: linear-gradient(to right, #FF5A5F, #F43F8E, #9333EA);
-    box-shadow: 0 2px 4px rgb(0 0 0 / .12);
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #F43F8E, 0 6px 14px rgb(244 63 142 / .5);
+    animation: newBadgePulse 1.6s ease-in-out infinite;
+  }
+  @keyframes newBadgePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
   }
   /* ── Dark mode (:global so it matches <html data-theme>) ── */
   :global([data-theme="dark"] .chip) { background: #131a28; border-color: #2a3350; color: #cbd5e1; }
@@ -155,7 +160,7 @@ const guideIntros: Record<string, string> = {
   const isPlaceholder = (u) => u.includes('PASTE-YOUR-TOOL-URL-HERE');
   const isFresh = (d) => { if (!d) return false; const days = (Date.now() - new Date(d + 'T00:00:00').getTime()) / 86400000; return days >= 0 && days < 5; };
   const tag = (n) => `<span class="inline-block text-[11px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full bg-[#9333EA]/10 text-[#9333EA] mb-3">${esc(n)}</span>`;
-  const body = (t) => `${tag(t.niche)}${isFresh(t.added) ? '<span class="new-badge">New</span>' : ''}<h3 class="text-lg font-bold text-neutral-900 pr-6">${esc(t.name)}</h3><p class="text-sm text-neutral-600 mt-1">${esc(t.blurb)}</p>`;
+  const body = (t) => `${tag(t.niche)}${isFresh(t.added) ? '<span class="new-badge">✨ New</span>' : ''}<h3 class="text-lg font-bold text-neutral-900 pr-6">${esc(t.name)}</h3><p class="text-sm text-neutral-600 mt-1">${esc(t.blurb)}</p>`;
 
   function cardHtml(t) {
     if (isPlaceholder(t.url)) {
