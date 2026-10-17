@@ -528,6 +528,7 @@ export const niches: Niche[] = [
       { name: "MapQuiz", slug: "mapquiz", url: "https://mapquiz.2.fixoraa.tech", blurb: "Name-the-location quiz by region with streaks and a learn mode that groups cou" },
       { name: "WardrobeCalc", slug: "wardrobecalc", url: "https://wardrobecalc.2.fixoraa.tech", blurb: "Clothes inventory in \u2192 hanging metres (short/long split), shelf stacks, drawer" },
       { name: "CoinFlipPro", slug: "coinflippro", url: "https://coinflippro.2.fixoraa.tech", blurb: "Flip coins singly or in bulk, track streaks, test fairness over thousands of f" },
+      { name: "TollTally", slug: "tolltally", url: "https://tolltally.2.fixoraa.tech", blurb: "Trip toll estimate from distance, highway share and vehicle class, a per-100-k" },
     ],
   },
   // ── Converters ───────────────────────────────────────────────────────
