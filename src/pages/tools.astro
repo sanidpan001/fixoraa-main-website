@@ -1,9 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { niches, allTools, totalTools } from '../data/tools';
+import { niches, allTools, totalTools, newTools } from '../data/tools';
 
 const sortedTools = [...allTools].sort((a, b) => a.name.localeCompare(b.name));
-const toolsJson = JSON.stringify(sortedTools);
+const withAdded = sortedTools.map((t) => ({ ...t, added: newTools[t.slug] ?? null }));
+const toolsJson = JSON.stringify(withAdded);
+const isNewTool = (t: { slug: string }) => { const d = newTools[t.slug]; if (!d) return false; const days = (Date.now() - new Date(d + 'T00:00:00').getTime()) / 86400000; return days >= 0 && days < 5; };
 const isSoon = (url: string) => url.includes('PASTE-YOUR-TOOL-URL-HERE');
 
 const guideIntros: Record<string, string> = {
@@ -40,6 +42,7 @@ const guideIntros: Record<string, string> = {
   <!-- Niche filter chips -->
   <div id="nicheChips" class="flex flex-wrap justify-center gap-2 mb-4">
     <button data-niche="all" class="chip chip-active">All</button>
+    <button data-niche="new" class="chip">✨ New</button>
     {niches.map((n) => (
       <button data-niche={n.slug} class="chip">{n.name}</button>
     ))}
@@ -61,7 +64,7 @@ const guideIntros: Record<string, string> = {
           </div>
         ) : (
           <a href={t.url} target="_blank" rel="noopener" class="group relative block h-full rounded-2xl bg-white border border-neutral-200 p-5 hover:shadow-lg hover:-translate-y-1 hover:border-neutral-300 transition-all">
-            <span class="inline-block text-[11px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full bg-[#9333EA]/10 text-[#9333EA] mb-3">{t.niche}</span>
+            <span class="inline-block text-[11px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full bg-[#9333EA]/10 text-[#9333EA] mb-3">{t.niche}</span>{isNewTool(t) && <span class="new-badge">New</span>}
             <h3 class="text-lg font-bold text-neutral-900 pr-6">{t.name}</h3>
             <p class="text-sm text-neutral-600 mt-1">{t.blurb}</p>
             <span class="absolute top-5 right-5 text-xl text-neutral-400 group-hover:text-[#9333EA] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" aria-hidden="true">↗</span>
@@ -120,6 +123,13 @@ const guideIntros: Record<string, string> = {
     background: linear-gradient(to right, #FF5A5F, #F43F8E, #9333EA);
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / .1);
   }
+  .new-badge {
+    display: inline-block; margin-left: .5rem; vertical-align: middle;
+    font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+    padding: .25rem .6rem; border-radius: 9999px; color: #fff;
+    background: linear-gradient(to right, #FF5A5F, #F43F8E, #9333EA);
+    box-shadow: 0 2px 4px rgb(0 0 0 / .12);
+  }
   /* ── Dark mode (:global so it matches <html data-theme>) ── */
   :global([data-theme="dark"] .chip) { background: #131a28; border-color: #2a3350; color: #cbd5e1; }
   :global([data-theme="dark"] .chip:hover) { border-color: #475569; }
@@ -143,8 +153,9 @@ const guideIntros: Record<string, string> = {
 
   const esc = (s) => s.replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const isPlaceholder = (u) => u.includes('PASTE-YOUR-TOOL-URL-HERE');
+  const isFresh = (d) => { if (!d) return false; const days = (Date.now() - new Date(d + 'T00:00:00').getTime()) / 86400000; return days >= 0 && days < 5; };
   const tag = (n) => `<span class="inline-block text-[11px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full bg-[#9333EA]/10 text-[#9333EA] mb-3">${esc(n)}</span>`;
-  const body = (t) => `${tag(t.niche)}<h3 class="text-lg font-bold text-neutral-900 pr-6">${esc(t.name)}</h3><p class="text-sm text-neutral-600 mt-1">${esc(t.blurb)}</p>`;
+  const body = (t) => `${tag(t.niche)}${isFresh(t.added) ? '<span class="new-badge">New</span>' : ''}<h3 class="text-lg font-bold text-neutral-900 pr-6">${esc(t.name)}</h3><p class="text-sm text-neutral-600 mt-1">${esc(t.blurb)}</p>`;
 
   function cardHtml(t) {
     if (isPlaceholder(t.url)) {
@@ -155,10 +166,11 @@ const guideIntros: Record<string, string> = {
 
   function render() {
     const q = search.value.trim().toLowerCase();
-    const filtered = tools.filter((t) =>
-      (activeNiche === 'all' || t.nicheSlug === activeNiche) &&
+    let filtered = tools.filter((t) =>
+      (activeNiche === 'all' || (activeNiche === 'new' ? isFresh(t.added) : t.nicheSlug === activeNiche)) &&
       (!q || t.name.toLowerCase().includes(q) || t.blurb.toLowerCase().includes(q) || t.niche.toLowerCase().includes(q))
     );
+    if (activeNiche === 'new') filtered.sort((a, b) => (b.added || '').localeCompare(a.added || '') || a.name.localeCompare(b.name));
     grid.innerHTML = filtered.map(cardHtml).join('');
     empty.classList.toggle('hidden', filtered.length > 0);
     grid.classList.toggle('hidden', filtered.length === 0);
