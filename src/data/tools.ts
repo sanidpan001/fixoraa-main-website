@@ -394,6 +394,7 @@ export const niches: Niche[] = [
       { name: "MacAddr", slug: "macaddr", url: "https://macaddr.2.fixoraa.tech", blurb: "Paste any MAC \u2192 all standard formats (colon, dash, Cisco dotted, bare), validi" },
       { name: "Base64Img", slug: "base64img", url: "https://base64img.2.fixoraa.tech", blurb: "Drop an image \u2192 base64 with the full data URI, copy-ready CSS background and <" },
       { name: "JSONPath", slug: "jsonpath", url: "https://jsonpath.2.fixoraa.tech", blurb: "Paste JSON, type a JSONPath expression and see matched values highlighted in a" },
+      { name: "MacVendor", slug: "macvendor", url: "https://macvendor.2.fixoraa.tech", blurb: "Vendor identification from the OUI prefix (bundled dataset of common vendors)," },
     ],
   },
   // ── Date & Time ──────────────────────────────────────────────────────
