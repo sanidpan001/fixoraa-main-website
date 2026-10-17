@@ -460,6 +460,7 @@ export const niches: Niche[] = [
       { name: "BloodDonor", slug: "blooddonor", url: "https://blooddonor.2.fixoraa.tech", blurb: "Answer a short situation checklist \u2192 eligible / wait-until verdict with the ex" },
       { name: "KidVaccine", slug: "kidvaccine", url: "https://kidvaccine.2.fixoraa.tech", blurb: "Birth date in \u2192 the full schedule with calendar dates per dose, what's due now" },
       { name: "RowErg", slug: "rowerg", url: "https://rowerg.2.fixoraa.tech", blurb: "Converts a 500m split into total times for every standard erg distance, and pl" },
+      { name: "ContracTime", slug: "contractime", url: "https://contractime.2.fixoraa.tech", blurb: "One-tap start/stop timing \u2192 live frequency/duration averages over the last hou" },
     ],
   },
   // ── Fun & Lifestyle ──────────────────────────────────────────────────
