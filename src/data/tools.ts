@@ -359,7 +359,7 @@ export const niches: Niche[] = [
       { name: "EmojiText", slug: "emojitext", url: "https://emojitext.2.fixoraa.tech", blurb: "Type a sentence \u2192 words swapped for emojis where they exist, names/letters in" },
       { name: "VocabTest", slug: "vocabtest", url: "https://vocabtest.2.fixoraa.tech", blurb: "Frequency-band sampling test with nonsense-word traps to correct guessing \u2192 es" },
       { name: "TextColumns", slug: "textcolumns", url: "https://textcolumns.2.fixoraa.tech", blurb: "Paste text \u2192 balanced 2/3/4-column layout with gutter, font-size and rule-line" },
-      { name: "AcroFind", slug: "acrofind", url: "https://acrofind.2.fixoraa.tech", blurb: "Paste a document \u2192 every acronym extracted with occurrence counts, first-use p" },
+      { name: "AcroFind", slug: "acrofind", url: "https://acrofind.netlify.app", blurb: "Paste a document \u2192 every acronym extracted with occurrence counts, first-use p" },
       { name: "QuoteMaker", slug: "quotemaker", url: "https://quotemaker.2.fixoraa.tech", blurb: "Quote + author \u2192 typography-led cards with curated background styles (gradient" },
       { name: "PangramCheck", slug: "pangramcheck", url: "https://pangramcheck.2.fixoraa.tech", blurb: "Paste text \u2192 26-letter coverage grid lighting up live, missing letters listed," },
       { name: "SpaceClean", slug: "spaceclean", url: "https://spaceclean.fixoraa.workers.dev", blurb: "Normalises double spaces, tabs, trailing spaces and excess blank lines with pe" },
