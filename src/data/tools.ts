@@ -533,6 +533,8 @@ export const niches: Niche[] = [
       { name: "BakersPct", slug: "bakerspct", url: "https://bakerspct.fixoraa.workers.dev", blurb: "Flour is 100 percent and every ingredient follows: build a formula in baker's" },
       { name: "IdealWeight", slug: "idealweight", url: "https://idealweightfixoraa.netlify.app", blurb: "Shows all four clinical formulas as a RANGE plus the BMI healthy range \u2014 no si" },
       { name: "Chronotype", slug: "chronotype", url: "https://chronotypefixoraa.netlify.app", blurb: "Short quiz \u2192 chronotype animal + a personalised ideal day schedule (wake, focu" },
+      { name: "EyeBreak", slug: "eyebreak", url: "https://eyebreakfixoraa.netlify.app", blurb: "Fullscreen 20-20-20 timer: 20-min work, 20-sec look-away with a 20-ft focus pr" },
+      { name: "BabyWeek", slug: "babyweek", url: "https://babyweek.netlify.app", blurb: "Enter due date or LMP \u2192 current week/day, trimester, countdown and this week's" },
     ],
   },
   // ── Fun & Lifestyle ──────────────────────────────────────────────────
@@ -704,6 +706,8 @@ export const niches: Niche[] = [
       { name: "PrimeNest", slug: "primenest", url: "https://primenest.fixoraa.workers.dev", blurb: "Test primality with a factor proof, find the nth prime, list primes between tw" },
       { name: "LCMLab", slug: "lcmlab", url: "https://lcmlab.fixoraa.workers.dev", blurb: "LCM and GCF for two or three numbers, with the ladder method and factor trees" },
       { name: "NumberDrill", slug: "numberdrill", url: "https://numberdrill.fixoraa.workers.dev", blurb: "Pick an operation and level for timed on-screen drills, or print a worksheet w" },
+      { name: "VennDiagram", slug: "venndiagram", url: "https://venndiagramfixoraa.netlify.app", blurb: "2- and 3-circle Venn with editable region labels, colour themes and print/PNG" },
+      { name: "MindMaply", slug: "mindmaply", url: "https://mindmaply.netlify.app", blurb: "Drag-node mind maps with colour branches, auto-layout tidy button and PNG expo" },
     ],
   },
 ];
@@ -747,6 +751,10 @@ export const totalTools: number = allTools.length;
 //  than ~10 days can be deleted on any later edit; they do nothing then.
 // ───────────────────────────────────────────────────────────────────────
 export const newTools: Record<string, string> = {
+  "eyebreak": "2026-10-18",
+  "babyweek": "2026-10-18",
+  "venndiagram": "2026-10-18",
+  "mindmaply": "2026-10-18",
   "idealweight": "2026-10-18",
   "chronotype": "2026-10-18",
   grocerysave: "2026-10-17",
