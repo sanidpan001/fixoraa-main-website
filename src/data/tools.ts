@@ -531,6 +531,8 @@ export const niches: Niche[] = [
       { name: "StretchFlow", slug: "stretchflow", url: "https://stretchflow.fixoraa.workers.dev", blurb: "Pick a body area or sport and get a timed guided routine with hold countdowns" },
       { name: "ReciMath", slug: "recipemath", url: "https://recipemath.fixoraa.workers.dev", blurb: "Enter ingredients once, change the servings, and every quantity rescales with" },
       { name: "BakersPct", slug: "bakerspct", url: "https://bakerspct.fixoraa.workers.dev", blurb: "Flour is 100 percent and every ingredient follows: build a formula in baker's" },
+      { name: "IdealWeight", slug: "idealweight", url: "https://idealweightfixoraa.netlify.app", blurb: "Shows all four clinical formulas as a RANGE plus the BMI healthy range \u2014 no si" },
+      { name: "Chronotype", slug: "chronotype", url: "https://chronotypefixoraa.netlify.app", blurb: "Short quiz \u2192 chronotype animal + a personalised ideal day schedule (wake, focu" },
     ],
   },
   // ── Fun & Lifestyle ──────────────────────────────────────────────────
@@ -745,6 +747,8 @@ export const totalTools: number = allTools.length;
 //  than ~10 days can be deleted on any later edit; they do nothing then.
 // ───────────────────────────────────────────────────────────────────────
 export const newTools: Record<string, string> = {
+  "idealweight": "2026-10-18",
+  "chronotype": "2026-10-18",
   grocerysave: "2026-10-17",
   childcarecost: "2026-10-17",
   leasebreak: "2026-10-17",
