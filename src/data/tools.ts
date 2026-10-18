@@ -179,6 +179,8 @@ export const niches: Niche[] = [
       { name: "GratuityCalc", slug: "gratuitycalc", url: "https://gratuitycalc.fixoraa.workers.dev", blurb: "Checks the 5-year eligibility rule, applies the 15/26 formula and shows gratui" },
       { name: "DebtRatio", slug: "debtratio", url: "https://debtratio.2.fixoraa.tech", blurb: "Front-end and back-end DTI side by side with lender-band verdicts and the mont" },
       { name: "DutyCost", slug: "dutycost", url: "https://dutycost.2.fixoraa.tech", blurb: "The full cost stack in order \u2014 price, freight and insurance to CIF, duty on CI" },
+      { name: "OverPay", slug: "overpay", url: "https://overpay.2.fixoraa.tech", blurb: "Rate and hours split by band \u2014 regular, 1.5x and 2x \u2014 with night-shift and wee" },
+      { name: "LtvCalc", slug: "ltvcalc", url: "https://ltvcalc.2.fixoraa.tech", blurb: "ARPU, gross margin and churn give a margin-adjusted LTV, CAC from spend divide" },
     ],
   },
   // ── Image Tools ──────────────────────────────────────────────────────
@@ -231,6 +233,8 @@ export const niches: Niche[] = [
       { name: "PicText", slug: "pictext", url: "https://pictext.fixoraa.workers.dev", blurb: "Free-position text layers with fonts, outline/shadow and sticker shapes \u2014 post" },
       { name: "GrayPic", slug: "graypic", url: "https://graypic.fixoraa.workers.dev", blurb: "Grayscale conversion with contrast/brightness and channel-mix (red/green/blue" },
       { name: "HeicDrop", slug: "heicdrop", url: "https://heicdrop.2.fixoraa.tech", blurb: "Conversion happens entirely on your device \u2014 photos never leave the browser \u2014" },
+      { name: "DpiFix", slug: "dpifix", url: "https://dpifix.2.fixoraa.tech", blurb: "Drop an image to see its pixel size and true print size at each standard DPI," },
+      { name: "ScreenRec", slug: "screenrec", url: "https://screenrec.2.fixoraa.tech", blurb: "Record your full screen, a window or a tab with optional microphone narration" },
     ],
   },
   // ── PDF Tools ────────────────────────────────────────────────────────
@@ -377,6 +381,7 @@ export const niches: Niche[] = [
       { name: "WordLadder", slug: "wordladder", url: "https://wordladder.fixoraa.workers.dev", blurb: "Give a start and end word and get the shortest ladder between them, plus a dai" },
       { name: "CrosswordHelp", slug: "crosswordhelp", url: "https://crosswordhelp.fixoraa.workers.dev", blurb: "Type a pattern like C_T plus any clue letters and get ranked candidate words f" },
       { name: "ScriptTime", slug: "scripttime", url: "https://scripttime.fixoraa.workers.dev", blurb: "Paste a script or scene and get estimated screen time from dialogue and action" },
+      { name: "HandLetter", slug: "handletter", url: "https://handletter.2.fixoraa.tech", blurb: "Type or paste text and get a realistic handwritten page: a choice of handwriti" },
     ],
   },
   // ── Developer Tools ──────────────────────────────────────────────────
@@ -454,6 +459,7 @@ export const niches: Niche[] = [
       { name: "SlugifyPro", slug: "slugifypro", url: "https://slugifypro.fixoraa.workers.dev", blurb: "Turns titles into clean URL slugs with transliteration, stop-word control and" },
       { name: "ViewportTest", slug: "viewporttest", url: "https://viewporttest.fixoraa.workers.dev", blurb: "Previews any URL-sized layout across phone, tablet, laptop and desktop frames" },
       { name: "UniInspect", slug: "uniinspect", url: "https://uniinspect.2.fixoraa.tech", blurb: "Every character gets a row with codepoint, UTF-8 and UTF-16 bytes, HTML entity" },
+      { name: "DlCalc", slug: "dlcalc", url: "https://dlcalc.2.fixoraa.tech", blurb: "File size plus speed gives download and upload times with an efficiency slider" },
     ],
   },
   // ── Date & Time ──────────────────────────────────────────────────────
@@ -629,6 +635,7 @@ export const niches: Niche[] = [
       { name: "AquaVol", slug: "aquavol", url: "https://aquavol.fixoraa.workers.dev", blurb: "Tank dimensions give water volume in litres and gallons, filled weight and a s" },
       { name: "GravelCalc", slug: "gravelcalc", url: "https://gravelcalc.fixoraa.workers.dev", blurb: "Area and depth give gravel volume, tonnes with compaction allowance, and bag c" },
       { name: "BookShelfIt", slug: "bookshelfit", url: "https://bookshelfit.fixoraa.workers.dev", blurb: "Plans a bookshelf: shelves from your book heights, total board length, and how" },
+      { name: "EggTimer", slug: "eggtimer", url: "https://eggtimer.2.fixoraa.tech", blurb: "Pick doneness from yolk pictures, egg size and fridge or room start to get exa" },
     ],
   },
   // ── Converters ───────────────────────────────────────────────────────
@@ -861,6 +868,13 @@ export const newTools: Record<string, string> = {
   uniinspect: "2026-10-18",
   heicdrop: "2026-10-18",
   dutycost: "2026-10-18",
+  overpay: "2026-10-19",
+  dlcalc: "2026-10-19",
+  dpifix: "2026-10-19",
+  screenrec: "2026-10-19",
+  ltvcalc: "2026-10-19",
+  handletter: "2026-10-19",
+  eggtimer: "2026-10-19",
 };
 
 
