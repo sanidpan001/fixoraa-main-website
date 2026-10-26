@@ -143,7 +143,7 @@ export const niches: Niche[] = [
       { name: "EPFCalc", slug: "epfcalc", url: "https://epfcalc.2.fixoraa.tech", blurb: "Projects with yearly salary increments and shows the employer/employee split p" },
       { name: "SWPCalc", slug: "swpcalc", url: "https://swpcalc.2.fixoraa.tech", blurb: "Withdrawals that can rise yearly with inflation, plus the exact month the corp" },
       { name: "SipVsRd", slug: "sipvsrd", url: "https://sipvsrd.fixoraa.tech", blurb: "Same monthly amount through SIP and RD together, inflation-adjusted real value" },
-      { name: "StampDuty", slug: "stampduty", url: "https://stampduty.2.fixoraa.tech", blurb: "State-wise duty + registration with male, female and joint totals compared on" },
+      { name: "StampDuty", slug: "stampduty", url: "https://stampduty.fixoraa.tech", blurb: "State-wise duty + registration with male, female and joint totals compared on" },
       { name: "CarInsure", slug: "carinsure", url: "https://carinsure.fixoraa.tech", blurb: "Premium estimate built transparently from IDV, car age, NCB slab and add-on pi" },
       { name: "RentDeposit", slug: "rentdeposit", url: "https://rentdeposit.fixoraa.tech", blurb: "Full move-in cash total: deposit (city-wise month presets), first month, broke" },
       { name: "NpsVsEpf", slug: "npsvsepf", url: "https://npsvsepf.fixoraa.tech", blurb: "Same contribution through NPS (with equity/debt split + annuity portion at exi" },
@@ -403,7 +403,7 @@ export const niches: Niche[] = [
       { name: "PalinPlay", slug: "palinplay", url: "https://palinplay.2.fixoraa.tech", blurb: "Checks full sentences the way humans mean it, and finds the longest palindrome" },
       { name: "SentFlip", slug: "sentflip", url: "https://sentflip.fixoraa.tech", blurb: "Reverses sentence order in a paragraph, or word order inside each sentence, ke" },
       { name: "EmojiText", slug: "emojitext", url: "https://emojitext.fixoraa.tech", blurb: "Type a sentence \u2192 words swapped for emojis where they exist, names/letters in" },
-      { name: "VocabTest", slug: "vocabtest", url: "https://vocabtest.2.fixoraa.tech", blurb: "Frequency-band sampling test with nonsense-word traps to correct guessing \u2192 es" },
+      { name: "VocabTest", slug: "vocabtest", url: "https://vocabtest.fixoraa.tech", blurb: "Frequency-band sampling test with nonsense-word traps to correct guessing \u2192 es" },
       { name: "TextColumns", slug: "textcolumns", url: "https://textcolumns.fixoraa.tech", blurb: "Paste text \u2192 balanced 2/3/4-column layout with gutter, font-size and rule-line" },
       { name: "AcroFind", slug: "acrofind", url: "https://acrofind.netlify.app", blurb: "Paste a document \u2192 every acronym extracted with occurrence counts, first-use p" },
       { name: "QuoteMaker", slug: "quotemaker", url: "https://quotemaker.fixoraa.tech", blurb: "Quote + author \u2192 typography-led cards with curated background styles (gradient" },
@@ -550,6 +550,7 @@ export const niches: Niche[] = [
       { name: "RobotsGen", slug: "robotsgen", url: "https://robotsgen.fixoraa.tech", blurb: "RobotsGen — free online robots.txt generator. Per-bot allow/disallow checklist including AI crawlers, sitemap lines, and a validated downloadable file No signup," },
       { name: "SchemaGen", slug: "schemagen", url: "https://schemagen.fixoraa.tech", blurb: "SchemaGen — free online schema markup generator. Forms for FAQ/Article/Product/Recipe → valid JSON-LD plus a built-in sanity check (missing fields flagged) before you" },
       { name: "TableMD", slug: "tablemd", url: "https://tablemd.fixoraa.tech", blurb: "TableMD — free online markdown table generator. Paste CSV/TSV/Excel data → aligned Markdown with per-column alignment and a rendered preview side by side No signup," },
+      { name: "XmlJson", slug: "xmljson", url: "https://xmljson.fixoraa.tech", blurb: "XmlJson — free online xml to json converter online. Two-way XML↔JSON with attribute handling toggle, pretty print and error location No signup, unlimited free usage." },
     ],
   },
   // ── Date & Time ──────────────────────────────────────────────────────
@@ -802,6 +803,8 @@ export const niches: Niche[] = [
       { name: "StoryDice", slug: "storydice", url: "https://storydice.fixoraa.tech", blurb: "StoryDice — free online story dice online. Roll up to 9 icon dice across story categories, lock the good ones, re-roll the rest — plus a story-starter sentence for the" },
       { name: "TicTacToe", slug: "tictactoe", url: "https://tictactoe.fixoraa.tech", blurb: "TicTacToe — free online tic tac toe online vs computer. Three AI levels (random → unbeatable minimax), two-player mode, score board across rounds No signup, unlimited" },
       { name: "VanPower", slug: "vanpower", url: "https://vanpower.fixoraa.tech", blurb: "VanPower — free online campervan power calculator. A loads list gives daily watt-hours, a recommended battery bank for your autonomy days and battery chemistry, solar" },
+      { name: "WashDose", slug: "washdose", url: "https://washdose.fixoraa.tech", blurb: "WashDose — free online how much detergent per load calculator. Dosage for powder/liquid/pods by load kg, water hardness and soil level, with over-dose warning No signup," },
+      { name: "WaterUse", slug: "wateruse", url: "https://wateruse.fixoraa.tech", blurb: "WaterUse — free online household water usage calculator. Daily litres by fixture with per-person totals and the top saving actions ranked by litres saved No signup," },
     ],
   },
   // ── Converters ───────────────────────────────────────────────────────
@@ -840,6 +843,7 @@ export const niches: Niche[] = [
       { name: "HatSize", slug: "hatsize", url: "https://hatsize.fixoraa.tech", blurb: "HatSize — free online hat size converter. Measure head in cm/inches → US/UK/EU sizes for adults and kids, with between-sizes advice No signup, unlimited free usage." },
       { name: "LumenRoom", slug: "lumenroom", url: "https://lumenroom.fixoraa.tech", blurb: "LumenRoom — free online lumens calculator room lighting. Room size + use (kitchen/task/ambient) → lumens needed and bulb counts for LED/CFL/halogen equivalents No" },
       { name: "PlanetAge", slug: "planetage", url: "https://planetage.fixoraa.tech", blurb: "PlanetAge — free online age on other planets calculator. Age on 8 planets + your next planetary birthday date for each No signup, unlimited free usage." },
+      { name: "ViewSize", slug: "viewsize", url: "https://viewsize.fixoraa.tech", blurb: "ViewSize — free online tv size calculator viewing distance. Diagonal + aspect → true width/height/area and a viewing-distance range with angle verdicts — not a single" },
     ],
   },
   // ── Study & Career ───────────────────────────────────────────────────
@@ -1267,6 +1271,10 @@ export const newTools: Record<string, string> = {
   "timelinemaker": "2026-10-26",
   "vanpower": "2026-10-26",
   "vectorcalc": "2026-10-26",
+  "viewsize": "2026-10-27",
+  "washdose": "2026-10-27",
+  "wateruse": "2026-10-27",
+  "xmljson": "2026-10-27",
 };
 
 
