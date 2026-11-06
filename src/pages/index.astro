@@ -1,10 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { niches, allTools, totalTools } from '../data/tools';
+import { niches, totalTools } from '../data/tools';
 
-// Hero count: totalTools rounded DOWN to the nearest hundred (334 -> 300+).
-// Sandipan's rule (2026-10-13): the hero always shows the hundred mark, never the exact count.
-const heroTools = Math.floor(totalTools / 100) * 100;
+// Hero count: totalTools rounded DOWN to the nearest thousand, shown with a
+// trailing "+" (42,714 -> "42000+"). Sandipan's rule (2026-11-06, refining
+// his 2026-10-13 hundred-mark rule): the hero never shows the exact count —
+// it steps up by whole thousands only. Everywhere else uses the exact total.
+const heroTools = Math.floor(totalTools / 1000) * 1000;
 
 // Rotating gradient accents for niche cards
 const accents = [
@@ -199,7 +201,7 @@ const pageDescription =
     <div class="mx-auto grid max-w-6xl grid-cols-2 gap-4 px-5 py-12 lg:grid-cols-4">
       <div class="stagger-card rounded-3xl border border-ink/10 bg-cream p-6 text-center">
         <p class="text-4xl font-extrabold tracking-tight sm:text-5xl">
-          <span class="stat-count" data-count={totalTools}>0</span>
+          <span class="stat-count" data-count={heroTools}>0</span>+
         </p>
         <p class="mt-2 text-sm font-semibold text-ink/60">free tools</p>
       </div>
@@ -211,7 +213,7 @@ const pageDescription =
       </div>
       <div class="stagger-card rounded-3xl border border-ink/10 bg-cream p-6 text-center">
         <p class="text-4xl font-extrabold tracking-tight text-gradient sm:text-5xl">
-          <span class="stat-count" data-count={totalTools} data-infinity="true">0</span>
+          <span class="stat-count" data-count={heroTools} data-infinity="true">0</span>
         </p>
         <p class="mt-2 text-sm font-semibold text-ink/60">tools, forever growing</p>
       </div>
@@ -768,10 +770,16 @@ const pageDescription =
 </script>
 
 <!-- ══════════ LIVE TOOL SEARCH ══════════ -->
-<script define:vars={{ toolData: allTools }}>
+<!-- Since 2026-11-06 the tool list is NOT baked into this page any more
+     (it made the homepage 12 MB). The index lives in static JSON shards
+     under /data/shards/ and is fetched lazily on first search use. -->
+<script>
+  import { loadToolIndex, toolMatches } from '../lib/search-client.js';
+
   const searchInput = document.getElementById('tool-search');
   const searchResults = document.getElementById('search-results');
-  const tools = toolData;
+  let tools = [];
+  let indexStarted = false;
 
   function escapeHtml(s) {
     return String(s)
@@ -813,21 +821,32 @@ const pageDescription =
     searchResults.classList.remove('hidden');
   }
 
-  searchInput.addEventListener('input', () => {
+  function runSearch() {
     const q = searchInput.value.trim().toLowerCase();
     if (q.length < 2) {
       hideResults();
       return;
     }
     const matches = tools
-      .filter(
-        (t) =>
-          t.name.toLowerCase().includes(q) ||
-          t.blurb.toLowerCase().includes(q) ||
-          t.niche.toLowerCase().includes(q)
-      )
+      .filter((t) => toolMatches(t, q))
+      .sort((a, b) => a.ord - b.ord)
       .slice(0, 8);
     renderResults(matches, searchInput.value.trim());
+  }
+
+  function ensureIndex() {
+    if (indexStarted) return;
+    indexStarted = true;
+    // Progressive: re-run the current query as each shard lands.
+    loadToolIndex((loaded) => {
+      tools = loaded;
+      runSearch();
+    });
+  }
+
+  searchInput.addEventListener('input', () => {
+    ensureIndex();
+    runSearch();
   });
 
   searchInput.addEventListener('keydown', (e) => {
@@ -842,8 +861,9 @@ const pageDescription =
     setTimeout(hideResults, 180);
   });
   searchInput.addEventListener('focus', () => {
+    ensureIndex();
     if (searchInput.value.trim().length >= 2) {
-      searchInput.dispatchEvent(new Event('input'));
+      runSearch();
     }
   });
 </script>

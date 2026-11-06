@@ -1,12 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { niches, allTools, totalTools, newTools } from '../data/tools';
+import { niches, totalTools, newTools } from '../data/tools';
+import { sortedAll, isPlaceholderUrl } from '../lib/tools-data';
 
-const sortedTools = [...allTools].sort((a, b) => a.name.localeCompare(b.name));
-const withAdded = sortedTools.map((t) => ({ ...t, added: newTools[t.slug] ?? null }));
-const toolsJson = JSON.stringify(withAdded);
+// Speed fix (2026-11-06): this page used to render all 42,714 cards AND
+// embed the full tool list as JSON (a 67 MB page). It is now a light
+// landing: the first 100 A–Z tools are server-rendered below, full lists
+// live on the paginated pages under /tools/<collection>/, and the search
+// box fetches the compact index shards from /data/shards/ on first use.
+const initialTools = sortedAll.slice(0, 100);
 const isNewTool = (t: { slug: string }) => { const d = newTools[t.slug]; if (!d) return false; const days = (Date.now() - new Date(d + 'T00:00:00').getTime()) / 86400000; return days >= 0 && days < 5; };
-const isSoon = (url: string) => url.includes('PASTE-YOUR-TOOL-URL-HERE');
+const isSoon = (url: string) => isPlaceholderUrl(url);
 
 const guideIntros: Record<string, string> = {
   'finance-calculators': "Money questions rarely need a spreadsheet — they need one honest number, fast. This category covers the full arc of personal finance: loan EMIs and payoff timelines, SIP and RD growth, income tax and GST, retirement corpus planning, and the small daily maths of budgets, discounts and salary breakup. Every calculator shows its working, so you can change an assumption — a rate, a tenure, a monthly amount — and see the effect instantly. Start with the EMI and SIP tools if you are planning something big, and keep the everyday converters handy for everything else.",
@@ -39,21 +43,23 @@ const guideIntros: Record<string, string> = {
     </div>
   </div>
 
-  <!-- Niche filter chips -->
+  <!-- Category chips: links to the paginated listing pages (same look as
+       the old filter chips; the lists themselves live one click away) -->
   <div id="nicheChips" class="flex flex-wrap justify-center gap-2 mb-4">
-    <button data-niche="all" class="chip chip-active">All</button>
-    <button data-niche="new" class="chip">✨ New</button>
+    <a href="/tools" class="chip chip-active">All</a>
+    <a href="/tools/new/" class="chip">✨ New</a>
     {niches.map((n) => (
-      <button data-niche={n.slug} class="chip">{n.name}</button>
+      <a href={`/tools/${n.slug}/`} class="chip">{n.name}</a>
     ))}
   </div>
 
   <!-- Results count -->
   <p id="resultCount" class="text-center text-sm text-neutral-500 mb-8">Showing {totalTools} of {totalTools} tools</p>
 
-  <!-- Grid -->
+  <!-- Grid: the first 100 tools A–Z are server-rendered; search results
+       are rendered into the same grid by the script below. -->
   <div id="toolGrid" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-    {sortedTools.map((t) => (
+    {initialTools.map((t) => (
       <div class="tool-card" data-name={t.name.toLowerCase()} data-blurb={t.blurb.toLowerCase()} data-niche={t.niche.toLowerCase()} data-nicheslug={t.nicheSlug}>
         {isSoon(t.url) ? (
           <div class="relative block h-full rounded-2xl bg-white border border-neutral-200 p-5 opacity-70">
@@ -74,6 +80,13 @@ const guideIntros: Record<string, string> = {
     ))}
   </div>
 
+  <!-- Browse the full directory -->
+  <p id="browseAllNote" class="text-center text-sm text-neutral-500 mt-8">
+    Showing the first 100 tools A–Z.
+    <a href="/tools/all/" class="font-bold text-[#9333EA] hover:underline">Browse all {totalTools} tools →</a>
+    or pick a category above.
+  </p>
+
   <!-- Empty state -->
   <div id="emptyState" class="hidden text-center py-16">
     <p class="text-5xl mb-4">🔍</p>
@@ -86,10 +99,10 @@ const guideIntros: Record<string, string> = {
     <h2 class="text-2xl font-black text-neutral-900 mb-4">Browse by category</h2>
     <div class="grid gap-3 sm:grid-cols-2">
       {niches.map((n) => (
-        <button data-jump={n.slug} class="text-left rounded-2xl bg-white border border-neutral-200 p-4 hover:shadow-md hover:-translate-y-0.5 transition-all">
+        <a href={`/tools/${n.slug}/`} class="block text-left rounded-2xl bg-white border border-neutral-200 p-4 hover:shadow-md hover:-translate-y-0.5 transition-all">
           <span class="font-bold text-neutral-900">{n.name}</span>
           <span class="block text-sm text-neutral-500 mt-1">{n.tools.length} tools · {n.tagline}</span>
-        </button>
+        </a>
       ))}
     </div>
   </div>
@@ -113,6 +126,7 @@ const guideIntros: Record<string, string> = {
 
 <style>
   .chip {
+    display: inline-block; text-decoration: none;
     font-size: .875rem; font-weight: 600; padding: .5rem 1rem; border-radius: 9999px;
     border: 1px solid #e5e5e5; background: #fff; color: #404040; cursor: pointer;
     transition: all .15s ease;
@@ -146,15 +160,23 @@ const guideIntros: Record<string, string> = {
   .tool-card { animation: fadeUp .35s ease both; }
 </style>
 
-<script define:vars={{ toolsJson }}>
-  const tools = JSON.parse(toolsJson);
+<script>
+  import { loadToolIndex, toolMatches } from '../lib/search-client.js';
+
+  // Search runs off the lazy index shards (fetched on first keystroke) —
+  // the full tool list is no longer embedded in this page. Card markup and
+  // the match rule are the same ones this page has always used.
   const grid = document.getElementById('toolGrid');
   const search = document.getElementById('toolSearch');
   const count = document.getElementById('resultCount');
   const empty = document.getElementById('emptyState');
-  const chips = [...document.querySelectorAll('#nicheChips .chip')];
-  const total = tools.length;
-  let activeNiche = 'all';
+  const browseNote = document.getElementById('browseAllNote');
+  const initialGridHtml = grid.innerHTML;
+  const initialCountText = count.textContent;
+  const RENDER_CAP = 500;
+  let allTools = [];
+  let total = 0;
+  let indexStarted = false;
 
   const esc = (s) => s.replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const isPlaceholder = (u) => u.includes('PASTE-YOUR-TOOL-URL-HERE');
@@ -171,30 +193,43 @@ const guideIntros: Record<string, string> = {
 
   function render() {
     const q = search.value.trim().toLowerCase();
-    let filtered = tools.filter((t) =>
-      (activeNiche === 'all' || (activeNiche === 'new' ? isFresh(t.added) : t.nicheSlug === activeNiche)) &&
-      (!q || t.name.toLowerCase().includes(q) || t.blurb.toLowerCase().includes(q) || t.niche.toLowerCase().includes(q))
-    );
-    if (activeNiche === 'new') filtered.sort((a, b) => (b.added || '').localeCompare(a.added || '') || a.name.localeCompare(b.name));
-    grid.innerHTML = filtered.map(cardHtml).join('');
-    empty.classList.toggle('hidden', filtered.length > 0);
-    grid.classList.toggle('hidden', filtered.length === 0);
-    count.textContent = `Showing ${filtered.length} of ${total} tools`;
+    if (!q) {
+      grid.innerHTML = initialGridHtml;
+      count.textContent = initialCountText;
+      empty.classList.add('hidden');
+      grid.classList.remove('hidden');
+      browseNote.classList.remove('hidden');
+      return;
+    }
+    const matches = allTools
+      .filter((t) => toolMatches(t, q))
+      .sort((a, b) => a.name.localeCompare(b.name));
+    const shown = matches.slice(0, RENDER_CAP);
+    grid.innerHTML = shown.map(cardHtml).join('');
+    empty.classList.toggle('hidden', matches.length > 0);
+    grid.classList.toggle('hidden', matches.length === 0);
+    browseNote.classList.add('hidden');
+    count.textContent = matches.length > RENDER_CAP
+      ? `Showing first ${RENDER_CAP} of ${matches.length} matches — keep typing to narrow it down`
+      : `Showing ${matches.length} of ${total} tools`;
   }
 
-  search.addEventListener('input', render);
-  chips.forEach((chip) => chip.addEventListener('click', () => {
-    chips.forEach((c) => c.classList.remove('chip-active'));
-    chip.classList.add('chip-active');
-    activeNiche = chip.dataset.niche;
+  function ensureIndex() {
+    if (indexStarted) return;
+    indexStarted = true;
+    loadToolIndex((loaded) => {
+      allTools = loaded;
+      total = loaded.length;
+      render();
+    });
+  }
+
+  search.addEventListener('input', () => {
+    ensureIndex();
     render();
-  }));
-  // Category cards below the grid jump to the matching filter
-  document.querySelectorAll('[data-jump]').forEach((btn) => btn.addEventListener('click', () => {
-    const chip = chips.find((c) => c.dataset.niche === btn.dataset.jump);
-    if (chip) chip.click();
-    grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }));
-  render();
+  });
+  search.addEventListener('focus', () => {
+    if (search.value.trim()) ensureIndex();
+  });
 </script>
 </Layout>

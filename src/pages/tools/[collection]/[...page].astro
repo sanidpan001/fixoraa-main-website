@@ -1,0 +1,22 @@
+---
+// Paginated tool listings (added 2026-11-06, main-site speed fix).
+// Generates /tools/all/, /tools/new/ and /tools/<niche>/ — page 1 at the
+// bare path, further pages at /tools/<collection>/<n>/, 100 tools each —
+// all server-rendered from src/data/tools.ts via src/lib/tools-data.ts.
+import ListingPage from '../../../components/ListingPage.astro';
+import { getCollections } from '../../../lib/tools-data';
+
+export function getStaticPaths({ paginate }: any) {
+  return getCollections().flatMap((c: any) =>
+    paginate(c.tools, {
+      params: { collection: c.id },
+      props: { collection: c },
+      pageSize: 100,
+    })
+  );
+}
+
+const { page, collection } = Astro.props;
+---
+
+<ListingPage collection={collection} page={page} />

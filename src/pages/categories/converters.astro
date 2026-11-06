@@ -3,6 +3,11 @@ import Layout from '../../layouts/Layout.astro';
 import { niches } from '../../data/tools';
 
 const niche = niches.find((n) => n.slug === 'converters');
+// Speed fix (2026-11-06): this guide used to render ALL 40,624 converter
+// cards inline (a 16.6 MB page). The grid below now shows the first 100 and
+// links to the full paginated listing at /tools/converters/ — the guide's
+// prose, favourites and FAQs are unchanged.
+const gridTools = niche.tools.slice(0, 100);
 const title = "Converters — Units, Shoe Sizes, Oven Temps & More | Fixoraa";
 const description = "Free online converters for units, shoe and ring sizes, oven temperatures, fractions, percentages and numbers in words. Instant results, no signup.";
 const faqs = [
@@ -78,13 +83,16 @@ const faqJsonLd = {
 
     <h2 class="text-2xl font-black text-neutral-900 pt-8">Every tool in this category</h2>
     <div class="grid gap-3 sm:grid-cols-2 !mt-4">
-      {niche.tools.map((t) => (
+      {gridTools.map((t) => (
         <a href={t.url} target="_blank" rel="noopener" class="block rounded-2xl border border-neutral-200 bg-white p-4 hover:shadow-md transition-all">
           <span class="font-bold text-neutral-900">{t.name}</span>
           <p class="mt-1 text-sm text-neutral-600">{t.blurb}</p>
         </a>
       ))}
     </div>
+    <p class="!mt-6 text-center">
+      <a href="/tools/converters/" class="inline-block rounded-full bg-ink px-6 py-3 text-sm font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg">Browse all {niche.tools.length} converters →</a>
+    </p>
 
     <h2 class="text-2xl font-black text-neutral-900 pt-8">Frequently asked questions</h2>
     <div class="space-y-3 !mt-4">

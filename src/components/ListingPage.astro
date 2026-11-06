@@ -1,0 +1,164 @@
+---
+// Paginated tool-listing page (added 2026-11-06, main-site speed fix).
+// Renders ONE page (100 tools) of a collection — /tools/all/, /tools/new/
+// or /tools/<niche>/ — with the same card design the old single-page
+// /tools directory used, plus numbered pagination so every tool stays
+// reachable (and crawlable) through real <a href> links.
+import Layout from '../layouts/Layout.astro';
+import { niches, isFresh, isPlaceholderUrl, type Collection } from '../lib/tools-data';
+
+interface PageLike {
+  data: any[];
+  currentPage: number;
+  lastPage: number;
+  total: number;
+  url: { prev?: string; next?: string };
+}
+
+interface Props {
+  collection: Collection;
+  page: PageLike;
+}
+
+const { collection, page } = Astro.props as Props;
+const tools = page.data;
+const total = page.total;
+const perPage = tools.length > 0 ? 100 : 100;
+const start = total === 0 ? 0 : (page.currentPage - 1) * perPage + 1;
+const end = (page.currentPage - 1) * perPage + tools.length;
+const base = `/tools/${collection.id}/`;
+const pageHref = (n: number) => (n === 1 ? base : `${base}${n}/`);
+
+// Windowed page numbers: 1 … c-2 c-1 c c+1 c+2 … N
+const win: (number | '…')[] = [];
+{
+  const c = page.currentPage;
+  const last = page.lastPage;
+  const nums = new Set<number>([1, last, c - 2, c - 1, c, c + 1, c + 2]);
+  let prev = 0;
+  for (let n = 1; n <= last; n++) {
+    if (!nums.has(n)) continue;
+    if (prev && n - prev > 1) win.push('…');
+    win.push(n);
+    prev = n;
+  }
+}
+
+const pageTitle =
+  page.currentPage === 1
+    ? collection.kind === 'all'
+      ? 'All Free Online Tools A–Z — Fixoraa'
+      : collection.kind === 'new'
+        ? '✨ New Tools — Fixoraa'
+        : `${collection.title} — Free Online Tools | Fixoraa`
+    : collection.kind === 'all'
+      ? `All Free Online Tools A–Z — Page ${page.currentPage} — Fixoraa`
+      : collection.kind === 'new'
+        ? `✨ New Tools — Page ${page.currentPage} — Fixoraa`
+        : `${collection.title} — Page ${page.currentPage} | Fixoraa`;
+const pageDescription = `Browse ${total} free ${collection.kind === 'niche' ? collection.title : 'online'} tools on Fixoraa — page ${page.currentPage} of ${page.lastPage}. No signup, no watermarks.`;
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+<main class="mx-auto max-w-6xl px-4 py-10 sm:py-14">
+  <!-- Header (same design language as /tools) -->
+  <div class="text-center mb-8">
+    <span class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full text-white bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] mb-4">Free · No signup</span>
+    <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-neutral-900">{collection.title}<span class="bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] bg-clip-text text-transparent">{collection.titleAccent}</span></h1>
+    <p class="mt-4 text-neutral-600 max-w-2xl mx-auto">{collection.tagline}</p>
+  </div>
+
+  <!-- Collection chips (links — same row as the /tools filter chips) -->
+  <div class="flex flex-wrap justify-center gap-2 mb-4">
+    <a href="/tools/all/" class={`chip ${collection.id === 'all' ? 'chip-active' : ''}`}>All</a>
+    <a href="/tools/new/" class={`chip ${collection.id === 'new' ? 'chip-active' : ''}`}>✨ New</a>
+    {niches.map((n) => (
+      <a href={`/tools/${n.slug}/`} class={`chip ${collection.id === n.slug ? 'chip-active' : ''}`}>{n.name}</a>
+    ))}
+  </div>
+
+  <!-- Results count -->
+  <p class="text-center text-sm text-neutral-500 mb-8">
+    {total === 0
+      ? 'No tools here right now — check back soon.'
+      : <>Showing {start}–{end} of {total} tools · Page {page.currentPage} of {page.lastPage}</>}
+  </p>
+
+  <!-- Grid (card markup identical to the /tools directory cards) -->
+  <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {tools.map((t) => (
+      <div class="tool-card" data-name={t.name.toLowerCase()} data-blurb={t.blurb.toLowerCase()} data-niche={t.niche.toLowerCase()} data-nicheslug={t.nicheSlug}>
+        {isPlaceholderUrl(t.url) ? (
+          <div class="relative block h-full rounded-2xl bg-white border border-neutral-200 p-5 opacity-70">
+            <span class="inline-block text-[11px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full bg-[#9333EA]/10 text-[#9333EA] mb-3">{t.niche}</span>
+            <h3 class="text-lg font-bold text-neutral-900 pr-6">{t.name}</h3>
+            <p class="text-sm text-neutral-600 mt-1">{t.blurb}</p>
+            <span class="inline-block mt-3 text-xs font-bold px-3 py-1 rounded-full bg-neutral-100 text-neutral-500">Coming soon</span>
+          </div>
+        ) : (
+          <a href={t.url} target="_blank" rel="noopener" class="group relative block h-full rounded-2xl bg-white border border-neutral-200 p-5 hover:shadow-lg hover:-translate-y-1 hover:border-neutral-300 transition-all">
+            <span class="inline-block text-[11px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full bg-[#9333EA]/10 text-[#9333EA] mb-3">{t.niche}</span>{isFresh(t.slug) && <span class="new-badge">✨ New</span>}
+            <h3 class="text-lg font-bold text-neutral-900 pr-6">{t.name}</h3>
+            <p class="text-sm text-neutral-600 mt-1">{t.blurb}</p>
+            <span class="absolute top-5 right-5 text-xl text-neutral-400 group-hover:text-[#9333EA] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" aria-hidden="true">↗</span>
+          </a>
+        )}
+      </div>
+    ))}
+  </div>
+
+  <!-- Pagination -->
+  {page.lastPage > 1 && (
+    <nav class="mt-12 flex flex-wrap items-center justify-center gap-2" aria-label="Listing pages">
+      {page.url.prev
+        ? <a href={page.url.prev} class="chip" rel="prev">← Prev</a>
+        : <span class="chip opacity-40 pointer-events-none">← Prev</span>}
+      {win.map((n) => n === '…'
+        ? <span class="px-1 text-neutral-400">…</span>
+        : <a href={pageHref(n)} class={`chip ${n === page.currentPage ? 'chip-active' : ''}`} aria-current={n === page.currentPage ? 'page' : undefined}>{n}</a>)}
+      {page.url.next
+        ? <a href={page.url.next} class="chip" rel="next">Next →</a>
+        : <span class="chip opacity-40 pointer-events-none">Next →</span>}
+    </nav>
+  )}
+
+  <p class="mt-10 text-center text-sm text-neutral-500">
+    Looking for something specific? <a href="/tools" class="font-bold text-[#9333EA] hover:underline">Search the full directory</a>
+  </p>
+</main>
+
+<style>
+  .chip {
+    display: inline-block; text-decoration: none;
+    font-size: .875rem; font-weight: 600; padding: .5rem 1rem; border-radius: 9999px;
+    border: 1px solid #e5e5e5; background: #fff; color: #404040; cursor: pointer;
+    transition: all .15s ease;
+  }
+  .chip:hover { border-color: #a3a3a3; }
+  .chip-active {
+    color: #fff; border-color: transparent;
+    background: linear-gradient(to right, #FF5A5F, #F43F8E, #9333EA);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / .1);
+  }
+  .new-badge {
+    display: inline-block; margin-left: .5rem; vertical-align: middle;
+    font-size: 11px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase;
+    padding: .35rem .75rem; border-radius: 9999px; color: #fff;
+    background: linear-gradient(to right, #FF5A5F, #F43F8E, #9333EA);
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #F43F8E, 0 6px 14px rgb(244 63 142 / .5);
+    animation: newBadgePulse 1.6s ease-in-out infinite;
+  }
+  @keyframes newBadgePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+  :global([data-theme="dark"] .chip) { background: #131a28; border-color: #2a3350; color: #cbd5e1; }
+  :global([data-theme="dark"] .chip:hover) { border-color: #475569; }
+  :global([data-theme="dark"] .chip.chip-active) {
+    background: linear-gradient(to right, #FF5A5F, #F43F8E, #9333EA);
+    border-color: transparent; color: #fff;
+  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  .tool-card { animation: fadeUp .35s ease both; }
+</style>
+</Layout>
