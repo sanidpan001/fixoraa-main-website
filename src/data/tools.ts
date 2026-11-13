@@ -319,6 +319,7 @@ export const niches: Niche[] = [
       { name: "DoublePatra", slug: "kvpcalc", url: "https://finance.fixoraa.tech/kvpcalc/", blurb: "KVP calculator — Kisan Vikas Patra doubling time, maturity value and year-by-year growth at the current rate." },
       { name: "SilverNest", slug: "scsscalc", url: "https://finance.fixoraa.tech/scsscalc/", blurb: "SCSS calculator — Senior Citizens Savings Scheme quarterly interest payouts, full payout schedule and extension comparison." },
       { name: "SlipSmith", slug: "payslipgen", url: "https://finance.fixoraa.tech/payslipgen/", blurb: "Payslip generator — create a professional salary slip online with earnings, deductions and net pay in words. Printable, free." },
+      { name: "DepreciMate", slug: "depreciationcalc", url: "https://finance.fixoraa.tech/depreciationcalc/", blurb: "Depreciation calculator — straight-line and WDV depreciation with a year-by-year book value schedule." },
     ],
   },
   // ── Image Tools ──────────────────────────────────────────────────────
@@ -1075,6 +1076,7 @@ export const niches: Niche[] = [
       { name: "CycleDiary", slug: "periodtracker", url: "https://health.fixoraa.tech/periodtracker/", blurb: "Period tracker — log your cycles privately in your browser, see cycle statistics and your next period prediction." },
       { name: "EarScope", slug: "hearingtest", url: "https://health.fixoraa.tech/hearingtest/", blurb: "Hearing test online — check each ear across 8 frequencies with a guided tone test and audiogram-style results." },
       { name: "HueCheck", slug: "ishiharatest", url: "https://health.fixoraa.tech/ishiharatest/", blurb: "Colour blind test — Ishihara-style plates generated in your browser to screen red-green colour vision, with a kids mode." },
+      { name: "SharpSight", slug: "snellenchart", url: "https://health.fixoraa.tech/snellenchart/", blurb: "Eye test online — a calibrated Snellen eye chart and visual acuity check you can take at home." },
     ],
   },
   // ── Fun & Lifestyle ──────────────────────────────────────────────────
@@ -52864,6 +52866,8 @@ export const niches: Niche[] = [
       { name: "NoteNest", slug: "notetaker", url: "https://study.fixoraa.tech/notetaker/", blurb: "Free online note taker — simple notes app with search, tags, pinning and export. No signup needed." },
       { name: "OfferCraft", slug: "offerletter", url: "https://study.fixoraa.tech/offerletter/", blurb: "Offer letter generator — a polished job offer letter in minutes, with standard, startup and internship templates." },
       { name: "RelieveRight", slug: "relievingletter", url: "https://study.fixoraa.tech/relievingletter/", blurb: "Relieving letter generator — formal relieving and experience letter for departing employees, printable and free." },
+      { name: "LeaveNote", slug: "leaveapplication", url: "https://study.fixoraa.tech/leaveapplication/", blurb: "Leave application generator — office, school and sick leave letters in a clean formal format, free." },
+      { name: "InternLaurel", slug: "internshipcert", url: "https://study.fixoraa.tech/internshipcert/", blurb: "Internship certificate generator — create polished internship completion certificates free, printable." },
     ],
   },
 ];
@@ -52907,6 +52911,10 @@ export const totalTools: number = allTools.length;
 //  than ~10 days can be deleted on any later edit; they do nothing then.
 // ───────────────────────────────────────────────────────────────────────
 export const newTools: Record<string, string> = {
+  "leaveapplication": "2026-11-13",
+  "snellenchart": "2026-11-13",
+  "depreciationcalc": "2026-11-13",
+  "internshipcert": "2026-11-13",
   "relievingletter": "2026-11-13",
   "cspbuilder": "2026-11-13",
   "ishiharatest": "2026-11-13",
