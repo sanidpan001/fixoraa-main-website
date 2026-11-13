@@ -320,6 +320,7 @@ export const niches: Niche[] = [
       { name: "SilverNest", slug: "scsscalc", url: "https://finance.fixoraa.tech/scsscalc/", blurb: "SCSS calculator — Senior Citizens Savings Scheme quarterly interest payouts, full payout schedule and extension comparison." },
       { name: "SlipSmith", slug: "payslipgen", url: "https://finance.fixoraa.tech/payslipgen/", blurb: "Payslip generator — create a professional salary slip online with earnings, deductions and net pay in words. Printable, free." },
       { name: "DepreciMate", slug: "depreciationcalc", url: "https://finance.fixoraa.tech/depreciationcalc/", blurb: "Depreciation calculator — straight-line and WDV depreciation with a year-by-year book value schedule." },
+      { name: "RentDraft", slug: "rentagreement", url: "https://finance.fixoraa.tech/rentagreement/", blurb: "Rent agreement generator — create a clear rental agreement draft online free, printable." },
     ],
   },
   // ── Image Tools ──────────────────────────────────────────────────────
@@ -775,6 +776,7 @@ export const niches: Niche[] = [
       { name: "JwtLens", slug: "jwtdecoder", url: "https://dev.fixoraa.tech/jwtdecoder/", blurb: "JWT decoder online — decode and inspect any JWT token free, with expiry verdict and signature check." },
       { name: "GitCompass", slug: "gitcommands", url: "https://dev.fixoraa.tech/gitcommands/", blurb: "Git commands cheat sheet and command builder — the exact Git command for any task, with examples and an undo-anything panel." },
       { name: "ShieldHeader", slug: "cspbuilder", url: "https://dev.fixoraa.tech/cspbuilder/", blurb: "CSP generator — build a Content Security Policy header with presets, per-directive controls and safety warnings." },
+      { name: "ZodForge", slug: "jsontozod", url: "https://dev.fixoraa.tech/jsontozod/", blurb: "JSON to Zod — generate Zod validation schemas from any JSON instantly, with inferred TypeScript types." },
     ],
   },
   // ── Date & Time ──────────────────────────────────────────────────────
@@ -1077,6 +1079,7 @@ export const niches: Niche[] = [
       { name: "EarScope", slug: "hearingtest", url: "https://health.fixoraa.tech/hearingtest/", blurb: "Hearing test online — check each ear across 8 frequencies with a guided tone test and audiogram-style results." },
       { name: "HueCheck", slug: "ishiharatest", url: "https://health.fixoraa.tech/ishiharatest/", blurb: "Colour blind test — Ishihara-style plates generated in your browser to screen red-green colour vision, with a kids mode." },
       { name: "SharpSight", slug: "snellenchart", url: "https://health.fixoraa.tech/snellenchart/", blurb: "Eye test online — a calibrated Snellen eye chart and visual acuity check you can take at home." },
+      { name: "CalciTrack", slug: "calciumintake", url: "https://health.fixoraa.tech/calciumintake/", blurb: "Calcium intake calculator — tick the foods you ate today and see your calcium total against your daily target." },
     ],
   },
   // ── Fun & Lifestyle ──────────────────────────────────────────────────
@@ -1943,6 +1946,7 @@ export const niches: Niche[] = [
       { name: "Wallpaper Paste", slug: "wallpaperpaste", url: "https://fun.fixoraa.tech/wallpaperpaste/", blurb: "Enter number of rolls and get the answer instantly." },
       { name: "Wallpaper Rolls", slug: "wallpaperrolls", url: "https://fun.fixoraa.tech/wallpaperrolls/", blurb: "Enter wall area and get the answer instantly." },
       { name: "Water for Plants", slug: "waterplants", url: "https://fun.fixoraa.tech/waterplants/", blurb: "Enter pot count and water per pot and get the answer instantly." },
+      { name: "InviteInk", slug: "invitationmaker", url: "https://fun.fixoraa.tech/invitationmaker/", blurb: "Invitation maker — design birthday and party invitations free, printable or as a PNG, no watermark." },
     ],
   },
   // ── Converters ───────────────────────────────────────────────────────
@@ -52868,6 +52872,7 @@ export const niches: Niche[] = [
       { name: "RelieveRight", slug: "relievingletter", url: "https://study.fixoraa.tech/relievingletter/", blurb: "Relieving letter generator — formal relieving and experience letter for departing employees, printable and free." },
       { name: "LeaveNote", slug: "leaveapplication", url: "https://study.fixoraa.tech/leaveapplication/", blurb: "Leave application generator — office, school and sick leave letters in a clean formal format, free." },
       { name: "InternLaurel", slug: "internshipcert", url: "https://study.fixoraa.tech/internshipcert/", blurb: "Internship certificate generator — create polished internship completion certificates free, printable." },
+      { name: "CampusSeal", slug: "bonafidecert", url: "https://study.fixoraa.tech/bonafidecert/", blurb: "Bonafide certificate generator — student bonafide certificate format and maker, ready to print." },
     ],
   },
 ];
@@ -52911,6 +52916,11 @@ export const totalTools: number = allTools.length;
 //  than ~10 days can be deleted on any later edit; they do nothing then.
 // ───────────────────────────────────────────────────────────────────────
 export const newTools: Record<string, string> = {
+  "bonafidecert": "2026-11-13",
+  "rentagreement": "2026-11-13",
+  "calciumintake": "2026-11-13",
+  "jsontozod": "2026-11-13",
+  "invitationmaker": "2026-11-13",
   "leaveapplication": "2026-11-13",
   "snellenchart": "2026-11-13",
   "depreciationcalc": "2026-11-13",
