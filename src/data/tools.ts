@@ -773,6 +773,7 @@ export const niches: Niche[] = [
       { name: "Video File Size", slug: "videofilesize", url: "https://dev.fixoraa.tech/videofilesize/", blurb: "Enter bitrate and duration and get the answer instantly." },
       { name: "JwtLens", slug: "jwtdecoder", url: "https://dev.fixoraa.tech/jwtdecoder/", blurb: "JWT decoder online — decode and inspect any JWT token free, with expiry verdict and signature check." },
       { name: "GitCompass", slug: "gitcommands", url: "https://dev.fixoraa.tech/gitcommands/", blurb: "Git commands cheat sheet and command builder — the exact Git command for any task, with examples and an undo-anything panel." },
+      { name: "ShieldHeader", slug: "cspbuilder", url: "https://dev.fixoraa.tech/cspbuilder/", blurb: "CSP generator — build a Content Security Policy header with presets, per-directive controls and safety warnings." },
     ],
   },
   // ── Date & Time ──────────────────────────────────────────────────────
@@ -1073,6 +1074,7 @@ export const niches: Niche[] = [
       { name: "VitaSun", slug: "vitamindcalc", url: "https://health.fixoraa.tech/vitamindcalc/", blurb: "Vitamin D calculator — your daily intake target and supplement dose from age, weight, sun exposure and diet." },
       { name: "CycleDiary", slug: "periodtracker", url: "https://health.fixoraa.tech/periodtracker/", blurb: "Period tracker — log your cycles privately in your browser, see cycle statistics and your next period prediction." },
       { name: "EarScope", slug: "hearingtest", url: "https://health.fixoraa.tech/hearingtest/", blurb: "Hearing test online — check each ear across 8 frequencies with a guided tone test and audiogram-style results." },
+      { name: "HueCheck", slug: "ishiharatest", url: "https://health.fixoraa.tech/ishiharatest/", blurb: "Colour blind test — Ishihara-style plates generated in your browser to screen red-green colour vision, with a kids mode." },
     ],
   },
   // ── Fun & Lifestyle ──────────────────────────────────────────────────
@@ -42868,6 +42870,7 @@ export const niches: Niche[] = [
       { name: "Young Modulus", slug: "youngmodulus", url: "https://study.fixoraa.tech/youngmodulus/", blurb: "Enter force, length, area, and extension and get the answer instantly." },
       { name: "NoteNest", slug: "notetaker", url: "https://study.fixoraa.tech/notetaker/", blurb: "Free online note taker — simple notes app with search, tags, pinning and export. No signup needed." },
       { name: "OfferCraft", slug: "offerletter", url: "https://study.fixoraa.tech/offerletter/", blurb: "Offer letter generator — a polished job offer letter in minutes, with standard, startup and internship templates." },
+      { name: "RelieveRight", slug: "relievingletter", url: "https://study.fixoraa.tech/relievingletter/", blurb: "Relieving letter generator — formal relieving and experience letter for departing employees, printable and free." },
     ],
   },
 ];
@@ -42911,6 +42914,9 @@ export const totalTools: number = allTools.length;
 //  than ~10 days can be deleted on any later edit; they do nothing then.
 // ───────────────────────────────────────────────────────────────────────
 export const newTools: Record<string, string> = {
+  "relievingletter": "2026-11-13",
+  "cspbuilder": "2026-11-13",
+  "ishiharatest": "2026-11-13",
   "payslipgen": "2026-11-13",
   "periodtracker": "2026-11-13",
   "offerletter": "2026-11-13",
