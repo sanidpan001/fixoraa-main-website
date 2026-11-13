@@ -786,6 +786,7 @@ export const niches: Niche[] = [
       { name: "PolicyPilot", slug: "privacypolicy", url: "https://dev.fixoraa.tech/privacypolicy/", blurb: "Privacy policy generator — create a free privacy policy for your website or app with GDPR/CCPA sections." },
       { name: "Redirectly", slug: "redirectgen", url: "https://dev.fixoraa.tech/redirectgen/", blurb: "Redirect generator — create .htaccess and nginx 301 redirect rules from old-to-new URL lists, with loop checks." },
       { name: "ClauseCraft", slug: "termsgenerator", url: "https://dev.fixoraa.tech/termsgenerator/", blurb: "Terms and conditions generator — build a full terms of service with clause toggles and automatic section numbering." },
+      { name: "IgnoreIvy", slug: "gitignoregen", url: "https://dev.fixoraa.tech/gitignoregen/", blurb: ".gitignore generator — build a clean, deduplicated .gitignore for 32 stacks, with merge for your existing file." },
     ],
   },
   // ── Date & Time ──────────────────────────────────────────────────────
@@ -1089,6 +1090,7 @@ export const niches: Niche[] = [
       { name: "HueCheck", slug: "ishiharatest", url: "https://health.fixoraa.tech/ishiharatest/", blurb: "Colour blind test — Ishihara-style plates generated in your browser to screen red-green colour vision, with a kids mode." },
       { name: "SharpSight", slug: "snellenchart", url: "https://health.fixoraa.tech/snellenchart/", blurb: "Eye test online — a calibrated Snellen eye chart and visual acuity check you can take at home." },
       { name: "CalciTrack", slug: "calciumintake", url: "https://health.fixoraa.tech/calciumintake/", blurb: "Calcium intake calculator — tick the foods you ate today and see your calcium total against your daily target." },
+      { name: "SurfaceSelf", slug: "bsacalc", url: "https://health.fixoraa.tech/bsacalc/", blurb: "BSA calculator — body surface area from height and weight with Du Bois, Mosteller, Haycock and Gehan-George formulas." },
     ],
   },
   // ── Fun & Lifestyle ──────────────────────────────────────────────────
@@ -52898,6 +52900,7 @@ export const niches: Niche[] = [
       { name: "NocNest", slug: "nocletter", url: "https://study.fixoraa.tech/nocletter/", blurb: "NOC generator — no objection certificate formats for visa, travel, internship and business use, printable." },
       { name: "PermitPen", slug: "permissionletter", url: "https://study.fixoraa.tech/permissionletter/", blurb: "Permission letter generator — formal permission request letters for work from home, study, events and more." },
       { name: "Authink", slug: "authorisationletter", url: "https://study.fixoraa.tech/authorisationletter/", blurb: "Authorisation letter generator — formal letters to authorise someone to collect documents, certificates or act for you." },
+      { name: "PurposePage", slug: "sopwriter", url: "https://study.fixoraa.tech/sopwriter/", blurb: "SOP maker — guided statement of purpose builder for university admission with a live quality checklist and word-limit tracker." },
     ],
   },
 ];
@@ -52941,6 +52944,9 @@ export const totalTools: number = allTools.length;
 //  than ~10 days can be deleted on any later edit; they do nothing then.
 // ───────────────────────────────────────────────────────────────────────
 export const newTools: Record<string, string> = {
+  "gitignoregen": "2026-11-13",
+  "bsacalc": "2026-11-13",
+  "sopwriter": "2026-11-13",
   "authorisationletter": "2026-11-13",
   "tambola": "2026-11-13",
   "termsgenerator": "2026-11-13",
