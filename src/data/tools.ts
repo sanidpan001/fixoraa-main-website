@@ -1949,6 +1949,8 @@ export const niches: Niche[] = [
       { name: "Wallpaper Rolls", slug: "wallpaperrolls", url: "https://fun.fixoraa.tech/wallpaperrolls/", blurb: "Enter wall area and get the answer instantly." },
       { name: "Water for Plants", slug: "waterplants", url: "https://fun.fixoraa.tech/waterplants/", blurb: "Enter pot count and water per pot and get the answer instantly." },
       { name: "InviteInk", slug: "invitationmaker", url: "https://fun.fixoraa.tech/invitationmaker/", blurb: "Invitation maker — design birthday and party invitations free, printable or as a PNG, no watermark." },
+      { name: "GiggleScript", slug: "madlibs", url: "https://fun.fixoraa.tech/madlibs/", blurb: "Mad Libs game — fill in the blanks and reveal a silly story; 6 templates, auto-fill word banks, play free." },
+      { name: "BottleSpin", slug: "spinbottle", url: "https://fun.fixoraa.tech/spinbottle/", blurb: "Spin the bottle game — add players, spin the bottle online, with optional clean truth or dare cards." },
     ],
   },
   // ── Converters ───────────────────────────────────────────────────────
@@ -52878,6 +52880,10 @@ export const niches: Niche[] = [
       { name: "ConductSeal", slug: "charactercert", url: "https://study.fixoraa.tech/charactercert/", blurb: "Character certificate generator — school and college character certificate format with conduct grade, printable." },
       { name: "Appointly", slug: "appointmentletter", url: "https://study.fixoraa.tech/appointmentletter/", blurb: "Appointment letter generator — formal letter of appointment with probation terms and a CTC breakup annexure." },
       { name: "RaiseLetter", slug: "incrementletter", url: "https://study.fixoraa.tech/incrementletter/", blurb: "Increment letter generator — salary increment and appraisal letter with old vs revised CTC and arrears." },
+      { name: "GratitudeSeal", slug: "appreciationcert", url: "https://study.fixoraa.tech/appreciationcert/", blurb: "Certificate of appreciation generator — thank volunteers, speakers and employees with a printable certificate." },
+      { name: "EndorseInk", slug: "recommendationletter", url: "https://study.fixoraa.tech/recommendationletter/", blurb: "Letter of recommendation generator — write a strong LOR for students and employees, formal or warm tone." },
+      { name: "FeeSlip", slug: "feereceipt", url: "https://study.fixoraa.tech/feereceipt/", blurb: "Fee receipt generator — school and coaching fee receipts with fee heads, amount in words and balance due." },
+      { name: "TCDesk", slug: "transfercert", url: "https://study.fixoraa.tech/transfercert/", blurb: "Transfer certificate generator — school TC and leaving certificate in the standard format, printable." },
     ],
   },
 ];
@@ -52921,6 +52927,12 @@ export const totalTools: number = allTools.length;
 //  than ~10 days can be deleted on any later edit; they do nothing then.
 // ───────────────────────────────────────────────────────────────────────
 export const newTools: Record<string, string> = {
+  "madlibs": "2026-11-13",
+  "appreciationcert": "2026-11-13",
+  "recommendationletter": "2026-11-13",
+  "feereceipt": "2026-11-13",
+  "transfercert": "2026-11-13",
+  "spinbottle": "2026-11-13",
   "charactercert": "2026-11-13",
   "appointmentletter": "2026-11-13",
   "deliverychallan": "2026-11-13",
