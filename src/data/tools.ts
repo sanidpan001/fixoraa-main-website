@@ -785,6 +785,7 @@ export const niches: Niche[] = [
       { name: "ZodForge", slug: "jsontozod", url: "https://dev.fixoraa.tech/jsontozod/", blurb: "JSON to Zod — generate Zod validation schemas from any JSON instantly, with inferred TypeScript types." },
       { name: "PolicyPilot", slug: "privacypolicy", url: "https://dev.fixoraa.tech/privacypolicy/", blurb: "Privacy policy generator — create a free privacy policy for your website or app with GDPR/CCPA sections." },
       { name: "Redirectly", slug: "redirectgen", url: "https://dev.fixoraa.tech/redirectgen/", blurb: "Redirect generator — create .htaccess and nginx 301 redirect rules from old-to-new URL lists, with loop checks." },
+      { name: "ClauseCraft", slug: "termsgenerator", url: "https://dev.fixoraa.tech/termsgenerator/", blurb: "Terms and conditions generator — build a full terms of service with clause toggles and automatic section numbering." },
     ],
   },
   // ── Date & Time ──────────────────────────────────────────────────────
@@ -1958,6 +1959,7 @@ export const niches: Niche[] = [
       { name: "GiggleScript", slug: "madlibs", url: "https://fun.fixoraa.tech/madlibs/", blurb: "Mad Libs game — fill in the blanks and reveal a silly story; 6 templates, auto-fill word banks, play free." },
       { name: "BottleSpin", slug: "spinbottle", url: "https://fun.fixoraa.tech/spinbottle/", blurb: "Spin the bottle game — add players, spin the bottle online, with optional clean truth or dare cards." },
       { name: "TruthTrap", slug: "twotruths", url: "https://fun.fixoraa.tech/twotruths/", blurb: "Two truths and a lie — game maker with shuffled cards, pass-and-play cover and an idea bank, play free." },
+      { name: "HousieHub", slug: "tambola", url: "https://fun.fixoraa.tech/tambola/", blurb: "Tambola ticket generator & housie number caller — printable 3x9 tickets, strips of 6, 1-90 caller board and claim checker." },
     ],
   },
   // ── Converters ───────────────────────────────────────────────────────
@@ -52895,6 +52897,7 @@ export const niches: Niche[] = [
       { name: "GapDeclare", slug: "gapcert", url: "https://study.fixoraa.tech/gapcert/", blurb: "Gap certificate generator — gap year declaration and affidavit format for college admission, with reason library." },
       { name: "NocNest", slug: "nocletter", url: "https://study.fixoraa.tech/nocletter/", blurb: "NOC generator — no objection certificate formats for visa, travel, internship and business use, printable." },
       { name: "PermitPen", slug: "permissionletter", url: "https://study.fixoraa.tech/permissionletter/", blurb: "Permission letter generator — formal permission request letters for work from home, study, events and more." },
+      { name: "Authink", slug: "authorisationletter", url: "https://study.fixoraa.tech/authorisationletter/", blurb: "Authorisation letter generator — formal letters to authorise someone to collect documents, certificates or act for you." },
     ],
   },
 ];
@@ -52938,6 +52941,9 @@ export const totalTools: number = allTools.length;
 //  than ~10 days can be deleted on any later edit; they do nothing then.
 // ───────────────────────────────────────────────────────────────────────
 export const newTools: Record<string, string> = {
+  "authorisationletter": "2026-11-13",
+  "tambola": "2026-11-13",
+  "termsgenerator": "2026-11-13",
   "privacypolicy": "2026-11-13",
   "fnfstatement": "2026-11-13",
   "twotruths": "2026-11-13",
