@@ -398,6 +398,7 @@ export const niches: Niche[] = [
       { name: "PrintQueue", slug: "printqueue", url: "https://image.fixoraa.tech/printqueue/", blurb: "Plan printing: enter pages and printer speed to get print minutes, reams, and sheets." },
       { name: "ScanBatch", slug: "scanbatch", url: "https://image.fixoraa.tech/scanbatch/", blurb: "Plan scanning: enter pages and scan speed to get scan minutes, batches, and file size." },
       { name: "Color Match Game", slug: "colormatch", url: "https://image.fixoraa.tech/colormatch/", blurb: "Does the word match the ink colour? Ten fast rounds to test your brain." },
+      { name: "PalettePop", slug: "paletteextractor", url: "https://image.fixoraa.tech/paletteextractor/", blurb: "Color palette extractor from any image — dominant colours with proportions, copy HEX/RGB and export CSS." },
     ],
   },
   // ── PDF Tools ────────────────────────────────────────────────────────
@@ -766,6 +767,7 @@ export const niches: Niche[] = [
       { name: "Download Time", slug: "downloadtime", url: "https://dev.fixoraa.tech/downloadtime/", blurb: "Enter file size and internet speed and get the answer instantly." },
       { name: "Random Color", slug: "randomcolor", url: "https://dev.fixoraa.tech/randomcolor/", blurb: "Generate a random colour with its hex code and a live swatch." },
       { name: "Video File Size", slug: "videofilesize", url: "https://dev.fixoraa.tech/videofilesize/", blurb: "Enter bitrate and duration and get the answer instantly." },
+      { name: "JwtLens", slug: "jwtdecoder", url: "https://dev.fixoraa.tech/jwtdecoder/", blurb: "JWT decoder online — decode and inspect any JWT token free, with expiry verdict and signature check." },
     ],
   },
   // ── Date & Time ──────────────────────────────────────────────────────
@@ -840,6 +842,7 @@ export const niches: Niche[] = [
       { name: "Weeks Between Dates", slug: "weeksbetween", url: "https://time.fixoraa.tech/weeksbetween/", blurb: "Pick your dates and get the answer instantly." },
       { name: "Workdays Between Dates", slug: "workdaysbetween", url: "https://time.fixoraa.tech/workdaysbetween/", blurb: "Pick your dates and get the answer instantly." },
       { name: "Writing Time", slug: "writingtime", url: "https://time.fixoraa.tech/writingtime/", blurb: "Enter word count and writing speed and get the answer instantly." },
+      { name: "TickDown", slug: "countdown", url: "https://time.fixoraa.tech/countdown/", blurb: "Free countdown timer online — count down to any date and time with live seconds, presets and a shareable link." },
     ],
   },
   // ── Health & Fitness ─────────────────────────────────────────────────
@@ -1062,6 +1065,7 @@ export const niches: Niche[] = [
       { name: "Waist Hip Ratio", slug: "waisthipratio", url: "https://health.fixoraa.tech/waisthipratio/", blurb: "Enter waist and hip circumferences and get the answer instantly." },
       { name: "Workout Volume", slug: "workoutvolume", url: "https://health.fixoraa.tech/workoutvolume/", blurb: "Enter sets, reps, and weight and get the answer instantly." },
       { name: "Yoga Calories", slug: "yogacalories", url: "https://health.fixoraa.tech/yogacalories/", blurb: "Enter your weight and yoga time and get the answer instantly." },
+      { name: "VitaSun", slug: "vitamindcalc", url: "https://health.fixoraa.tech/vitamindcalc/", blurb: "Vitamin D calculator — your daily intake target and supplement dose from age, weight, sun exposure and diet." },
     ],
   },
   // ── Fun & Lifestyle ──────────────────────────────────────────────────
@@ -42855,6 +42859,7 @@ export const niches: Niche[] = [
       { name: "Wave Period", slug: "waveperiod", url: "https://study.fixoraa.tech/waveperiod/", blurb: "Enter frequency and get the answer instantly." },
       { name: "Work Calculator", slug: "workcalc", url: "https://study.fixoraa.tech/workcalc/", blurb: "Enter force and distance and get the answer instantly." },
       { name: "Young Modulus", slug: "youngmodulus", url: "https://study.fixoraa.tech/youngmodulus/", blurb: "Enter force, length, area, and extension and get the answer instantly." },
+      { name: "NoteNest", slug: "notetaker", url: "https://study.fixoraa.tech/notetaker/", blurb: "Free online note taker — simple notes app with search, tags, pinning and export. No signup needed." },
     ],
   },
 ];
@@ -42898,6 +42903,11 @@ export const totalTools: number = allTools.length;
 //  than ~10 days can be deleted on any later edit; they do nothing then.
 // ───────────────────────────────────────────────────────────────────────
 export const newTools: Record<string, string> = {
+  "countdown": "2026-11-13",
+  "vitamindcalc": "2026-11-13",
+  "notetaker": "2026-11-13",
+  "paletteextractor": "2026-11-13",
+  "jwtdecoder": "2026-11-13",
   "abamperestoamperes": "2026-11-05",
   "abamperestocentiamperes": "2026-11-05",
   "abamperestodecaamperes": "2026-11-05",
