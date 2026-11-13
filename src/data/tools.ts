@@ -323,6 +323,7 @@ export const niches: Niche[] = [
       { name: "RentDraft", slug: "rentagreement", url: "https://finance.fixoraa.tech/rentagreement/", blurb: "Rent agreement generator — create a clear rental agreement draft online free, printable." },
       { name: "ChallanCraft", slug: "deliverychallan", url: "https://finance.fixoraa.tech/deliverychallan/", blurb: "Delivery challan generator — create a delivery challan (DC) for job work, samples or branch transfer, free." },
       { name: "PreBill", slug: "proformainvoice", url: "https://finance.fixoraa.tech/proformainvoice/", blurb: "Proforma invoice generator — create a proforma invoice for advance payment or export, marked proforma, free." },
+      { name: "DeedMate", slug: "partnershipdeed", url: "https://finance.fixoraa.tech/partnershipdeed/", blurb: "Partnership deed generator — draft a partnership firm deed with profit ratios, capital and clause library." },
     ],
   },
   // ── Image Tools ──────────────────────────────────────────────────────
@@ -623,6 +624,7 @@ export const niches: Niche[] = [
       { name: "Uppercase Text", slug: "uppercasetext", url: "https://text.fixoraa.tech/uppercasetext/", blurb: "Paste your text and get the result instantly." },
       { name: "Vowel Counter", slug: "vowelcounter", url: "https://text.fixoraa.tech/vowelcounter/", blurb: "Paste your text and get the result instantly." },
       { name: "Word Counter", slug: "wordcounter", url: "https://text.fixoraa.tech/wordcounter/", blurb: "Paste your text and get the result instantly." },
+      { name: "ProsePolish", slug: "grammarcheck", url: "https://text.fixoraa.tech/grammarcheck/", blurb: "Grammar checker — free AI grammar and spell check with corrected text, fix explanations and instant local checks." },
     ],
   },
   // ── Developer Tools ──────────────────────────────────────────────────
@@ -52884,6 +52886,9 @@ export const niches: Niche[] = [
       { name: "EndorseInk", slug: "recommendationletter", url: "https://study.fixoraa.tech/recommendationletter/", blurb: "Letter of recommendation generator — write a strong LOR for students and employees, formal or warm tone." },
       { name: "FeeSlip", slug: "feereceipt", url: "https://study.fixoraa.tech/feereceipt/", blurb: "Fee receipt generator — school and coaching fee receipts with fee heads, amount in words and balance due." },
       { name: "TCDesk", slug: "transfercert", url: "https://study.fixoraa.tech/transfercert/", blurb: "Transfer certificate generator — school TC and leaving certificate in the standard format, printable." },
+      { name: "SalarySeal", slug: "salarycert", url: "https://study.fixoraa.tech/salarycert/", blurb: "Salary certificate generator — employee salary certificate with breakup, CTC in words and experience, printable." },
+      { name: "GapDeclare", slug: "gapcert", url: "https://study.fixoraa.tech/gapcert/", blurb: "Gap certificate generator — gap year declaration and affidavit format for college admission, with reason library." },
+      { name: "NocNest", slug: "nocletter", url: "https://study.fixoraa.tech/nocletter/", blurb: "NOC generator — no objection certificate formats for visa, travel, internship and business use, printable." },
     ],
   },
 ];
@@ -52927,6 +52932,11 @@ export const totalTools: number = allTools.length;
 //  than ~10 days can be deleted on any later edit; they do nothing then.
 // ───────────────────────────────────────────────────────────────────────
 export const newTools: Record<string, string> = {
+  "salarycert": "2026-11-13",
+  "gapcert": "2026-11-13",
+  "grammarcheck": "2026-11-13",
+  "partnershipdeed": "2026-11-13",
+  "nocletter": "2026-11-13",
   "madlibs": "2026-11-13",
   "appreciationcert": "2026-11-13",
   "recommendationletter": "2026-11-13",
