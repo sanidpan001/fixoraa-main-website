@@ -316,6 +316,8 @@ export const niches: Niche[] = [
       { name: "Weekend Pay", slug: "weekendpay", url: "https://finance.fixoraa.tech/weekendpay/", blurb: "Enter weekend hours and rate and get the answer instantly." },
       { name: "Weekly Budget", slug: "weeklybudget", url: "https://finance.fixoraa.tech/weeklybudget/", blurb: "Enter monthly budget and get the answer instantly." },
       { name: "Weekly Pay", slug: "weeklypay", url: "https://finance.fixoraa.tech/weeklypay/", blurb: "Enter hourly rate and weekly hours and get the answer instantly." },
+      { name: "DoublePatra", slug: "kvpcalc", url: "https://finance.fixoraa.tech/kvpcalc/", blurb: "KVP calculator — Kisan Vikas Patra doubling time, maturity value and year-by-year growth at the current rate." },
+      { name: "SilverNest", slug: "scsscalc", url: "https://finance.fixoraa.tech/scsscalc/", blurb: "SCSS calculator — Senior Citizens Savings Scheme quarterly interest payouts, full payout schedule and extension comparison." },
     ],
   },
   // ── Image Tools ──────────────────────────────────────────────────────
@@ -399,6 +401,7 @@ export const niches: Niche[] = [
       { name: "ScanBatch", slug: "scanbatch", url: "https://image.fixoraa.tech/scanbatch/", blurb: "Plan scanning: enter pages and scan speed to get scan minutes, batches, and file size." },
       { name: "Color Match Game", slug: "colormatch", url: "https://image.fixoraa.tech/colormatch/", blurb: "Does the word match the ink colour? Ten fast rounds to test your brain." },
       { name: "PalettePop", slug: "paletteextractor", url: "https://image.fixoraa.tech/paletteextractor/", blurb: "Color palette extractor from any image — dominant colours with proportions, copy HEX/RGB and export CSS." },
+      { name: "LogoLark", slug: "logomaker", url: "https://image.fixoraa.tech/logomaker/", blurb: "Free logo maker — design a text and icon logo online with fonts, colours and icons. Download PNG or SVG, no watermark." },
     ],
   },
   // ── PDF Tools ────────────────────────────────────────────────────────
@@ -768,6 +771,7 @@ export const niches: Niche[] = [
       { name: "Random Color", slug: "randomcolor", url: "https://dev.fixoraa.tech/randomcolor/", blurb: "Generate a random colour with its hex code and a live swatch." },
       { name: "Video File Size", slug: "videofilesize", url: "https://dev.fixoraa.tech/videofilesize/", blurb: "Enter bitrate and duration and get the answer instantly." },
       { name: "JwtLens", slug: "jwtdecoder", url: "https://dev.fixoraa.tech/jwtdecoder/", blurb: "JWT decoder online — decode and inspect any JWT token free, with expiry verdict and signature check." },
+      { name: "GitCompass", slug: "gitcommands", url: "https://dev.fixoraa.tech/gitcommands/", blurb: "Git commands cheat sheet and command builder — the exact Git command for any task, with examples and an undo-anything panel." },
     ],
   },
   // ── Date & Time ──────────────────────────────────────────────────────
@@ -42903,6 +42907,10 @@ export const totalTools: number = allTools.length;
 //  than ~10 days can be deleted on any later edit; they do nothing then.
 // ───────────────────────────────────────────────────────────────────────
 export const newTools: Record<string, string> = {
+  "gitcommands": "2026-11-13",
+  "kvpcalc": "2026-11-13",
+  "scsscalc": "2026-11-13",
+  "logomaker": "2026-11-13",
   "countdown": "2026-11-13",
   "vitamindcalc": "2026-11-13",
   "notetaker": "2026-11-13",
