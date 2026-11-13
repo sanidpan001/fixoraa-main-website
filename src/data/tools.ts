@@ -321,6 +321,8 @@ export const niches: Niche[] = [
       { name: "SlipSmith", slug: "payslipgen", url: "https://finance.fixoraa.tech/payslipgen/", blurb: "Payslip generator — create a professional salary slip online with earnings, deductions and net pay in words. Printable, free." },
       { name: "DepreciMate", slug: "depreciationcalc", url: "https://finance.fixoraa.tech/depreciationcalc/", blurb: "Depreciation calculator — straight-line and WDV depreciation with a year-by-year book value schedule." },
       { name: "RentDraft", slug: "rentagreement", url: "https://finance.fixoraa.tech/rentagreement/", blurb: "Rent agreement generator — create a clear rental agreement draft online free, printable." },
+      { name: "ChallanCraft", slug: "deliverychallan", url: "https://finance.fixoraa.tech/deliverychallan/", blurb: "Delivery challan generator — create a delivery challan (DC) for job work, samples or branch transfer, free." },
+      { name: "PreBill", slug: "proformainvoice", url: "https://finance.fixoraa.tech/proformainvoice/", blurb: "Proforma invoice generator — create a proforma invoice for advance payment or export, marked proforma, free." },
     ],
   },
   // ── Image Tools ──────────────────────────────────────────────────────
@@ -52873,6 +52875,9 @@ export const niches: Niche[] = [
       { name: "LeaveNote", slug: "leaveapplication", url: "https://study.fixoraa.tech/leaveapplication/", blurb: "Leave application generator — office, school and sick leave letters in a clean formal format, free." },
       { name: "InternLaurel", slug: "internshipcert", url: "https://study.fixoraa.tech/internshipcert/", blurb: "Internship certificate generator — create polished internship completion certificates free, printable." },
       { name: "CampusSeal", slug: "bonafidecert", url: "https://study.fixoraa.tech/bonafidecert/", blurb: "Bonafide certificate generator — student bonafide certificate format and maker, ready to print." },
+      { name: "ConductSeal", slug: "charactercert", url: "https://study.fixoraa.tech/charactercert/", blurb: "Character certificate generator — school and college character certificate format with conduct grade, printable." },
+      { name: "Appointly", slug: "appointmentletter", url: "https://study.fixoraa.tech/appointmentletter/", blurb: "Appointment letter generator — formal letter of appointment with probation terms and a CTC breakup annexure." },
+      { name: "RaiseLetter", slug: "incrementletter", url: "https://study.fixoraa.tech/incrementletter/", blurb: "Increment letter generator — salary increment and appraisal letter with old vs revised CTC and arrears." },
     ],
   },
 ];
@@ -52916,6 +52921,11 @@ export const totalTools: number = allTools.length;
 //  than ~10 days can be deleted on any later edit; they do nothing then.
 // ───────────────────────────────────────────────────────────────────────
 export const newTools: Record<string, string> = {
+  "charactercert": "2026-11-13",
+  "appointmentletter": "2026-11-13",
+  "deliverychallan": "2026-11-13",
+  "incrementletter": "2026-11-13",
+  "proformainvoice": "2026-11-13",
   "bonafidecert": "2026-11-13",
   "rentagreement": "2026-11-13",
   "calciumintake": "2026-11-13",
