@@ -318,6 +318,7 @@ export const niches: Niche[] = [
       { name: "Weekly Pay", slug: "weeklypay", url: "https://finance.fixoraa.tech/weeklypay/", blurb: "Enter hourly rate and weekly hours and get the answer instantly." },
       { name: "DoublePatra", slug: "kvpcalc", url: "https://finance.fixoraa.tech/kvpcalc/", blurb: "KVP calculator — Kisan Vikas Patra doubling time, maturity value and year-by-year growth at the current rate." },
       { name: "SilverNest", slug: "scsscalc", url: "https://finance.fixoraa.tech/scsscalc/", blurb: "SCSS calculator — Senior Citizens Savings Scheme quarterly interest payouts, full payout schedule and extension comparison." },
+      { name: "SlipSmith", slug: "payslipgen", url: "https://finance.fixoraa.tech/payslipgen/", blurb: "Payslip generator — create a professional salary slip online with earnings, deductions and net pay in words. Printable, free." },
     ],
   },
   // ── Image Tools ──────────────────────────────────────────────────────
@@ -1070,6 +1071,8 @@ export const niches: Niche[] = [
       { name: "Workout Volume", slug: "workoutvolume", url: "https://health.fixoraa.tech/workoutvolume/", blurb: "Enter sets, reps, and weight and get the answer instantly." },
       { name: "Yoga Calories", slug: "yogacalories", url: "https://health.fixoraa.tech/yogacalories/", blurb: "Enter your weight and yoga time and get the answer instantly." },
       { name: "VitaSun", slug: "vitamindcalc", url: "https://health.fixoraa.tech/vitamindcalc/", blurb: "Vitamin D calculator — your daily intake target and supplement dose from age, weight, sun exposure and diet." },
+      { name: "CycleDiary", slug: "periodtracker", url: "https://health.fixoraa.tech/periodtracker/", blurb: "Period tracker — log your cycles privately in your browser, see cycle statistics and your next period prediction." },
+      { name: "EarScope", slug: "hearingtest", url: "https://health.fixoraa.tech/hearingtest/", blurb: "Hearing test online — check each ear across 8 frequencies with a guided tone test and audiogram-style results." },
     ],
   },
   // ── Fun & Lifestyle ──────────────────────────────────────────────────
@@ -42864,6 +42867,7 @@ export const niches: Niche[] = [
       { name: "Work Calculator", slug: "workcalc", url: "https://study.fixoraa.tech/workcalc/", blurb: "Enter force and distance and get the answer instantly." },
       { name: "Young Modulus", slug: "youngmodulus", url: "https://study.fixoraa.tech/youngmodulus/", blurb: "Enter force, length, area, and extension and get the answer instantly." },
       { name: "NoteNest", slug: "notetaker", url: "https://study.fixoraa.tech/notetaker/", blurb: "Free online note taker — simple notes app with search, tags, pinning and export. No signup needed." },
+      { name: "OfferCraft", slug: "offerletter", url: "https://study.fixoraa.tech/offerletter/", blurb: "Offer letter generator — a polished job offer letter in minutes, with standard, startup and internship templates." },
     ],
   },
 ];
@@ -42907,6 +42911,10 @@ export const totalTools: number = allTools.length;
 //  than ~10 days can be deleted on any later edit; they do nothing then.
 // ───────────────────────────────────────────────────────────────────────
 export const newTools: Record<string, string> = {
+  "payslipgen": "2026-11-13",
+  "periodtracker": "2026-11-13",
+  "offerletter": "2026-11-13",
+  "hearingtest": "2026-11-13",
   "gitcommands": "2026-11-13",
   "kvpcalc": "2026-11-13",
   "scsscalc": "2026-11-13",
