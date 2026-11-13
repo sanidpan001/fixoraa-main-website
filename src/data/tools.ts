@@ -324,6 +324,8 @@ export const niches: Niche[] = [
       { name: "ChallanCraft", slug: "deliverychallan", url: "https://finance.fixoraa.tech/deliverychallan/", blurb: "Delivery challan generator — create a delivery challan (DC) for job work, samples or branch transfer, free." },
       { name: "PreBill", slug: "proformainvoice", url: "https://finance.fixoraa.tech/proformainvoice/", blurb: "Proforma invoice generator — create a proforma invoice for advance payment or export, marked proforma, free." },
       { name: "DeedMate", slug: "partnershipdeed", url: "https://finance.fixoraa.tech/partnershipdeed/", blurb: "Partnership deed generator — draft a partnership firm deed with profit ratios, capital and clause library." },
+      { name: "SettleDesk", slug: "fnfstatement", url: "https://finance.fixoraa.tech/fnfstatement/", blurb: "Full and final settlement generator — FnF statement with pro-rata salary, leave encashment and notice pay." },
+      { name: "MonthlyMint", slug: "pomisc", url: "https://finance.fixoraa.tech/pomisc/", blurb: "POMIS calculator — Post Office Monthly Income Scheme monthly payout, total interest and closure estimator." },
     ],
   },
   // ── Image Tools ──────────────────────────────────────────────────────
@@ -781,6 +783,8 @@ export const niches: Niche[] = [
       { name: "GitCompass", slug: "gitcommands", url: "https://dev.fixoraa.tech/gitcommands/", blurb: "Git commands cheat sheet and command builder — the exact Git command for any task, with examples and an undo-anything panel." },
       { name: "ShieldHeader", slug: "cspbuilder", url: "https://dev.fixoraa.tech/cspbuilder/", blurb: "CSP generator — build a Content Security Policy header with presets, per-directive controls and safety warnings." },
       { name: "ZodForge", slug: "jsontozod", url: "https://dev.fixoraa.tech/jsontozod/", blurb: "JSON to Zod — generate Zod validation schemas from any JSON instantly, with inferred TypeScript types." },
+      { name: "PolicyPilot", slug: "privacypolicy", url: "https://dev.fixoraa.tech/privacypolicy/", blurb: "Privacy policy generator — create a free privacy policy for your website or app with GDPR/CCPA sections." },
+      { name: "Redirectly", slug: "redirectgen", url: "https://dev.fixoraa.tech/redirectgen/", blurb: "Redirect generator — create .htaccess and nginx 301 redirect rules from old-to-new URL lists, with loop checks." },
     ],
   },
   // ── Date & Time ──────────────────────────────────────────────────────
@@ -1953,6 +1957,7 @@ export const niches: Niche[] = [
       { name: "InviteInk", slug: "invitationmaker", url: "https://fun.fixoraa.tech/invitationmaker/", blurb: "Invitation maker — design birthday and party invitations free, printable or as a PNG, no watermark." },
       { name: "GiggleScript", slug: "madlibs", url: "https://fun.fixoraa.tech/madlibs/", blurb: "Mad Libs game — fill in the blanks and reveal a silly story; 6 templates, auto-fill word banks, play free." },
       { name: "BottleSpin", slug: "spinbottle", url: "https://fun.fixoraa.tech/spinbottle/", blurb: "Spin the bottle game — add players, spin the bottle online, with optional clean truth or dare cards." },
+      { name: "TruthTrap", slug: "twotruths", url: "https://fun.fixoraa.tech/twotruths/", blurb: "Two truths and a lie — game maker with shuffled cards, pass-and-play cover and an idea bank, play free." },
     ],
   },
   // ── Converters ───────────────────────────────────────────────────────
@@ -52889,6 +52894,7 @@ export const niches: Niche[] = [
       { name: "SalarySeal", slug: "salarycert", url: "https://study.fixoraa.tech/salarycert/", blurb: "Salary certificate generator — employee salary certificate with breakup, CTC in words and experience, printable." },
       { name: "GapDeclare", slug: "gapcert", url: "https://study.fixoraa.tech/gapcert/", blurb: "Gap certificate generator — gap year declaration and affidavit format for college admission, with reason library." },
       { name: "NocNest", slug: "nocletter", url: "https://study.fixoraa.tech/nocletter/", blurb: "NOC generator — no objection certificate formats for visa, travel, internship and business use, printable." },
+      { name: "PermitPen", slug: "permissionletter", url: "https://study.fixoraa.tech/permissionletter/", blurb: "Permission letter generator — formal permission request letters for work from home, study, events and more." },
     ],
   },
 ];
@@ -52932,6 +52938,12 @@ export const totalTools: number = allTools.length;
 //  than ~10 days can be deleted on any later edit; they do nothing then.
 // ───────────────────────────────────────────────────────────────────────
 export const newTools: Record<string, string> = {
+  "privacypolicy": "2026-11-13",
+  "fnfstatement": "2026-11-13",
+  "twotruths": "2026-11-13",
+  "permissionletter": "2026-11-13",
+  "pomisc": "2026-11-13",
+  "redirectgen": "2026-11-13",
   "salarycert": "2026-11-13",
   "gapcert": "2026-11-13",
   "grammarcheck": "2026-11-13",
