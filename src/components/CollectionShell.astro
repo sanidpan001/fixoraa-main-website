@@ -1,0 +1,241 @@
+---
+// Collection shell (added 2026-11-20, 700k rollout — replaces the fully
+// paginated /tools/<collection>/ listings for the all / new / per-category
+// collections).
+//
+// Why: at ~805k tools the old design would have generated ~8,000 static
+// pages for EACH of these collections (~25k pages with the sub-category
+// listings on top). A shell renders the first 100 tools server-side
+// (same cards, real links) and loads the rest client-side from the
+// search-index shards — the same lazy index the site search uses.
+// Sub-category listings under /categories/<cat>/<sub>/ keep real
+// server-side pagination.
+import Layout from '../layouts/Layout.astro';
+import SubcatBrowser from './SubcatBrowser.astro';
+import {
+  niches,
+  isFresh,
+  isPlaceholderUrl,
+  type Collection,
+} from '../lib/tools-data';
+
+interface Props {
+  collection: Collection;
+}
+
+const { collection } = Astro.props as Props;
+const tools = collection.tools;
+const total = collection.total;
+const shown = tools.length;
+
+const pageTitle =
+  collection.kind === 'all'
+    ? 'All Free Online Tools A–Z — Fixoraa'
+    : collection.kind === 'new'
+      ? '✨ New Tools — Fixoraa'
+      : `${collection.title} — Free Online Tools | Fixoraa`;
+const pageDescription = `Browse ${total} free ${collection.kind === 'niche' ? collection.title : 'online'} tools on Fixoraa. No signup, no watermarks.`;
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+<main
+  class="mx-auto max-w-6xl px-4 py-10 sm:py-14"
+  id="collectionShell"
+  data-collection={collection.id}
+  data-kind={collection.kind}
+  data-total={total}
+>
+  <!-- Header (same design language as /tools) -->
+  <div class="text-center mb-8">
+    <span class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full text-white bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] mb-4">Free · No signup</span>
+    <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-neutral-900">{collection.title}<span class="bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] bg-clip-text text-transparent">{collection.titleAccent}</span></h1>
+    <p class="mt-4 text-neutral-600 max-w-2xl mx-auto">{collection.tagline}</p>
+  </div>
+
+  <!-- Collection chips (links — same row as the /tools filter chips) -->
+  <div class="flex flex-wrap justify-center gap-2 mb-4">
+    <a href="/tools/all/" class={`chip ${collection.id === 'all' ? 'chip-active' : ''}`}>All</a>
+    <a href="/tools/new/" class={`chip ${collection.id === 'new' ? 'chip-active' : ''}`}>✨ New</a>
+    {niches.map((n) => (
+      <a href={`/tools/${n.slug}/`} class={`chip ${collection.id === n.slug ? 'chip-active' : ''}`}>{n.name}</a>
+    ))}
+  </div>
+
+  <!-- Results count -->
+  <p id="shellCount" class="text-center text-sm text-neutral-500 mb-8">
+    {total === 0
+      ? 'No tools here right now — check back soon.'
+      : <>Showing {shown} of {total} tools{total > shown ? ' — keep scrolling to load more' : ''}</>}
+  </p>
+
+  <!-- Grid: first 100 tools server-rendered; the client script below
+       appends the rest from the search index in 100-tool chunks. -->
+  <div id="shellGrid" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {tools.map((t) => (
+      <div class="tool-card" data-name={t.name.toLowerCase()} data-blurb={t.blurb.toLowerCase()} data-niche={t.niche.toLowerCase()} data-nicheslug={t.nicheSlug}>
+        {isPlaceholderUrl(t.url) ? (
+          <div class="relative block h-full rounded-2xl bg-white border border-neutral-200 p-5 opacity-70">
+            <span class="inline-block text-[11px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full bg-[#9333EA]/10 text-[#9333EA] mb-3">{t.niche}</span>
+            <h3 class="text-lg font-bold text-neutral-900 pr-6">{t.name}</h3>
+            <p class="text-sm text-neutral-600 mt-1">{t.blurb}</p>
+            <span class="inline-block mt-3 text-xs font-bold px-3 py-1 rounded-full bg-neutral-100 text-neutral-500">Coming soon</span>
+          </div>
+        ) : (
+          <a href={t.url} target="_blank" rel="noopener" class="group relative block h-full rounded-2xl bg-white border border-neutral-200 p-5 hover:shadow-lg hover:-translate-y-1 hover:border-neutral-300 transition-all">
+            <span class="inline-block text-[11px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full bg-[#9333EA]/10 text-[#9333EA] mb-3">{t.niche}</span>{isFresh(t.slug) && <span class="new-badge">✨ New</span>}
+            <h3 class="text-lg font-bold text-neutral-900 pr-6">{t.name}</h3>
+            <p class="text-sm text-neutral-600 mt-1">{t.blurb}</p>
+            <span class="absolute top-5 right-5 text-xl text-neutral-400 group-hover:text-[#9333EA] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" aria-hidden="true">↗</span>
+          </a>
+        )}
+      </div>
+    ))}
+  </div>
+
+  {total > shown && (
+    <div class="mt-12 text-center">
+      <button id="shellMore" type="button" class="chip chip-active" style="cursor:pointer">
+        Load more tools
+      </button>
+      <p id="shellStatus" class="mt-3 text-sm text-neutral-500" aria-live="polite"></p>
+    </div>
+  )}
+
+  {collection.kind === 'niche' && (
+    <SubcatBrowser category={collection.id} />
+  )}
+
+  <p class="mt-10 text-center text-sm text-neutral-500">
+    Looking for something specific? <a href="/tools" class="font-bold text-[#9333EA] hover:underline">Search the full directory</a>
+  </p>
+</main>
+
+<style>
+  .chip {
+    display: inline-block; text-decoration: none;
+    font-size: .875rem; font-weight: 600; padding: .5rem 1rem; border-radius: 9999px;
+    border: 1px solid #e5e5e5; background: #fff; color: #404040; cursor: pointer;
+    transition: all .15s ease;
+  }
+  .chip:hover { border-color: #a3a3a3; }
+  .chip-active {
+    color: #fff; border-color: transparent;
+    background: linear-gradient(to right, #FF5A5F, #F43F8E, #9333EA);
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / .1);
+  }
+  .new-badge {
+    display: inline-block; margin-left: .5rem; vertical-align: middle;
+    font-size: 11px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase;
+    padding: .35rem .75rem; border-radius: 9999px; color: #fff;
+    background: linear-gradient(to right, #FF5A5F, #F43F8E, #9333EA);
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #F43F8E, 0 6px 14px rgb(244 63 142 / .5);
+    animation: newBadgePulse 1.6s ease-in-out infinite;
+  }
+  @keyframes newBadgePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+  :global([data-theme="dark"] .chip) { background: #131a28; border-color: #2a3350; color: #cbd5e1; }
+  :global([data-theme="dark"] .chip:hover) { border-color: #475569; }
+  :global([data-theme="dark"] .chip.chip-active) {
+    background: linear-gradient(to right, #FF5A5F, #F43F8E, #9333EA);
+    border-color: transparent; color: #fff;
+  }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+  .tool-card { animation: fadeUp .35s ease both; }
+</style>
+
+<script>
+  import { loadToolIndex } from '../lib/search-client.js';
+
+  // Client-side continuation for the shell: builds this collection's
+  // full ordered list from the lazy search index (same ordering rules
+  // the server used for the first 100) and appends 100 cards at a time.
+  const shell = document.getElementById('collectionShell');
+  const grid = document.getElementById('shellGrid');
+  const btn = document.getElementById('shellMore');
+  const status = document.getElementById('shellStatus');
+  const count = document.getElementById('shellCount');
+
+  if (shell && grid && btn) {
+    const collectionId = shell.dataset.collection;
+    const kind = shell.dataset.kind;
+    const total = parseInt(shell.dataset.total || '0', 10);
+    const CHUNK = 100;
+    let rendered = grid.querySelectorAll('.tool-card').length;
+    let list = null;
+    let loading = false;
+
+    const esc = (s) => s.replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const isPlaceholder = (u) => u.includes('PASTE-YOUR-TOOL-URL-HERE');
+    const isFresh = (d) => { if (!d) return false; const days = (Date.now() - new Date(d + 'T00:00:00').getTime()) / 86400000; return days >= 0 && days < 5; };
+    const tag = (n) => `<span class="inline-block text-[11px] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full bg-[#9333EA]/10 text-[#9333EA] mb-3">${esc(n)}</span>`;
+    const body = (t) => `${tag(t.niche)}${isFresh(t.added) ? '<span class="new-badge">✨ New</span>' : ''}<h3 class="text-lg font-bold text-neutral-900 pr-6">${esc(t.name)}</h3><p class="text-sm text-neutral-600 mt-1">${esc(t.blurb)}</p>`;
+
+    function cardHtml(t) {
+      if (isPlaceholder(t.url)) {
+        return `<div class="tool-card"><div class="relative block h-full rounded-2xl bg-white border border-neutral-200 p-5 opacity-70">${body(t)}<span class="inline-block mt-3 text-xs font-bold px-3 py-1 rounded-full bg-neutral-100 text-neutral-500">Coming soon</span></div></div>`;
+      }
+      return `<div class="tool-card"><a href="${esc(t.url)}" target="_blank" rel="noopener" class="group relative block h-full rounded-2xl bg-white border border-neutral-200 p-5 hover:shadow-lg hover:-translate-y-1 hover:border-neutral-300 transition-all">${body(t)}<span class="absolute top-5 right-5 text-xl text-neutral-400 group-hover:text-[#9333EA] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" aria-hidden="true">↗</span></a></div>`;
+    }
+
+    function buildList(all) {
+      let out;
+      if (kind === 'new') {
+        out = all
+          .filter((t) => isFresh(t.added))
+          .sort((a, b) => (b.added || '').localeCompare(a.added || '') || a.name.localeCompare(b.name) || a.ord - b.ord);
+      } else if (kind === 'niche') {
+        out = all
+          .filter((t) => t.nicheSlug === collectionId)
+          .sort((a, b) => a.name.localeCompare(b.name) || a.ord - b.ord);
+      } else {
+        out = [...all].sort((a, b) => a.name.localeCompare(b.name) || a.ord - b.ord);
+      }
+      return out;
+    }
+
+    function updateCount(done) {
+      if (!count) return;
+      count.textContent = done
+        ? `Showing ${rendered} of ${total} tools`
+        : `Showing ${rendered} of ${total} tools — keep scrolling to load more`;
+    }
+
+    async function loadMore() {
+      if (loading) return;
+      loading = true;
+      if (status) status.textContent = 'Loading the directory index…';
+      try {
+        if (!list) {
+          const all = await loadToolIndex();
+          list = buildList(all);
+        }
+        const next = list.slice(rendered, rendered + CHUNK);
+        if (next.length) {
+          grid.insertAdjacentHTML('beforeend', next.map(cardHtml).join(''));
+          rendered += next.length;
+        }
+        const done = rendered >= total || next.length === 0;
+        updateCount(done);
+        if (status) status.textContent = done ? 'That is everything in this collection.' : '';
+        if (done) btn.style.display = 'none';
+      } catch (e) {
+        if (status) status.textContent = 'Could not load more right now — please try again.';
+      }
+      loading = false;
+    }
+
+    btn.addEventListener('click', loadMore);
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((e) => e.isIntersecting)) loadMore();
+        },
+        { rootMargin: '600px' }
+      );
+      io.observe(btn);
+    }
+  }
+</script>
+</Layout>

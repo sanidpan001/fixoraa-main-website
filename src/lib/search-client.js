@@ -1,10 +1,12 @@
-// Lazy tool-search index loader (added 2026-11-06, main-site speed fix).
+// Lazy tool-search index loader (added 2026-11-06, main-site speed fix;
+// tuples gained sub-category fields 2026-11-20).
 //
 // The full tool list used to be baked into the homepage and /tools HTML
 // (12 MB and 67 MB pages). It now lives in static JSON shards under
-// /data/shards/, generated at build time from src/data/tools.ts. This
-// loader fetches the manifest + shards ONLY on first search interaction,
-// calling onProgress(tools) after every shard so results can render
+// /data/shards/, generated at build time from the merged dataset
+// (src/data/tools.ts + src/data/shards/*.json). This loader fetches the
+// manifest + shards ONLY on first search interaction, calling
+// onProgress(tools) after every shard so results can render
 // progressively while the rest are still downloading.
 
 let cache = null;
@@ -37,6 +39,8 @@ export function loadToolIndex(onProgress) {
                 nicheSlug: t[4],
                 added: t[5],
                 ord: t[6],
+                subSlug: t[7] || '',
+                subcategory: t[8] || '',
                 niche: nameBySlug[t[4]] || '',
               });
             }
@@ -60,6 +64,7 @@ export function toolMatches(t, q) {
   return (
     t.name.toLowerCase().includes(q) ||
     t.blurb.toLowerCase().includes(q) ||
-    t.niche.toLowerCase().includes(q)
+    t.niche.toLowerCase().includes(q) ||
+    (t.subcategory || '').toLowerCase().includes(q)
   );
 }

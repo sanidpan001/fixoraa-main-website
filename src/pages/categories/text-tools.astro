@@ -1,8 +1,10 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { niches } from '../../data/tools';
+import { niches } from '../../lib/tools-data';
+import SubcatBrowser from '../../components/SubcatBrowser.astro';
 
 const niche = niches.find((n) => n.slug === 'text-tools')!;
+const gridTools = niche.tools.slice(0, 100);
 const title = "Text Tools: Count, Clean, Format & Analyze Text Free — Fixoraa";
 const description = "Free text tools to count words, clean lists, convert case, compare drafts and check readability — for writers, students and SEOs. No signup, no watermark.";
 const faqs = [
@@ -26,6 +28,8 @@ const faqJsonLd = {
     <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-neutral-900">Free <span class="bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] bg-clip-text text-transparent">text tools</span> for cleaner, sharper writing</h1>
     <p class="mt-4 text-neutral-500">{niche.tagline} — {niche.tools.length} free tools · No signup · No watermark</p>
   </div>
+
+  <SubcatBrowser category={niche.slug} />
 
   <article class="space-y-6 text-neutral-700 leading-relaxed">
     <p class="text-lg text-neutral-800">
@@ -77,13 +81,16 @@ const faqJsonLd = {
 
     <h2 class="text-2xl font-black text-neutral-900 pt-8">Every tool in this category</h2>
     <div class="grid gap-3 sm:grid-cols-2 !mt-4">
-      {niche.tools.map((t) => (
+      {gridTools.map((t) => (
         <a href={t.url} target="_blank" rel="noopener" class="block rounded-2xl border border-neutral-200 bg-white p-4 hover:shadow-md transition-all">
           <span class="font-bold text-neutral-900">{t.name}</span>
           <p class="mt-1 text-sm text-neutral-600">{t.blurb}</p>
         </a>
       ))}
     </div>
+    <p class="!mt-6 text-center">
+      <a href={`/tools/${niche.slug}/`} class="inline-block rounded-full bg-ink px-6 py-3 text-sm font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg">Browse all {niche.tools.length} tools →</a>
+    </p>
 
     <h2 class="text-2xl font-black text-neutral-900 pt-8">Frequently asked questions</h2>
     <div class="space-y-3 !mt-4">

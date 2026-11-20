@@ -1,22 +1,23 @@
 ---
-// Paginated tool listings (added 2026-11-06, main-site speed fix).
-// Generates /tools/all/, /tools/new/ and /tools/<niche>/ — page 1 at the
-// bare path, further pages at /tools/<collection>/<n>/, 100 tools each —
-// all server-rendered from src/data/tools.ts via src/lib/tools-data.ts.
-import ListingPage from '../../../components/ListingPage.astro';
+// Collection shells (added 2026-11-06 as paginated listings; converted
+// to shells 2026-11-20 for the 700k rollout).
+// Generates exactly ONE page per collection at /tools/<collection>/ —
+// the first 100 tools are server-rendered and the rest loads client-side
+// from the search shards (see components/CollectionShell.astro). The old
+// deep pages (/tools/<collection>/<n>/) are intentionally gone: at
+// ~805k tools they would have meant ~25,000 static pages. Sub-category
+// listings under /categories/<cat>/<sub>/ keep real pagination.
+import CollectionShell from '../../../components/CollectionShell.astro';
 import { getCollections } from '../../../lib/tools-data';
 
-export function getStaticPaths({ paginate }: any) {
-  return getCollections().flatMap((c: any) =>
-    paginate(c.tools, {
-      params: { collection: c.id },
-      props: { collection: c },
-      pageSize: 100,
-    })
-  );
+export function getStaticPaths() {
+  return getCollections().map((c: any) => ({
+    params: { collection: c.id },
+    props: { collection: c },
+  }));
 }
 
-const { page, collection } = Astro.props;
+const { collection } = Astro.props;
 ---
 
-<ListingPage collection={collection} page={page} />
+<CollectionShell collection={collection} />

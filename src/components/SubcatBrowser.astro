@@ -1,0 +1,36 @@
+---
+// Sub-category browser (added 2026-11-20, 700k rollout).
+// Renders the sub-categories of ONE parent category as cards with tool
+// counts, linking to the paginated listings under
+// /categories/<category>/<subcategory>/. Data comes from the merged
+// build-time dataset (tools.ts + src/data/shards/*.json).
+import { getSubcategories } from '../lib/tools-data';
+
+interface Props {
+  category: string; // niche slug of the parent category
+}
+
+const { category } = Astro.props as Props;
+const subs = getSubcategories().filter((s) => s.categorySlug === category);
+---
+
+{subs.length > 1 && (
+  <section class="my-10">
+    <h2 class="text-2xl font-black text-neutral-900">Browse by sub-category</h2>
+    <p class="mt-2 text-neutral-600">
+      This category is organised into {subs.length} sub-categories — pick the
+      shelf that matches your task.
+    </p>
+    <div class="grid gap-3 sm:grid-cols-2 !mt-4">
+      {subs.map((s) => (
+        <a
+          href={`/categories/${s.categorySlug}/${s.slug}/`}
+          class="block rounded-2xl border border-neutral-200 bg-white p-4 hover:shadow-md hover:-translate-y-0.5 transition-all"
+        >
+          <span class="font-bold text-neutral-900">{s.name}</span>
+          <span class="block text-sm text-neutral-500 mt-1">{s.count} {s.count === 1 ? 'tool' : 'tools'}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+)}

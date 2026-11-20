@@ -1,0 +1,23 @@
+---
+// Paginated sub-category listings (added 2026-11-20, 700k rollout).
+// Generates /categories/<category>/<subcategory>/ — page 1 at the bare
+// path, further pages at /categories/<category>/<subcategory>/<n>/,
+// 100 tools each — server-rendered from the merged dataset
+// (src/data/tools.ts + src/data/shards/*.json) via src/lib/tools-data.ts.
+import SubcatListingPage from '../../../../components/SubcatListingPage.astro';
+import { getSubcategories } from '../../../../lib/tools-data';
+
+export function getStaticPaths({ paginate }: any) {
+  return getSubcategories().flatMap((s: any) =>
+    paginate(s.tools, {
+      params: { category: s.categorySlug, subcategory: s.slug },
+      props: { subcat: s },
+      pageSize: 100,
+    })
+  );
+}
+
+const { page, subcat } = Astro.props;
+---
+
+<SubcatListingPage subcat={subcat} page={page} />
