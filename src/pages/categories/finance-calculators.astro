@@ -5,7 +5,7 @@ import SubcatBrowser from '../../components/SubcatBrowser.astro';
 
 const niche = niches.find((n) => n.slug === 'finance-calculators');
 const gridTools = niche.tools.slice(0, 100);
-const title = "Finance Calculators — Loans, Tax, SIP & Salary Tools | Fixoraa";
+const title = "Finance — Loans, Tax, SIP & Salary Tools | Fixoraa";
 const description = "Free finance calculators for loan EMIs, SIP growth, income tax, GST, salary in-hand and retirement planning. No signup, no watermark — just clear numbers.";
 const faqs = [
   { q: "Are these finance calculators free to use?", a: "Yes — every calculator in this category is free for unlimited use. There is no signup, no trial period and no watermark or locked result waiting at the end. Open the calculator, enter your figures and read the full projection. You can come back and rerun the numbers as often as your plans change." },
@@ -25,7 +25,7 @@ const faqJsonLd = {
 <main class="mx-auto max-w-3xl px-4 py-10 sm:py-14">
   <div class="text-center mb-10">
     <span class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full text-white bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] mb-4">Category Guide</span>
-    <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-neutral-900">Finance <span class="bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] bg-clip-text text-transparent">Calculators</span></h1>
+    <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-neutral-900"><span class="bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] bg-clip-text text-transparent">Finance</span></h1>
     <p class="mt-4 text-lg text-neutral-600">{niche.tagline}</p>
     <p class="mt-2 text-neutral-500 text-sm">{niche.tools.length} free tools · No signup · No watermark</p>
   </div>

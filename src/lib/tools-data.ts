@@ -67,6 +67,18 @@ const CATEGORY_TO_NICHE_SLUG: Record<string, string> = {
   PDF: 'pdf-tools',
 };
 
+// Display-name overrides (2026-11-21, Sandipan's order): the finance
+// category shows as just "Finance" everywhere — chips, category pages,
+// the search manifest, card tags — while its slug (finance-calculators)
+// and every URL stay unchanged. The name in tools.ts is NOT edited (the
+// legacy file stays untouched); the override lives here, in the data
+// layer every page reads from.
+const DISPLAY_NAME_OVERRIDES: Record<string, string> = {
+  'finance-calculators': 'Finance',
+};
+const displayName = (n: { slug: string; name: string }): string =>
+  DISPLAY_NAME_OVERRIDES[n.slug] ?? n.name;
+
 // ── Shard loading ────────────────────────────────────────────────────────
 
 interface ShardEntry {
@@ -105,21 +117,25 @@ const mergedAll: LibTool[] = [];
 // 1) Legacy tools first — they win every slug conflict.
 for (const n of legacyNiches) {
   const sub = `${n.name} — More Tools`;
+  // The bucket's display name follows the override, but its URL slug is
+  // still derived from the ORIGINAL name above — a rename must not move
+  // the /categories/<cat>/<name>-more-tools/ URLs that already exist.
+  const subDisplay = `${displayName(n)} — More Tools`;
   for (const t of n.tools) {
     if (seenSlugs.has(t.slug)) continue;
     seenSlugs.add(t.slug);
     const added = legacyNewTools[t.slug] ?? null;
     if (added) addedBySlug.set(t.slug, added);
     mergedAll.push({
-      niche: n.name,
+      niche: displayName(n),
       nicheSlug: n.slug,
       name: t.name,
       slug: t.slug,
       url: t.url,
       blurb: t.blurb,
       added,
-      category: n.name,
-      subcategory: sub,
+      category: displayName(n),
+      subcategory: subDisplay,
       subSlug: subcatSlug(sub),
     });
   }
@@ -141,14 +157,14 @@ for (const e of loadShardEntries()) {
   const added = e.added ?? null;
   if (added) addedBySlug.set(e.slug, added);
   mergedAll.push({
-    niche: n.name,
+    niche: displayName(n),
     nicheSlug,
     name: e.name,
     slug: e.slug,
     url: e.url,
     blurb: e.blurb,
     added,
-    category: n.name,
+    category: displayName(n),
     subcategory: e.subcategory,
     subSlug: subcatSlug(e.subcategory),
   });
@@ -161,7 +177,7 @@ if (shardSkipped > 0) {
 
 /** The 10 site categories, each with its MERGED tools array. */
 export const niches = legacyNiches.map((n) => ({
-  name: n.name,
+  name: displayName(n),
   slug: n.slug,
   tagline: n.tagline,
   tools: mergedAll
@@ -246,7 +262,7 @@ export function getCollections(): Collection[] {
     cols.push({
       id: n.slug,
       kind: 'niche',
-      title: n.name,
+      title: displayName(n),
       tagline: n.tagline,
       tools: tools.slice(0, PAGE_SIZE),
       total: tools.length,
@@ -421,7 +437,7 @@ export function getManifest(): Manifest {
       .sort();
     return {
       slug: n.slug,
-      name: n.name,
+      name: displayName(n),
       tagline: n.tagline,
       count: mergedAll.filter((t) => t.nicheSlug === n.slug).length,
       shards: ids,
