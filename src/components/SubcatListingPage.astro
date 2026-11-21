@@ -38,6 +38,19 @@ const siblings = getSubcategories().filter(
   (s) => s.categorySlug === subcat.categorySlug
 );
 
+// Mobile chip-row collapse (added 2026-11-21): on small screens the
+// sibling chip row shows only the active chip plus the first 3 other
+// chips, with a Show more/less toggle; chips beyond that are marked
+// chip-extra and hidden by the media query in <style> below. Desktop
+// always shows every chip and never shows the toggle.
+let otherSeen = 0;
+const chipItems = siblings.map((s) => {
+  const active = s.slug === subcat.slug;
+  const extra = !active && otherSeen++ >= 3;
+  return { s, active, extra };
+});
+const hasExtraChips = chipItems.some((c) => c.extra);
+
 // Windowed page numbers: 1 â€¦ c-2 c-1 c c+1 c+2 â€¦ N
 const win: (number | 'â€¦')[] = [];
 {
@@ -84,10 +97,13 @@ const pageDescription = `Browse ${total} free ${subcat.name} tools on Fixoraa â€
 
   <!-- Sibling sub-category chips -->
   {siblings.length > 1 && (
-    <div class="flex flex-wrap justify-center gap-2 mb-4">
-      {siblings.map((s) => (
-        <a href={`/categories/${s.categorySlug}/${s.slug}/`} class={`chip ${s.slug === subcat.slug ? 'chip-active' : ''}`}>{s.name}</a>
+    <div class="subcat-chips flex flex-wrap justify-center gap-2 mb-4" data-expanded="false">
+      {chipItems.map(({ s, active, extra }) => (
+        <a href={`/categories/${s.categorySlug}/${s.slug}/`} class={`chip ${active ? 'chip-active' : ''}${extra ? ' chip-extra' : ''}`}>{s.name}</a>
       ))}
+      {hasExtraChips && (
+        <button type="button" class="chip subcat-toggle" aria-expanded="false">Show more</button>
+      )}
     </div>
   )}
 
@@ -141,6 +157,23 @@ const pageDescription = `Browse ${total} free ${subcat.name} tools on Fixoraa â€
   </p>
 </main>
 
+<script>
+  // Mobile-only sibling-chip toggle: instant show/hide of the extra
+  // chips (no animation). The button itself is hidden on desktop by
+  // the media query in <style> below, so this only ever fires on
+  // small screens.
+  document.querySelectorAll('.subcat-toggle').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const wrap = btn.closest('.subcat-chips');
+      if (!wrap) return;
+      const expanded = wrap.getAttribute('data-expanded') === 'true';
+      wrap.setAttribute('data-expanded', expanded ? 'false' : 'true');
+      btn.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      btn.textContent = expanded ? 'Show more' : 'Show less';
+    });
+  });
+</script>
+
 <style>
   .chip {
     display: inline-block; text-decoration: none;
@@ -174,5 +207,17 @@ const pageDescription = `Browse ${total} free ${subcat.name} tools on Fixoraa â€
   }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
   .tool-card { animation: fadeUp .35s ease both; }
+  /* Sibling-chip Show more/less toggle: mobile only (below the sm
+     breakpoint, mirroring the site's Tailwind sm: convention). On
+     desktop the button is never displayed and all chips stay visible.
+     The active chip is pinned first on mobile so it is always in the
+     visible set when the row is collapsed. Instant display toggle â€”
+     no transitions. */
+  .subcat-toggle { display: none; }
+  @media (max-width: 639.98px) {
+    .subcat-chips .chip-active { order: -1; }
+    .subcat-chips[data-expanded="false"] .chip-extra { display: none; }
+    .subcat-toggle { display: inline-block; order: 1; }
+  }
 </style>
 </Layout>
