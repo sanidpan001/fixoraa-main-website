@@ -652,7 +652,7 @@ export const niches: Niche[] = [
       { name: "SQLPolish", slug: "sqlpolish", url: "https://dev.fixoraa.tech/sqlpolish/", blurb: "Format and beautify SQL queries instantly" },
       { name: "UuidMint", slug: "uuidmint", url: "https://dev.fixoraa.tech/uuidmint/", blurb: "Generate random UUIDs and GUIDs" },
       { name: "TokenPeek", slug: "tokenpeek", url: "https://dev.fixoraa.tech/tokenpeek/", blurb: "Decode and inspect JWT tokens instantly" },
-      { name: "GitAid", slug: "gitaid", url: "https://gitaid.fixoraa.tech", blurb: "Git rescue guide — fix mistakes fast" },
+      { name: "GitAid", slug: "gitaid", url: "https://dev.fixoraa.tech/gitaid/", blurb: "Git rescue guide — fix mistakes fast" },
       { name: "QueryKit", slug: "querykit", url: "https://dev.fixoraa.tech/querykit/", blurb: "URL parser and UTM link builder" },
       { name: "Permitly", slug: "permitly", url: "https://dev.fixoraa.tech/permitly/", blurb: "Pick the right open-source license" },
       { name: "SpecScope", slug: "specscope", url: "https://dev.fixoraa.tech/specscope/", blurb: "CSS specificity score analyzer" },
