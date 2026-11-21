@@ -2,10 +2,14 @@
 import Layout from '../layouts/Layout.astro';
 import { niches, totalTools } from '../lib/tools-data';
 
-// Hero count: totalTools rounded DOWN to the nearest thousand, shown with a
-// trailing "+" (42,714 -> "42000+"). Sandipan's rule (2026-11-06, refining
-// his 2026-10-13 hundred-mark rule): the hero never shows the exact count —
-// it steps up by whole thousands only. Everywhere else uses the exact total.
+// Hero count (Sandipan's rule, re-refined 2026-11-21): the hero headline
+// shows the total floored to whole lakhs — 738,769 -> "7 lakh +" — and
+// steps up only when the total crosses the next lakh (800,000 -> "8 lakh +").
+// The exact total is used everywhere else (title, categories line, the
+// stats strip's free-tools card, /tools).
+const heroLakh = Math.floor(totalTools / 100000);
+// Count-up target for the "∞ tools, forever growing" stats card only (its
+// animation counts up, then swaps to ∞) — behaviour unchanged.
 const heroTools = Math.floor(totalTools / 1000) * 1000;
 
 // Rotating gradient accents for niche cards
@@ -80,7 +84,7 @@ const pageDescription =
       </p>
 
       <h1 class="hero-anim mx-auto mt-6 max-w-4xl text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl">
-        {heroTools}+ free tools.<br />
+        {heroLakh} lakh + free tools.<br />
         Zero signup.<br />
         <span class="text-gradient">Infinite possibilities.</span>
       </h1>
@@ -201,7 +205,7 @@ const pageDescription =
     <div class="mx-auto grid max-w-6xl grid-cols-2 gap-4 px-5 py-12 lg:grid-cols-4">
       <div class="stagger-card rounded-3xl border border-ink/10 bg-cream p-6 text-center">
         <p class="text-4xl font-extrabold tracking-tight sm:text-5xl">
-          <span class="stat-count" data-count={heroTools}>0</span>+
+          <span class="stat-count" data-count={totalTools}>0</span>
         </p>
         <p class="mt-2 text-sm font-semibold text-ink/60">free tools</p>
       </div>
