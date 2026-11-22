@@ -161,7 +161,7 @@ const guideIntros: Record<string, string> = {
 </style>
 
 <script>
-  import { loadToolIndex, toolMatches } from '../lib/search-client.js';
+  import { loadToolIndex, searchTools } from '../lib/search-client.js';
 
   // Search runs off the lazy index shards (fetched on first keystroke) —
   // the full tool list is no longer embedded in this page. Card markup and
@@ -201,17 +201,14 @@ const guideIntros: Record<string, string> = {
       browseNote.classList.remove('hidden');
       return;
     }
-    const matches = allTools
-      .filter((t) => toolMatches(t, q))
-      .sort((a, b) => a.name.localeCompare(b.name));
-    const shown = matches.slice(0, RENDER_CAP);
+    const { list: shown, total: matchTotal } = searchTools(allTools, search.value, RENDER_CAP);
     grid.innerHTML = shown.map(cardHtml).join('');
-    empty.classList.toggle('hidden', matches.length > 0);
-    grid.classList.toggle('hidden', matches.length === 0);
+    empty.classList.toggle('hidden', matchTotal > 0);
+    grid.classList.toggle('hidden', matchTotal === 0);
     browseNote.classList.add('hidden');
-    count.textContent = matches.length > RENDER_CAP
-      ? `Showing first ${RENDER_CAP} of ${matches.length} matches — keep typing to narrow it down`
-      : `Showing ${matches.length} of ${total} tools`;
+    count.textContent = matchTotal > RENDER_CAP
+      ? `Showing first ${RENDER_CAP} of ${matchTotal} matches — keep typing to narrow it down`
+      : `Showing ${matchTotal} of ${total} tools`;
   }
 
   function ensureIndex() {
