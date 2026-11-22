@@ -755,6 +755,11 @@
           if (ps.length >= 8 && bl.includes(ps)) { ns += 10; break; }
         }
       }
+      // Curation boost: the original hand-built tools carry small
+      // ord values (the site's own ordering). When one of them name-
+      // matches the task at all, it should outrank the combinatorial
+      // bulk tools that merely share the same words.
+      if (nameHit && (t.ord || 999999) < 1000) ns += 12;
       if (nameHit) byName.push([ns, t]);
       if (blurbWords.length) {
         const bl = (t.blurb || '').toLowerCase();
@@ -782,6 +787,19 @@
       }
     }
     push(byName, 22);
+    // Legacy injection: guarantee the best curated (ord<1000) name
+    // matches a seat in front of the AI, even when thousands of bulk
+    // tools outscore them on phrase coverage (the "resume template"
+    // flood). The AI still makes the final call.
+    let injected = 0;
+    for (const [, t] of byName) {
+      if (injected >= 4) break;
+      if ((t.ord || 999999) >= 1000) continue;
+      if (seen.has(t.slug)) continue;
+      seen.add(t.slug);
+      out.splice(4 + injected, 0, t);
+      injected++;
+    }
     const nameCount = out.length;
     // Blurb pool: keep only tools whose blurb word-matches at least 2
     // query words, word-checked properly (the includes() pass above is
@@ -892,7 +910,7 @@
           { role: 'system', content: PICK_PROMPT },
           { role: 'user', content: 'Visitor: ' + text + '\n\nCandidates:\n' + list },
         ],
-        12000,
+        15000,
         2000
       );
       const obj = parseJsonSlice(content, '{', '}');
@@ -935,7 +953,8 @@
         return;
       }
       const nameCands = cands.slice(0, nameCount);
-      const pick = phrases ? await aiPick(text, cands) : null;
+      let pick = phrases ? await aiPick(text, cands) : null;
+      if (phrases && !pick) pick = await aiPick(text, cands); // one retry — the backend cold-starts
       typing.remove();
       if (pick && pick.picks.length) {
         if (pick.reply) addBot(pick.reply);
