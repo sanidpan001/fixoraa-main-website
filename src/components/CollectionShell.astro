@@ -60,6 +60,9 @@ const pageDescription = `Browse ${total} free ${collection.kind === 'niche' ? co
     <p class="mt-4 text-neutral-600 max-w-2xl mx-auto">{collection.tagline}</p>
   </div>
 
+  <!-- Search (task-style, site-wide) — above the chips, like /tools -->
+  <div class="mb-8"><ToolSearchBox /></div>
+
   <!-- Collection chips (links — same row as the /tools filter chips) -->
   <div class="flex flex-wrap justify-center gap-2 mb-4">
     <a href="/tools/all/" class={`chip ${collection.id === 'all' ? 'chip-active' : ''}`}>All</a>
@@ -68,10 +71,6 @@ const pageDescription = `Browse ${total} free ${collection.kind === 'niche' ? co
       <a href={`/tools/${n.slug}/`} class={`chip ${collection.id === n.slug ? 'chip-active' : ''}`}>{n.name}</a>
     ))}
   </div>
-
-  {collection.kind !== 'niche' && (
-    <div class="mb-4"><ToolSearchBox /></div>
-  )}
 
   <!-- Results count -->
   <p id="shellCount" class="text-center text-sm text-neutral-500 mb-8">
