@@ -2,9 +2,11 @@
 // Fixoraa Tool Finder — AI chat widget (added 2026-11-22 on Sandipan's order).
 // Floating draggable icon, bottom-right. The visitor describes what they
 // need (any language); the Groq backend turns it into English search
-// phrases, and the site's own lazy search index (src/lib/search-client.js)
-// finds the matching tools. Falls back to direct keyword search if the
-// AI call fails or times out. No ads, no tracking beyond the site tracker.
+// phrases, a word-level ranker over the site's own lazy search index
+// (src/lib/search-client.js) builds a candidate list, and the AI makes
+// the final pick from those candidates. Falls back to the ranked list
+// if an AI call fails or times out. All widget text is English; visitors
+// can type in any language. No ads, no tracking beyond the site tracker.
 ---
 
 <div id="fxchat" class="fxchat" aria-live="polite">
@@ -55,7 +57,7 @@
       <button type="button" class="fxchat-chip">Merge two PDFs</button>
       <button type="button" class="fxchat-chip">Calculate my loan EMI</button>
       <button type="button" class="fxchat-chip">Compress an image</button>
-      <button type="button" class="fxchat-chip">Mujhe resume banana hai</button>
+      <button type="button" class="fxchat-chip">Build my resume</button>
       <button type="button" class="fxchat-chip">Convert JPG to PNG</button>
       <button type="button" class="fxchat-chip">Count words in my text</button>
     </div>
@@ -67,7 +69,7 @@
         type="text"
         autocomplete="off"
         maxlength="300"
-        placeholder="Apni problem likho… e.g. PDF ko Word me badalna hai"
+        placeholder="Type your problem in any language… e.g. merge two PDFs"
         aria-label="Describe what you need a tool for"
       />
       <button id="fxchat-send" class="fxchat-send" type="submit" aria-label="Send">
@@ -353,8 +355,6 @@
 
   let greeted = false;
   let busy = false;
-  let indexReady = false;
-  let lastQuery = null;
 
   /* ---------- panel open/close ---------- */
   function openPanel() {
@@ -363,13 +363,10 @@
     if (!greeted) {
       greeted = true;
       addBot(
-        'Hi! Main Fixoraa ka Tool Finder hoon. Apni problem ya kaam batao — jaise "do PDF jodne hain" ya "photo ka size kam karna hai" — main 10 lakh+ tools me se sahi tool dhundh dunga.'
+        'Hi! I am Fixoraa\'s Tool Finder. Tell me your problem or task — like "merge two PDFs" or "make a photo smaller" — and I will find the right tool for you from 10 lakh+ tools. You can write in any language — English, Hindi, Hinglish or any other language — I understand them all and will find your tool.'
       );
     }
-    loadToolIndex(() => {}).then(() => {
-      indexReady = true;
-      if (lastQuery) renderResults(lastQuery, true);
-    });
+    loadToolIndex(() => {}); // warm the index in the background
     setTimeout(() => input.focus(), 60);
   }
   function closePanel() {
@@ -511,53 +508,120 @@
     scrollDown();
   }
 
-  /* ---------- search + ranking ---------- */
+  /* ---------- search + ranking (v2: word-level matching) ---------- */
   const STOP = new Set(
-    'the a an to of for me my i want need hai hain karna karo mujhe mera meri ek do please tool tools online free ka ki ke se aur or and in on ko'.split(' ')
+    'the a an to of for me my i want need hai hain karna karo karni mujhe mera meri ek do please tool tools online free ka ki ke se aur or and in on ko wala wali liye batao dikhao chahiye kahan kaise bhi'.split(' ')
   );
-  function tokensOf(text) {
-    return (text.toLowerCase().match(/[a-z0-9]+/g) || []).filter(
-      (w) => w.length >= 3 && !STOP.has(w)
-    );
+  function wordsOf(s) {
+    return (String(s || '').toLowerCase().match(/[a-z0-9]+/g) || []);
   }
-  function rankTools(tools, phrases, rawText) {
-    const toks = tokensOf(rawText);
-    const scored = [];
-    for (const t of tools) {
-      const name = t.name.toLowerCase();
-      const blurb = (t.blurb || '').toLowerCase();
-      const sub = (t.subcategory || '').toLowerCase();
-      const niche = (t.niche || '').toLowerCase();
-      let s = 0;
-      for (const p of phrases) {
-        if (!p) continue;
-        if (name.includes(p)) s += 14;
-        if (sub.includes(p)) s += 7;
-        if (blurb.includes(p)) s += 4;
-        if (niche.includes(p)) s += 3;
-      }
-      for (const w of toks) {
-        if (name.includes(w)) s += 3;
-        if (sub.includes(w)) s += 2;
-        if (blurb.includes(w)) s += 1;
-      }
-      if (s > 0) scored.push([s, t]);
+  // Word match: exact, or a shared prefix for words of 4+ letters
+  // (merge~merging, calculate~calculator) — never a loose substring,
+  // so "emi" can no longer match "reminding".
+  function wm(q, w) {
+    if (q === w) return true;
+    if (q.length >= 4 && w.length >= 4 && (q.startsWith(w) || w.startsWith(q))) return true;
+    return false;
+  }
+  function coverage(phraseWords, targetWords) {
+    if (!phraseWords.length) return 0;
+    let hit = 0;
+    for (const q of phraseWords) {
+      if (targetWords.some((w) => wm(q, w))) hit++;
     }
-    scored.sort((a, b) => b[0] - a[0]);
+    return hit / phraseWords.length;
+  }
+  // Per-tool word lists, computed once per loaded index.
+  let wordCache = null;
+  function buildWordCache(tools) {
+    wordCache = tools.map((t) => ({
+      nw: wordsOf(t.name),
+      sw: wordsOf(t.subcategory || ''),
+    }));
+  }
+  // Returns { cands, topName }: up to 26 candidates — the best name
+  // matches first, then extra candidates found through their blurbs
+  // (brand-named tools like ShrinkPro are only findable that way).
+  function buildCandidates(tools, phrases, rawText) {
+    if (!wordCache || wordCache.length !== tools.length) buildWordCache(tools);
+    const pws = phrases
+      .map((p) => wordsOf(p).filter((w) => w.length >= 2 && !STOP.has(w)))
+      .filter((a) => a.length);
+    const rawToks = [...new Set(wordsOf(rawText).filter((w) => w.length >= 3 && !STOP.has(w)))];
+    const blurbWords = [...new Set([...pws.flat(), ...rawToks])].filter((w) => w.length >= 4).slice(0, 8);
+    const byName = [];
+    const blurbHits = [];
+    for (let i = 0; i < tools.length; i++) {
+      const t = tools[i];
+      const { nw, sw } = wordCache[i];
+      let ns = 0;
+      let nameHit = false;
+      for (const pw of pws) {
+        const c = coverage(pw, nw);
+        if (c >= 0.5) {
+          ns += c * 20;
+          if (c === 1) ns += 6;
+          nameHit = true;
+        }
+      }
+      for (const q of rawToks) {
+        if (nw.some((w) => wm(q, w))) {
+          ns += 4;
+          nameHit = true;
+        }
+      }
+      for (const pw of pws) {
+        const c = coverage(pw, sw);
+        if (c >= 0.5) ns += c * 5;
+      }
+      if (nameHit) byName.push([ns, t]);
+      if (blurbWords.length) {
+        const bl = (t.blurb || '').toLowerCase();
+        let bs = 0;
+        for (const q of blurbWords) if (bl.includes(q)) bs++;
+        if (bs >= 2) blurbHits.push([bs, t]);
+      }
+    }
+    const byOrd = (a, b) => b[0] - a[0] || (a[1].ord || 0) - (b[1].ord || 0);
+    byName.sort(byOrd);
+    blurbHits.sort(byOrd);
     const seen = new Set();
     const out = [];
-    for (const [, t] of scored) {
-      if (seen.has(t.slug)) continue;
-      seen.add(t.slug);
-      out.push(t);
-      if (out.length >= 6) break;
+    function push(arr, cap) {
+      const perSub = {};
+      for (const [, t] of arr) {
+        if (out.length >= cap) break;
+        if (seen.has(t.slug)) continue;
+        const k = t.subcategory || '';
+        perSub[k] = perSub[k] || 0;
+        if (perSub[k] >= 3) continue;
+        perSub[k]++;
+        seen.add(t.slug);
+        out.push(t);
+      }
     }
-    return out;
+    push(byName, 18);
+    const nameCount = out.length;
+    // Blurb pool: keep only tools whose blurb word-matches at least 2
+    // query words, word-checked properly (the includes() pass above is
+    // just a cheap prefilter).
+    if (blurbHits.length) {
+      const checked = [];
+      for (const [bs, t] of blurbHits.slice(0, 400)) {
+        const bw = wordsOf(t.blurb || '');
+        let real = 0;
+        for (const q of blurbWords) if (bw.some((w) => wm(q, w))) real++;
+        if (real >= 2) checked.push([real, t]);
+      }
+      checked.sort(byOrd);
+      push(checked, 26);
+    }
+    return { cands: out, nameCount, topName: byName.length ? byName[0][0] : 0 };
   }
 
-  async function aiPhrases(text) {
+  async function groqCall(messages, timeoutMs, maxTokens) {
     const ctrl = new AbortController();
-    const timer = setTimeout(() => ctrl.abort(), 12000);
+    const timer = setTimeout(() => ctrl.abort(), timeoutMs);
     try {
       const res = await fetch(BACKEND, {
         method: 'POST',
@@ -565,30 +629,48 @@
         signal: ctrl.signal,
         body: JSON.stringify({
           model: 'openai/gpt-oss-20b',
-          messages: [
-            { role: 'system', content: SYS_PROMPT },
-            { role: 'user', content: text },
-          ],
-          max_tokens: 4000,
+          messages,
+          max_tokens: maxTokens || 4000,
           reasoning_effort: 'low',
         }),
       });
       if (!res.ok) throw new Error('backend ' + res.status);
       const data = await res.json();
-      const content =
-        data && data.choices && data.choices[0] && data.choices[0].message
-          ? data.choices[0].message.content || ''
-          : '';
-      const start = content.indexOf('[');
-      const end = content.lastIndexOf(']');
-      if (start < 0 || end <= start) return null;
-      let arr = null;
-      try {
-        arr = JSON.parse(content.slice(start, end + 1));
-      } catch (e) {
-        arr = (content.slice(start, end + 1).match(/"([^"]+)"/g) || []).map((q) =>
-          q.replace(/"/g, '')
-        );
+      return data && data.choices && data.choices[0] && data.choices[0].message
+        ? data.choices[0].message.content || ''
+        : '';
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+  function parseJsonSlice(content, open, close) {
+    const start = content.indexOf(open);
+    const end = content.lastIndexOf(close);
+    if (start < 0 || end <= start) return null;
+    try {
+      return JSON.parse(content.slice(start, end + 1));
+    } catch (e) {
+      return null;
+    }
+  }
+  async function aiPhrases(text) {
+    try {
+      const content = await groqCall(
+        [
+          { role: 'system', content: SYS_PROMPT },
+          { role: 'user', content: text },
+        ],
+        12000
+      );
+      let arr = parseJsonSlice(content, '[', ']');
+      if (!Array.isArray(arr)) {
+        const start = content.indexOf('[');
+        const end = content.lastIndexOf(']');
+        if (start >= 0 && end > start) {
+          arr = (content.slice(start, end + 1).match(/"([^"]+)"/g) || []).map((q) =>
+            q.replace(/"/g, '')
+          );
+        }
       }
       if (!Array.isArray(arr)) return null;
       const phrases = arr
@@ -598,30 +680,43 @@
       return phrases.length ? phrases : null;
     } catch (e) {
       return null;
-    } finally {
-      clearTimeout(timer);
     }
   }
-
-  let currentResultsEl = null;
-  async function renderResults(query, refreshOnly) {
-    const tools = await loadToolIndex(() => {});
-    const phrases = query.phrases || [];
-    const found = rankTools(tools, phrases, query.text);
-    if (refreshOnly) {
-      // Index finished loading after an early render — upgrade silently
-      // only if the new top result differs.
-      if (currentResultsEl && found.length) {
-        const first = currentResultsEl.querySelector('a');
-        if (first && first.getAttribute('href') !== found[0].url) {
-          const fresh = renderCards(found);
-          currentResultsEl.replaceWith(fresh);
-          currentResultsEl = fresh;
-        }
+  const PICK_PROMPT =
+    'You are the Fixoraa Tool Finder. A visitor described a task. From the candidate tool list, ' +
+    'pick the tools that GENUINELY do that task — read the descriptions carefully: many candidates ' +
+    'are only calculators ABOUT a topic, not tools that do it; prefer real utility tools over ' +
+    '"calculation time / cost for professionals" calculators. Reply with ONLY a JSON object: ' +
+    '{"reply":"<one short friendly line in English>","picks":[<candidate numbers, best first, up to 6>]}. ' +
+    'If none of the candidates genuinely fit, picks must be [].';
+  async function aiPick(text, cands) {
+    try {
+      const list = cands
+        .map((t, i) => i + '. ' + t.name + ' — ' + (t.blurb || '') + ' [' + (t.subcategory || t.niche || '') + ']')
+        .join('\n');
+      const content = await groqCall(
+        [
+          { role: 'system', content: PICK_PROMPT },
+          { role: 'user', content: 'Visitor: ' + text + '\n\nCandidates:\n' + list },
+        ],
+        12000,
+        2000
+      );
+      const obj = parseJsonSlice(content, '{', '}');
+      if (!obj || !Array.isArray(obj.picks)) return null;
+      const picks = [];
+      for (const n of obj.picks) {
+        const i = Number(n);
+        if (Number.isInteger(i) && i >= 0 && i < cands.length && !picks.includes(i)) picks.push(i);
+        if (picks.length >= 6) break;
       }
-      return found;
+      return {
+        reply: typeof obj.reply === 'string' && obj.reply.trim() ? obj.reply.trim().slice(0, 220) : null,
+        picks,
+      };
+    } catch (e) {
+      return null;
     }
-    return found;
   }
 
   /* ---------- send flow ---------- */
@@ -631,29 +726,50 @@
     sendBtn.disabled = true;
     addUser(text);
     const typing = addTyping();
-    loadToolIndex(() => {}); // warm the index in parallel with the AI call
-    const phrases = await aiPhrases(text);
-    const query = { text, phrases: phrases || [] };
-    lastQuery = query;
-    const found = await renderResults(query, false);
-    typing.remove();
-    if (found.length) {
+    try {
+      const toolsPromise = loadToolIndex(() => {}); // load in parallel with the AI call
+      const phrases = await aiPhrases(text);
+      const tools = await toolsPromise;
+      const { cands, nameCount } = buildCandidates(tools, phrases || [], text);
+      if (!cands.length) {
+        typing.remove();
+        addBot(
+          'Sorry, I could not find a tool for that. Try describing the task with different words — for example "EMI calculator" or "compress PDF" — or browse by category:'
+        );
+        renderCategoryLinks();
+        return;
+      }
+      const nameCands = cands.slice(0, nameCount);
+      const pick = phrases ? await aiPick(text, cands) : null;
+      typing.remove();
+      if (pick && pick.picks.length) {
+        if (pick.reply) addBot(pick.reply);
+        else addBot('Got it! Here are the best tools for you:');
+        renderCards(pick.picks.map((i) => cands[i]));
+        addBot('Need anything else? Just tell me — I will search again.');
+      } else if (pick && !pick.picks.length && nameCands.length) {
+        // The AI says no candidate truly does this task — be honest,
+        // but still show the closest name matches.
+        addBot('I could not find an exact tool for that yet. These are the closest matches:');
+        renderCards(nameCands.slice(0, 4));
+        addBot('Or browse all tools by category:');
+        renderCategoryLinks();
+      } else {
+        addBot('Got it! Here are the best matching tools:');
+        renderCards(nameCands.slice(0, 6));
+        addBot('Need anything else? Just tell me — I will search again.');
+      }
+    } catch (e) {
+      typing.remove();
       addBot(
-        phrases
-          ? 'Samajh gaya! Ye rahe sabse sahi tools:'
-          : 'Ye rahe matching tools:'
-      );
-      currentResultsEl = renderCards(found);
-      addBot('Aur kuch chahiye to batao — main aur dhundh dunga.');
-    } else {
-      addBot(
-        'Iske liye exact tool nahi mila. Thoda alag shabdon me try karo — jaise kaam ka naam likho ("EMI calculator", "PDF compress"). Ya category se browse karo:'
+        'Something went wrong while searching. Please try again in a moment, or browse all tools by category:'
       );
       renderCategoryLinks();
+    } finally {
+      busy = false;
+      sendBtn.disabled = false;
+      input.focus();
     }
-    busy = false;
-    sendBtn.disabled = false;
-    input.focus();
   }
 
   form.addEventListener('submit', (e) => {
