@@ -10,6 +10,7 @@
 ---
 
 <div id="fxchat" class="fxchat" aria-live="polite">
+ <div id="fxchat-anchor" class="fxchat-anchor">
   <button
     id="fxchat-fab"
     class="fxchat-fab"
@@ -33,6 +34,7 @@
   </button>
 
   <button id="fxchat-hint" class="fxchat-hint" type="button" aria-label="Find your tool here — open the tool finder chat">Find your tool here</button>
+ </div>
 
   <section
     id="fxchat-panel"
@@ -98,11 +100,20 @@
     --fx-bot-bg: #2e2752;
     --fx-bot-ink: #f0edfd;
   }
-  .fxchat-fab {
+  /* The anchor is the fixed, draggable element; the FAB fills it
+     and the hint pill hangs above it, so the pill follows the
+     button everywhere — even to a drag-saved position. */
+  .fxchat-anchor {
     position: fixed;
     right: 20px;
     bottom: 20px;
     z-index: 90;
+    width: 58px;
+    height: 58px;
+  }
+  .fxchat-fab {
+    position: absolute;
+    inset: 0;
     width: 58px;
     height: 58px;
     border: none;
@@ -125,10 +136,10 @@
      blink, never a hard strobe; hides for good once the chat has
      been opened (localStorage) so it never nags. */
   .fxchat-hint {
-    position: fixed;
-    right: 20px;
-    bottom: 90px;
-    z-index: 90;
+    position: absolute;
+    right: 0;
+    bottom: calc(100% + 12px);
+    white-space: nowrap;
     border: none;
     cursor: pointer;
     padding: 9px 15px;
@@ -390,8 +401,7 @@
   }
   @media (max-width: 480px) {
     .fxchat-panel { right: 12px; left: 12px; width: auto; bottom: 88px; }
-    .fxchat-fab { right: 16px; bottom: 16px; }
-    .fxchat-hint { right: 16px; bottom: 86px; }
+    .fxchat-anchor { right: 16px; bottom: 16px; }
   }
   @media (prefers-reduced-motion: reduce) {
     .fxchat-panel { animation: none; }
@@ -412,6 +422,7 @@
     'No explanations, no markdown, only the JSON array.';
 
   const fab = document.getElementById('fxchat-fab');
+  const anchor = document.getElementById('fxchat-anchor');
   const panel = document.getElementById('fxchat-panel');
   const closeBtn = document.getElementById('fxchat-close');
   const msgs = document.getElementById('fxchat-msgs');
@@ -469,20 +480,20 @@
       }
     } catch (e) {}
     function placeFab(x, y) {
-      const maxX = window.innerWidth - fab.offsetWidth - 6;
-      const maxY = window.innerHeight - fab.offsetHeight - 6;
+      const maxX = window.innerWidth - anchor.offsetWidth - 6;
+      const maxY = window.innerHeight - anchor.offsetHeight - 6;
       const cx = Math.max(6, Math.min(x, maxX));
       const cy = Math.max(6, Math.min(y, maxY));
-      fab.style.left = cx + 'px';
-      fab.style.top = cy + 'px';
-      fab.style.right = 'auto';
-      fab.style.bottom = 'auto';
+      anchor.style.left = cx + 'px';
+      anchor.style.top = cy + 'px';
+      anchor.style.right = 'auto';
+      anchor.style.bottom = 'auto';
     }
     fab.addEventListener('pointerdown', (e) => {
       hideHint();
       dragging = true;
       moved = false;
-      const r = fab.getBoundingClientRect();
+      const r = anchor.getBoundingClientRect();
       startX = e.clientX;
       startY = e.clientY;
       fabX = r.left;
@@ -500,7 +511,7 @@
       if (!dragging) return;
       dragging = false;
       if (moved) {
-        const r = fab.getBoundingClientRect();
+        const r = anchor.getBoundingClientRect();
         try {
           localStorage.setItem('fxchat-pos', JSON.stringify({ x: r.left, y: r.top }));
         } catch (e) {}
@@ -699,7 +710,7 @@
       sw: wordsOf(t.subcategory || ''),
     }));
   }
-  // Returns { cands, topName }: up to 26 candidates — the best name
+  // Returns { cands, topName }: up to 36 candidates — the best name
   // matches first, then extra candidates found through their blurbs
   // (brand-named tools like ShrinkPro are only findable that way).
   function buildCandidates(tools, phrases, rawText) {
@@ -734,6 +745,16 @@
         const c = coverage(pw, sw);
         if (c >= 0.5) ns += c * 5;
       }
+      // Brand-named tools (ResumeForge, ShrinkPro) often carry the
+      // exact task phrase only in their blurb — reward that so they
+      // are not buried under hundreds of name-matching calculators.
+      if (nameHit) {
+        const bl = (t.blurb || '').toLowerCase();
+        for (const p of phrases) {
+          const ps = String(p).toLowerCase().trim();
+          if (ps.length >= 8 && bl.includes(ps)) { ns += 10; break; }
+        }
+      }
       if (nameHit) byName.push([ns, t]);
       if (blurbWords.length) {
         const bl = (t.blurb || '').toLowerCase();
@@ -760,21 +781,21 @@
         out.push(t);
       }
     }
-    push(byName, 18);
+    push(byName, 22);
     const nameCount = out.length;
     // Blurb pool: keep only tools whose blurb word-matches at least 2
     // query words, word-checked properly (the includes() pass above is
     // just a cheap prefilter).
     if (blurbHits.length) {
       const checked = [];
-      for (const [bs, t] of blurbHits.slice(0, 400)) {
+      for (const [bs, t] of blurbHits.slice(0, 800)) {
         const bw = wordsOf(t.blurb || '');
         let real = 0;
         for (const q of blurbWords) if (bw.some((w) => wm(q, w))) real++;
         if (real >= 2) checked.push([real, t]);
       }
       checked.sort(byOrd);
-      push(checked, 26);
+      push(checked, 36);
     }
     return { cands: out, nameCount, topName: byName.length ? byName[0][0] : 0 };
   }
@@ -851,6 +872,11 @@
     'English message → English reply; Hinglish (Hindi written in Roman letters) → Hinglish reply; ' +
     'Hindi in Devanagari script → Hindi (Devanagari) reply; any other language → that language. ' +
     'Keep tool names in English exactly as given. ' +
+    'CRITICAL LANGUAGE RULE: if the visitor\'s message contains Hindi words written in Roman ' +
+    'letters (words like mujhe, karna, hai, hain, chahiye, mera, batao, dikhao, kaise), your reply ' +
+    'MUST be in HINGLISH — Hindi written in Roman letters, like "Samajh gaya! Ye tool abhi Fixoraa ' +
+    'par nahi hai, aap neeche diye gaye Request button se ise maang sakte hain." — NOT in English ' +
+    'and NEVER in Devanagari script. Only use Devanagari when the visitor wrote in Devanagari. ' +
     'Reply with ONLY a JSON object: ' +
     '{"reply":"<one or two short friendly lines in the visitor\'s language>","picks":[<candidate numbers, best first, up to 6>]}. ' +
     'If none of the candidates genuinely fit, picks must be [] and the reply must honestly say this ' +
