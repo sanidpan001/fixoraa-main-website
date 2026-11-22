@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import { niches } from '../../lib/tools-data';
 import SubcatBrowser from '../../components/SubcatBrowser.astro';
+import ToolSearchBox from '../../components/ToolSearchBox.astro';
 
 const niche = niches.find((n) => n.slug === 'pdf-tools');
 const gridTools = niche.tools.slice(0, 100);
@@ -29,6 +30,8 @@ const faqJsonLd = {
     <p class="mt-4 text-lg text-neutral-600">{niche.tagline}</p>
     <p class="mt-2 text-neutral-500 text-sm">{niche.tools.length} free tools · No signup · No watermark</p>
   </div>
+
+  <div class="mb-10"><ToolSearchBox /></div>
 
   <SubcatBrowser category={niche.slug} />
 
