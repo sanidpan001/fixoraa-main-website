@@ -12,6 +12,7 @@
 // server-side pagination.
 import Layout from '../layouts/Layout.astro';
 import SubcatBrowser from './SubcatBrowser.astro';
+import ToolSearchBox from './ToolSearchBox.astro';
 import {
   niches,
   getSubcategories,
@@ -67,6 +68,10 @@ const pageDescription = `Browse ${total} free ${collection.kind === 'niche' ? co
       <a href={`/tools/${n.slug}/`} class={`chip ${collection.id === n.slug ? 'chip-active' : ''}`}>{n.name}</a>
     ))}
   </div>
+
+  {collection.kind !== 'niche' && (
+    <div class="mb-4"><ToolSearchBox /></div>
+  )}
 
   <!-- Results count -->
   <p id="shellCount" class="text-center text-sm text-neutral-500 mb-8">
