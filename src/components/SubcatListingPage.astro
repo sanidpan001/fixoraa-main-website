@@ -5,6 +5,7 @@
 // /tools listings, plus numbered pagination so every tool stays
 // reachable (and crawlable) through real <a href> links.
 import Layout from '../layouts/Layout.astro';
+import ToolSearchBox from './ToolSearchBox.astro';
 import {
   getSubcategories,
   isFresh,
@@ -94,6 +95,9 @@ const pageDescription = `Browse ${total} free ${subcat.name} tools on Fixoraa â€
       No signup, no watermarks.
     </p>
   </div>
+
+  <!-- Search (task-style, site-wide) -->
+  <div class="mb-8"><ToolSearchBox /></div>
 
   <!-- Sibling sub-category chips -->
   {siblings.length > 1 && (
