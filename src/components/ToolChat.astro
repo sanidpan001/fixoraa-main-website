@@ -1,0 +1,670 @@
+---
+// Fixoraa Tool Finder — AI chat widget (added 2026-11-22 on Sandipan's order).
+// Floating draggable icon, bottom-right. The visitor describes what they
+// need (any language); the Groq backend turns it into English search
+// phrases, and the site's own lazy search index (src/lib/search-client.js)
+// finds the matching tools. Falls back to direct keyword search if the
+// AI call fails or times out. No ads, no tracking beyond the site tracker.
+---
+
+<div id="fxchat" class="fxchat" aria-live="polite">
+  <button
+    id="fxchat-fab"
+    class="fxchat-fab"
+    type="button"
+    aria-label="Open the Fixoraa tool finder chat"
+    aria-haspopup="dialog"
+    aria-expanded="false"
+    title="Find a tool — drag to move"
+  >
+    <svg class="fxchat-fab-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path
+        d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path d="M8.5 10.5h.01M12 10.5h.01M15.5 10.5h.01" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" />
+    </svg>
+    <span class="fxchat-fab-dot" aria-hidden="true"></span>
+  </button>
+
+  <section
+    id="fxchat-panel"
+    class="fxchat-panel"
+    role="dialog"
+    aria-modal="false"
+    aria-label="Fixoraa tool finder"
+    hidden
+  >
+    <header class="fxchat-head">
+      <span class="fxchat-avatar" aria-hidden="true">∞</span>
+      <div class="fxchat-head-text">
+        <strong>Tool Finder</strong>
+        <span>Tell me your task — I will find the right tool from 10 lakh+ tools</span>
+      </div>
+      <button id="fxchat-close" class="fxchat-close" type="button" aria-label="Close chat">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      </button>
+    </header>
+
+    <div id="fxchat-msgs" class="fxchat-msgs" data-lenis-prevent></div>
+
+    <div id="fxchat-chips" class="fxchat-chips" data-lenis-prevent>
+      <button type="button" class="fxchat-chip">Merge two PDFs</button>
+      <button type="button" class="fxchat-chip">Calculate my loan EMI</button>
+      <button type="button" class="fxchat-chip">Compress an image</button>
+      <button type="button" class="fxchat-chip">Mujhe resume banana hai</button>
+      <button type="button" class="fxchat-chip">Convert JPG to PNG</button>
+      <button type="button" class="fxchat-chip">Count words in my text</button>
+    </div>
+
+    <form id="fxchat-form" class="fxchat-form">
+      <input
+        id="fxchat-input"
+        class="fxchat-input"
+        type="text"
+        autocomplete="off"
+        maxlength="300"
+        placeholder="Apni problem likho… e.g. PDF ko Word me badalna hai"
+        aria-label="Describe what you need a tool for"
+      />
+      <button id="fxchat-send" class="fxchat-send" type="submit" aria-label="Send">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </form>
+    <p class="fxchat-note">AI-powered search · Please do not share passwords or personal files here.</p>
+  </section>
+</div>
+
+<style>
+  .fxchat {
+    --fx-grad: linear-gradient(120deg, #ff5a5f 0%, #f43f8e 38%, #9333ea 70%, #2e6bff 100%);
+    font-family: inherit;
+  }
+  .fxchat-fab {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 90;
+    width: 58px;
+    height: 58px;
+    border: none;
+    border-radius: 50%;
+    background-image: var(--fx-grad);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+    box-shadow: 0 12px 30px -8px rgba(147, 51, 234, 0.55), 0 4px 12px rgba(10, 10, 10, 0.18);
+    touch-action: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .fxchat-fab:hover { transform: translateY(-2px) scale(1.04); }
+  .fxchat-fab:active { cursor: grabbing; }
+  .fxchat-fab-icon { width: 29px; height: 29px; pointer-events: none; }
+  .fxchat-fab-dot {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #22c55e;
+    border: 2px solid #fff;
+    pointer-events: none;
+    animation: fxchat-pulse 2.4s infinite;
+  }
+  @keyframes fxchat-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.5); }
+    70% { box-shadow: 0 0 0 7px rgba(34, 197, 94, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+  }
+  .fxchat-panel {
+    position: fixed;
+    right: 16px;
+    bottom: 90px;
+    z-index: 91;
+    width: min(384px, calc(100vw - 24px));
+    height: min(568px, calc(100dvh - 116px));
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    overflow: hidden;
+    background: rgb(var(--cream));
+    color: rgb(var(--ink));
+    border: 1px solid rgb(var(--ink) / 0.1);
+    box-shadow: 0 24px 60px -12px rgba(10, 10, 10, 0.35);
+    transform-origin: bottom right;
+    animation: fxchat-in 0.22s ease;
+  }
+  .fxchat-panel[hidden] { display: none; }
+  @keyframes fxchat-in {
+    from { opacity: 0; transform: translateY(14px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .fxchat-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 14px;
+    background-image: var(--fx-grad);
+    color: #fff;
+    flex: none;
+  }
+  .fxchat-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.22);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 800;
+    flex: none;
+  }
+  .fxchat-head-text { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
+  .fxchat-head-text strong { font-size: 15.5px; font-weight: 800; letter-spacing: -0.01em; }
+  .fxchat-head-text span { font-size: 11.5px; opacity: 0.92; }
+  .fxchat-close {
+    margin-left: auto;
+    flex: none;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.18);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .fxchat-close svg { width: 17px; height: 17px; }
+  .fxchat-msgs {
+    flex: 1;
+    overflow-y: auto;
+    padding: 14px 12px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    overscroll-behavior: contain;
+  }
+  .fxchat-msg {
+    max-width: 88%;
+    padding: 9px 12px;
+    border-radius: 15px;
+    font-size: 14px;
+    line-height: 1.45;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .fxchat-msg.bot {
+    align-self: flex-start;
+    background: rgb(var(--ink) / 0.06);
+    border-bottom-left-radius: 5px;
+  }
+  .fxchat-msg.user {
+    align-self: flex-end;
+    background-image: var(--fx-grad);
+    color: #fff;
+    border-bottom-right-radius: 5px;
+  }
+  .fxchat-msg.typing { display: inline-flex; gap: 5px; align-items: center; }
+  .fxchat-msg.typing i {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: rgb(var(--ink) / 0.45);
+    animation: fxchat-blink 1.1s infinite;
+  }
+  .fxchat-msg.typing i:nth-child(2) { animation-delay: 0.18s; }
+  .fxchat-msg.typing i:nth-child(3) { animation-delay: 0.36s; }
+  @keyframes fxchat-blink { 0%, 80%, 100% { opacity: 0.25; } 40% { opacity: 1; } }
+  .fxchat-results { display: flex; flex-direction: column; gap: 8px; align-self: stretch; }
+  .fxchat-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid rgb(var(--ink) / 0.1);
+    border-radius: 14px;
+    padding: 10px 12px;
+    background: rgb(var(--ink) / 0.03);
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+  .fxchat-card:hover { border-color: #9333ea; transform: translateY(-1px); }
+  .fxchat-card strong { display: block; font-size: 14px; font-weight: 700; line-height: 1.3; }
+  .fxchat-card span { display: block; font-size: 12px; opacity: 0.72; margin-top: 2px; line-height: 1.4; }
+  .fxchat-card em {
+    display: inline-block;
+    font-style: normal;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #9333ea;
+    margin-top: 6px;
+  }
+  .fxchat-catlinks { display: flex; flex-wrap: wrap; gap: 6px; align-self: stretch; }
+  .fxchat-catlinks a {
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid rgb(var(--ink) / 0.14);
+    padding: 5px 10px;
+    border-radius: 999px;
+  }
+  .fxchat-catlinks a:hover { border-color: #9333ea; color: #9333ea; }
+  .fxchat-chips {
+    flex: none;
+    display: flex;
+    gap: 6px;
+    padding: 4px 12px 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .fxchat-chips::-webkit-scrollbar { display: none; }
+  .fxchat-chip {
+    flex: none;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 11px;
+    border-radius: 999px;
+    border: 1px solid rgb(var(--ink) / 0.14);
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+  }
+  .fxchat-chip:hover { border-color: #f43f8e; color: #f43f8e; }
+  .fxchat-form {
+    flex: none;
+    display: flex;
+    gap: 8px;
+    padding: 10px 12px 6px;
+    border-top: 1px solid rgb(var(--ink) / 0.08);
+  }
+  .fxchat-input {
+    flex: 1;
+    min-width: 0;
+    border: 1px solid rgb(var(--ink) / 0.14);
+    background: transparent;
+    color: inherit;
+    border-radius: 999px;
+    padding: 10px 15px;
+    font-size: 14px;
+    outline: none;
+  }
+  .fxchat-input:focus { border-color: #9333ea; }
+  .fxchat-send {
+    flex: none;
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 50%;
+    background-image: var(--fx-grad);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .fxchat-send svg { width: 19px; height: 19px; margin-left: -2px; }
+  .fxchat-send:disabled { opacity: 0.55; cursor: wait; }
+  .fxchat-note {
+    flex: none;
+    text-align: center;
+    font-size: 10.5px;
+    opacity: 0.55;
+    padding: 0 12px 9px;
+    margin: 0;
+  }
+  @media (max-width: 480px) {
+    .fxchat-panel { right: 12px; left: 12px; width: auto; bottom: 88px; }
+    .fxchat-fab { right: 16px; bottom: 16px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fxchat-panel { animation: none; }
+    .fxchat-fab-dot { animation: none; }
+  }
+</style>
+
+<script>
+  import { loadToolIndex } from '../lib/search-client.js';
+
+  const BACKEND = 'https://fixoraa-universal-backend.onrender.com/api/groq';
+  const SYS_PROMPT =
+    'You help visitors of Fixoraa, a directory of 10 lakh+ free online tools, find the right tool. ' +
+    'The visitor describes a task or problem in any language (English, Hindi, Hinglish, etc.). ' +
+    'Reply with ONLY a JSON array of 3 to 5 short English search phrases that would match tool names ' +
+    'in the directory (for example: ["merge pdf", "combine pdf files", "pdf merger"]). ' +
+    'No explanations, no markdown, only the JSON array.';
+
+  const fab = document.getElementById('fxchat-fab');
+  const panel = document.getElementById('fxchat-panel');
+  const closeBtn = document.getElementById('fxchat-close');
+  const msgs = document.getElementById('fxchat-msgs');
+  const form = document.getElementById('fxchat-form');
+  const input = document.getElementById('fxchat-input');
+  const sendBtn = document.getElementById('fxchat-send');
+  const chips = document.getElementById('fxchat-chips');
+
+  let greeted = false;
+  let busy = false;
+  let indexReady = false;
+  let lastQuery = null;
+
+  /* ---------- panel open/close ---------- */
+  function openPanel() {
+    panel.hidden = false;
+    fab.setAttribute('aria-expanded', 'true');
+    if (!greeted) {
+      greeted = true;
+      addBot(
+        'Hi! Main Fixoraa ka Tool Finder hoon. Apni problem ya kaam batao — jaise "do PDF jodne hain" ya "photo ka size kam karna hai" — main 10 lakh+ tools me se sahi tool dhundh dunga.'
+      );
+    }
+    loadToolIndex(() => {}).then(() => {
+      indexReady = true;
+      if (lastQuery) renderResults(lastQuery, true);
+    });
+    setTimeout(() => input.focus(), 60);
+  }
+  function closePanel() {
+    panel.hidden = true;
+    fab.setAttribute('aria-expanded', 'false');
+  }
+  closeBtn.addEventListener('click', closePanel);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !panel.hidden) closePanel();
+  });
+
+  /* ---------- draggable FAB (click = open, drag = move) ---------- */
+  (function makeDraggable() {
+    let startX = 0, startY = 0, fabX = 0, fabY = 0, dragging = false, moved = false;
+    try {
+      const saved = JSON.parse(localStorage.getItem('fxchat-pos') || 'null');
+      if (saved && typeof saved.x === 'number' && typeof saved.y === 'number') {
+        placeFab(saved.x, saved.y);
+      }
+    } catch (e) {}
+    function placeFab(x, y) {
+      const maxX = window.innerWidth - fab.offsetWidth - 6;
+      const maxY = window.innerHeight - fab.offsetHeight - 6;
+      const cx = Math.max(6, Math.min(x, maxX));
+      const cy = Math.max(6, Math.min(y, maxY));
+      fab.style.left = cx + 'px';
+      fab.style.top = cy + 'px';
+      fab.style.right = 'auto';
+      fab.style.bottom = 'auto';
+    }
+    fab.addEventListener('pointerdown', (e) => {
+      dragging = true;
+      moved = false;
+      const r = fab.getBoundingClientRect();
+      startX = e.clientX;
+      startY = e.clientY;
+      fabX = r.left;
+      fabY = r.top;
+      fab.setPointerCapture(e.pointerId);
+    });
+    fab.addEventListener('pointermove', (e) => {
+      if (!dragging) return;
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+      if (Math.abs(dx) + Math.abs(dy) > 7) moved = true;
+      if (moved) placeFab(fabX + dx, fabY + dy);
+    });
+    fab.addEventListener('pointerup', () => {
+      if (!dragging) return;
+      dragging = false;
+      if (moved) {
+        const r = fab.getBoundingClientRect();
+        try {
+          localStorage.setItem('fxchat-pos', JSON.stringify({ x: r.left, y: r.top }));
+        } catch (e) {}
+      } else {
+        panel.hidden ? openPanel() : closePanel();
+      }
+    });
+    window.addEventListener('resize', () => {
+      if (fab.style.left) {
+        const r = fab.getBoundingClientRect();
+        placeFab(r.left, r.top);
+      }
+    });
+  })();
+
+  /* ---------- message rendering ---------- */
+  function scrollDown() {
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+  function addUser(text) {
+    const d = document.createElement('div');
+    d.className = 'fxchat-msg user';
+    d.textContent = text;
+    msgs.appendChild(d);
+    scrollDown();
+  }
+  function addBot(text) {
+    const d = document.createElement('div');
+    d.className = 'fxchat-msg bot';
+    d.textContent = text;
+    msgs.appendChild(d);
+    scrollDown();
+    return d;
+  }
+  function addTyping() {
+    const d = document.createElement('div');
+    d.className = 'fxchat-msg bot typing';
+    d.innerHTML = '<i></i><i></i><i></i>';
+    d.setAttribute('aria-label', 'Searching tools');
+    msgs.appendChild(d);
+    scrollDown();
+    return d;
+  }
+  function esc(s) {
+    return String(s || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+  function renderCards(tools) {
+    const wrap = document.createElement('div');
+    wrap.className = 'fxchat-results';
+    wrap.innerHTML = tools
+      .map(
+        (t) =>
+          '<a class="fxchat-card" href="' +
+          esc(t.url) +
+          '"><strong>' +
+          esc(t.name) +
+          '</strong>' +
+          (t.blurb ? '<span>' + esc(t.blurb) + '</span>' : '') +
+          '<em>' +
+          esc(t.subcategory || t.niche || 'Tool') +
+          ' · Open tool →</em></a>'
+      )
+      .join('');
+    msgs.appendChild(wrap);
+    scrollDown();
+    return wrap;
+  }
+  function renderCategoryLinks() {
+    const cats = [
+      ['PDF Tools', '/categories/pdf-tools/'],
+      ['Image Tools', '/categories/image-tools/'],
+      ['Finance', '/categories/finance-calculators/'],
+      ['Converters', '/categories/converters/'],
+      ['Text Tools', '/categories/text-tools/'],
+      ['All Tools', '/tools'],
+    ];
+    const wrap = document.createElement('div');
+    wrap.className = 'fxchat-catlinks';
+    wrap.innerHTML = cats
+      .map((c) => '<a href="' + c[1] + '">' + c[0] + '</a>')
+      .join('');
+    msgs.appendChild(wrap);
+    scrollDown();
+  }
+
+  /* ---------- search + ranking ---------- */
+  const STOP = new Set(
+    'the a an to of for me my i want need hai hain karna karo mujhe mera meri ek do please tool tools online free ka ki ke se aur or and in on ko'.split(' ')
+  );
+  function tokensOf(text) {
+    return (text.toLowerCase().match(/[a-z0-9]+/g) || []).filter(
+      (w) => w.length >= 3 && !STOP.has(w)
+    );
+  }
+  function rankTools(tools, phrases, rawText) {
+    const toks = tokensOf(rawText);
+    const scored = [];
+    for (const t of tools) {
+      const name = t.name.toLowerCase();
+      const blurb = (t.blurb || '').toLowerCase();
+      const sub = (t.subcategory || '').toLowerCase();
+      const niche = (t.niche || '').toLowerCase();
+      let s = 0;
+      for (const p of phrases) {
+        if (!p) continue;
+        if (name.includes(p)) s += 14;
+        if (sub.includes(p)) s += 7;
+        if (blurb.includes(p)) s += 4;
+        if (niche.includes(p)) s += 3;
+      }
+      for (const w of toks) {
+        if (name.includes(w)) s += 3;
+        if (sub.includes(w)) s += 2;
+        if (blurb.includes(w)) s += 1;
+      }
+      if (s > 0) scored.push([s, t]);
+    }
+    scored.sort((a, b) => b[0] - a[0]);
+    const seen = new Set();
+    const out = [];
+    for (const [, t] of scored) {
+      if (seen.has(t.slug)) continue;
+      seen.add(t.slug);
+      out.push(t);
+      if (out.length >= 6) break;
+    }
+    return out;
+  }
+
+  async function aiPhrases(text) {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 12000);
+    try {
+      const res = await fetch(BACKEND, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        signal: ctrl.signal,
+        body: JSON.stringify({
+          model: 'openai/gpt-oss-20b',
+          messages: [
+            { role: 'system', content: SYS_PROMPT },
+            { role: 'user', content: text },
+          ],
+          max_tokens: 4000,
+          reasoning_effort: 'low',
+        }),
+      });
+      if (!res.ok) throw new Error('backend ' + res.status);
+      const data = await res.json();
+      const content =
+        data && data.choices && data.choices[0] && data.choices[0].message
+          ? data.choices[0].message.content || ''
+          : '';
+      const start = content.indexOf('[');
+      const end = content.lastIndexOf(']');
+      if (start < 0 || end <= start) return null;
+      let arr = null;
+      try {
+        arr = JSON.parse(content.slice(start, end + 1));
+      } catch (e) {
+        arr = (content.slice(start, end + 1).match(/"([^"]+)"/g) || []).map((q) =>
+          q.replace(/"/g, '')
+        );
+      }
+      if (!Array.isArray(arr)) return null;
+      const phrases = arr
+        .map((x) => String(x).toLowerCase().trim())
+        .filter((x) => x.length >= 2 && x.length <= 60)
+        .slice(0, 5);
+      return phrases.length ? phrases : null;
+    } catch (e) {
+      return null;
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
+  let currentResultsEl = null;
+  async function renderResults(query, refreshOnly) {
+    const tools = await loadToolIndex(() => {});
+    const phrases = query.phrases || [];
+    const found = rankTools(tools, phrases, query.text);
+    if (refreshOnly) {
+      // Index finished loading after an early render — upgrade silently
+      // only if the new top result differs.
+      if (currentResultsEl && found.length) {
+        const first = currentResultsEl.querySelector('a');
+        if (first && first.getAttribute('href') !== found[0].url) {
+          const fresh = renderCards(found);
+          currentResultsEl.replaceWith(fresh);
+          currentResultsEl = fresh;
+        }
+      }
+      return found;
+    }
+    return found;
+  }
+
+  /* ---------- send flow ---------- */
+  async function handleSend(text) {
+    if (busy || !text) return;
+    busy = true;
+    sendBtn.disabled = true;
+    addUser(text);
+    const typing = addTyping();
+    loadToolIndex(() => {}); // warm the index in parallel with the AI call
+    const phrases = await aiPhrases(text);
+    const query = { text, phrases: phrases || [] };
+    lastQuery = query;
+    const found = await renderResults(query, false);
+    typing.remove();
+    if (found.length) {
+      addBot(
+        phrases
+          ? 'Samajh gaya! Ye rahe sabse sahi tools:'
+          : 'Ye rahe matching tools:'
+      );
+      currentResultsEl = renderCards(found);
+      addBot('Aur kuch chahiye to batao — main aur dhundh dunga.');
+    } else {
+      addBot(
+        'Iske liye exact tool nahi mila. Thoda alag shabdon me try karo — jaise kaam ka naam likho ("EMI calculator", "PDF compress"). Ya category se browse karo:'
+      );
+      renderCategoryLinks();
+    }
+    busy = false;
+    sendBtn.disabled = false;
+    input.focus();
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const text = input.value.trim();
+    if (!text) return;
+    input.value = '';
+    handleSend(text);
+  });
+  chips.addEventListener('click', (e) => {
+    const b = e.target.closest('.fxchat-chip');
+    if (b) handleSend(b.textContent.trim());
+  });
+</script>
