@@ -5,6 +5,7 @@
 // /categories/<category>/<subcategory>/. Data comes from the merged
 // build-time dataset (tools.ts + src/data/shards/*.json).
 import { getSubcategories } from '../lib/tools-data';
+import ToolSearchBox from './ToolSearchBox.astro';
 
 interface Props {
   category: string; // niche slug of the parent category
@@ -17,6 +18,7 @@ const subs = getSubcategories().filter((s) => s.categorySlug === category);
 
 {(subs.length > 1 || (always && subs.length > 0)) && (
   <section class="my-10">
+    <div class="mb-8"><ToolSearchBox /></div>
     <h2 class="text-2xl font-black text-neutral-900">Browse by sub-category</h2>
     <p class="mt-2 text-neutral-600">
       This category is organised into {subs.length} sub-categories — pick the
