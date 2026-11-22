@@ -265,6 +265,31 @@
   .fxchat-msg.typing i:nth-child(2) { animation-delay: 0.18s; }
   .fxchat-msg.typing i:nth-child(3) { animation-delay: 0.36s; }
   @keyframes fxchat-blink { 0%, 80%, 100% { opacity: 0.25; } 40% { opacity: 1; } }
+  .fxchat-reqwrap {
+    display: flex;
+    margin: 2px 0 10px;
+  }
+  .fxchat-reqbtn {
+    border: 1.5px solid #9333ea;
+    cursor: pointer;
+    background: var(--fx-bot-bg);
+    color: var(--fx-bot-ink);
+    font-weight: 800;
+    font-size: 13.5px;
+    padding: 10px 16px;
+    border-radius: 12px;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .fxchat-reqbtn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px -8px rgba(147, 51, 234, 0.5);
+  }
+  .fxchat-reqbtn:disabled {
+    opacity: 0.6;
+    cursor: default;
+    transform: none;
+    box-shadow: none;
+  }
   .fxchat-results { display: flex; flex-direction: column; gap: 8px; align-self: stretch; }
   .fxchat-card {
     display: block;
@@ -565,6 +590,84 @@
     scrollDown();
   }
 
+  /* ---------- request-a-tool (Sandipan, 2026-11-22) ----------
+     When no tool genuinely fits, the visitor can request it; the
+     request lands in the same Formspree inbox as the contact form.
+     Button + confirmation follow the visitor's language (sniffed). */
+  const REQ_ENDPOINT = 'https://formspree.io/f/mgaoewnl';
+  function sniffLang(text) {
+    if (/[\u0900-\u097F]/.test(text)) return 'hi';
+    const t = ' ' + String(text).toLowerCase().replace(/[^a-z\s]/g, ' ') + ' ';
+    if (/( hai| hain| mujhe| mera| meri| karna| karo| chahiye| wala| wali| batao| dikhao| kaise| kahan| aur| nahi| bhi | liye| ek | do )/.test(t)) return 'hinglish';
+    return 'en';
+  }
+  const REQ_TEXT = {
+    en: {
+      btn: '🛠 Request this tool',
+      busy: 'Sending…',
+      ok: 'Done! Your request has been noted. We build requested tools, so do check back soon — meanwhile, anything else I can find for you?',
+      fail: 'Sorry, the request could not be sent. Please try again, or use the contact page on the site.',
+    },
+    hinglish: {
+      btn: '🛠 Ye tool request karo',
+      busy: 'Bhej raha hoon…',
+      ok: 'Ho gaya! Tumhari request note kar li hai. Hum requested tools banate hain, kuch samay baad phir check karna — tab tak, kuch aur dhoondoon tumhare liye?',
+      fail: 'Sorry, request nahi bhej paya. Phir se try karo, ya site ke contact page se bhej do.',
+    },
+    hi: {
+      btn: '🛠 यह टूल अनुरोध करें',
+      busy: 'भेज रहा हूँ…',
+      ok: 'हो गया! आपका अनुरोध दर्ज कर लिया है। हम अनुरोध किए गए टूल बनाते हैं, कुछ समय बाद फिर देखें — तब तक, कुछ और खोजूँ आपके लिए?',
+      fail: 'क्षमा करें, अनुरोध नहीं भेज पाया। फिर से प्रयास करें, या साइट के संपर्क पेज से भेजें।',
+    },
+  };
+  const FOLLOW_TEXT = {
+    en: 'Need anything else? Just tell me — I will search again.',
+    hinglish: 'Kuch aur chahiye? Bas bata do — main phir dhoond dunga.',
+    hi: 'कुछ और चाहिए? बस बता दीजिए — मैं फिर खोज दूँगा।',
+  };
+  const GOT_TEXT = {
+    en: 'Got it! Here are the best matching tools:',
+    hinglish: 'Samajh gaya! Tumhare liye sabse sahi tools ye rahe:',
+    hi: 'समझ गया! आपके लिए सबसे सही टूल ये रहे:',
+  };
+  function renderRequestButton(userText, lang) {
+    const T = REQ_TEXT[lang] || REQ_TEXT.en;
+    const wrap = document.createElement('div');
+    wrap.className = 'fxchat-reqwrap';
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'fxchat-reqbtn';
+    btn.textContent = T.btn;
+    btn.addEventListener('click', async () => {
+      btn.disabled = true;
+      btn.textContent = T.busy;
+      try {
+        const resp = await fetch(REQ_ENDPOINT, {
+          method: 'POST',
+          headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            _subject: 'Tool request from Fixoraa chat',
+            source: 'Fixoraa Tool Finder chat',
+            requested_tool: userText,
+            language: lang,
+            page: location.href,
+          }),
+        });
+        if (!resp.ok) throw new Error('send failed');
+        wrap.remove();
+        addBot(T.ok);
+      } catch (e) {
+        btn.disabled = false;
+        btn.textContent = T.btn;
+        addBot(T.fail);
+      }
+    });
+    wrap.appendChild(btn);
+    msgs.appendChild(wrap);
+    scrollDown();
+  }
+
   /* ---------- search + ranking (v2: word-level matching) ---------- */
   const STOP = new Set(
     'the a an to of for me my i want need hai hain karna karo karni mujhe mera meri ek do please tool tools online free ka ki ke se aur or and in on ko wala wali liye batao dikhao chahiye kahan kaise bhi'.split(' ')
@@ -743,9 +846,16 @@
     'You are the Fixoraa Tool Finder. A visitor described a task. From the candidate tool list, ' +
     'pick the tools that GENUINELY do that task — read the descriptions carefully: many candidates ' +
     'are only calculators ABOUT a topic, not tools that do it; prefer real utility tools over ' +
-    '"calculation time / cost for professionals" calculators. Reply with ONLY a JSON object: ' +
-    '{"reply":"<one short friendly line in English>","picks":[<candidate numbers, best first, up to 6>]}. ' +
-    'If none of the candidates genuinely fit, picks must be [].';
+    '"calculation time / cost for professionals" calculators. ' +
+    'LANGUAGE RULE: write the reply in the SAME language and script as the visitor\'s message — ' +
+    'English message → English reply; Hinglish (Hindi written in Roman letters) → Hinglish reply; ' +
+    'Hindi in Devanagari script → Hindi (Devanagari) reply; any other language → that language. ' +
+    'Keep tool names in English exactly as given. ' +
+    'Reply with ONLY a JSON object: ' +
+    '{"reply":"<one or two short friendly lines in the visitor\'s language>","picks":[<candidate numbers, best first, up to 6>]}. ' +
+    'If none of the candidates genuinely fit, picks must be [] and the reply must honestly say this ' +
+    'exact tool is not on Fixoraa yet AND explain that the visitor can tap the "Request this tool" ' +
+    'button below to request it — requested tools get built.';
   async function aiPick(text, cands) {
     try {
       const list = cands
@@ -768,7 +878,7 @@
         if (picks.length >= 6) break;
       }
       return {
-        reply: typeof obj.reply === 'string' && obj.reply.trim() ? obj.reply.trim().slice(0, 220) : null,
+        reply: typeof obj.reply === 'string' && obj.reply.trim() ? obj.reply.trim().slice(0, 320) : null,
         picks,
       };
     } catch (e) {
@@ -782,6 +892,7 @@
     busy = true;
     sendBtn.disabled = true;
     addUser(text);
+    const lang = sniffLang(text);
     const typing = addTyping();
     try {
       const toolsPromise = loadToolIndex(() => {}); // load in parallel with the AI call
@@ -794,6 +905,7 @@
           'Sorry, I could not find a tool for that. Try describing the task with different words — for example "EMI calculator" or "compress PDF" — or browse by category:'
         );
         renderCategoryLinks();
+        renderRequestButton(text, lang);
         return;
       }
       const nameCands = cands.slice(0, nameCount);
@@ -801,20 +913,27 @@
       typing.remove();
       if (pick && pick.picks.length) {
         if (pick.reply) addBot(pick.reply);
-        else addBot('Got it! Here are the best tools for you:');
+        else addBot(GOT_TEXT[lang]);
         renderCards(pick.picks.map((i) => cands[i]));
-        addBot('Need anything else? Just tell me — I will search again.');
+        addBot(FOLLOW_TEXT[lang]);
       } else if (pick && !pick.picks.length && nameCands.length) {
         // The AI says no candidate truly does this task — be honest,
         // but still show the closest name matches.
-        addBot('I could not find an exact tool for that yet. These are the closest matches:');
+        if (pick.reply) addBot(pick.reply);
+        else addBot('I could not find an exact tool for that yet. These are the closest matches:');
         renderCards(nameCands.slice(0, 4));
+        renderRequestButton(text, lang);
         addBot('Or browse all tools by category:');
         renderCategoryLinks();
-      } else {
-        addBot('Got it! Here are the best matching tools:');
+      } else if (nameCands.length) {
+        addBot(GOT_TEXT[lang]);
         renderCards(nameCands.slice(0, 6));
-        addBot('Need anything else? Just tell me — I will search again.');
+        addBot(FOLLOW_TEXT[lang]);
+      } else {
+        addBot('I could not find an exact tool for that yet.');
+        renderRequestButton(text, lang);
+        addBot('Or browse all tools by category:');
+        renderCategoryLinks();
       }
     } catch (e) {
       typing.remove();
