@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import ToolChat from '../components/ToolChat.astro';
 
 interface Props {
   title: string;
@@ -293,5 +294,6 @@ const footerLinks = [
       // Sync toggle state with the theme the head script applied pre-paint
       setTheme(document.documentElement.getAttribute('data-theme') === 'dark', false);
     </script>
+      <ToolChat />
   </body>
 </html>
