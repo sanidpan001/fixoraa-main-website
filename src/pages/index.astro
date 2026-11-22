@@ -778,7 +778,7 @@ const pageDescription =
      (it made the homepage 12 MB). The index lives in static JSON shards
      under /data/shards/ and is fetched lazily on first search use. -->
 <script>
-  import { loadToolIndex, toolMatches } from '../lib/search-client.js';
+  import { loadToolIndex, searchTools } from '../lib/search-client.js';
 
   const searchInput = document.getElementById('tool-search');
   const searchResults = document.getElementById('search-results');
@@ -831,10 +831,7 @@ const pageDescription =
       hideResults();
       return;
     }
-    const matches = tools
-      .filter((t) => toolMatches(t, q))
-      .sort((a, b) => a.ord - b.ord)
-      .slice(0, 8);
+    const matches = searchTools(tools, searchInput.value, 8).list;
     renderResults(matches, searchInput.value.trim());
   }
 
