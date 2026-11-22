@@ -32,6 +32,8 @@
     <span class="fxchat-fab-dot" aria-hidden="true"></span>
   </button>
 
+  <button id="fxchat-hint" class="fxchat-hint" type="button" aria-label="Find your tool here — open the tool finder chat">Find your tool here</button>
+
   <section
     id="fxchat-panel"
     class="fxchat-panel"
@@ -118,6 +120,32 @@
   }
   .fxchat-fab:hover { transform: translateY(-2px) scale(1.04); }
   .fxchat-fab:active { cursor: grabbing; }
+  /* Blinking "Find your tool here" pill above the FAB (Sandipan's
+     idea, 2026-11-22): tells visitors what the button does. Soft
+     blink, never a hard strobe; hides for good once the chat has
+     been opened (localStorage) so it never nags. */
+  .fxchat-hint {
+    position: fixed;
+    right: 20px;
+    bottom: 90px;
+    z-index: 90;
+    border: none;
+    cursor: pointer;
+    padding: 9px 15px;
+    border-radius: 999px;
+    background-image: var(--fx-grad);
+    color: #fff;
+    font-size: 13.5px;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    box-shadow: 0 10px 26px -8px rgba(147, 51, 234, 0.55);
+    animation: fxhint-blink 1.5s ease-in-out infinite;
+  }
+  @keyframes fxhint-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .fxchat-hint-hide { display: none; }
   .fxchat-fab-icon { width: 29px; height: 29px; pointer-events: none; }
   .fxchat-fab-dot {
     position: absolute;
@@ -338,10 +366,12 @@
   @media (max-width: 480px) {
     .fxchat-panel { right: 12px; left: 12px; width: auto; bottom: 88px; }
     .fxchat-fab { right: 16px; bottom: 16px; }
+    .fxchat-hint { right: 16px; bottom: 86px; }
   }
   @media (prefers-reduced-motion: reduce) {
     .fxchat-panel { animation: none; }
     .fxchat-fab-dot { animation: none; }
+    .fxchat-hint { animation: none; }
   }
 </style>
 
@@ -365,11 +395,25 @@
   const sendBtn = document.getElementById('fxchat-send');
   const chips = document.getElementById('fxchat-chips');
 
+  /* ---------- blinking hint pill ---------- */
+  const hint = document.getElementById('fxchat-hint');
+  function hideHint() {
+    if (!hint || hint.classList.contains('fxchat-hint-hide')) return;
+    hint.classList.add('fxchat-hint-hide');
+    try { localStorage.setItem('fxchat-hint-seen', '1'); } catch (e) {}
+  }
+  if (hint) {
+    try { if (localStorage.getItem('fxchat-hint-seen')) hint.classList.add('fxchat-hint-hide'); } catch (e) {}
+    hint.addEventListener('click', () => { hideHint(); openPanel(); });
+  }
+
+
   let greeted = false;
   let busy = false;
 
   /* ---------- panel open/close ---------- */
   function openPanel() {
+    hideHint();
     panel.hidden = false;
     fab.setAttribute('aria-expanded', 'true');
     if (!greeted) {
@@ -410,6 +454,7 @@
       fab.style.bottom = 'auto';
     }
     fab.addEventListener('pointerdown', (e) => {
+      hideHint();
       dragging = true;
       moved = false;
       const r = fab.getBoundingClientRect();
