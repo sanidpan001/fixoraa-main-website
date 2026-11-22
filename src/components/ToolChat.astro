@@ -80,7 +80,9 @@
   </section>
 </div>
 
-<style>
+<style is:global>
+  /* is:global is required: chat messages and result cards are created
+     by JS at runtime, so Astro's scoped styles would never reach them. */
   .fxchat {
     --fx-grad: linear-gradient(120deg, #ff5a5f 0%, #f43f8e 38%, #9333ea 70%, #2e6bff 100%);
     /* AI (bot) messages get their own clearly different colour from the
