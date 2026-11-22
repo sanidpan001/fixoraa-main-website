@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import { niches } from '../../lib/tools-data';
 import SubcatBrowser from '../../components/SubcatBrowser.astro';
+import ToolSearchBox from '../../components/ToolSearchBox.astro';
 
 const niche = niches.find((n) => n.slug === 'text-tools')!;
 const gridTools = niche.tools.slice(0, 100);
@@ -28,6 +29,8 @@ const faqJsonLd = {
     <h1 class="text-4xl sm:text-5xl font-black tracking-tight text-neutral-900">Free <span class="bg-gradient-to-r from-[#FF5A5F] via-[#F43F8E] to-[#9333EA] bg-clip-text text-transparent">text tools</span> for cleaner, sharper writing</h1>
     <p class="mt-4 text-neutral-500">{niche.tagline} — {niche.tools.length} free tools · No signup · No watermark</p>
   </div>
+
+  <div class="mb-10"><ToolSearchBox /></div>
 
   <SubcatBrowser category={niche.slug} />
 
