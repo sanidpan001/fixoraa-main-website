@@ -375,6 +375,9 @@ export const niches: Niche[] = [
       { name: "PDFSummarizer", slug: "pdfsummarizer", url: "https://pdf.fixoraa.tech/pdfsummarizer/", blurb: "Summarize a PDF with AI — free, no credits" },
       { name: "TranslatePDF", slug: "translatepdf", url: "https://pdf.fixoraa.tech/translatepdf/", blurb: "Translate a PDF into Hindi and 9 more languages — free" },
       { name: "HTMLtoPDF", slug: "htmltopdf", url: "https://pdf.fixoraa.tech/htmltopdf/", blurb: "Convert HTML code to a PDF — free, in your browser" },
+      { name: "ProtectPDF", slug: "protectpdf", url: "https://pdf.fixoraa.tech/protectpdf/", blurb: "Password-protect a PDF with AES-256 encryption — free" },
+      { name: "UnlockPDF", slug: "unlockpdf", url: "https://pdf.fixoraa.tech/unlockpdf/", blurb: "Remove a known password from a PDF — free" },
+      { name: "RepairPDF", slug: "repairpdf", url: "https://pdf.fixoraa.tech/repairpdf/", blurb: "Repair a damaged or corrupt PDF — free" },
       { name: "WordBridge", slug: "wordbridge", url: "https://pdf.fixoraa.tech/wordbridge/", blurb: "Convert PDF to an editable Word document" },
       { name: "TwinPeek", slug: "twinpeek", url: "https://pdf.fixoraa.tech/twinpeek/", blurb: "Compare two PDFs & highlight what changed" },
       { name: "TrimPage", slug: "trimpage", url: "https://pdf.fixoraa.tech/trimpage/", blurb: "Crop PDF pages & trim white margins" },
@@ -1874,6 +1877,9 @@ export const totalTools: number = allTools.length;
 //  than ~10 days can be deleted on any later edit; they do nothing then.
 // ───────────────────────────────────────────────────────────────────────
 export const newTools: Record<string, string> = {
+  "protectpdf": "2026-11-23",
+  "unlockpdf": "2026-11-23",
+  "repairpdf": "2026-11-23",
   "comparepdf": "2026-11-23",
   "pdfsummarizer": "2026-11-23",
   "translatepdf": "2026-11-23",
