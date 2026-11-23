@@ -383,6 +383,8 @@ export const niches: Niche[] = [
       { name: "PDFtoPPT", slug: "pdftoppt", url: "https://pdf.fixoraa.tech/pdftoppt/", blurb: "Convert PDF to PowerPoint slides — free" },
       { name: "WordtoPDF", slug: "wordtopdf", url: "https://pdf.fixoraa.tech/wordtopdf/", blurb: "Convert Word documents to PDF — free, no upload" },
       { name: "ExceltoPDF", slug: "exceltopdf", url: "https://pdf.fixoraa.tech/exceltopdf/", blurb: "Convert Excel sheets to PDF — free, no upload" },
+      { name: "PPTtoPDF", slug: "ppttopdf", url: "https://pdf.fixoraa.tech/ppttopdf/", blurb: "Convert PowerPoint presentations to PDF — free" },
+      { name: "ScantoPDF", slug: "scantopdf", url: "https://pdf.fixoraa.tech/scantopdf/", blurb: "Scan documents to PDF with your camera — free" },
       { name: "WordBridge", slug: "wordbridge", url: "https://pdf.fixoraa.tech/wordbridge/", blurb: "Convert PDF to an editable Word document" },
       { name: "TwinPeek", slug: "twinpeek", url: "https://pdf.fixoraa.tech/twinpeek/", blurb: "Compare two PDFs & highlight what changed" },
       { name: "TrimPage", slug: "trimpage", url: "https://pdf.fixoraa.tech/trimpage/", blurb: "Crop PDF pages & trim white margins" },
@@ -1882,6 +1884,8 @@ export const totalTools: number = allTools.length;
 //  than ~10 days can be deleted on any later edit; they do nothing then.
 // ───────────────────────────────────────────────────────────────────────
 export const newTools: Record<string, string> = {
+  "ppttopdf": "2026-11-23",
+  "scantopdf": "2026-11-23",
   "pdftoexcel": "2026-11-23",
   "pdftoword": "2026-11-23",
   "pdftoppt": "2026-11-23",
