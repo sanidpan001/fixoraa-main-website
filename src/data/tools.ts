@@ -356,12 +356,18 @@ export const niches: Niche[] = [
     slug: "pdf-tools",
     tagline: "Merge, split and convert PDF files for free",
     tools: [
+      { name: "MergePDF", slug: "mergepdf", url: "https://pdf.fixoraa.tech/mergepdf/", blurb: "Merge multiple PDFs into one — unlimited files, no upload, no signup" },
+      { name: "CompressPDF", slug: "compresspdf", url: "https://pdf.fixoraa.tech/compresspdf/", blurb: "Compress PDF size online — up to 95% smaller, files never leave your device" },
+      { name: "JPGtoPDF", slug: "jpgtopdf", url: "https://pdf.fixoraa.tech/jpgtopdf/", blurb: "Convert JPG, PNG and WebP images to one PDF — unlimited and free" },
+      { name: "SplitPDF", slug: "splitpdf", url: "https://pdf.fixoraa.tech/splitpdf/", blurb: "Split a PDF by page ranges or extract pages — no upload needed" },
+      { name: "OrganizePDF", slug: "organizepdf", url: "https://pdf.fixoraa.tech/organizepdf/", blurb: "Rearrange, delete and add PDF pages with visual thumbnails" },
+      { name: "RotatePDF", slug: "rotatepdf", url: "https://pdf.fixoraa.tech/rotatepdf/", blurb: "Rotate PDF pages permanently — single files or whole batches" },
+      { name: "PageNumbers", slug: "pagenumbers", url: "https://pdf.fixoraa.tech/pagenumbers/", blurb: "Add page numbers to a PDF in any position and format" },
       { name: "PageToPix", slug: "pagetopix", url: "https://pdf.fixoraa.tech/pagetopix/", blurb: "Convert PDF pages to PNG or JPG in your browser" },
       { name: "DocBind", slug: "docbind", url: "https://pdf.fixoraa.tech/docbind/", blurb: "Merge, split and organize PDF files online" },
       { name: "PDFNinja", slug: "pdfninja", url: "https://pdf.fixoraa.tech/pdfninja/", blurb: "All-in-one PDF converter and editor toolkit" },
       { name: "PageMark", slug: "pagemark", url: "https://pdf.fixoraa.tech/pagemark/", blurb: "Add text or image watermarks to PDFs" },
       { name: "DocuMeta", slug: "documeta", url: "https://pdf.fixoraa.tech/documeta/", blurb: "View and edit PDF info and metadata" },
-      { name: "ArrangePDF", slug: "organizepdf", url: "https://pdf.fixoraa.tech/organizepdf/", blurb: "Reorder PDF pages into any order" },
       { name: "BlankGone", slug: "blankgone", url: "https://pdf.fixoraa.tech/blankgone/", blurb: "Detect & remove blank PDF pages" },
       { name: "PDF2Web", slug: "pdftohtml", url: "https://pdf.fixoraa.tech/pdftohtml/", blurb: "Convert a PDF to a single HTML file" },
       { name: "MarkPeel", slug: "pdftomd", url: "https://pdf.fixoraa.tech/pdftomd/", blurb: "Convert PDF text to Markdown" },
@@ -1908,6 +1914,13 @@ export const totalTools: number = allTools.length;
 //  than ~10 days can be deleted on any later edit; they do nothing then.
 // ───────────────────────────────────────────────────────────────────────
 export const newTools: Record<string, string> = {
+  "mergepdf": "2026-11-23",
+  "compresspdf": "2026-11-23",
+  "jpgtopdf": "2026-11-23",
+  "splitpdf": "2026-11-23",
+  "organizepdf": "2026-11-23",
+  "rotatepdf": "2026-11-23",
+  "pagenumbers": "2026-11-23",
   "airportpark": "2026-10-28",
   "atticvent": "2026-10-28",
   "backpackfit": "2026-10-28",
