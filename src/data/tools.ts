@@ -379,6 +379,7 @@ export const niches: Niche[] = [
       { name: "UnlockPDF", slug: "unlockpdf", url: "https://pdf.fixoraa.tech/unlockpdf/", blurb: "Remove a known password from a PDF — free" },
       { name: "RepairPDF", slug: "repairpdf", url: "https://pdf.fixoraa.tech/repairpdf/", blurb: "Repair a damaged or corrupt PDF — free" },
       { name: "PDFtoWord", slug: "pdftoword", url: "https://pdf.fixoraa.tech/pdftoword/", blurb: "Convert PDF to an editable Word document — free" },
+      { name: "PDFtoExcel", slug: "pdftoexcel", url: "https://pdf.fixoraa.tech/pdftoexcel/", blurb: "Convert PDF tables to Excel sheets — free" },
       { name: "PDFtoPPT", slug: "pdftoppt", url: "https://pdf.fixoraa.tech/pdftoppt/", blurb: "Convert PDF to PowerPoint slides — free" },
       { name: "WordtoPDF", slug: "wordtopdf", url: "https://pdf.fixoraa.tech/wordtopdf/", blurb: "Convert Word documents to PDF — free, no upload" },
       { name: "ExceltoPDF", slug: "exceltopdf", url: "https://pdf.fixoraa.tech/exceltopdf/", blurb: "Convert Excel sheets to PDF — free, no upload" },
@@ -1881,6 +1882,7 @@ export const totalTools: number = allTools.length;
 //  than ~10 days can be deleted on any later edit; they do nothing then.
 // ───────────────────────────────────────────────────────────────────────
 export const newTools: Record<string, string> = {
+  "pdftoexcel": "2026-11-23",
   "pdftoword": "2026-11-23",
   "pdftoppt": "2026-11-23",
   "wordtopdf": "2026-11-23",
