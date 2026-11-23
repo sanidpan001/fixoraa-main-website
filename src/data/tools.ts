@@ -367,6 +367,10 @@ export const niches: Niche[] = [
       { name: "CropPDF", slug: "croppdf", url: "https://pdf.fixoraa.tech/croppdf/", blurb: "Crop PDF margins and trim borders with a visual editor" },
       { name: "PDFtoJPG", slug: "pdftojpg", url: "https://pdf.fixoraa.tech/pdftojpg/", blurb: "Convert PDF pages to JPG or PNG images up to 300 DPI" },
       { name: "SignPDF", slug: "signpdf", url: "https://pdf.fixoraa.tech/signpdf/", blurb: "Sign a PDF online — draw, type or upload your signature" },
+      { name: "PDFForms", slug: "pdfforms", url: "https://pdf.fixoraa.tech/pdfforms/", blurb: "Fill PDF form fields online — free, no signup" },
+      { name: "PDFtoMarkdown", slug: "pdftomarkdown", url: "https://pdf.fixoraa.tech/pdftomarkdown/", blurb: "Convert PDF to clean Markdown — free" },
+      { name: "EditPDF", slug: "editpdf", url: "https://pdf.fixoraa.tech/editpdf/", blurb: "Edit PDF online — add text, highlights and images" },
+      { name: "RedactPDF", slug: "redactpdf", url: "https://pdf.fixoraa.tech/redactpdf/", blurb: "Redact a PDF — permanently black out sensitive text" },
       { name: "WordBridge", slug: "wordbridge", url: "https://pdf.fixoraa.tech/wordbridge/", blurb: "Convert PDF to an editable Word document" },
       { name: "TwinPeek", slug: "twinpeek", url: "https://pdf.fixoraa.tech/twinpeek/", blurb: "Compare two PDFs & highlight what changed" },
       { name: "TrimPage", slug: "trimpage", url: "https://pdf.fixoraa.tech/trimpage/", blurb: "Crop PDF pages & trim white margins" },
@@ -1866,6 +1870,10 @@ export const totalTools: number = allTools.length;
 //  than ~10 days can be deleted on any later edit; they do nothing then.
 // ───────────────────────────────────────────────────────────────────────
 export const newTools: Record<string, string> = {
+  "pdfforms": "2026-11-23",
+  "pdftomarkdown": "2026-11-23",
+  "editpdf": "2026-11-23",
+  "redactpdf": "2026-11-23",
   "watermarkpdf": "2026-11-23",
   "croppdf": "2026-11-23",
   "pdftojpg": "2026-11-23",
