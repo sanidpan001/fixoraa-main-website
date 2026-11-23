@@ -385,6 +385,7 @@ export const niches: Niche[] = [
       { name: "ExceltoPDF", slug: "exceltopdf", url: "https://pdf.fixoraa.tech/exceltopdf/", blurb: "Convert Excel sheets to PDF — free, no upload" },
       { name: "PPTtoPDF", slug: "ppttopdf", url: "https://pdf.fixoraa.tech/ppttopdf/", blurb: "Convert PowerPoint presentations to PDF — free" },
       { name: "ScantoPDF", slug: "scantopdf", url: "https://pdf.fixoraa.tech/scantopdf/", blurb: "Scan documents to PDF with your camera — free" },
+      { name: "PDFtoArchive", slug: "pdftoa", url: "https://pdf.fixoraa.tech/pdftoa/", blurb: "Convert PDF to PDF/A for long-term archiving — free" },
       { name: "WordBridge", slug: "wordbridge", url: "https://pdf.fixoraa.tech/wordbridge/", blurb: "Convert PDF to an editable Word document" },
       { name: "TwinPeek", slug: "twinpeek", url: "https://pdf.fixoraa.tech/twinpeek/", blurb: "Compare two PDFs & highlight what changed" },
       { name: "TrimPage", slug: "trimpage", url: "https://pdf.fixoraa.tech/trimpage/", blurb: "Crop PDF pages & trim white margins" },
@@ -1884,6 +1885,7 @@ export const totalTools: number = allTools.length;
 //  than ~10 days can be deleted on any later edit; they do nothing then.
 // ───────────────────────────────────────────────────────────────────────
 export const newTools: Record<string, string> = {
+  "pdftoa": "2026-11-23",
   "ppttopdf": "2026-11-23",
   "scantopdf": "2026-11-23",
   "pdftoexcel": "2026-11-23",
