@@ -48,7 +48,7 @@
       <span class="fxchat-avatar" aria-hidden="true">∞</span>
       <div class="fxchat-head-text">
         <strong>Tool Finder</strong>
-        <span>Tell me your task — I will find the right tool from 1,724 tools</span>
+        <span>Tell me your task — I will find the right tool from <span id="fxchat-count">1,700+</span> tools</span>
       </div>
       <button id="fxchat-close" class="fxchat-close" type="button" aria-label="Close chat">
         <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
@@ -414,8 +414,18 @@
   import { loadToolIndex } from '../lib/search-client.js';
 
   const BACKEND = 'https://fixoraa-universal-backend.onrender.com/api/groq';
-  const SYS_PROMPT =
-    'You help visitors of Fixoraa, a directory of 1,724 free online tools, find the right tool. ' +
+  /* Live tool count: read once from the site manifest. '1,700+' is the
+     hero-rule fallback until it loads, so no stale exact number is ever shown. */
+  let fxCountLabel = '1,700+';
+  function fxApplyCount(n) {
+    if (!n || n <= 0) return;
+    fxCountLabel = Number(n).toLocaleString('en-IN');
+    const el = document.getElementById('fxchat-count');
+    if (el) el.textContent = fxCountLabel;
+  }
+  fetch('/data/index.json').then((r) => r.json()).then((m) => fxApplyCount(m && m.total)).catch(() => {});
+  const sysPrompt = () =>
+    'You help visitors of Fixoraa, a directory of ' + fxCountLabel + ' free online tools, find the right tool. ' +
     'The visitor describes a task or problem in any language (English, Hindi, Hinglish, etc.). ' +
     'Reply with ONLY a JSON array of 3 to 5 short English search phrases that would match tool names ' +
     'in the directory (for example: ["merge pdf", "combine pdf files", "pdf merger"]). ' +
@@ -455,7 +465,7 @@
     if (!greeted) {
       greeted = true;
       addBot(
-        'Hi! I am Fixoraa\'s Tool Finder. Tell me your problem or task — like "merge two PDFs" or "make a photo smaller" — and I will find the right tool for you from 1,724 tools. You can write in any language — English, Hindi, Hinglish or any other language — I understand them all and will find your tool.'
+        'Hi! I am Fixoraa\'s Tool Finder. Tell me your problem or task — like "merge two PDFs" or "make a photo smaller" — and I will find the right tool for you from ' + fxCountLabel + ' tools. You can write in any language — English, Hindi, Hinglish or any other language — I understand them all and will find your tool.'
       );
     }
     loadToolIndex(() => {}); // warm the index in the background
@@ -856,7 +866,7 @@
     try {
       const content = await groqCall(
         [
-          { role: 'system', content: SYS_PROMPT },
+          { role: 'system', content: sysPrompt() },
           { role: 'user', content: text },
         ],
         12000
