@@ -8,6 +8,9 @@ import { niches, totalTools } from '../lib/tools-data';
 // The exact total is used everywhere else (title, categories line, the
 // stats strip's free-tools card, /tools).
 const heroLakh = Math.floor(totalTools / 100000);
+// Teardown fallback (2026-11-23): below 1 lakh the lakh format would
+// read "0 lakh +", so the hero shows the exact total instead.
+const heroCount = heroLakh >= 1 ? `${heroLakh} lakh +` : totalTools.toLocaleString('en-IN');
 // Count-up target for the "∞ tools, forever growing" stats card only (its
 // animation counts up, then swaps to ∞) — behaviour unchanged.
 const heroTools = Math.floor(totalTools / 1000) * 1000;
@@ -84,7 +87,7 @@ const pageDescription =
       </p>
 
       <h1 class="hero-anim mx-auto mt-6 max-w-4xl text-4xl font-extrabold leading-[1.08] tracking-tight sm:text-6xl lg:text-7xl">
-        {heroLakh} lakh + free tools.<br />
+        {heroCount} free tools.<br />
         Zero signup.<br />
         <span class="text-gradient">Infinite possibilities.</span>
       </h1>
