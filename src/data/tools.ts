@@ -360,6 +360,7 @@ export const niches: Niche[] = [
       { name: "CompressPDF", slug: "compresspdf", url: "https://pdf.fixoraa.tech/compresspdf/", blurb: "Compress PDF size online — up to 95% smaller, files never leave your device" },
       { name: "JPGtoPDF", slug: "jpgtopdf", url: "https://pdf.fixoraa.tech/jpgtopdf/", blurb: "Convert JPG, PNG and WebP images to one PDF — unlimited and free" },
       { name: "SplitPDF", slug: "splitpdf", url: "https://pdf.fixoraa.tech/splitpdf/", blurb: "Split a PDF by page ranges or extract pages — no upload needed" },
+      { name: "OrganizePDF", slug: "organizepdf", url: "https://pdf.fixoraa.tech/organizepdf/", blurb: "Rearrange, delete and add PDF pages with visual thumbnails" },
       { name: "RotatePDF", slug: "rotatepdf", url: "https://pdf.fixoraa.tech/rotatepdf/", blurb: "Rotate PDF pages permanently — single files or whole batches" },
       { name: "PageNumbers", slug: "pagenumbers", url: "https://pdf.fixoraa.tech/pagenumbers/", blurb: "Add page numbers to a PDF in any position and format" },
       { name: "WatermarkPDF", slug: "watermarkpdf", url: "https://pdf.fixoraa.tech/watermarkpdf/", blurb: "Add a text or logo watermark to PDF pages — free and private" },
