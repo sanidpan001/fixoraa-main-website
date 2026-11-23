@@ -363,6 +363,10 @@ export const niches: Niche[] = [
       { name: "OrganizePDF", slug: "organizepdf", url: "https://pdf.fixoraa.tech/organizepdf/", blurb: "Rearrange, delete and add PDF pages with visual thumbnails" },
       { name: "RotatePDF", slug: "rotatepdf", url: "https://pdf.fixoraa.tech/rotatepdf/", blurb: "Rotate PDF pages permanently — single files or whole batches" },
       { name: "PageNumbers", slug: "pagenumbers", url: "https://pdf.fixoraa.tech/pagenumbers/", blurb: "Add page numbers to a PDF in any position and format" },
+      { name: "WatermarkPDF", slug: "watermarkpdf", url: "https://pdf.fixoraa.tech/watermarkpdf/", blurb: "Add a text or logo watermark to PDF pages — free and private" },
+      { name: "CropPDF", slug: "croppdf", url: "https://pdf.fixoraa.tech/croppdf/", blurb: "Crop PDF margins and trim borders with a visual editor" },
+      { name: "PDFtoJPG", slug: "pdftojpg", url: "https://pdf.fixoraa.tech/pdftojpg/", blurb: "Convert PDF pages to JPG or PNG images up to 300 DPI" },
+      { name: "SignPDF", slug: "signpdf", url: "https://pdf.fixoraa.tech/signpdf/", blurb: "Sign a PDF online — draw, type or upload your signature" },
       { name: "PageToPix", slug: "pagetopix", url: "https://pdf.fixoraa.tech/pagetopix/", blurb: "Convert PDF pages to PNG or JPG in your browser" },
       { name: "DocBind", slug: "docbind", url: "https://pdf.fixoraa.tech/docbind/", blurb: "Merge, split and organize PDF files online" },
       { name: "PDFNinja", slug: "pdfninja", url: "https://pdf.fixoraa.tech/pdfninja/", blurb: "All-in-one PDF converter and editor toolkit" },
@@ -1914,6 +1918,10 @@ export const totalTools: number = allTools.length;
 //  than ~10 days can be deleted on any later edit; they do nothing then.
 // ───────────────────────────────────────────────────────────────────────
 export const newTools: Record<string, string> = {
+  "watermarkpdf": "2026-11-23",
+  "croppdf": "2026-11-23",
+  "pdftojpg": "2026-11-23",
+  "signpdf": "2026-11-23",
   "mergepdf": "2026-11-23",
   "compresspdf": "2026-11-23",
   "jpgtopdf": "2026-11-23",
